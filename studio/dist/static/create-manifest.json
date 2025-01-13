@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "createdAt": "2024-11-12T14:37:09.269Z",
+  "createdAt": "2025-01-13T23:50:46.971Z",
   "workspaces": [
     {
       "name": "default",
       "title": "Ekadventure",
       "basePath": "/",
       "dataset": "production",
-      "schema": "ea52288a.create-schema.json"
+      "schema": "172fb778.create-schema.json"
     }
   ]
 }
