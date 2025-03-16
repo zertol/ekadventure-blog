@@ -14,8 +14,27 @@
   }
 }
 
+/* Base typography styles */
+@layer base {
+  h1 {
+    @apply text-[30px] font-bold leading-tight;
+  }
+  
+  h2 {
+    @apply text-[25px] font-semibold leading-tight;
+  }
+  
+  h3 {
+    @apply text-[20px] font-medium leading-snug;
+  }
+  
+  p, a, span, input, button, textarea, label, li {
+    @apply text-[14px] leading-relaxed;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, Arial, Helvetica, sans-serif);
 }

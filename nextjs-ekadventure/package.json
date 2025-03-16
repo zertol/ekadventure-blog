@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@sanity/image-url": "^1.1.0",
+    "@types/react-router-dom": "^5.3.3",
     "next": "15.0.3",
     "next-sanity": "^9.8.11",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",
