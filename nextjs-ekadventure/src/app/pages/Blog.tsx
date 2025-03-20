@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { client } from '../sanity/client';
 import { type SanityDocument } from 'next-sanity';
 import Link from 'next/link';
+import HeaderImage from '../components/HeaderImage/page';
 
 const Blog: React.FC = () => {
   const [posts, setPosts] = useState<SanityDocument[]>([]);
@@ -53,12 +54,20 @@ const Blog: React.FC = () => {
 
   return (
     <div className="blog-page">
+      <HeaderImage 
+        backgroundImage="/images/adventure-header.jpg"
+        roundedImage="/images/profile-avatar.jpg"
+        text={
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Blog</h1>
+            <p className="text-xl md:text-2xl mb-2">
+              Discover our latest <span className="font-semibold">adventures</span> and travel tales
+            </p>
+          </div>
+        }
+      />
+      
       <section className="mb-10">
-        <h1 className="mb-4">Blog</h1>
-        <p className="mb-8 max-w-3xl">
-          Discover our latest adventures, travel tips, and stories from around the world.
-        </p>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
             <article 

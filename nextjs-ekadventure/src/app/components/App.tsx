@@ -11,6 +11,10 @@ interface AppProps {
 }
 
 const App: React.FC<AppProps> = ({ currentPage = 'home', children }) => {
+  // The HeaderImage is included within each page component
+  // So we don't need to render it here.
+  // The post detail page is the only exception that doesn't use the HeaderImage
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />

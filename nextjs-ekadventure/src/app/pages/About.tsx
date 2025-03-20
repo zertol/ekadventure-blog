@@ -1,9 +1,21 @@
 import React from 'react';
+import HeaderImage from '../components/HeaderImage/page';
 
 const About: React.FC = () => {
   return (
     <div className="about-page">
-      <h1 className="mb-6">About EkAdventure</h1>
+      <HeaderImage 
+        backgroundImage="/images/adventure-header.jpg"
+        roundedImage="/images/profile-avatar.jpg"
+        text={
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">About EkAdventure</h1>
+            <p className="text-xl md:text-2xl mb-2">
+              Learn about our team and <span className="font-semibold">our passion</span> for travel
+            </p>
+          </div>
+        }
+      />
       
       <section className="mb-10">
         <h2 className="mb-4">Our Story</h2>

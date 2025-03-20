@@ -1,21 +1,21 @@
 import React from 'react';
+import HeaderImage from '../components/HeaderImage/page';
 
 const Home: React.FC = () => {
   return (
     <div className="home-page">
-      <section className="mb-10">
-        <h1 className="mb-4">Welcome to EkAdventure Blog</h1>
-        <p className="mb-6 max-w-3xl">
-          This is the home page of our adventure blog where we share our experiences, 
-          travel tips, and exciting stories from around the world.
-        </p>
-        
-        <div className="relative h-[300px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden mb-8">
-          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-            <p className="text-gray-500">[Featured Image Placeholder]</p>
+      <HeaderImage 
+        backgroundImage="/images/adventure-header.jpg"
+        roundedImage="/images/profile-avatar.jpg"
+        text={
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to EkAdventure Blog</h1>
+            <p className="text-xl md:text-2xl mb-2">
+              Explore the world with us - one <span className="font-semibold">adventure</span> at a time
+            </p>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       <section className="mb-10">
         <h2 className="mb-6">Explore Our Content</h2>

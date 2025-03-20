@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import HeaderImage from '../components/HeaderImage/page';
 
 interface FormData {
   name: string;
@@ -62,8 +63,20 @@ const Contact: React.FC = () => {
 
   return (
     <div className="contact-page">
+      <HeaderImage 
+        backgroundImage="/images/adventure-header.jpg"
+        roundedImage="/images/profile-avatar.jpg"
+        text={
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
+            <p className="text-xl md:text-2xl mb-2">
+              We'd love to hear from you about your <span className="font-semibold">travel dreams</span>
+            </p>
+          </div>
+        }
+      />
+      
       <section className="mb-10">
-        <h1 className="mb-4">Contact Us</h1>
         <p className="mb-6 max-w-3xl">
           Have questions, suggestions, or want to collaborate? Fill out the form below and we'll get back to you as soon as possible.
         </p>
