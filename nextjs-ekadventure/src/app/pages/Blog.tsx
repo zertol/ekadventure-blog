@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { client } from '../sanity/client';
 import { type SanityDocument } from 'next-sanity';
@@ -6,31 +8,49 @@ import HeaderImage from '../components/HeaderImage/page';
 
 const Blog: React.FC = () => {
   const [posts, setPosts] = useState<SanityDocument[]>([]);
+  const [categories, setCategories] = useState<SanityDocument[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchData = async () => {
       try {
         setIsLoading(true);
         const POSTS_QUERY = `*[
           _type == "post"
           && defined(slug.current)
-        ]|order(publishedAt desc){_id, title, slug, publishedAt, excerpt, mainImage}`;
+        ]|order(publishedAt desc){
+          _id, 
+          title, 
+          slug, 
+          publishedAt, 
+          excerpt, 
+          mainImage,
+          "categories": *[_type == "category" && _id in ^.categories[]._ref]{
+            name,
+            slug
+          }
+        }`;
+
+        const CATEGORIES_QUERY = `*[_type == "category"] | order(name asc)`;
         
         const options = { next: { revalidate: 30 } };
-        const result = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+        const [postsResult, categoriesResult] = await Promise.all([
+          client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options),
+          client.fetch<SanityDocument[]>(CATEGORIES_QUERY, {}, options)
+        ]);
         
-        setPosts(result);
+        setPosts(postsResult);
+        setCategories(categoriesResult);
         setIsLoading(false);
       } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError('Failed to load blog posts. Please try again later.');
+        console.error('Error fetching data:', err);
+        setError('Failed to load blog content. Please try again later.');
         setIsLoading(false);
       }
     };
 
-    fetchPosts();
+    fetchData();
   }, []);
 
   if (isLoading) {
@@ -67,75 +87,106 @@ const Blog: React.FC = () => {
         }
       />
       
-      <section className="mb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <article 
-              key={post._id} 
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
-              {post.mainImage && (
-                <div className="h-48 bg-gray-200">
-                  {/* Image would be rendered here with Sanity's image URL builder */}
-                  <div className="w-full h-full flex items-center justify-center text-gray-500">
-                    [Post Image]
+      <div className="container mx-auto px-4 py-12">
+        {/* Categories Section */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4">Categories</h2>
+          <div className="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <Link
+                key={category._id}
+                href={`/category/${category.slug.current}`}
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Posts Grid */}
+        <section className="mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post) => (
+              <article 
+                key={post._id} 
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+              >
+                {post.mainImage && (
+                  <div className="h-48 bg-gray-200">
+                    <div className="w-full h-full flex items-center justify-center text-gray-500">
+                      [Post Image]
+                    </div>
                   </div>
-                </div>
-              )}
-              <div className="p-4 md:p-6">
-                <h2 className="mb-2">
+                )}
+                <div className="p-4 md:p-6">
+                  <h2 className="text-xl font-semibold mb-2">
+                    <Link 
+                      href={`/${post.slug.current}`}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      {post.title}
+                    </Link>
+                  </h2>
+                  <time 
+                    dateTime={post.publishedAt} 
+                    className="text-gray-600 text-sm block mb-3"
+                  >
+                    {new Date(post.publishedAt).toLocaleDateString()}
+                  </time>
+                  {post.categories && post.categories.length > 0 && (
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {post.categories.map((category: any) => (
+                        <Link
+                          key={category.slug.current}
+                          href={`/category/${category.slug.current}`}
+                          className="text-sm px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+                        >
+                          {category.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                  {post.excerpt && (
+                    <p className="text-gray-700 mb-4">{post.excerpt}</p>
+                  )}
                   <Link 
                     href={`/${post.slug.current}`}
-                    className="hover:text-blue-600 transition-colors"
+                    className="inline-block text-blue-600 hover:underline transition-colors"
                   >
-                    {post.title}
+                    Read more →
                   </Link>
-                </h2>
-                <time 
-                  dateTime={post.publishedAt} 
-                  className="text-gray-600 block mb-3"
-                >
-                  {new Date(post.publishedAt).toLocaleDateString()}
-                </time>
-                {post.excerpt && (
-                  <p className="text-gray-700 mb-4">{post.excerpt}</p>
-                )}
-                <Link 
-                  href={`/${post.slug.current}`}
-                  className="inline-block text-blue-600 hover:underline transition-colors"
-                >
-                  Read more →
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          
+          {posts.length === 0 && (
+            <div className="text-center py-12 bg-gray-50 rounded-lg">
+              <p className="text-gray-600">No blog posts found.</p>
+            </div>
+          )}
+        </section>
         
-        {posts.length === 0 && (
-          <div className="text-center py-12 bg-gray-50 rounded-lg">
-            <p className="text-gray-600">No blog posts found.</p>
+        <section>
+          <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
+            <h2 className="mb-4">Looking for something specific?</h2>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input 
+                type="search" 
+                placeholder="Search blog posts..." 
+                className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button 
+                type="button" 
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Search
+              </button>
+            </div>
           </div>
-        )}
-      </section>
-      
-      <section>
-        <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
-          <h2 className="mb-4">Looking for something specific?</h2>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <input 
-              type="search" 
-              placeholder="Search blog posts..." 
-              className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button 
-              type="button" 
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

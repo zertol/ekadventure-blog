@@ -14,9 +14,9 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
 }) => {
   return (
     <div 
-      className="relative h-[700px] w-full overflow-hidden mb-12"
+      className="relative h-[700px] w-full"
       style={{ 
-        backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0) 100%), url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.1) 100%), url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}

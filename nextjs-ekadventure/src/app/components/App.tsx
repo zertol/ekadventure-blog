@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode } from 'react';
 
 // Import page components
@@ -19,7 +21,7 @@ const App: React.FC<AppProps> = ({ currentPage = 'home', children }) => {
     <div className="flex min-h-screen flex-col">
       <Header />
       
-      <main className="container mx-auto px-4 py-6 md:py-8 flex-grow">
+      <main className="flex-grow">
         {/* Content will be rendered by Next.js routing */}
         {currentPage === 'home' && !children && <Home />}
         {children}
