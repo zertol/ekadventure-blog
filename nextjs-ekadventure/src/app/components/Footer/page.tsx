@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           {/* Logo and Social Media Section */}
           <div className="flex flex-col items-center md:items-start space-y-6">
             <Image
-              src="/images/logo-white.png"
+              src="/images/profile-avatar.jpg"
               alt="EkAdventure Logo"
               width={130}
               height={130}

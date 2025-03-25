@@ -281,6 +281,21 @@
         ],
         "name": "tags",
         "type": "array"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "category"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to category"
+          }
+        ],
+        "name": "categories",
+        "type": "array"
       }
     ],
     "name": "post",

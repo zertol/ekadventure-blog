@@ -2,24 +2,28 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isAboutPage = pathname === '/about';
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
+    if (!isAboutPage) {
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        setIsScrolled(scrollPosition > 50);
+      };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [isAboutPage]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 px-4 py-4 transition-all duration-300 ${
-      isScrolled ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
+      isScrolled || isAboutPage ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
     }`}>
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
@@ -36,7 +40,7 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex space-x-8">
             <Link 
               href="/" 
               className="text-white hover:text-gray-200 transition-colors relative group"
@@ -75,7 +79,7 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Search Bar */}
-          <div className="relative">
+          <div className="hidden md:flex relative">
             <input
               type="text"
               placeholder="Search..."

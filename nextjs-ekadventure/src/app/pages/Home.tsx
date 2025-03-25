@@ -1,44 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import HeaderImage from '../components/HeaderImage/page';
 import CategoryArticle from '../components/CategoryArticle/page';
-import { type SanityDocument } from 'next-sanity';
-import { client } from '../sanity/client';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post" && references(^._id)]) > 0] | order(name asc) {
-  _id,
-  name,
-  slug,
-  "imageUrl": image.asset->url,
-  "postCount": count(*[_type == "post" && references(^._id)])
-}`;
+import { CategoryContext } from '../store/CategoryContext';
+import { useLoader } from '../store/LoaderContext';
 
 const Home: React.FC = () => {
-  const [categories, setCategories] = useState<SanityDocument[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { categories, error } = useContext(CategoryContext);
+  const { isLoading } = useLoader();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        // ... existing fetch calls ...
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-        // Add categories fetch
-        const categoriesResult = await client.fetch<SanityDocument[]>(CATEGORIES_QUERY);
-        setCategories(categoriesResult);
-        
-        setIsLoading(false);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-        setError('Failed to load content. Please try again later.');
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="home-page">
