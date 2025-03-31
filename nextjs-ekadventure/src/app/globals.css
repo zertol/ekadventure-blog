@@ -1,40 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: #659DBD;
+  --color-secondary: #A39F66;
+  --color-text-white: #ffffff;
+  --color-text-dark: #313131;
+  --color-background-primary: #FEFBF2;
+  --color-background-green-accent: #A39F66;
+  --color-background-blue-accent: #659DBD;
+  --color-background-dark: #313131;
 }
 
 /* Base typography styles */
 @layer base {
+  body {
+    @apply bg-background-primary text-text-dark font-primary;
+  }
+
   h1 {
-    @apply text-[30px] font-bold leading-tight;
+    @apply text-[30px] font-bold leading-tight font-secondary;
   }
   
   h2 {
-    @apply text-[25px] font-semibold leading-tight;
+    @apply text-[25px] font-semibold leading-tight font-secondary;
   }
   
   h3 {
-    @apply text-[20px] font-medium leading-snug;
+    @apply text-[20px] font-medium leading-snug font-secondary;
   }
   
   p, a, span, input, button, textarea, label, li {
-    @apply text-[14px] leading-relaxed;
+    @apply text-[14px] leading-relaxed font-primary;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-geist-sans, Arial, Helvetica, sans-serif);
+@layer components {
+  
+
+  .flex-center-row {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-center-col {
+    @apply flex items-center justify-center flex-col;
+  }
+
+  .flex-between-row {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-between-col {
+    @apply flex items-center justify-between flex-col;
+  }
+
+  .flex-start-row {
+    @apply flex items-start justify-start;
+  }
+
+  .flex-start-col {
+    @apply flex items-start justify-start flex-col;
+  }
+
+  .flex-end-row {
+    @apply flex items-end justify-end;
+  }
+
+  .flex-end-col {
+    @apply flex items-end justify-end flex-col;
+  }
+
+  .flex-wrap-row {
+    @apply flex flex-wrap;
+  }
+
+  .flex-wrap-col {
+    @apply flex flex-wrap flex-col;
+  }
+
+  .mt-c-30 {
+    @apply mt-[30px];
+  }
+
+  .mt-c-60 {
+    @apply mt-[60px];
+  }
+
+  .mt-c-90 {
+    @apply mt-[90px];
+  }
+
+  .mt-c-120 {
+    @apply mt-[120px];
+  }
+
+  .mb-c-30 {
+    @apply mb-[30px];
+  }
+
+  .mb-c-60 {
+    @apply mb-[60px];
+  }
+
+  .mb-c-90 {
+    @apply mb-[90px];
+  }
+
+  .mb-c-120 {
+    @apply mb-[120px];
+  }
+
+  .container-max-w-1280 {
+    @apply max-w-[1280px];
+  }
+
+  .container-max-w-1024 {
+    @apply max-w-[1024px];
+  }
+
+  .container-max-w-768 {
+    @apply max-w-[768px];
+  }
+  
+  .container-max-w-none {
+    @apply max-w-none;
+  }
+
+  .container-px-60 {
+    @apply px-[60px];
+  }
+
+  .container-px-30 {
+    @apply px-[30px];
+  }
+
+  .container-px-25 {
+    @apply px-[25px];
+  }
+
+  .container-py-60 {
+    @apply py-[60px];
+  }
+
+  .container-py-30 {
+    @apply py-[30px];
+  }
+
+  .container-mx-60 {
+    @apply mx-[60px];
+  }
+
+  .container-mx-30 {
+    @apply mx-[30px];
+  }
+
+  .container-mx-25 {
+    @apply mx-[25px];
+  }
+
+  .container-my-60 {
+    @apply my-[60px];
+  }
+
+  .container-my-30 {
+    @apply my-[30px];
+  }
+
+  .container-my-25 {
+    @apply my-[25px];
+  }
 }
+

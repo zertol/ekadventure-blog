@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import LoaderContextProvider from "./store/LoaderContext";
 import CategoryContextProvider from "./store/CategoryContext";
 import Loader from "./components/Loader/page";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EkAdventure Blog",
@@ -19,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <LoaderContextProvider>
           <CategoryContextProvider>
             <Loader />
