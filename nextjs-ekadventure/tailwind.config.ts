@@ -13,18 +13,22 @@ const config: Config = {
         'secondary': '#A39F66',
         'text-white': '#ffffff',
         'text-dark': '#313131',
+        'text-white-off': '#FEFBF2',
         'background-primary': '#FEFBF2',
         'background-green-accent': '#A39F66',
         'background-blue-accent': '#659DBD',
         'background-dark': '#313131',
       },
       fontFamily: {
-        'primary': ['Poppins', 'sans-serif'],
+        'primary': ['Poppins', 'sans serif'],
         'secondary': ['Poor Story', 'cursive'],
       },
     },
   },
   plugins: [],
+  corePlugins: {
+    boxSizing: true, // This ensures box-sizing is used as expected
+  }
 };
 
 export default config;

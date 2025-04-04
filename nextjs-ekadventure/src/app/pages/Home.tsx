@@ -25,23 +25,22 @@ const Home: React.FC = () => {
         roundedImage="/images/profile-avatar.jpg"
         text={
           <div>
-            <h1 className="font-bold mb-4">Welcome to EkAdventure Blog</h1>
-            <p className="mb-2">
-              Explore the world with us - one{" "}
-              <span className="font-semibold">adventure</span> at a time
-            </p>
+            <h2 className="font-bold italic">
+              Where Every Day Is An{" "}
+              <span className="font-ps text-[28px]">Adventure</span>
+            </h2>
           </div>
         }
       />
       <section className="mt-c-60 mb-c-120">
         <div className="container-max-w-none container-px-60">
           <div className="mb-5">
-            <h2 className="font-bold text-left">
+            <h2 className="font-bold text-left font-ps">
               A little bit about this land
             </h2>
           </div>
-          <div className="mb-0 pl-25">
-            <p className="text-left text-wrap">
+          <div className="mb-0 pl-c-25">
+            <p className="text-left text-wrap font-ps text-[20px]">
               Hi there! I’m Elie, and welcome to my land filled with adventure
               and things to discover. I created it in hopes to share with you
               the world through my eyes and for us to embark together on every
@@ -94,12 +93,14 @@ const Home: React.FC = () => {
 
         {/* Content */}
         <div className="relative z-10 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6 italic">
+          <h1 className="text-[40px] font-bold mb-6 italic">
             Want to build a Blog like this?
-          </h2>
+          </h1>
           <Link
             href="/contact"
-            className="inline-block bg-[#6C8AB5] text-white px-8 py-3 rounded-md hover:bg-[#5A7494] transition-all duration-300 transform hover:-translate-y-1"
+            className="inline-block bg-background-blue-accent text-white 
+            px-[24px] py-[12px] text-[16px] rounded-md hover:bg-background-green-accent transition-all 
+            duration-300"
           >
             Start sharing your experience
           </Link>
