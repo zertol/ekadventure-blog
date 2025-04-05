@@ -88,6 +88,26 @@
     @apply flex flex-wrap flex-col;
   }
 
+  .py-c-60{
+    @apply py-[60px];
+  }
+
+  .py-c-30{
+    @apply py-[30px];
+  }
+
+  .px-c-60{
+    @apply px-[60px];
+  }
+
+  .px-c-30{
+    @apply px-[30px];
+  }
+
+  .px-c-25{
+    @apply px-[25px];
+  }
+
   .p-c-25{
     @apply p-[25px];
   }
@@ -178,6 +198,26 @@
 
   .mb-c-120 {
     @apply mb-[120px];
+  }
+
+  .my-c-60{
+    @apply my-[60px];
+  }
+
+  .my-c-30{
+    @apply my-[30px];
+  }
+
+  .mx-c-60{
+    @apply mx-[60px];
+  }
+
+  .mx-c-30{
+    @apply mx-[30px];
+  }
+
+  .mx-c-25{
+    @apply mx-[25px];
   }
 
   .container-max-w-1280 {

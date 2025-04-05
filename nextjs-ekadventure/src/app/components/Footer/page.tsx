@@ -7,8 +7,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#2D2D2D] text-white">
       {/* Main content container */}
-      <div className="container-max-w-1280 mx-auto px-2 md:px-[25px] py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 max-w-6xl mx-auto">
+      <div className="container-max-w-1280 mx-auto px-[15px] md:px-[25px] py-[20px]">
+        <div className="flex flex-col md:flex-row justify-between items-center md:gap-4 gap-8 max-w-6xl mx-auto">
           {/* Logo and Social Media Section */}
           <div className="flex-center-col space-y-6">
             <Image
@@ -31,31 +31,27 @@ const Footer: React.FC = () => {
           </nav>
 
           {/* Newsletter Subscription */}
-          <div className="flex-center-row">
-            <div className="bg-background-green-accent p-2 md:p-4 rounded-md md:max-w-sm w-full text-center">
-              <h2 className="font-semibold mb-2">Never miss an adventure!</h2>
-              <p className="text-sm mb-3">
+          <div className="w-full md:w-auto md:max-w-sm">
+            <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
+              <h3 className="md:text-2xl font-semibold mb-2">
+                Never miss an adventure!
+              </h3>
+              <p className="text-text-dark font-semibold mb-3 text-sm/5">
                 Stay up to date with my latest experiences and exclusive
                 adventures I wanna share.
               </p>
-              <form
-                action="/api/subscribe"
-                method="POST"
-                className="w-full flex flex-row"
-              >
-                <div className="">
+              <form action="/api/subscribe" method="POST" className="w-full">
+                <div className="flex flex-row w-full overflow-hidden">
                   <input
                     type="email"
                     name="email"
                     required
                     placeholder="example@mail.com"
-                    className="flex-1 px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
+                    className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
                   />
-                </div>
-                <div>
                   <button
                     type="submit"
-                    className="bg-background-blue-accent text-white px-6 py-2 hover:bg-background-blue-accent/85 transition-colors"
+                    className="bg-background-blue-accent text-white px-6 py-2 whitespace-nowrap hover:bg-background-blue-accent/85 transition-colors"
                   >
                     SUBSCRIBE
                   </button>
@@ -67,7 +63,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Divider - full width */}
-      <div className="w-full h-[1px] bg-background-primary" />
+      <div className="w-full h-[1px] bg-background-primary mt-4" />
 
       {/* Copyright container */}
       <div className="py-1">

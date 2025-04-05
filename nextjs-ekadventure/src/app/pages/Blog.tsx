@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import React, { useState, useContext, useEffect } from 'react';
-import { CategoryContext } from '../store/CategoryContext';
-import { useLoader } from '../store/LoaderContext';
-import CategoryFilter from '../components/CategoryFilter/page';
-import PostArticles from '../components/PostArticle/PostArticles';
-import { client } from '../sanity/client';
-import { SanityDocument } from 'next-sanity';
-import HeaderImage from '../components/HeaderImage/page';
+import React, { useState, useContext, useEffect } from "react";
+import { CategoryContext } from "../store/CategoryContext";
+import { useLoader } from "../store/LoaderContext";
+import CategoryFilter from "../components/CategoryFilter/page";
+import PostArticles from "../components/PostArticle/PostArticles";
+import { client } from "../sanity/client";
+import { SanityDocument } from "next-sanity";
+import HeaderImage from "../components/HeaderImage/page";
 
 interface Category {
   name: string;
   slug: string;
 }
 
-const POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
+const POSTS_QUERY = `*[_type == "post"] | order(date desc) {
   _id,
   title,
   slug,
-  publishedAt,
+  "publishedAt": date,
   excerpt,
-  "imageUrl": mainImage.asset->url,
+  "imageUrl": featuredMedia.asset->url,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
@@ -41,7 +41,7 @@ const Blog: React.FC = () => {
         const fetchedPosts = await client.fetch(POSTS_QUERY);
         setPosts(fetchedPosts);
       } catch (err) {
-        setError('Failed to load posts. Please try again later.');
+        setError("Failed to load posts. Please try again later.");
       } finally {
         setIsLoading(false);
       }
@@ -55,7 +55,7 @@ const Blog: React.FC = () => {
   };
 
   const filteredPosts = selectedCategory
-    ? posts.filter(post => 
+    ? posts.filter((post) =>
         post.categories?.some((cat: Category) => cat.slug === selectedCategory)
       )
     : posts;
@@ -66,17 +66,21 @@ const Blog: React.FC = () => {
 
   return (
     <div>
-      <HeaderImage 
-        backgroundImage="/images/blog-header.jpg"
+      <HeaderImage
+        backgroundImage="/images/adventure-header.jpg"
+        roundedImage="/images/profile-avatar.jpg"
         text={
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-            <p className="text-xl md:text-2xl">Discover our latest adventures and stories</p>
+            <h2 className="font-bold italic">
+              Where Adventures Belong
+              <br />
+              <span className="font-ps text-[28px]">Welcome!</span>
+            </h2>
           </div>
         }
       />
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 my-c-60">
         {/* Category Filters */}
         <div className="flex flex-wrap gap-3 mb-12 justify-center">
           <CategoryFilter

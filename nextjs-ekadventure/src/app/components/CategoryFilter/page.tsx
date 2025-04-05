@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface CategoryFilterProps {
   name: string;
@@ -6,14 +6,18 @@ interface CategoryFilterProps {
   onClick: () => void;
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({ name, isActive, onClick }) => {
+const CategoryFilter: React.FC<CategoryFilterProps> = ({
+  name,
+  isActive,
+  onClick,
+}) => {
   return (
     <button
       onClick={onClick}
-      className={`px-6 py-2 rounded-full transition-all duration-300 text-sm font-medium ${
-        isActive 
-          ? 'bg-[#6C8AB5] text-white' 
-          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+      className={`px-6 py-2 rounded-md shadow-md transition-all duration-300 font-medium ${
+        isActive
+          ? "bg-background-blue-accent text-white"
+          : "bg-white text-text-primary hover:bg-background-blue-accent hover:text-white"
       }`}
     >
       {name}
@@ -21,4 +25,4 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ name, isActive, onClick
   );
 };
 
-export default CategoryFilter; 
+export default CategoryFilter;

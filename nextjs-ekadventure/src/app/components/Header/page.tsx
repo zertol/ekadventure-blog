@@ -32,16 +32,16 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 px-4 py-[12px] transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 px-3 md:pl-c-25 md:pr-c-25 py-[12px] transition-all duration-500 ${
           isScrolled || isAboutPage
             ? "bg-background-green-accent"
             : "bg-transparent"
         }`}
       >
-        <div className="container container-max-w-none pl-c-25 pr-c-25">
+        <div className="container container-max-w-none ">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center w-[30%]">
+            <Link href="/" className="flex items-center w-[35%] md:w-[30%]">
               <Image
                 src="/images/Logo_Site-Horizontal_UPG.png"
                 alt="EkAdventure Logo"
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-8 h-8"
               >
                 <path
                   strokeLinecap="round"

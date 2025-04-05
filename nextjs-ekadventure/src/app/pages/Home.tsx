@@ -33,7 +33,7 @@ const Home: React.FC = () => {
         }
       />
       <section className="mt-c-60 mb-c-120">
-        <div className="container-max-w-none container-px-60">
+        <div className="container-max-w-none container-px-25 md:container-px-60">
           <div className="mb-5">
             <h2 className="font-bold text-left font-ps">
               A little bit about this land
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
 
       {/* Categories Section */}
       <section className="mb-c-90">
-        <div className="mx-auto container-px-60 container-max-w-1280">
+        <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-12 flex-center-col">
             <h2 className="font-bold text-center mb-4 uppercase">
               Choose your adventure
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
 
         {/* Content */}
         <div className="relative z-10 text-center text-white">
-          <h1 className="text-[40px] font-bold mb-6 italic">
+          <h1 className="text-[30px] md:text-[40px] font-bold mb-6 italic">
             Want to build a Blog like this?
           </h1>
           <Link

@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Category {
   name: string;
@@ -22,12 +22,12 @@ const PostArticle: React.FC<PostArticleProps> = ({
   categories,
   slug,
   imageUrl,
-  excerpt
+  excerpt,
 }) => {
   return (
-    <article className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <article className="bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       {/* Image Container */}
-      <div className="relative h-48 w-full overflow-hidden">
+      <div className="relative h-[300px] w-full overflow-hidden">
         <Image
           src={imageUrl}
           alt={title}
@@ -37,61 +37,60 @@ const PostArticle: React.FC<PostArticleProps> = ({
       </div>
 
       {/* Content */}
-      <div className="p-6">
-        {/* Categories and Date */}
-        <div className="flex flex-wrap items-center gap-2 mb-3">
-          <div className="flex-1 flex flex-wrap gap-2">
-            {categories.map((category, index) => (
-              <Link 
-                key={`${category.slug}-${index}`}
-                href={`/category/${category.slug}`}
-                className="text-sm text-[#6C8AB5] hover:underline"
-              >
-                {category.name}
-                {index < categories.length - 1 && <span className="ml-2">•</span>}
-              </Link>
-            ))}
-          </div>
-          <span className="text-sm text-gray-500 whitespace-nowrap">{date}</span>
-        </div>
-
+      <div className="p-3">
         {/* Title */}
         <Link href={`/blog/${slug}`}>
-          <h3 className="text-xl font-bold mb-2 hover:text-[#6C8AB5] transition-colors">
+          <h3 className="font-bold mb-1 hover:text-gray-500 transition-colors">
             {title}
           </h3>
         </Link>
 
+        {/* Categories and Date */}
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div className="flex-1 flex flex-row flex-wrap">
+            <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
+              {date}
+            </span>
+            <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
+              /
+            </span>
+            <span className="text-[12px] text-gray-500 whitespace-nowrap">
+              No Comments
+            </span>
+          </div>
+          <div className=" gap-2">
+            {categories.map((category, index) => (
+              <Link
+                key={`${category.slug}-${index}`}
+                href={`/category/${category.slug}`}
+                className={`text-[12px] text-white bg-background-blue-accent hover:bg-background-green-accent 
+                  rounded-sm px-2 py-1 ${
+                    index < categories.length - 1 ? "mr-2" : ""
+                  }`}
+              >
+                {category.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Excerpt */}
         {excerpt && (
-          <p className="text-gray-600 text-sm line-clamp-2 mb-4">
-            {excerpt}
-          </p>
+          <p className="text-gray-600 text-sm line-clamp-2 mb-4">{excerpt}</p>
         )}
 
         {/* Read More Link */}
-        <Link 
-          href={`/blog/${slug}`}
-          className="inline-flex items-center text-[#6C8AB5] hover:underline"
-        >
-          Read More
-          <svg 
-            className="w-4 h-4 ml-1" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
+        <div className="flex justify-end">
+          <Link
+            href={`/blog/${slug}`}
+            className="inline-flex items-center font-semibold text-background-blue-accent hover:underline hover:text-background-green-accent"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
+            Read More
+          </Link>
+        </div>
       </div>
     </article>
   );
 };
 
-export default PostArticle; 
+export default PostArticle;
