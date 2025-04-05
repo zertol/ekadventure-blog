@@ -76,6 +76,10 @@
         ],
         "name": "slug",
         "type": "slug"
+      },
+      {
+        "name": "featuredMedia",
+        "type": "image"
       }
     ],
     "name": "category",
