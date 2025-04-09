@@ -1,6 +1,6 @@
-import React from 'react';
-import App from '../components/App';
-import About from '../pages/About';
+import React from "react";
+import App from "../components/App";
+import About from "../pages/About";
 
 export default function AboutPage() {
   return (
@@ -8,4 +8,4 @@ export default function AboutPage() {
       <About />
     </App>
   );
-} 
+}

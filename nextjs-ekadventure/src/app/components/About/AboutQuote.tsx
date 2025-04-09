@@ -1,15 +1,13 @@
-"use client";
-
-import React from 'react';
+import React from "react";
 
 const AboutQuote: React.FC = () => {
   return (
-    <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg max-w-[400px]">
-      <blockquote className="text-lg text-center text-gray-800">
+    <div className="bg-background-blue-accent backdrop-blur-sm p-4 lg:p-6 rounded-lg box-shadow-quote">
+      <blockquote className="text-[18px] lg:text-[20px] leading-5 font-bold text-center text-text-white-off font-ps">
         "If you want to see more to life, head outside and look for it!"
       </blockquote>
     </div>
   );
 };
 
-export default AboutQuote; 
+export default AboutQuote;

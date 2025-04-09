@@ -3,26 +3,19 @@ import HeaderImage from "../components/HeaderImage/page";
 import CategoryArticle from "../components/CategoryArticle/page";
 import Image from "next/image";
 import Link from "next/link";
-import { CategoryContext } from "../store/CategoryContext";
-import { useLoader } from "../store/LoaderContext";
+import { useCategories } from "../store/CategoryContext";
 
 const Home: React.FC = () => {
-  const { categories, error } = useContext(CategoryContext);
-  const { isLoading } = useLoader();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
+  const { categories, error } = useCategories();
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error.message}</div>;
   }
 
   return (
     <div className="home-page">
       <HeaderImage
         backgroundImage="/images/adventure-header.jpg"
-        roundedImage="/images/profile-avatar.jpg"
+        roundedImage="/images/profile-avatar.webp"
         text={
           <div>
             <h2 className="font-bold italic">
@@ -41,12 +34,12 @@ const Home: React.FC = () => {
           </div>
           <div className="mb-0 pl-c-25">
             <p className="text-left text-wrap font-ps text-[20px]">
-              Hi there! I’m Elie, and welcome to my land filled with adventure
+              Hi there! I'm Elie, and welcome to my land filled with adventure
               and things to discover. I created it in hopes to share with you
               the world through my eyes and for us to embark together on every
               journey, to live life to the fullest, and to tell a story about
               the world.
-              <br /> Ready for your next adventure ? Let’s go!
+              <br /> Ready for your next adventure ? Let's go!
             </p>
           </div>
         </div>

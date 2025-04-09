@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { client } from "../../sanity/client";
-import { type SanityDocument } from "next-sanity";
+import { SanityDocument } from "next-sanity";
+import Image from "next/image";
 import Link from "next/link";
 import App from "../../components/App";
 import HeaderImage from "../../components/HeaderImage/page";
 import PostArticles from "../../components/PostArticle/PostArticles";
-import { useLoader } from "../../store/LoaderContext";
-import { useParams } from "next/navigation";
 
 // Query to get posts by category
 const CATEGORY_POSTS_QUERY = `*[
@@ -31,84 +31,35 @@ const CATEGORY_POSTS_QUERY = `*[
 const CATEGORY_QUERY = `*[_type == "category" && slug.current == $categoryname][0]`;
 
 const CategoryPage = () => {
-  // Use the useParams hook from next/navigation instead
-  const params = useParams();
-  const categoryname = params.categoryname as string;
-
-  const { setIsLoading } = useLoader();
-  const [category, setCategory] = useState<SanityDocument | null>(null);
+  const { categoryname } = useParams();
   const [posts, setPosts] = useState<SanityDocument[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const fetchCategoryData = async () => {
+    const fetchPosts = async () => {
       try {
-        setIsLoading(true);
-        const [categoryData, postsData] = await Promise.all([
-          client.fetch<SanityDocument>(CATEGORY_QUERY, {
-            categoryname: categoryname,
-          }),
-          client.fetch<SanityDocument[]>(CATEGORY_POSTS_QUERY, {
-            categoryname: categoryname,
-          }),
-        ]);
-
-        setCategory(categoryData);
-        setPosts(postsData || []);
+        const posts = await client.fetch<SanityDocument[]>(
+          `*[_type == "post" && references(*[_type == "category" && slug.current == $categoryname]._id)] | order(_createdAt desc)`,
+          { categoryname }
+        );
+        setPosts(posts);
       } catch (err) {
-        console.error("Error fetching category data:", err);
-        setError("Failed to load category data. Please try again later.");
-      } finally {
-        setIsLoading(false);
-        setIsLoaded(true);
+        setError("Failed to load posts. Please try again later.");
       }
     };
 
-    if (categoryname) {
-      fetchCategoryData();
-    }
-  }, [categoryname, setIsLoading]);
-
-  if (!isLoaded) {
-    return null; // Let the Loader component handle the loading state
-  }
+    fetchPosts();
+  }, [categoryname]);
 
   if (error) {
-    return (
-      <App currentPage="category">
-        <div className="container mx-auto px-4 py-12">
-          <h1 className="text-2xl font-bold mb-4">Error</h1>
-          <p className="text-red-600 mb-4">{error}</p>
-          <Link href="/blog" className="text-blue-600 hover:underline">
-            ← Back to blog
-          </Link>
-        </div>
-      </App>
-    );
-  }
-
-  if (!category) {
-    return (
-      <App currentPage="category">
-        <div className="container mx-auto px-4 py-56 flex-center-col h-full">
-          <h1 className="text-2xl font-bold mb-4">Category not found</h1>
-          <Link
-            href="/blog"
-            className="text-white bg-background-blue-accent rounded-sm hover:bg-background-green-accent px-3 py-2"
-          >
-            ← Back to blog
-          </Link>
-        </div>
-      </App>
-    );
+    return <div>{error}</div>;
   }
 
   return (
     <App currentPage="category">
       <HeaderImage
         backgroundImage="/images/adventure-header.jpg"
-        roundedImage="/images/profile-avatar.jpg"
+        roundedImage="/images/profile-avatar.webp"
         text={
           <div>
             <h2 className="font-bold italic">
@@ -131,7 +82,7 @@ const CategoryPage = () => {
 
         <div className="mb-8 flex-center-col">
           <h2 className="font-bold text-center mb-4 uppercase">
-            {category.name}
+            {categoryname}
           </h2>
           <span className="block w-24 h-1 bg-black"></span>
         </div>

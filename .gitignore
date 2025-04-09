@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# distribution directories
+/dist
+/*/dist/
+
+# studio
+/studio/dist
+/*/studio/dist
+studio/dist/*

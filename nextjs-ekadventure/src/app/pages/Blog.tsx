@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useContext, useEffect } from "react";
-import { CategoryContext } from "../store/CategoryContext";
-import { useLoader } from "../store/LoaderContext";
+import { useCategories } from "../store/CategoryContext";
 import CategoryFilter from "../components/CategoryFilter/page";
 import PostArticles from "../components/PostArticle/PostArticles";
 import { client } from "../sanity/client";
@@ -28,8 +27,7 @@ const POSTS_QUERY = `*[_type == "post"] | order(date desc) {
 }`;
 
 const Blog: React.FC = () => {
-  const { categories } = useContext(CategoryContext);
-  const { setIsLoading } = useLoader();
+  const { categories } = useCategories();
   const [posts, setPosts] = useState<SanityDocument[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -37,18 +35,15 @@ const Blog: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        setIsLoading(true);
         const fetchedPosts = await client.fetch(POSTS_QUERY);
         setPosts(fetchedPosts);
       } catch (err) {
         setError("Failed to load posts. Please try again later.");
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchPosts();
-  }, [setIsLoading]);
+  }, []);
 
   const handleCategoryClick = (categorySlug: string | null) => {
     setSelectedCategory(categorySlug);
@@ -68,7 +63,7 @@ const Blog: React.FC = () => {
     <div>
       <HeaderImage
         backgroundImage="/images/adventure-header.jpg"
-        roundedImage="/images/profile-avatar.jpg"
+        roundedImage="/images/profile-avatar.webp"
         text={
           <div>
             <h2 className="font-bold italic">

@@ -6,12 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import HeaderNavLink from "./NavLink";
 import SocialIcons from "../SocialIcons/page";
+import { usePages } from "../../store/PagesContext";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
+  const { pages } = usePages();
 
   useEffect(() => {
     if (!isAboutPage) {
@@ -28,6 +30,9 @@ const Header: React.FC = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  // Sort pages by order property
+  const menuItems = pages.sort((a, b) => a.order - b.order);
 
   return (
     <>
@@ -47,20 +52,19 @@ const Header: React.FC = () => {
                 alt="EkAdventure Logo"
                 width={500}
                 height={500}
-                layout="intrinsic"
                 className={`transition-all duration-500 h-auto ${
-                  isScrolled ? "w-[120px]" : "w-[180px]"
+                  isScrolled || isAboutPage ? "w-[120px]" : "w-[180px]"
                 }`}
               />
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8 w-[70%] md:items-center md:justify-center">
-              <HeaderNavLink href="/">HOME</HeaderNavLink>
-              <HeaderNavLink href="/blog">BLOG</HeaderNavLink>
-              <HeaderNavLink href="/shop">SHOP</HeaderNavLink>
-              <HeaderNavLink href="/about">ABOUT</HeaderNavLink>
-              <HeaderNavLink href="/contact">CONTACT</HeaderNavLink>
+              {menuItems.map((page) => (
+                <HeaderNavLink key={page.slug} href={`/${page.slug}`}>
+                  {page.title.toUpperCase()}
+                </HeaderNavLink>
+              ))}
             </nav>
 
             {/* Search Bar */}
@@ -129,21 +133,15 @@ const Header: React.FC = () => {
           } `}
         >
           <nav className="flex flex-col justify-between gap-0 w-full h-full text-center">
-            <HeaderNavLink href="/" onClick={toggleMobileMenu}>
-              HOME
-            </HeaderNavLink>
-            <HeaderNavLink href="/blog" onClick={toggleMobileMenu}>
-              BLOG
-            </HeaderNavLink>
-            <HeaderNavLink href="/shop" onClick={toggleMobileMenu}>
-              SHOP
-            </HeaderNavLink>
-            <HeaderNavLink href="/about" onClick={toggleMobileMenu}>
-              ABOUT
-            </HeaderNavLink>
-            <HeaderNavLink href="/contact" onClick={toggleMobileMenu}>
-              CONTACT
-            </HeaderNavLink>
+            {menuItems.map((page) => (
+              <HeaderNavLink
+                key={page.slug}
+                href={`/${page.slug}`}
+                onClick={toggleMobileMenu}
+              >
+                {page.title.toUpperCase()}
+              </HeaderNavLink>
+            ))}
           </nav>
         </div>
       </div>

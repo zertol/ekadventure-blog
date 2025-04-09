@@ -18,7 +18,7 @@ const images = [
     description: 'Header background image (mountain landscape)',
   },
   {
-    name: 'profile-avatar.jpg',
+    name: 'profile-avatar.webp',
     url: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&h=400&fit=crop&q=80',
     description: 'Profile avatar (person)',
   },

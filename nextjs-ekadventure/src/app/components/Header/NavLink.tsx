@@ -1,22 +1,29 @@
-import React, { ReactNode } from "react";
+"use client";
+
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLoading } from "../../store/LoadingContext";
 
 interface HeaderNavLinkProps {
   href: string;
-  children: ReactNode;
+  children: React.ReactNode;
   onClick?: () => void;
-  className?: string;
 }
 
 const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
   href,
   children,
   onClick,
-  className = "",
 }) => {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const { setIsLoading } = useLoading();
+  const isActive = pathname === href || (href === "/home" && pathname === "/");
+
+  const handleClick = () => {
+    setIsLoading(true);
+    if (onClick) onClick();
+  };
 
   return (
     <div
@@ -26,7 +33,7 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
     >
       <Link
         href={href}
-        onClick={onClick}
+        onClick={handleClick}
         className={`text-white text-[14px] uppercase tracking-wide transition-colors relative group
           md:inline-block block w-full md:w-auto font-semibold
         `}

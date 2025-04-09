@@ -1,13 +1,16 @@
 {
-  "version": 1,
-  "createdAt": "2025-04-05T12:28:51.550Z",
+  "version": 2,
+  "createdAt": "2025-04-08T14:48:06.622Z",
   "workspaces": [
     {
       "name": "default",
       "title": "Ekadventure",
       "basePath": "/",
+      "projectId": "0evq1ccg",
       "dataset": "production",
-      "schema": "3b049378.create-schema.json"
+      "icon": "<style data-styled-version=\"6.1.17\" data-styled=\"true\">.eRLZSo{font-family:Inter,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",\"Liberation Sans\",Helvetica,Arial,system-ui,sans-serif;font-weight:500;font-size:13px;transform:translateY(1px);}/*!sc*/\ndata-styled.g116[id=\"sc-hZARmv\"]{content:\"eRLZSo,\"}/*!sc*/\n</style><svg viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><rect fill=\"#01794f\" rx=\"2\" height=\"32\" width=\"32\"></rect><text class=\"sc-hZARmv eRLZSo\" fill=\"hsla(159, 98%, 0%, 1)\" alignment-baseline=\"middle\" text-anchor=\"middle\" y=\"50%\" x=\"50%\">E</text></svg>",
+      "schema": "c8b23a05.create-schema.json",
+      "tools": "fc3db5af.create-tools.json"
     }
   ]
 }

@@ -37,7 +37,7 @@ const PostArticles: React.FC<PostArticlesProps> = ({
             date={formatDate(post.publishedAt)}
             categories={post.categories || []}
             slug={post.slug.current}
-            imageUrl={post.imageUrl || "/images/profile-avatar.jpg"}
+            imageUrl={post.imageUrl || "/images/profile-avatar.webp"}
             excerpt={post.excerpt}
           />
         ))}
