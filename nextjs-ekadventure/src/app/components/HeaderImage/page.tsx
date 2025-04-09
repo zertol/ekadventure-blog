@@ -13,12 +13,10 @@ interface HeaderImageProps {
 
 const HeaderImage: React.FC<HeaderImageProps> = ({
   text,
-  backgroundImage,
   roundedImage = "/images/profile-avatar.webp",
 }) => {
-  const pathname = usePathname();
   const { pages } = usePages();
-
+  const pathname = usePathname();
   // Get current page slug from pathname (remove leading slash)
   const currentSlug = pathname === "/" ? "home" : pathname.slice(1);
 
@@ -26,8 +24,7 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
   const currentPage = pages.find((page) => page.slug === currentSlug);
 
   // Use the page's imageUrl or fall back to the provided backgroundImage or default
-  const headerImage =
-    currentPage?.imageUrl || backgroundImage || "/images/adventure-header.jpg";
+  const headerImage = currentPage?.imageUrl || "/images/adventure-header.jpg";
 
   return (
     <div

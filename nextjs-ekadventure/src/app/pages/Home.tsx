@@ -1,12 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import HeaderImage from "../components/HeaderImage/page";
 import CategoryArticle from "../components/CategoryArticle/page";
 import Image from "next/image";
 import Link from "next/link";
 import { useCategories } from "../store/CategoryContext";
-
+import { useLoading } from "../store/LoadingContext";
+import { usePages } from "../store/PagesContext";
 const Home: React.FC = () => {
   const { categories, error } = useCategories();
+  const { registerComponent, markReady } = usePages();
+
+  useEffect(() => {
+    registerComponent();
+    markReady();
+  }, [registerComponent, markReady]);
+
   if (error) {
     return <div>{error.message}</div>;
   }
@@ -14,7 +22,6 @@ const Home: React.FC = () => {
   return (
     <div className="home-page">
       <HeaderImage
-        backgroundImage="/images/adventure-header.jpg"
         roundedImage="/images/profile-avatar.webp"
         text={
           <div>

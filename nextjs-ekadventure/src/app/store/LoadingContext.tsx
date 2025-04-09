@@ -1,47 +1,36 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import React, { createContext, useContext } from "react";
+import { usePages } from "./PagesContext";
 import LoadingSpinner from "../components/LoadingSpinner/page";
 
 interface LoadingContextType {
   isLoading: boolean;
-  setIsLoading: (loading: boolean) => void;
 }
 
 const LoadingContext = createContext<LoadingContextType>({
   isLoading: false,
-  setIsLoading: () => {},
 });
 
-export const useLoading = () => {
-  const context = useContext(LoadingContext);
-  if (!context) {
-    throw new Error("useLoading must be used within LoadingProvider");
-  }
-  return context;
-};
-
-export const LoadingProvider = ({
+export const LoadingProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
-}: {
-  children: React.ReactNode;
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  // Reset loading state on route change
-  useEffect(() => {
-    setIsLoading(false);
-  }, [pathname, searchParams]);
+  const { isLoading } = usePages();
 
   return (
-    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+    <LoadingContext.Provider value={{ isLoading }}>
       {children}
       {isLoading && <LoadingSpinner />}
     </LoadingContext.Provider>
   );
+};
+
+export const useLoading = () => {
+  const context = useContext(LoadingContext);
+  if (!context) {
+    throw new Error("useLoading must be used within a LoadingProvider");
+  }
+  return context;
 };
 
 export default LoadingProvider;

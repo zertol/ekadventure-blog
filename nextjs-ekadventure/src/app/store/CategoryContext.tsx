@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import { SanityDocument } from "next-sanity";
 import { client } from "../sanity/client";
+import { usePages } from "./PagesContext";
 
 interface CategoryContextType {
   categories: SanityDocument[];
@@ -35,7 +36,9 @@ export const CategoryContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [categories, setCategoriesState] = useState<SanityDocument[]>([]);
+
   const [error, setError] = useState<Error | null>(null);
+  const { registerComponent, markReady } = usePages();
 
   const setCategories = useCallback((newCategories: SanityDocument[]) => {
     setCategoriesState(newCategories);
@@ -43,6 +46,7 @@ export const CategoryContextProvider: React.FC<{
 
   const fetchCategories = useCallback(async () => {
     try {
+      registerComponent();
       const query = `*[_type == "category" && count(*[_type == "post" && references(^._id)]) > 0] | order(name asc) {
           _id,
           name,
@@ -52,12 +56,13 @@ export const CategoryContextProvider: React.FC<{
       }`;
       const result = await client.fetch(query);
       setCategories(result);
+      markReady();
     } catch (err) {
       setError(
         err instanceof Error ? err : new Error("Failed to fetch categories")
       );
     }
-  }, [setCategories]);
+  }, [setCategories, registerComponent, markReady]);
 
   useEffect(() => {
     fetchCategories();

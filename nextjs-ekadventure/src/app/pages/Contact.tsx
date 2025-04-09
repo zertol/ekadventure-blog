@@ -71,7 +71,6 @@ const Contact: React.FC = () => {
   return (
     <div className="contact-page">
       <HeaderImage
-        backgroundImage="/images/adventure-header.jpg"
         roundedImage="/images/profile-avatar.webp"
         text={
           <div>

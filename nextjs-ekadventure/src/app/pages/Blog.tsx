@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCategories } from "../store/CategoryContext";
 import CategoryFilter from "../components/CategoryFilter/page";
 import PostArticles from "../components/PostArticle/PostArticles";
 import { client } from "../sanity/client";
 import { SanityDocument } from "next-sanity";
 import HeaderImage from "../components/HeaderImage/page";
+import { usePages } from "../store/PagesContext";
 
 interface Category {
   name: string;
@@ -31,19 +32,24 @@ const Blog: React.FC = () => {
   const [posts, setPosts] = useState<SanityDocument[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { registerComponent, markReady } = usePages();
 
+  // Fetch posts
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        registerComponent();
         const fetchedPosts = await client.fetch(POSTS_QUERY);
         setPosts(fetchedPosts);
       } catch (err) {
         setError("Failed to load posts. Please try again later.");
+      } finally {
+        markReady();
       }
     };
 
     fetchPosts();
-  }, []);
+  }, [markReady, registerComponent]);
 
   const handleCategoryClick = (categorySlug: string | null) => {
     setSelectedCategory(categorySlug);
@@ -62,7 +68,6 @@ const Blog: React.FC = () => {
   return (
     <div>
       <HeaderImage
-        backgroundImage="/images/adventure-header.jpg"
         roundedImage="/images/profile-avatar.webp"
         text={
           <div>
@@ -93,7 +98,7 @@ const Blog: React.FC = () => {
           ))}
         </div>
 
-        {/* Posts Grid with Load More */}
+        {/* Posts Grid */}
         <PostArticles posts={filteredPosts} />
       </div>
     </div>

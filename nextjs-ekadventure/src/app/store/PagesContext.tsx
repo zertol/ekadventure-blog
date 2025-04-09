@@ -1,7 +1,13 @@
 "use client";
 
-import { createContext, useContext } from "react";
-import { SanityDocument } from "next-sanity";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { usePathname } from "next/navigation";
 
 type PageType = {
   imageUrl: string;
@@ -13,11 +19,23 @@ type PageType = {
 type PagesContextType = {
   pages: PageType[];
   error: string | null;
+  registerComponent: () => void;
+  markReady: () => void;
+  isLoading: boolean;
+  setReadyComponents: (count: number) => void;
+  setExpectedCount: (count: number) => void;
+  setIsLoading: (isLoading: boolean) => void;
 };
 
 export const PagesContext = createContext<PagesContextType>({
   pages: [],
   error: null,
+  registerComponent: () => {},
+  markReady: () => {},
+  isLoading: false,
+  setReadyComponents: () => {},
+  setExpectedCount: () => {},
+  setIsLoading: () => {},
 });
 
 interface PagesContextProviderProps {
@@ -29,9 +47,39 @@ const PagesContextProvider = ({
   children,
   initialPages,
 }: PagesContextProviderProps) => {
+  const [readyComponents, setReadyComponents] = useState(0);
+  const [expectedCount, setExpectedCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const registerComponent = useCallback(() => {
+    console.log("Component registered");
+    setExpectedCount((count) => count + 1);
+  }, []);
+
+  const markReady = useCallback(() => {
+    console.log("Component marked as ready");
+    setReadyComponents((count) => count + 1);
+  }, []);
+
+  // Update loading state based on component readiness
+  useEffect(() => {
+    setIsLoading(true);
+    if (readyComponents === expectedCount && expectedCount > 0) {
+      setIsLoading(false);
+    }
+  }, [readyComponents, expectedCount]);
+
+  // Reset on route change
+
   const value: PagesContextType = {
     pages: initialPages,
     error: null,
+    registerComponent,
+    markReady,
+    isLoading,
+    setReadyComponents,
+    setExpectedCount,
+    setIsLoading,
   };
 
   return (

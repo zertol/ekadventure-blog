@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLoading } from "../../store/LoadingContext";
+import { usePages } from "@/app/store/PagesContext";
 
 interface HeaderNavLinkProps {
   href: string;
@@ -17,12 +17,12 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
   onClick,
 }) => {
   const pathname = usePathname();
-  const { setIsLoading } = useLoading();
   const isActive = pathname === href || (href === "/home" && pathname === "/");
-
+  const { setReadyComponents, setExpectedCount, setIsLoading } = usePages();
   const handleClick = () => {
     setIsLoading(true);
-    if (onClick) onClick();
+    setReadyComponents(0);
+    setExpectedCount(0);
   };
 
   return (

@@ -60,9 +60,9 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <PagesContextProvider initialPages={pages}>
-          <CategoryContextProvider>
-            <LoadingProvider>{children}</LoadingProvider>
-          </CategoryContextProvider>
+          <LoadingProvider>
+            <CategoryContextProvider>{children}</CategoryContextProvider>
+          </LoadingProvider>
         </PagesContextProvider>
       </body>
     </html>
