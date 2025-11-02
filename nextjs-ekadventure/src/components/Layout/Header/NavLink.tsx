@@ -17,7 +17,6 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
 }) => {
   const pathname = usePathname();
   const isActive = pathname === href || (href === "/home" && pathname === "/");
-
   const handleClick = () => {
     if (onClick) onClick();
   };
