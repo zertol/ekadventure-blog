@@ -1,0 +1,3 @@
+type AboutType = {
+    content: any;
+}
