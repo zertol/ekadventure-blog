@@ -1,6 +1,6 @@
-import React from 'react';
-import App from '../components/App';
-import Contact from '../pages/Contact';
+import React from "react";
+import App from "@/components/App";
+import Contact from "@/components/Pages/Contact";
 
 export default function ContactPage() {
   return (
@@ -8,4 +8,4 @@ export default function ContactPage() {
       <Contact />
     </App>
   );
-} 
+}

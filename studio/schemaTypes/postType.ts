@@ -32,6 +32,26 @@ export const postType = defineType({
       type: 'portableText',
     }),
     defineField({
+      name: 'googleMapsHowToTitle',
+      type: 'string',
+    }),
+    defineField({
+      name: 'googleMapsHowTo',
+      type: 'portableText',
+    }),
+    defineField({
+      name: 'youtubeEmbedUrl',
+      type: 'url',
+    }),
+    defineField({
+      name: 'whereToEat',
+      type: 'portableText'
+    }),
+    defineField({
+      name: 'whereToStay',
+      type: 'portableText'
+    }),
+    defineField({
       name: 'excerpt',
       type: 'portableText',
     }),
@@ -51,6 +71,17 @@ export const postType = defineType({
       name: 'categories',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'category' }] }],
+    }),
+    defineField({
+      name: 'capturedMoments',
+      type: 'array',
+      of: [{ type: 'externalImage' }],
+    }),
+    defineField({
+      name: "comments",
+      title: "Comments",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "comment" }] }]
     }),
   ],
   preview: {

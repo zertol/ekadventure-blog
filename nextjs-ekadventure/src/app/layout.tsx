@@ -1,68 +1,44 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import CategoryContextProvider from "./store/CategoryContext";
-import PagesContextProvider from "./store/PagesContext";
-import LoadingProvider from "./store/LoadingContext";
-import { client } from "./sanity/client";
-import { draftMode } from "next/headers";
-import { groq } from "next-sanity";
-
-type PageType = {
-  imageUrl: string;
-  slug: string;
-  title: string;
-  order: number;
-};
+import PagesContextProvider from "@/store/PagesContext";
+import { Suspense } from "react";
+import { fetchAllPages } from "@/api/controllers/pages";
 
 export const metadata: Metadata = {
   title: "EkAdventure Blog",
   description: "Share your adventures with the world",
 };
 
-// This query will be cached and reused
-const pagesQuery = groq`*[_type == "page" && visible == true] | order(order asc) {
-  "imageUrl": featuredMedia.asset->url,
-  "slug": slug.current,
-  title,
-  order
-}`;
-
-// This function tells Next.js to build these paths at build time
-export async function generateStaticParams() {
-  const pages = await client.fetch<PageType[]>(pagesQuery);
-  return pages.map((page) => ({
-    slug: page.slug,
-  }));
-}
-
-async function getPages() {
-  // In production, use cached data with ISR
-  return client.fetch<PageType[]>(
-    pagesQuery,
-    {},
-    {
-      next: {
-        revalidate: 3600, // Revalidate every hour
-        tags: ["pages"],
-      },
-    }
-  );
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pages = await getPages();
+  const pagesProps: PagesContextType = { pages: [], error: null };
+  try {
+
+    const result = await fetchAllPages();
+
+    if (result.ErrorMessages && result.ErrorMessages.length > 0) {
+      throw new Error(result.ErrorMessages.join(", "));
+    }
+
+    pagesProps.pages = result.Result || [];
+    
+  } catch (err) {
+    pagesProps.error =
+      err instanceof Error
+        ? err
+        : new Error("An error occurred while fetching Pages Data");
+  }
 
   return (
     <html lang="en">
       <body>
-        <PagesContextProvider initialPages={pages}>
-          <LoadingProvider>
-            <CategoryContextProvider>{children}</CategoryContextProvider>
-          </LoadingProvider>
+        <PagesContextProvider pagesProps={pagesProps}>
+            <Suspense>
+              {children}
+            </Suspense>
         </PagesContextProvider>
       </body>
     </html>

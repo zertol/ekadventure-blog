@@ -1,4 +1,4 @@
-import {defineType} from 'sanity'
+import { defineType } from 'sanity'
 
 export const externalImageType = defineType({
   name: 'externalImage',
@@ -9,6 +9,11 @@ export const externalImageType = defineType({
       name: 'url',
       title: 'URL',
       type: 'url',
+    },
+    {
+      name: 'alt',
+      title: 'Alt',
+      type: 'string',
     },
   ],
 });

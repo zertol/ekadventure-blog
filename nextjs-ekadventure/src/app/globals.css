@@ -8,6 +8,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .webkit-autofill-override {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: white;
+      transition: background-color 5000s ease-in-out 0s;
+      box-shadow: inset 0 0 0 1000px var(--color-background-green-accent);
+    }
+  }
+}
+
 :root {
   --color-primary: #659DBD;
   --color-secondary: #A39F66;
@@ -30,15 +44,15 @@
   }
 
   h1 {
-    @apply text-[30px] font-bold leading-tight;
+    @apply text-[30px] font-bold leading-none;
   }
   
   h2 {
-    @apply text-[25px] font-semibold leading-tight;
+    @apply text-[25px] font-semibold leading-none;
   }
   
   h3 {
-    @apply text-[20px] font-medium leading-snug;
+    @apply text-[20px] font-medium leading-none;
   }
   
   p, a, span, input, button, textarea, label, li {
@@ -49,7 +63,7 @@
 @layer components {
 
   .flex-center-row {
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-center flex-row;
   }
 
   .flex-center-col {
@@ -57,7 +71,7 @@
   }
 
   .flex-between-row {
-    @apply flex items-center justify-between;
+    @apply flex items-center justify-between flex-row;
   }
 
   .flex-between-col {
@@ -65,7 +79,7 @@
   }
 
   .flex-start-row {
-    @apply flex items-start justify-start;
+    @apply flex items-start justify-start flex-row;
   }
 
   .flex-start-col {
@@ -73,7 +87,7 @@
   }
 
   .flex-end-row {
-    @apply flex items-end justify-end;
+    @apply flex items-end justify-end flex-row;
   }
 
   .flex-end-col {
@@ -81,7 +95,7 @@
   }
 
   .flex-wrap-row {
-    @apply flex flex-wrap;
+    @apply flex flex-wrap flex-row;
   }
 
   .flex-wrap-col {
@@ -287,8 +301,33 @@
   .about-content p{
     @apply text-[16px] mb-5 leading-7;
   }
+
+  .about-content span.font-ps{
+    @apply text-[20px];
+  }
+
+  .contact-form-input{
+    @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white rounded-none border-b-[1px] border-b-white resize-none focus:outline-none focus:placeholder:text-white
+  }
+
+  .comment-form-input{
+    @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white resize-none focus:outline-none focus:placeholder:text-white rounded-sm block
+  }
+
+  .primary-button{
+    @apply text-white bg-background-blue-accent hover:bg-background-green-accent 
+                  rounded-sm transition-all duration-300 px-2 py-1;
+  }
+
+  .featured-adventure-title{
+    @apply font-bold font-ps text-white;
+  }
 }
 
 .box-shadow-quote{
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+
+.box-shadow-post-detail-image{
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5)
 }
