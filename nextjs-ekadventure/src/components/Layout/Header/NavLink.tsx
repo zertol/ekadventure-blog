@@ -24,7 +24,7 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
 
   return (
     <div
-      className={`h-[20%] flex items-center transition-colors justify-center md:justify-start
+      className={`flex items-center transition-colors justify-center md:justify-start
         md:h-auto w-full md:w-auto hover:bg-background-dark md:hover:bg-transparent
         ${isActive ? "bg-background-dark md:bg-transparent" : ""}`}
     >

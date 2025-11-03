@@ -8,7 +8,7 @@ import HeaderNavLink from "./NavLink";
 import { usePages } from "@/store/PagesContext";
 import { useParams } from "next/navigation";
 
-const Header: React.FC = () => {
+const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -19,8 +19,8 @@ const Header: React.FC = () => {
   const isBlogDetailsPage = !!params?.slug;
 
   const { pages } = usePages();
-
-  const isScrollable = !isAboutPage && !isBlogDetailsPage && !isContactPage;
+  const isScrollable =
+    !isAboutPage && !isBlogDetailsPage && !isContactPage && !notFound;
 
   useEffect(() => {
     if (isScrollable) {
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 px-3 md:pl-c-25 md:pr-c-25 py-[12px] transition-all duration-200 ${
-          isScrolled || isAboutPage || isContactPage || isBlogDetailsPage
+          isScrolled || !isScrollable
             ? "bg-background-green-accent"
             : "bg-transparent"
         }`}
@@ -65,7 +65,9 @@ const Header: React.FC = () => {
               {menuItems.map((page) => (
                 <HeaderNavLink
                   key={page.slug}
-                  href={`/${page.slug.toLowerCase().includes('home')? "" : page.slug}`}
+                  href={`/${
+                    page.slug.toLowerCase().includes("home") ? "" : page.slug
+                  }`}
                   onClick={toggleMobileMenu}
                 >
                   {page.title.toUpperCase()}
@@ -77,26 +79,21 @@ const Header: React.FC = () => {
 
         <div className="container container-max-w-none ">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center w-[35%] md:w-[30%]">
-              <Image
-                src="/images/Logo_Site-Horizontal_UPG.png"
-                alt="EkAdventure Logo"
-                width={500}
-                height={500}
-                className={`transition-all duration-200 h-auto ${
-                  isScrolled ||
-                  isAboutPage ||
-                  isContactPage ||
-                  isBlogDetailsPage
-                    ? "w-[110px]"
-                    : "w-[150px]"
-                }`}
-              />
-            </Link>
+            <div className="flex items-center flex-1">
+              <Link href="/">
+                <Image
+                  src="/images/Logo_Site-Horizontal_UPG.png"
+                  alt="EkAdventure Logo"
+                  width={500}
+                  height={500}
+                  className={`transition-all duration-200 h-auto ${
+                    isScrolled || !isScrollable ? "w-[110px]" : "w-[150px]"
+                  }`}
+                />
+              </Link>
+            </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8 w-[70%] md:items-center md:justify-center">
+            <nav className="hidden md:flex space-x-5 lg:space-x-8 flex-1 md:items-center md:justify-center px-[45px] lg:px-0">
               {menuItems.map((page) => (
                 <HeaderNavLink key={page.slug} href={`/${page.slug}`}>
                   {page.title.toUpperCase()}
@@ -104,8 +101,7 @@ const Header: React.FC = () => {
               ))}
             </nav>
 
-            {/* Search Bar */}
-            <div className="hidden md:flex md:justify-end relative w-[30%]">
+            <div className="hidden md:flex md:justify-end relative flex-1">
               <input
                 type="text"
                 placeholder="Search..."

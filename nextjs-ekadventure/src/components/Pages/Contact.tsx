@@ -176,7 +176,7 @@ const Contact: React.FC = () => {
                 src={contactPage?.imageUrl}
                 alt="Contact"
                 fill
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                className="inset-0 w-full h-full object-cover rounded-lg"
               />
             </div>
           ) : (

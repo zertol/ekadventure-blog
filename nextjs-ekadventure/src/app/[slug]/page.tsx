@@ -16,6 +16,7 @@ import {
   fetchPostDetails,
 } from "@/api/controllers/posts";
 import { CommentsProvider } from "@/store/CommentsContext";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const posts = await fetchAllPosts();
@@ -43,6 +44,10 @@ export default async function PostPage({
       slug: slug,
     }),
   ]);
+
+  if (!postResult.Result) {
+    return notFound();
+  }
 
   const post = postResult.Result;
   const relatedPosts = relatedPostsResult.Result?.relatedPosts ?? [];
@@ -171,7 +176,7 @@ export default async function PostPage({
                 initialComments={buildCommentTree(post.comments)}
                 postId={post._id}
               >
-                <Comments/>
+                <Comments />
               </CommentsProvider>
             </div>
             <div className="w-full lg:w-[30%] lg:p-c-25 lg:border-l-[1px] border-background-dark/20">

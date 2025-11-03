@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-background-blue-accent text-white px-6 py-2 whitespace-nowrap hover:bg-background-blue-accent/85 transition-colors"
+                    className="bg-background-blue-accent text-white px-6 py-2 whitespace-nowrap hover:bg-background-dark  transition-colors"
                   >
                     SUBSCRIBE
                   </button>
