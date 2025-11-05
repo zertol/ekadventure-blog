@@ -9,7 +9,7 @@ import { formatString } from "../../utils/extenstions";
 import { Constants } from "../../Constants";
 
 export const fetchAllPages = onRequest(
-    { secrets: ["SANITY_PROJECT_ID"], cors: Constants.FIREBASE_CORS_LIST },
+    { secrets: ["SANITY_PROJECT_ID"], cors: false },
     async (req: Request<any>, res: Response<ApiResult<PageType[]>>): Promise<void> => {
         const apiResult: ApiResult<PageType[]> = {
             Result: null,
