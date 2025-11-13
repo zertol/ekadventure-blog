@@ -12,7 +12,7 @@ export const handleApiRequest = async <T>(
             ...options,
             headers: {
                 "Content-Type": "application/json",
-                "X-API-KEY": process.env.NEXT_PUBLIC_X_API_KEY || '',
+                "X-API-KEY": process.env.X_API_KEY || '',
                 ...options?.headers
             }
         }).then(res => res.json());
