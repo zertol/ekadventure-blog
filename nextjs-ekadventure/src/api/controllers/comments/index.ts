@@ -1,11 +1,11 @@
-export const addComment = async (comment: CommentType): Promise<ApiResult<AddCommentResponse>> => {
-    const result: ApiResult<AddCommentResponse> = {
+export const addComment = async (comment: CommentType): Promise<ApiResult<void>> => {
+    const result: ApiResult<void> = {
         Result: null,
         ErrorMessages: [],
     };
 
     try {
-        const response: ApiResult<AddCommentResponse> = await fetch("https://addcomment-zsszt3mtmq-uc.a.run.app",
+        const response: ApiResult<void> = await fetch("https://addcomment-zsszt3mtmq-uc.a.run.app",
             {
                 method: "POST",
                 headers: {

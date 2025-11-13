@@ -2,7 +2,7 @@
 
 import { addComment } from "@/api/controllers/comments";
 import { CommentFormData } from "@/models/comments/comment-form-data";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 type LoadingType = {
   parentId?: string;
@@ -34,7 +34,6 @@ export function CommentsProvider({
   initialComments?: CommentType[];
   postId: string;
 }) {
-  const [comments] = useState<CommentType[]>(initialComments);
 
   const [isLoading, setIsLoading] = useState<LoadingType>({ isLoading: false });
 
@@ -85,7 +84,7 @@ export function CommentsProvider({
   return (
     <CommentsContext.Provider
       value={{
-        comments,
+        comments: initialComments,
         submitComment,
         isLoading,
         submitStatus,
