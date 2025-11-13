@@ -6,27 +6,27 @@ import * as CommentsController from "./controllers/comments/";
 import * as ContactController from "./controllers/contact/";
 import { DIRegistration } from "./utils/di-registration";
 
-//Dependency Registrations
+// Dependency Registrations
 DIRegistration.registerDependencies();
 
-//Page Controllers
+// Page Controllers
 export const fetchAllPages = PagesController.fetchAllPages;
 
-//Post Controllers
+// Post Controllers
 export const fetchAllPosts = PostsController.fetchAllPosts;
 export const fetchLatestPosts = PostsController.fetchLatestPosts;
 export const fetchLatestPostsByCategories = PostsController.fetchLatestPostsByCategories;
 export const fetchPostDetails = PostsController.fetchPostDetails;
 
-//Category Controllers
+// Category Controllers
 export const fetchAllCategories = CategoriesController.fetchAllCategories;
 export const fetchCategoryPosts = CategoriesController.fetchCategoryPosts;
 
-//About Controllers
+// About Controllers
 export const fetchAboutDetails = AboutController.fetchAboutDetails;
 
-//Comments Controllers
+// Comments Controllers
 export const addComment = CommentsController.addComment;
 
-//Contact Controllers
+// Contact Controllers
 export const sendContactMail = ContactController.sendContactMail;

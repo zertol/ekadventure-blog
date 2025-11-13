@@ -30,5 +30,4 @@ export class SanityCategoryRepository implements ICategoryRepository {
 
         return response.json().then((data: SanityQueryResult<PostType[]>) => data.result);
     }
-
 }

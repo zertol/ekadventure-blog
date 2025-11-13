@@ -26,10 +26,11 @@ export default async function RootLayout({
     pagesProps.pages = result.Result || [];
     
   } catch (err) {
-    pagesProps.error =
-      err instanceof Error
-        ? err
-        : new Error("An error occurred while fetching Pages Data");
+    console.error("Error fetching Pages Data:", err);
+    // pagesProps.error =
+    //   err instanceof Error
+    //     ? err
+    //     : new Error("An error occurred while fetching Pages Data");
   }
 
   return (

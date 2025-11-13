@@ -1,11 +1,13 @@
 import { Constants } from "../../../../Constants";
+import { CommentAddResultType } from "../../../../types/domain/comment-add-result-type";
 import { CommentType } from "../../../../types/domain/comment-type";
 import { SanityError } from "../../../../types/sanity/sanity-error";
+import { SanityMutateResult } from "../../../../types/sanity/sanity-mutate-result";
 import { formatString } from "../../../../utils/extensions";
 import { ICommentRepository } from "../../../shared/interfaces/i-comment-repository";
 
 export class SanityCommentRepository implements ICommentRepository {
-    async addComment(comment: CommentType): Promise<void> {
+    async addComment(comment: CommentType): Promise<CommentAddResultType> {
         const response = await fetch(
             `${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/mutate/production`,
             {
@@ -44,6 +46,9 @@ export class SanityCommentRepository implements ICommentRepository {
             const errorData = (await response.json()) as SanityError;
             throw new Error(`Sanity fetch error: ${JSON.stringify(errorData.error)}`);
         }
-    }
 
+        return response.json().then((data: SanityMutateResult) => {
+            return { commentId: data.results[0].id };
+        });
+    }
 }

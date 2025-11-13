@@ -14,7 +14,7 @@ import { AboutService } from "../services/implementations/about/about-service";
 import { IAboutService } from "../services/interfaces/i-about-service";
 
 export class DIResolutions {
-    //Service Instances
+    // Service Instances
     static getPageService = (): IPageService => DependencyContainer.resolve<PageService>("IPageService");
     static getPostService = (): IPostService => DependencyContainer.resolve<PostService>("IPostService");
     static getCommentService = (): ICommentService => DependencyContainer.resolve<CommentService>("ICommentService");
@@ -22,7 +22,6 @@ export class DIResolutions {
     static getCategoryService = (): ICategoryService => DependencyContainer.resolve<CategoryService>("ICategoryService");
     static getAboutService = (): IAboutService => DependencyContainer.resolve<AboutService>("IAboutService");
 
-    //CMS Client Instance
+    // CMS Client Instance
     static getCMSClient = (): ICMSClient => DependencyContainer.resolve<ICMSClient>("ICMSClient");
-};
-
+}

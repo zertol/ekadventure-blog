@@ -7,7 +7,7 @@ export class QueryResultTranslator<T> implements ISanityTranslator<SanityQueryRe
             query: jsonData.query,
             result: jsonData.result,
             syncTags: jsonData.syncTags,
-            ms: jsonData.ms,
+            ms: jsonData.ms
         };
     }
 }

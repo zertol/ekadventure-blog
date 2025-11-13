@@ -11,12 +11,12 @@ export default defineConfig({
   projectId: '0evq1ccg',
   dataset: 'production',
 
-  plugins: [ structureTool(), visionTool() ],
+  plugins: [structureTool(), visionTool()],
 
   document: {
     actions: (prev, context) => {
       if (context.schemaType === 'comment') {
-        return [ commentReplyAction, ...prev ]
+        return [commentReplyAction, ...prev]
       }
       return prev
     }

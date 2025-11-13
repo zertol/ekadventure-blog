@@ -1,18 +1,5 @@
-import { genericFetch } from "@/utils/api/generic-fetch";
+import { handleApiRequest } from "@/utils/api/handle-api-request";
 
 export const fetchAllPages = async (): Promise<ApiResult<PageType[]>> => {
-    const result: ApiResult<PageType[]> = {
-        Result: null,
-        ErrorMessages: []
-    };
-
-    const response: ApiResult<PageType[]> = await genericFetch<PageType[]>("https://fetchallpages-zsszt3mtmq-uc.a.run.app");
-
-    if (response.ErrorMessages && response.ErrorMessages.length > 0) {
-        result.ErrorMessages = response.ErrorMessages;
-        return result;
-    }
-
-    result.Result = response.Result ?? [];
-    return result;
+    return await handleApiRequest<PageType[]>("https://fetchallpages-zsszt3mtmq-uc.a.run.app");
 }

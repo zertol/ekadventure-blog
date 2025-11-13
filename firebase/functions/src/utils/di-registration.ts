@@ -17,10 +17,10 @@ import { IAboutService } from "../services/interfaces/i-about-service";
 
 export class DIRegistration {
     public static registerDependencies(): void {
-        //Repository Instances
+        // Repository Instances
         DependencyContainer.register<ICMSClient>("ICMSClient", new SantiyCMSClient());
 
-        //Service Instances
+        // Service Instances
         DependencyContainer.register<IPageService>("IPageService", new PageService(
             DIResolutions.getCMSClient()
         ));
@@ -44,4 +44,3 @@ export class DIRegistration {
         DependencyContainer.register<IMailService>("IMailService", new MailService());
     }
 }
-

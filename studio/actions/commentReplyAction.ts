@@ -1,7 +1,6 @@
 import { DocumentActionComponent, DocumentActionProps } from "sanity";
 import { CommentType } from "../lib/types/comment-type";
 import { ApiResult } from "../lib/types/api-result";
-import { SanityCommentResult } from "../lib/types/sanity-comment-result";
 import { useRouter } from "sanity/router";
 
 interface PublishedComment {
@@ -34,7 +33,7 @@ export const commentReplyAction: DocumentActionComponent = (props: DocumentActio
         approved: true,
       };
 
-      const response: ApiResult<SanityCommentResult> = await fetch("https://addcomment-zsszt3mtmq-uc.a.run.app", {
+      const response: ApiResult<{ commentId: '' }> = await fetch("https://addcomment-zsszt3mtmq-uc.a.run.app", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,8 +41,8 @@ export const commentReplyAction: DocumentActionComponent = (props: DocumentActio
         body: JSON.stringify(newComment),
       }).then(res => res.json());
 
-      if (response.Result && response.Result.results.length > 0) {
-        const newDocId = response.Result.results[0].id;
+      if (response.Result && response.Result.commentId) {
+        const newDocId = response.Result.commentId;
         router.navigateIntent("edit", { id: newDocId, type: "comment" });
       }
     },

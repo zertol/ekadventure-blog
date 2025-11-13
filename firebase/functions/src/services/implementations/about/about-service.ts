@@ -8,5 +8,4 @@ export class AboutService implements IAboutService {
     async fetchAboutDetails(): Promise<AboutType> {
         return await this.cmsClient.getRepositories().about.fetchAboutDetails();
     }
-
 }

@@ -7,8 +7,8 @@ export class MutateResultTranslator implements ISanityTranslator<SanityMutateRes
             transactionId: jsonData.transactionId,
             results: jsonData.results.map((result: any) => ({
                 id: result.id,
-                operation: result.operation,
-            })),
+                operation: result.operation
+            }))
         };
     }
 }
