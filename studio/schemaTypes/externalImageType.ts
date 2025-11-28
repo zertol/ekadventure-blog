@@ -15,5 +15,22 @@ export const externalImageType = defineType({
       title: 'Alt',
       type: 'string',
     },
+    {
+      name: 'photoCredit',
+      title: 'Photo Credit',
+      type: 'string',
+    },
   ],
+  preview: {
+    select: {
+      url: 'url',
+      alt: 'alt',
+    },
+    prepare({ url, alt }) {
+      return {
+        imageUrl: url,
+        title: alt || 'External Image',
+      }
+    }
+  }
 });

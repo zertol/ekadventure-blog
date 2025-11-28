@@ -32,6 +32,42 @@ export const postType = defineType({
       type: 'portableText',
     }),
     defineField({
+      name: "stats",
+      type: "array",
+      initialValue: [
+        { label_en: "Distance", label_fr: "Distance", value_en: "", value_fr: "" },
+        { label_en: "Elevation Gain", label_fr: "Dénivelé Positif", value_en: "", value_fr: "" },
+        { label_en: "Difficulty", label_fr: "Difficulté", value_en: "", value_fr: "" },
+        { label_en: "Dog Friendly", label_fr: "Chiens Permis", value_en: "", value_fr: "" },
+        { label_en: "Toilets", label_fr: "Toilettes", value_en: "", value_fr: "" },
+        { label_en: "Duration", label_fr: "Durée", value_en: "", value_fr: "" }
+      ],
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "label_en", type: "string" },
+            { name: "label_fr", type: "string" },
+            { name: "value_en", type: "string" },
+            { name: "value_fr", type: "string" }
+          ],
+          preview: {
+            select: { title: "label_en", subtitle: "value_en", imageUrl: 'featuredMedia.url' }
+          }
+        }
+      ]
+    }),
+    defineField({
+      name: 'statsTitle',
+      type: 'object',
+      fields: [
+        { name: "title_en", type: "string" },
+        { name: "title_fr", type: "string" },
+        { name: "name_en", type: "string" },
+        { name: "name_fr", type: "string" }
+      ]
+    }),
+    defineField({
       name: 'googleMapsHowToTitle',
       type: 'string',
     }),
@@ -52,10 +88,22 @@ export const postType = defineType({
       type: 'portableText'
     }),
     defineField({
+      name: 'hikingPass',
+      type: 'portableText'
+    }),
+    defineField({
       name: 'excerpt',
       type: 'portableText',
     }),
-    defineField({ name: 'featuredMedia', type: 'image' }),
+    defineField({
+      name: 'otherHikes',
+      type: 'portableText'
+    }),
+    defineField({
+      name: 'otherAttractions',
+      type: 'portableText'
+    }),
+    defineField({ name: 'featuredMedia', type: 'externalImage' }),
     defineField({ name: 'sticky', type: 'boolean' }),
     defineField({
       name: 'author',
@@ -88,7 +136,7 @@ export const postType = defineType({
     select: {
       title: 'title',
       subtitle: 'author.name',
-      media: 'featuredMedia',
+      imageUrl: 'featuredMedia.url',
     },
   },
 });

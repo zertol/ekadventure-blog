@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
+import { PortableText } from "next-sanity";
+import { generateBlockComponents } from "@/components/Data/BlockComponents";
 interface Category {
   name: string;
   slug: string;
@@ -15,7 +17,7 @@ interface PostArticleProps {
   categories: Category[];
   slug: string;
   imageUrl: string;
-  excerpt?: string;
+  excerpt?: any;
 }
 
 const PostArticle: React.FC<PostArticleProps> = ({
@@ -67,7 +69,13 @@ const PostArticle: React.FC<PostArticleProps> = ({
 
         {/* Excerpt */}
         {excerpt && (
-          <p className="text-gray-600 text-sm line-clamp-2 mb-4">{excerpt}</p>
+          <PortableText value={excerpt} components={{
+            block: {
+              normal: ({ children }: any) => {
+                return <p className="text-sm mb-3 leading-5">{children}</p>;
+            }
+          }
+          }}/>
         )}
 
         {/* Read More Link */}

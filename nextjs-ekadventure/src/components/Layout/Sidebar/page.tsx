@@ -65,7 +65,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         {/* Featured Adventures */}
         <div className="flex-center-col">
           <div className="text-center bg-background-green-accent mb-4">
-            <div className="p-2">
+            <div className="py-2 px-6">
               <h3 className="featured-adventure-title">Featured adventures</h3>
             </div>
           </div>

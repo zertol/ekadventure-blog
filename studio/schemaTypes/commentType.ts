@@ -9,7 +9,7 @@ export default {
             name: "post",
             title: "Post",
             type: "reference",
-            to: [ { type: "post" } ],
+            to: [{ type: "post" }],
         },
         {
             name: "name",
@@ -40,7 +40,7 @@ export default {
             name: "parent",
             title: "Parent Comment",
             type: "reference",
-            to: [ { type: "comment" } ],
+            to: [{ type: "comment" }],
             description: "For threaded replies",
         },
         {
@@ -51,4 +51,19 @@ export default {
             description: "Indicates if the comment is made by the post author",
         }
     ],
+    preview: {
+        select: {
+            name: "name",
+            post: "post.title",
+            media: "post.featuredMedia.url",
+            approved: "approved"
+        },
+        prepare({ name, post, media, approved }: any) {
+            return {
+                title: `${name} — ${post}`,
+                subtitle: approved ? "Approved ✅" : "Not Approved ❌",
+                imageUrl: media
+            };
+        }
+    }
 };

@@ -18,7 +18,7 @@ export const groupImagesFromBlocks = (blocks: any[]) => {
 
     // Handle any remaining images at the end
     if (imageGroup.length) {
-        result.push({ _type: "imageGroup", images: imageGroup });
+        result.push({ _type: "imageGroupLast", images: imageGroup });
     }
 
     return result;
@@ -29,13 +29,14 @@ export const groupImagesFromBlocks = (blocks: any[]) => {
 // If there is an odd number of images, the last one will be displayed alone.
 export const groupImagePairsOrSingle = (images: any[]) => {
     const imagePairs = [];
+
     for (let i = 0; i < images.length; i += 2) {
         if (i + 1 < images.length) {
             // Pair of two images
-            imagePairs.push([ images[ i ], images[ i + 1 ] ]);
+            imagePairs.push([images[i], images[i + 1]]);
         } else {
             // Single image (last one if odd count)
-            imagePairs.push([ images[ i ] ]);
+            imagePairs.push([images[i]]);
         }
     }
     return imagePairs;

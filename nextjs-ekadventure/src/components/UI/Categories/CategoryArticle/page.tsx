@@ -36,8 +36,6 @@ const CategoryArticle: React.FC<CategoryArticleProps> = ({
         <div className="absolute inset-0 flex items-center justify-center text-white z-10">
           <h3 className="font-bold text-center relative">
             {title}
-            {/* group-hover applies styles when hovering over any parent element with the 'group' class */}
-            {/* In this case, when hovering the article (which has group class), the span's width animates from 0 to full */}
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
           </h3>
         </div>

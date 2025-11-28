@@ -9,7 +9,7 @@ export const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post
       _id,
       name,
       slug,
-      "imageUrl": featuredMedia.asset->url,
+      "imageUrl": featuredMedia.url,
       "postCount": count(*[_type == "post" && references(^._id)])
   }` as const;
 
@@ -19,7 +19,7 @@ export const POSTS_QUERY = `*[_type == "post"] | order(date desc) {
   slug,
   "publishedAt": date,
   excerpt,
-  "imageUrl": featuredMedia.asset->url,
+  "imageUrl": featuredMedia.url,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
@@ -31,7 +31,7 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   title,
   slug,
   "modifiedDate": _updatedAt,
-  "imageUrl": featuredMedia.asset->url,
+  "imageUrl": featuredMedia.url,
   "categories": categories[]->{
     _id,
     name,
@@ -41,9 +41,14 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   content,
   whereToEat,
   whereToStay,
+  stats,
+  statsTitle,
   googleMapsHowTo,
   googleMapsHowToTitle,
   youtubeEmbedUrl,
+  hikingPass,
+  otherHikes,
+  otherAttractions,
   capturedMoments[] {
     "imageUrl": url,
     alt
@@ -70,7 +75,7 @@ export const POSTS_BY_CATEGORY_QUERY = `*[
   slug,
   "publishedAt": date,
   excerpt,
-  "imageUrl": featuredMedia.asset->url,
+  "imageUrl": featuredMedia.url,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
@@ -86,7 +91,7 @@ export const LATEST_POSTS_QUERY = `*[_type == "post"] | order(date desc)[0...3]{
   "publishedAt": date,
   title,
   slug,
-  "imageUrl": featuredMedia.asset->url,
+  "imageUrl": featuredMedia.url,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
@@ -100,7 +105,7 @@ export const LATEST_POSTS_BY_CATEGORIES_QUERY = `*[_type == "post" && slug.curre
       _id,
       title,
       slug,
-      "imageUrl": featuredMedia.asset->url,
+      "imageUrl": featuredMedia.url,
       "categories": *[_type == "category" && _id in ^.categories[]._ref]{
         name,
         "slug": slug.current
