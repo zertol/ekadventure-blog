@@ -6,7 +6,7 @@ import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
 
 interface SideBarProps {
-  sideImage: string;
+  sideImage: ImageType;
   relatedPosts: PostType[];
 }
 
@@ -19,13 +19,10 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
           Hey there!
         </h1>
         <div className="relative w-full mb-4 flex-center-row">
-          <Image
-            src={sideImage}
-            alt="Adventure portrait"
-            height={500}
-            width={500}
+          <img
+            src={sideImage.url}
+            alt={ sideImage.alt || "Adventure portrait"}
             className="box-shadow-quote"
-            priority
           />
         </div>
         <p className="text-gray-700 mb-6">
@@ -65,7 +62,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         {/* Featured Adventures */}
         <div className="flex-center-col">
           <div className="text-center bg-background-green-accent mb-4">
-            <div className="p-2">
+            <div className="py-2 px-6">
               <h3 className="featured-adventure-title">Featured adventures</h3>
             </div>
           </div>

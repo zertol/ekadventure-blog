@@ -2,33 +2,33 @@ import { PortableTextComponentProps } from "next-sanity";
 import { groupImagePairsOrSingle } from "@/utils/data/helpers";
 import { PortableTextMarkComponentProps } from "next-sanity";
 import Link from "next/link";
-import ImageHighlight from "../UI/Blog/ArticleDetails/ImageHighlight/ImageHighlight";
-import ImagePairs from "../UI/Blog/ArticleDetails/ImagePair/ImagePairs";
+import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
 
-export const generateBlockComponents = (isAfterContent = false) => {
+export const generateBlockComponents = (
+  isAfterContent = false,
+  fullContainerWidth = false
+) => {
   return {
     types: {
       imageGroup: ({ value }: { value: { images: any[] } }) => {
         const imagePairsList = groupImagePairsOrSingle(value.images);
-
         return (
-          <div className={`${isAfterContent ? "mt-5" : "mt-8"}`}>
-            {imagePairsList.length === 1 ? (
-              <ImageHighlight
-                isAfterContent={isAfterContent}
-                img={imagePairsList[0][0]}
-              />
-            ) : (
-              imagePairsList.map((pair, pairIndex) => (
-                <ImagePairs
-                  key={`${pairIndex}`}
-                  images={pair}
-                  pairIndex={pairIndex}
-                  totalPairs={imagePairsList.length}
-                />
-              ))
-            )}
-          </div>
+          <ImageGroup
+            isAfterContent={isAfterContent}
+            fullWidth={fullContainerWidth}
+            imagePairsList={imagePairsList}
+          />
+        );
+      },
+      imageGroupLast: ({ value }: { value: { images: any[] } }) => {
+        const imagePairsList = groupImagePairsOrSingle(value.images);
+        return (
+          <ImageGroup
+            isAfterContent={isAfterContent}
+            fullWidth={fullContainerWidth}
+            imagePairsList={imagePairsList}
+            lastGroup={true}
+          />
         );
       },
       iframe: ({ value }: PortableTextComponentProps<any>) => {
@@ -65,18 +65,38 @@ export const generateBlockComponents = (isAfterContent = false) => {
         </Link>
       ),
       poorStory: ({ children }: PortableTextMarkComponentProps<any>) => (
-        <span className="font-ps">
-          {children}
+        <span className="font-ps">{children}</span>
+      ),
+      borderedThick: () => (
+        <span className="flex-center-row">
+          <span className="w-[25%] border-text-dark border-y-2"></span>
         </span>
-      )
+      ),
     },
     block: {
       h1: ({ children }: PortableTextComponentProps<any>) => (
         <h1 className="text-3xl font-bold">{children}</h1>
       ),
-      normal: ({ children, value }: PortableTextComponentProps<any>) => {
+      normal: ({ children }: PortableTextComponentProps<any>) => {
         return <p className="mb-3 leading-6">{children}</p>;
       },
+    },
+    list: {
+      bullet: ({ children }: PortableTextComponentProps<any>) => (
+        <ul className="list-disc ml-6 mb-4">{children}</ul>
+      ),
+      number: ({ children }: PortableTextComponentProps<any>) => (
+        <ol className="list-decimal ml-6 mb-4">{children}</ol>
+      ),
+    },
+
+    listItem: {
+      bullet: ({ children }: PortableTextComponentProps<any>) => (
+        <li className="mb-1">{children}</li>
+      ),
+      number: ({ children }: PortableTextComponentProps<any>) => (
+        <li className="mb-1">{children}</li>
+      ),
     },
   };
 };

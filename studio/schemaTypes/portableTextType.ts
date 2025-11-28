@@ -1,5 +1,4 @@
-import { defineField } from 'sanity'
-
+import { defineField, defineType } from 'sanity'
 export const portableTextType = defineField({
   name: 'portableText',
   type: 'array',
@@ -9,6 +8,7 @@ export const portableTextType = defineField({
         { title: "Strong", value: "strong" },
         { title: "Emphasis", value: "em" },
         { title: "Poor Story", value: "poorStory" },
+        { title: "Bordered Thick", value: "borderedThick" },
         // {
         //   title: "Sup",
         //   value: "sup",

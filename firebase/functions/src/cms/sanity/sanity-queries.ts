@@ -1,5 +1,5 @@
 export const PAGES_QUERY = `*[_type == "page" && visible == true] | order(order asc) {
-  "imageUrl": featuredMedia.asset->url,
+  featuredMedia,
   "slug": slug.current,
   title,
   order
@@ -8,8 +8,9 @@ export const PAGES_QUERY = `*[_type == "page" && visible == true] | order(order 
 export const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post" && references(^._id)]) > 0] | order(name asc) {
       _id,
       name,
-      slug,
-      "imageUrl": featuredMedia.asset->url,
+      "slug": slug.current,
+      featuredMedia,
+      headerMedia,
       "postCount": count(*[_type == "post" && references(^._id)])
   }` as const;
 
@@ -19,7 +20,7 @@ export const POSTS_QUERY = `*[_type == "post"] | order(date desc) {
   slug,
   "publishedAt": date,
   excerpt,
-  "imageUrl": featuredMedia.asset->url,
+  featuredMedia,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
@@ -31,7 +32,7 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   title,
   slug,
   "modifiedDate": _updatedAt,
-  "imageUrl": featuredMedia.asset->url,
+  featuredMedia,
   "categories": categories[]->{
     _id,
     name,
@@ -41,13 +42,15 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   content,
   whereToEat,
   whereToStay,
+  stats,
+  statsTitle,
   googleMapsHowTo,
   googleMapsHowToTitle,
   youtubeEmbedUrl,
-  capturedMoments[] {
-    "imageUrl": url,
-    alt
-  },
+  hikingPass,
+  otherHikes,
+  otherAttractions,
+  capturedMoments[],
   "comments": *[_type == "comment" && post._ref == ^._id && approved == true] | order(createdAt asc) {
     "id": _id,
     name,
@@ -64,16 +67,17 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
 export const POSTS_BY_CATEGORY_QUERY = `*[
   _type == "post" && 
   references(*[_type == "category" && slug.current == $categoryname]._id)
-] | order(publishedAt desc) {
+] | order(date desc) {
   _id,
   title,
   slug,
   "publishedAt": date,
   excerpt,
-  "imageUrl": featuredMedia.asset->url,
+  featuredMedia,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    headerMedia
   }
 }` as const;
 
@@ -86,7 +90,7 @@ export const LATEST_POSTS_QUERY = `*[_type == "post"] | order(date desc)[0...3]{
   "publishedAt": date,
   title,
   slug,
-  "imageUrl": featuredMedia.asset->url,
+  featuredMedia,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
@@ -100,7 +104,7 @@ export const LATEST_POSTS_BY_CATEGORIES_QUERY = `*[_type == "post" && slug.curre
       _id,
       title,
       slug,
-      "imageUrl": featuredMedia.asset->url,
+      featuredMedia,
       "categories": *[_type == "category" && _id in ^.categories[]._ref]{
         name,
         "slug": slug.current

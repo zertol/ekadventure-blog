@@ -1,8 +1,10 @@
 import { SanityDocument } from "@sanity/client";
+import { ImageType } from "./image-type";
 
 export type CategoryType = SanityDocument & {
     name: string;
-    slug: { current: string };
-    imageUrl: string;
+    slug: string;
+    featuredMedia: ImageType;
+    headerMedia: ImageType;
     postCount: string;
 };

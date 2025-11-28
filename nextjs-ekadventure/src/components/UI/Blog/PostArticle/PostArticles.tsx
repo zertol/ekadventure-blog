@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import PostArticle from "./page";
-import { SanityDocument } from "next-sanity";
+import { PostType } from "@/types/post-type";
 
 interface PostArticlesProps {
-  posts: SanityDocument[];
+  posts: PostType[];
   postsPerPage?: number;
 }
 
@@ -30,14 +30,14 @@ const PostArticles: React.FC<PostArticlesProps> = ({
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
-        {posts.slice(0, visiblePosts).map((post: SanityDocument) => (
+        {posts.slice(0, visiblePosts).map((post: PostType) => (
           <PostArticle
             key={post._id}
             title={post.title}
             date={formatDate(post.publishedAt)}
             categories={post.categories || []}
             slug={post.slug.current}
-            imageUrl={post.imageUrl || "/images/profile-avatar.webp"}
+            featuredMedia={post.featuredMedia}
             excerpt={post.excerpt}
           />
         ))}

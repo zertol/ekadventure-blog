@@ -21,9 +21,10 @@ interface AccordionItem {
   answer: string;
 }
 
-const About: React.FC<AboutProps> = ({about, latestPosts}) => {
+const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
   const { pages } = usePages();
-  const aboutPage: PageType | null = pages.find((page) => page.slug === "about") ?? null;
+  const aboutPage: PageType | null =
+    pages.find((page) => page.slug === "about") ?? null;
 
   const accordionItems: AccordionItem[] = [
     {
@@ -48,9 +49,7 @@ const About: React.FC<AboutProps> = ({about, latestPosts}) => {
       <section className="mt-28 mb-c-90">
         <div className="container max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 items-center">
           <AboutBrief />
-          <AboutImage
-            imageUrl={aboutPage?.imageUrl || "/images/adventure-header.jpg"}
-          />
+          <AboutImage featuredMedia={aboutPage?.featuredMedia} />
         </div>
       </section>
 
@@ -64,7 +63,10 @@ const About: React.FC<AboutProps> = ({about, latestPosts}) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Sanity Content */}
           <div className="about-content max-w-none leading-relaxed pl-2">
-            <PortableText value={about?.content} components={generateBlockComponents()} />
+            <PortableText
+              value={about?.content}
+              components={generateBlockComponents()}
+            />
           </div>
 
           {/* Right Column */}
@@ -88,7 +90,13 @@ const About: React.FC<AboutProps> = ({about, latestPosts}) => {
               <AccordionItems items={accordionItems} />
             </div>
             <div className="flex-center-col">
-              <h3 className="featured-adventure-title">My Latest Adventures</h3>
+              <div className="text-center bg-background-green-accent mb-4">
+                <div className="py-2 px-6">
+                  <h3 className="featured-adventure-title">
+                    My Latest Adventures
+                  </h3>
+                </div>
+              </div>
               {/* Latest Posts */}
               <LatestArticles posts={latestPosts} />
             </div>

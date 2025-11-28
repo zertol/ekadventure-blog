@@ -25,16 +25,18 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
       <div className="flex justify-between items-start">
         <div>
           <h4 className="font-medium">{comment.name} {comment.isAuthor && <span className="text-xs text-gray-500">(Author)</span>}</h4>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs text-gray-500">
             {new Date(comment.createdAt).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
             })}
           </p>
         </div>
       </div>
-      <p className="mt-2 text-gray-700">{comment.comment}</p>
+      <p className="mt-2 text-gray-700 whitespace-pre-line">{comment.comment}</p>
       <div className="justify-end flex">
         <button
           onClick={() => setShowReplyForm(!showReplyForm)}

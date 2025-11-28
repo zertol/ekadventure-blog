@@ -13,7 +13,6 @@ const Home: React.FC<HomeProps> = ({categories}) => {
   return (
     <div className="home-page">
       <HeaderImage
-        backgroundImage="/images/adventure-header.jpg"
         roundedImage="/images/profile-avatar.webp"
         text={
           <div>
@@ -62,8 +61,8 @@ const Home: React.FC<HomeProps> = ({categories}) => {
               >
                 <CategoryArticle
                   title={category.name}
-                  slug={category.slug.current}
-                  imageUrl={category.imageUrl || "/images/adventure-header.jpg"}
+                  slug={category.slug}
+                  featuredMedia={category.featuredMedia}
                 />
               </div>
             ))}

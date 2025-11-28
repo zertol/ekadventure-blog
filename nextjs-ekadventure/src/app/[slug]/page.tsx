@@ -52,18 +52,29 @@ export default async function PostPage({
   const post = postResult.Result;
   const relatedPosts = relatedPostsResult.Result?.relatedPosts ?? [];
 
+  const statsTitleParts: string[] = post.statsTitle?.title_en?.split("$name");
+  const statsTitle: string = post.statsTitle?.title_en;
+  const statsName: string = post.statsTitle?.name_en;
+
+  const isStatsDisplayed: boolean = !!(
+    post.stats?.length > 0 &&
+    statsTitle &&
+    statsName &&
+    statsTitleParts?.length > 1
+  );
+
   return (
     <App currentPage="post">
       {post && (
         <div className="container px-c-25 xl:px-0 xl:max-w-[1140px] mt-28 mb-c-90 mx-auto">
           <div className="flex flex-col lg:flex-row justify-center gap-4">
-            <div className="w-full lg:w-[70%] mb-c-60 lg:mb-0">
+            <div className="w-full lg:w-[70%] mb-c-60 lg:mb-0 lg:pr-[5px]">
               <div className="flex-between-row mb-6">
                 <div className="gap-1 md:gap-0 flex-start-col md:flex-start-row">
                   <PostCategories categories={post.categories} />
                 </div>
                 <div className="flex-center-row">
-                  <SocialIcons />
+                  <SocialIcons className="text-white" isSidebar />
                 </div>
               </div>
               <h1 className="font-semibold mb-0">{post.title}</h1>
@@ -83,10 +94,39 @@ export default async function PostPage({
                 {post.content && (
                   <PortableText
                     value={groupImagesFromBlocks(post.content)}
-                    components={generateBlockComponents()}
+                    components={generateBlockComponents(false)}
                   />
                 )}
               </div>
+              {isStatsDisplayed && (
+                <div className="mt-c-60 w-full lg:w-[85%]">
+                  <h2 className="font-bold mb-2">
+                    <img
+                      className="inline-block w-6 h-6 mr-2"
+                      alt="📋"
+                      src="https://s.w.org/images/core/emoji/15.0.3/svg/1f4cb.svg"
+                    />
+                    {statsTitleParts[0]}
+                    <span className="italic font-bold text-2xl">
+                      {statsName}
+                    </span>
+                    {statsTitleParts[1]}
+                  </h2>
+                  <div className="w-full lg:w-[85%] bg-background-blue-accent p-2 pl-5">
+                    {post.stats.map((stat, index) => (
+                      <div
+                        key={"stat-" + index}
+                        className="mb-1 flex-start-row font-ps text-white w-full"
+                      >
+                        <p className="text-[22px]">
+                          <strong>{stat.label_en}</strong>:{" "}
+                          <em>{stat.value_en}</em>
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               {post.googleMapsHowTo && post.googleMapsHowToTitle && (
                 <div className="mt-c-60 w-full lg:w-[85%]">
                   <h2 className="font-bold mb-2">
@@ -124,6 +164,23 @@ export default async function PostPage({
                   ></iframe>
                 </div>
               )}
+              {post.hikingPass && (
+                <div className="mt-c-60 w-full lg:w-[85%]">
+                  <h2 className="font-bold mb-2">
+                    <img
+                      src="https://s.w.org/images/core/emoji/16.0.1/svg/1f3ab.svg"
+                      alt="🎫"
+                      className="inline-block w-6 h-6 mr-2"
+                    />
+                    Hiking Pass
+                  </h2>
+
+                  <PortableText
+                    value={groupImagesFromBlocks(post.hikingPass)}
+                    components={generateBlockComponents(false, true)}
+                  />
+                </div>
+              )}
               {post.whereToStay && (
                 <div className="mt-c-60 w-full lg:w-[85%]">
                   <h2 className="font-bold mb-2">
@@ -158,6 +215,40 @@ export default async function PostPage({
                   />
                 </div>
               )}
+              {post.otherHikes && (
+                <div className="mt-c-60 w-full lg:w-[85%]">
+                  <h2 className="font-bold mb-2">
+                    <img
+                      src="https://s.w.org/images/core/emoji/16.0.1/svg/1f97e.svg"
+                      alt="🥾"
+                      className="inline-block w-6 h-6 mr-2"
+                    />
+                    Other hikes nearby
+                  </h2>
+
+                  <PortableText
+                    value={groupImagesFromBlocks(post.otherHikes)}
+                    components={generateBlockComponents(true)}
+                  />
+                </div>
+              )}
+              {post.otherAttractions && (
+                <div className="mt-c-60 w-full lg:w-[85%]">
+                  <h2 className="font-bold mb-2">
+                    <img
+                      src="https://s.w.org/images/core/emoji/16.0.1/svg/1f697.svg"
+                      alt="🚗"
+                      className="inline-block w-6 h-6 mr-2"
+                    />
+                    Other attractions nearby
+                  </h2>
+
+                  <PortableText
+                    value={groupImagesFromBlocks(post.otherAttractions)}
+                    components={generateBlockComponents(true)}
+                  />
+                </div>
+              )}
               {post.capturedMoments && post.capturedMoments.length > 0 && (
                 <div className="mt-c-60 w-full">
                   <h2 className="font-bold mb-2">
@@ -180,9 +271,9 @@ export default async function PostPage({
               </CommentsProvider>
             </div>
             <div className="w-full lg:w-[30%] lg:p-c-25 lg:border-l-[1px] border-background-dark/20">
-              {post.imageUrl && (
+              {post.featuredMedia && (
                 <Sidebar
-                  sideImage={post.imageUrl}
+                  sideImage={post.featuredMedia}
                   relatedPosts={relatedPosts}
                 />
               )}

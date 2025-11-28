@@ -15,10 +15,7 @@ import lgZoom from 'lightgallery/plugins/zoom';
 import lgFullScreen from 'lightgallery/plugins/fullscreen';
 
 interface ImageCarouselProps {
-  images: {
-    imageUrl: string;
-    alt?: string;
-  }[];
+  images: ImageType[];
   title?: string;
 }
 
@@ -77,7 +74,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
                 onClick={() => handleOpenLightbox(index)}
               >
                 <img
-                  src={image.imageUrl}
+                  src={image.url}
                   alt={image.alt || `Image ${index + 1}`}
                   className="object-cover"
                 />
@@ -113,8 +110,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           }}
           dynamic
           dynamicEl={images.map((image, index) => ({
-            src: image.imageUrl,
-            thumb: image.imageUrl,
+            src: image.url,
+            thumb: image.url,
             subHtml: `<h4>${image.alt || `Image ${index + 1}`}</h4>`,
           }))}
           speed={500}

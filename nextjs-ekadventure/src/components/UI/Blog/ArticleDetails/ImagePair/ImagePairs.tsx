@@ -1,11 +1,7 @@
 import ImagePair from "./ImagePair";
 
-interface ImageProps {
-  url: string;
-}
-
 interface ImagePairsProps {
-  images: ImageProps[];
+  images: ImageType[];
   pairIndex: number;
   totalPairs: number;
 }
@@ -13,7 +9,7 @@ interface ImagePairsProps {
 const ImagePairs: React.FC<ImagePairsProps> = ({
   images,
   pairIndex,
-  totalPairs,
+  totalPairs
 }) => {
   return (
     <div
@@ -25,7 +21,6 @@ const ImagePairs: React.FC<ImagePairsProps> = ({
         <ImagePair
           key={`${pairIndex}-${imgIndex}`}
           img={img}
-          alt={`Image ${pairIndex * 2 + imgIndex + 1}`}
         />
       ))}
     </div>

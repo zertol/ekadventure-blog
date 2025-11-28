@@ -7,7 +7,7 @@ import { usePages } from "@/store/PagesContext";
 
 interface HeaderImageProps {
   text: ReactNode;
-  backgroundImage?: string;
+  backgroundImage?: ImageType;
   roundedImage?: string;
 }
 
@@ -27,7 +27,7 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
 
   // Use the page's imageUrl or fall back to the provided backgroundImage or default
   const headerImage =
-    currentPage?.imageUrl || backgroundImage || "/images/adventure-header.jpg";
+    currentPage?.featuredMedia.url || backgroundImage?.url || "/images/adventure-header.jpg";
 
   return (
     <div

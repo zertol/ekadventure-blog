@@ -37,7 +37,7 @@ export const pageType = defineType({
       name: 'excerpt',
       type: 'portableText',
     }),
-    defineField({ name: 'featuredMedia', type: 'image' }),
+    defineField({ name: 'featuredMedia', type: 'externalImage' }),
     defineField({
       name: 'author',
       type: 'reference',
@@ -48,7 +48,7 @@ export const pageType = defineType({
     select: {
       title: 'title',
       subtitle: 'author.name',
-      media: 'featuredMedia',
+      imageUrl: 'featuredMedia.url',
     },
   },
 });
