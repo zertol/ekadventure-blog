@@ -1,5 +1,5 @@
 type PageType = {
-    imageUrl: string;
+    featuredMedia: ImageType;
     slug: string;
     title: string;
     order: number;

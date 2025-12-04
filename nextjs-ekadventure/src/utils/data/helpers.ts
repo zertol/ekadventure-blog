@@ -27,7 +27,7 @@ export const groupImagesFromBlocks = (blocks: any[]) => {
 
 // Helper to create image pairs for displaying multiple images side by side two at a time.
 // If there is an odd number of images, the last one will be displayed alone.
-export const groupImagePairsOrSingle = (images: any[]) => {
+export const groupImagePairsOrSingle = (images: ImageType[]): ImageType[][] => {
     const imagePairs = [];
 
     for (let i = 0; i < images.length; i += 2) {

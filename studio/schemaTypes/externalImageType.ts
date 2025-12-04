@@ -16,7 +16,7 @@ export const externalImageType = defineType({
       type: 'string',
     },
     {
-      name: 'photoCredit',
+      name: 'credit',
       title: 'Photo Credit',
       type: 'string',
     },

@@ -1,17 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import PrimaryButton from "../PrimaryButton/page";
-interface Category {
-  name: string;
-  slug: string;
-}
-
+import { CategoryType } from "@/types/category-type";
+ 
 interface LatestArticleProps {
   title: string;
   slug: string;
-  imageUrl: string;
+  featuredMedia?: ImageType;
   date: string;
-  categories: Category[];
+  categories: CategoryType[];
   isLinkOnly?: boolean;
 }
 
@@ -20,7 +17,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
   date,
   categories,
   slug,
-  imageUrl,
+  featuredMedia,
   isLinkOnly = false,
 }) => {
   return isLinkOnly ? (
@@ -37,7 +34,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
         <div
           className="w-[35%] h-28"
           style={{
-            backgroundImage: `url(${imageUrl})`,
+            backgroundImage: `url(${featuredMedia?.url || "/images/adventure-header.jpg"})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

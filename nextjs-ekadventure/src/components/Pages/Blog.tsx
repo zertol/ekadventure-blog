@@ -5,11 +5,11 @@ import { PostType } from "@/types/post-type";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
-import { SanityDocument } from "next-sanity";
+import { CategoryType } from "@/types/category-type";
 
 interface BlogProps {
   posts: PostType[];
-  categories: SanityDocument[];
+  categories: CategoryType[];
 }
 
 const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
@@ -25,14 +25,9 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
       ) || []
     : posts || [];
 
-  // if (error) {
-  //   return <div className="text-center py-8">{error.message}</div>;
-  // }
-
   return (
     <div>
       <HeaderImage
-        backgroundImage="/images/adventure-header.jpg"
         roundedImage="/images/profile-avatar.webp"
         text={
           <div>
@@ -57,8 +52,8 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
             <CategoryFilter
               key={category._id}
               name={category.name.toUpperCase()}
-              isActive={selectedCategory === category.slug.current}
-              onClick={() => handleCategoryClick(category.slug.current)}
+              isActive={selectedCategory === category.slug}
+              onClick={() => handleCategoryClick(category.slug)}
             />
           ))}
         </div>

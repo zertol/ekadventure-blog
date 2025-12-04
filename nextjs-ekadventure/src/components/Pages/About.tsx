@@ -49,9 +49,7 @@ const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
       <section className="mt-28 mb-c-90">
         <div className="container max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 items-center">
           <AboutBrief />
-          <AboutImage
-            imageUrl={aboutPage?.imageUrl || "/images/adventure-header.jpg"}
-          />
+          <AboutImage featuredMedia={aboutPage?.featuredMedia} />
         </div>
       </section>
 

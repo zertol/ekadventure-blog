@@ -1,5 +1,6 @@
 import { SanityDocument } from "@sanity/client";
 import { CommentType } from "./comment-type";
+import { ImageType } from "./image-type";
 
 export type PostDetailsType = SanityDocument & {
     categories: [];
@@ -26,7 +27,7 @@ export type PostDetailsType = SanityDocument & {
     hikingPass: any;
     otherHikes: any;
     otherAttractions: any;
-    capturedMoments: any;
-    imageUrl: any;
+    capturedMoments: ImageType[];
+    featuredMedia: ImageType;
     comments: CommentType[];
 };

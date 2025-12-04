@@ -1,7 +1,7 @@
 import ImagePair from "../ImagePair/ImagePair";
 
 interface ImageHighlightProps {
-  img: { url: string; alt: string; photoCredit?: string };
+  img: ImageType;
   isAfterContent: boolean;
   fullWidth: boolean;
   lastGroup?: boolean;

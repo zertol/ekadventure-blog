@@ -2,30 +2,27 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 interface CategoryArticleProps {
   title: string;
   slug: string;
-  imageUrl: string;
+  featuredMedia: ImageType;
 }
 
 const CategoryArticle: React.FC<CategoryArticleProps> = ({
   title,
   slug,
-  imageUrl,
+  featuredMedia,
 }) => {
   return (
     <Link href={`/category/${slug}`}>
       <article className="relative h-[450px] overflow-hidden group cursor-pointer shadow-md rounded-md">
         {/* Background Image with Zoom Effect */}
-        <div className="absolute inset-0 w-full h-full transition-transform duration-700  p-4 ease-in-out group-hover:scale-110">
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        <div className="absolute inset-0 w-full h-full transition-transform duration-700  ease-in-out group-hover:scale-110">
+          <img
+            src={featuredMedia.url || "/images/adventure-header.jpg"}
+            alt={featuredMedia.alt || title}
+            className="object-cover h-full w-full"
           />
         </div>
 

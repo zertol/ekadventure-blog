@@ -5,7 +5,7 @@ interface ImageGroupProps {
   isAfterContent: boolean;
   fullWidth: boolean;
   lastGroup?: boolean;
-  imagePairsList: any[][];
+  imagePairsList: ImageType[][];
 }
 
 const ImageGroup: React.FC<ImageGroupProps> = (props) => {

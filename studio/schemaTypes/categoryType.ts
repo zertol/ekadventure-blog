@@ -9,13 +9,14 @@ export const categoryType = defineType({
   fields: [
     defineField({ name: 'name', type: 'string' }),
     defineField({ name: 'slug', type: 'slug' }),
-    defineField({ name: 'featuredMedia', type: 'image' })
+    defineField({ name: 'featuredMedia', type: 'externalImage' }),
+    defineField({ name: 'headerMedia', type: 'externalImage' })
   ],
   preview: {
     select: {
       title: 'name',
       subtitle: 'slug.current',
-      media: 'featuredMedia',
+      imageUrl: 'featuredMedia.url',
     },
   },
 });

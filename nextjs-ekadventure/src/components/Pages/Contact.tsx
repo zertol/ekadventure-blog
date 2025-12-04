@@ -169,8 +169,8 @@ const Contact: React.FC = () => {
             </form>
           </div>
 
-          {/* Right Column - Image */}
-          {contactPage?.imageUrl ? (
+          {/* Right Column - Image
+          {contactPage?.featuredMedia ? (
             <div className="h-[250px] lg:h-auto lg:flex-1 relative">
               <Image
                 src={contactPage?.imageUrl}
@@ -187,8 +187,18 @@ const Contact: React.FC = () => {
                   Loading your adventure...
                 </p>
               </div>
-            </div>
-          )}
+            </div>¤
+          )} */}
+          <div className="h-[250px] lg:h-auto lg:flex-1 relative">
+            <img
+              src={contactPage?.featuredMedia?.url}
+              alt={
+                contactPage?.featuredMedia?.alt ||
+                "Contact Featured Media"
+              }
+              className="inset-0 w-full h-full object-cover rounded-lg"
+            />
+          </div>
         </div>
       </div>
     </div>

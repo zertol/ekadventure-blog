@@ -1,13 +1,7 @@
 import ImagePair from "./ImagePair";
 
-interface ImageProps {
-  url: string;
-  alt: string;
-  photoCredit?: string;
-}
-
 interface ImagePairsProps {
-  images: ImageProps[];
+  images: ImageType[];
   pairIndex: number;
   totalPairs: number;
 }

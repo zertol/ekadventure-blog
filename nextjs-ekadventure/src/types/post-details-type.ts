@@ -25,7 +25,7 @@ export type PostDetailsType = SanityDocument & {
     hikingPass: any;
     otherHikes: any;
     otherAttractions: any;
-    capturedMoments: any;
-    imageUrl: any;
+    capturedMoments: ImageType[];
+    featuredMedia: ImageType;
     comments: CommentType[];
 };

@@ -271,9 +271,9 @@ export default async function PostPage({
               </CommentsProvider>
             </div>
             <div className="w-full lg:w-[30%] lg:p-c-25 lg:border-l-[1px] border-background-dark/20">
-              {post.imageUrl && (
+              {post.featuredMedia && (
                 <Sidebar
-                  sideImage={post.imageUrl}
+                  sideImage={post.featuredMedia}
                   relatedPosts={relatedPosts}
                 />
               )}

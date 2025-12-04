@@ -1,15 +1,10 @@
-interface ImageProps {
-  url: string;
-  alt: string;
-  photoCredit?: string;
-}
 
 interface ImagePairProps {
-  img: ImageProps;
+  img: ImageType;
 }
 
 const ImagePair: React.FC<ImagePairProps> = ({
-  img: { url, alt, photoCredit },
+  img: { url, alt, credit },
 }) => {
   return (
     <div className="w-full">
@@ -18,7 +13,7 @@ const ImagePair: React.FC<ImagePairProps> = ({
         alt={alt || "Image To Render"}
         className="w-full h-auto box-shadow-post-detail-image"
       />
-      {photoCredit && (
+      {credit && (
         <p className="text-xs leading-none flex-start-row mt-1 text-text-dark/70">
           <img
             className="inline-block w-3 h-3 mr-1"
@@ -27,7 +22,7 @@ const ImagePair: React.FC<ImagePairProps> = ({
           />
           Shot taken by &nbsp;
           <strong>
-            <em>{photoCredit}</em>
+            <em>{credit}</em>
           </strong>
         </p>
       )}

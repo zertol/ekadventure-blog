@@ -3,25 +3,37 @@ import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Link from "next/link";
 import App from "@/components/App";
-import { fetchAllCategories, fetchCategoryPosts } from "@/api/controllers/categories";
+import {
+  fetchAllCategories,
+  fetchCategoryPosts,
+} from "@/api/controllers/categories";
 
 export async function generateStaticParams() {
   const categories = await fetchAllCategories();
   return categories.Result?.map((cat: any) => ({
-     categoryname : cat.slug.current
+    categoryname: cat.slug,
   }));
 }
 
-const CategoryPage: React.FC<any> = async ({ params }: { params: { categoryname: string } }) => {
+const CategoryPage: React.FC<any> = async ({
+  params,
+}: {
+  params: { categoryname: string };
+}) => {
+  const { categoryname } = await params;
 
-const posts = await fetchCategoryPosts({
-    categoryname: params.categoryname,
+  const posts = await fetchCategoryPosts({
+    categoryname: categoryname,
   });
+
+  const category = posts.Result && posts.Result[0]?.categories.find(cat => cat.slug === categoryname);
+
+  const headerMedia: ImageType | undefined = category?.headerMedia;
 
   return (
     <App currentPage="category">
       <HeaderImage
-        backgroundImage="/images/adventure-header.jpg"
+        backgroundImage={headerMedia}
         roundedImage="/images/profile-avatar.webp"
         text={
           <div>
@@ -46,13 +58,13 @@ const posts = await fetchCategoryPosts({
         <div className="mb-8 flex-center-col">
           <h2 className="font-bold text-center mb-4 uppercase">
             {posts.Result!.length > 0
-              ? posts.Result![0].categories[0].name
+              ? category?.name
               : "categoryname"}
           </h2>
           <span className="block w-24 h-1 bg-black"></span>
         </div>
 
-       <PostArticles posts={posts.Result!} />
+        <PostArticles posts={posts.Result!} />
       </div>
     </App>
   );
