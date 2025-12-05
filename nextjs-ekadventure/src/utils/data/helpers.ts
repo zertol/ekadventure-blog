@@ -60,3 +60,17 @@ export const buildCommentTree = (comments: any[]): CommentType[] => {
 
     return roots;
 }
+
+export const escapeHtml = (s: string): string => {
+    return s.replace(
+        /[&<>"]+/g,
+        (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] || c
+    );
+}
+
+export const highlightTerm = (text: string, term: string): string => {
+    if (!text) return text;
+    const escapedTerm = term.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
+    const re = new RegExp(`(${escapedTerm})`, "ig");
+    return escapeHtml(text).replace(re, "<mark>$1</mark>");
+}

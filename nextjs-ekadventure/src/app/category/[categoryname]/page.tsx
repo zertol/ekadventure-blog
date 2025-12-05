@@ -26,7 +26,7 @@ const CategoryPage: React.FC<any> = async ({
     categoryname: categoryname,
   });
 
-  const category = posts.Result && posts.Result[0]?.categories.find(cat => cat.slug === categoryname);
+  const category = posts.Result && posts.Result[0]?.categories.find((cat: CategoryType) => cat.slug === categoryname);
 
   const headerMedia: ImageType | undefined = category?.headerMedia;
 

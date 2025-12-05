@@ -12,6 +12,8 @@ import { ICategoryService } from "../services/interfaces/i-category-service";
 import { CategoryService } from "../services/implementations/category/category-service";
 import { AboutService } from "../services/implementations/about/about-service";
 import { IAboutService } from "../services/interfaces/i-about-service";
+import { ISearchService } from "../services/interfaces/i-search-service";
+import { SearchService } from "../services/implementations/search/search-service";
 
 export class DIResolutions {
     // Service Instances
@@ -21,6 +23,7 @@ export class DIResolutions {
     static getMailService = (): IMailService => DependencyContainer.resolve<MailService>("IMailService");
     static getCategoryService = (): ICategoryService => DependencyContainer.resolve<CategoryService>("ICategoryService");
     static getAboutService = (): IAboutService => DependencyContainer.resolve<AboutService>("IAboutService");
+    static getSearchService = (): ISearchService => DependencyContainer.resolve<SearchService>("ISearchService");
 
     // CMS Client Instance
     static getCMSClient = (): ICMSClient => DependencyContainer.resolve<ICMSClient>("ICMSClient");

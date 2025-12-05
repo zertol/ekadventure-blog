@@ -1,6 +1,5 @@
-import { SanityDocument } from "next-sanity";
-
-export type CategoryType = SanityDocument & {
+type CategoryType = {
+    _id: string;
     name: string;
     slug: string;
     featuredMedia: ImageType;

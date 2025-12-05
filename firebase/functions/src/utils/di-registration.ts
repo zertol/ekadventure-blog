@@ -14,6 +14,8 @@ import { ICategoryService } from "../services/interfaces/i-category-service";
 import { CategoryService } from "../services/implementations/category/category-service";
 import { AboutService } from "../services/implementations/about/about-service";
 import { IAboutService } from "../services/interfaces/i-about-service";
+import { ISearchService } from "../services/interfaces/i-search-service";
+import { SearchService } from "../services/implementations/search/search-service";
 
 export class DIRegistration {
     public static registerDependencies(): void {
@@ -38,6 +40,10 @@ export class DIRegistration {
         ));
 
         DependencyContainer.register<IAboutService>("IAboutService", new AboutService(
+            DIResolutions.getCMSClient()
+        ));
+
+        DependencyContainer.register<ISearchService>("ISearchService", new SearchService(
             DIResolutions.getCMSClient()
         ));
 

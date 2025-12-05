@@ -1,9 +1,20 @@
-import Header from "@/components/Layout/Header/page";
-import Link from "next/link";
+"use client";
 import Image from "next/image";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
+import { useSearch } from "@/utils/hooks/use-search";
+import { useRef } from "react";
+import { SearchResuls } from "@/components/UI/Common/SearchResults/page";
 
 export default function NotFound() {
+  const { query, setQuery, results, loading } = useSearch();
+
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  const searchSite = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setQuery(searchRef.current!.value || "");
+  };
+
   return (
     <div className="h-screen flex-center-col overflow-auto">
       <div className="container px-c-25 lg:px-0">
@@ -52,14 +63,14 @@ export default function NotFound() {
                 <p className="text-white font-semibold mb-3 text-sm/5">
                   Try searching below for your next adventure.
                 </p>
-                <form action="/api/subscribe" method="POST" className="w-full">
+                <form onSubmit={searchSite} method="POST" className="w-full">
                   <div className="flex flex-row w-full overflow-hidden">
                     <input
                       type="text"
-                      name="search"
-                      required
+                      name="query"
                       placeholder="Search an adventure..."
                       className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
+                      ref={searchRef}
                     />
                     <button
                       type="submit"
@@ -70,6 +81,9 @@ export default function NotFound() {
                     </button>
                   </div>
                 </form>
+                {(query || loading) && (
+                  <SearchResuls isInContainer={true} query={query} results={results} loading={loading}/>
+                )}
               </div>
             </div>
           </div>

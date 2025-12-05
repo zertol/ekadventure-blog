@@ -1,7 +1,7 @@
-import { SanityDocument } from "next-sanity";
-
-export type PostDetailsType = SanityDocument & {
-    categories: [];
+type PostDetailsType = {
+    _id: string;
+    slug: { current: string };
+    categories: CategoryType[];
     title: string;
     modifiedDate: Date;
     content: any;

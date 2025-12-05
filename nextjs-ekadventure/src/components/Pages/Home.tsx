@@ -3,7 +3,6 @@ import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryArticle from "@/components/UI/Categories/CategoryArticle/page";
 import Image from "next/image";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
-import { CategoryType } from "@/types/category-type";
 
 interface HomeProps {
   categories: CategoryType[];
@@ -43,7 +42,6 @@ const Home: React.FC<HomeProps> = ({categories}) => {
         </div>
       </section>
 
-      {/* Categories Section */}
       <section className="mb-c-90">
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-12 flex-center-col">
@@ -70,9 +68,7 @@ const Home: React.FC<HomeProps> = ({categories}) => {
         </div>
       </section>
 
-      {/* Build a Blog Section */}
       <section className="relative h-[400px] flex-center-row mb-c-60">
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/adventure-header.jpg"
@@ -82,7 +78,6 @@ const Home: React.FC<HomeProps> = ({categories}) => {
           />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 text-center text-white">
           <h1 className="text-[30px] md:text-[40px] font-bold mb-6 italic">
             Want to build a Blog like this?

@@ -1,6 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import { PostType } from "@/types/post-type";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";

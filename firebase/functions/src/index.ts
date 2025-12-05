@@ -4,6 +4,7 @@ import * as CategoriesController from "./controllers/categories/";
 import * as AboutController from "./controllers/about/";
 import * as CommentsController from "./controllers/comments/";
 import * as ContactController from "./controllers/contact/";
+import * as SearchController from "./controllers/search/";
 import { DIRegistration } from "./utils/di-registration";
 
 // Dependency Registrations
@@ -30,3 +31,6 @@ export const addComment = CommentsController.addComment;
 
 // Contact Controllers
 export const sendContactMail = ContactController.sendContactMail;
+
+// Search Controllers
+export const search = SearchController.search;

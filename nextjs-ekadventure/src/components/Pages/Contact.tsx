@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { usePages } from "@/store/PagesContext";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import { ContactType } from "@/types/contact-type";
 import { sendContactMail } from "@/api/controllers/contact";
 import FormInput from "../UI/Common/Form/FormInput/FormInput";
@@ -65,18 +64,13 @@ const Contact: React.FC = () => {
 
   return (
     <div className="contact-page px-c-25 lg:px-[60px] mb-c-60">
-      {/* Main Content */}
       <div className="container container-max-w-1280 mx-auto mt-28">
-        {/* Title */}
         <h1 className="text-[48px] font-bold font-ps text-center mb-12">
           Can&apos;t wait to hear from you!
         </h1>
 
-        {/* Content Grid */}
         <div className="flex flex-col lg:flex-row gap-8 min-h-[700px]">
-          {/* Left Column */}
           <div className="lg:flex-1 flex flex-col">
-            {/* Text Content */}
             <div className="flex-center-col text-center p-4 mb-4">
               <div className="mb-4">
                 <p>
@@ -92,13 +86,11 @@ const Contact: React.FC = () => {
               <span className="block w-24 h-1 bg-black"></span>
             </div>
 
-            {/* Contact Form */}
             <form
               onSubmit={handleSubmit(onSubmit)}
               onReset={onReset}
               className="flex-1 flex flex-col space-y-4 bg-background-green-accent p-6 rounded-lg box-shadow-quote"
             >
-              {/* Name Field */}
               <FormInput
                 label="name"
                 type="text"
@@ -109,7 +101,6 @@ const Contact: React.FC = () => {
                 className="contact-form-input"
               />
 
-              {/* Email Field */}
               <FormInput
                 label="email"
                 type="email"
@@ -120,7 +111,6 @@ const Contact: React.FC = () => {
                 className="contact-form-input"
               />
 
-              {/* Subject Field */}
               <FormInput
                 label="subject"
                 type="text"
@@ -131,7 +121,6 @@ const Contact: React.FC = () => {
                 className="contact-form-input"
               />
 
-              {/* Message Field */}
               <FormInput
                 label="message"
                 type="textarea"
@@ -142,7 +131,6 @@ const Contact: React.FC = () => {
                 className="contact-form-input"
               />
 
-              {/* Submit Button */}
               <div className="flex flex-col items-center">
                 <button
                   type="submit"
@@ -168,27 +156,7 @@ const Contact: React.FC = () => {
               </div>
             </form>
           </div>
-
-          {/* Right Column - Image
-          {contactPage?.featuredMedia ? (
-            <div className="h-[250px] lg:h-auto lg:flex-1 relative">
-              <Image
-                src={contactPage?.imageUrl}
-                alt="Contact"
-                fill
-                className="inset-0 w-full h-full object-cover rounded-lg"
-              />
-            </div>
-          ) : (
-            <div className="h-[250px] lg:h-auto lg:flex-1 relative flex flex-col items-center justify-center">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 border-4 border-background-green-accent border-t-transparent rounded-full animate-spin"></div>
-                <p className="mt-4 text-white font-ps text-lg">
-                  Loading your adventure...
-                </p>
-              </div>
-            </div>¤
-          )} */}
+          
           <div className="h-[250px] lg:h-auto lg:flex-1 relative">
             <img
               src={contactPage?.featuredMedia?.url}

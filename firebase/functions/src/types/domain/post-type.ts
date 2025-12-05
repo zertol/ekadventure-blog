@@ -1,8 +1,8 @@
-import { SanityDocument } from "@sanity/client";
 import { ImageType } from "./image-type";
 import { CategoryType } from "./category-type";
 
-export type PostType = SanityDocument & {
+export type PostType = {
+    _id: string;
     title: string;
     slug: { current: string };
     publishedAt: string;
