@@ -1,9 +1,11 @@
-import { SanityDocument } from "@sanity/client";
+import { CategoryType } from "./category-type";
 import { CommentType } from "./comment-type";
 import { ImageType } from "./image-type";
 
-export type PostDetailsType = SanityDocument & {
-    categories: [];
+export type PostDetailsType = {
+    _id: string;
+    slug: { current: string };
+    categories: CategoryType[];
     title: string;
     modifiedDate: Date;
     content: any;

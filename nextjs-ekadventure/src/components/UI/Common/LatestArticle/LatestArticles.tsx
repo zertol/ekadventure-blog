@@ -1,7 +1,5 @@
 import React from "react";
-import { SanityDocument } from "next-sanity";
 import LatestArticle from "./LatestArticle";
-import { PostType } from "@/types/post-type";
 
 interface LatestArticlesProps {
   posts: PostType[];

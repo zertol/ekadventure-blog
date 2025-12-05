@@ -1,11 +1,9 @@
 "use-client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
 import { PortableText } from "next-sanity";
-import { CategoryType } from "@/types/category-type";
 
 interface PostArticleProps {
   title: string;

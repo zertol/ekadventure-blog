@@ -1,6 +1,3 @@
-import { PostType } from "@/types/post-type";
-import { PostDetailsType } from "@/types/post-details-type";
-import { RelatedPostType } from "@/types/related-post-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
 
 export const fetchAllPosts = async (): Promise<ApiResult<PostType[]>> => {

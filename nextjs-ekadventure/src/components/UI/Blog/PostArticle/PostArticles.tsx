@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import PostArticle from "./page";
-import { PostType } from "@/types/post-type";
 
 interface PostArticlesProps {
   posts: PostType[];

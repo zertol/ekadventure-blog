@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { PostType } from "@/types/post-type";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
-import { CategoryType } from "@/types/category-type";
 
 interface BlogProps {
   posts: PostType[];
@@ -41,7 +39,6 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
       />
 
       <div className="container mx-auto px-4 my-c-60">
-        {/* Category Filters */}
         <div className="flex flex-wrap gap-5 mb-12 justify-center">
           <CategoryFilter
             name="ALL POSTS"
@@ -58,7 +55,6 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
           ))}
         </div>
 
-        {/* Posts Grid with Load More */}
         <PostArticles posts={filteredPosts} />
       </div>
     </div>

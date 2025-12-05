@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import PrimaryButton from "../PrimaryButton/page";
-import { CategoryType } from "@/types/category-type";
  
 interface LatestArticleProps {
   title: string;

@@ -111,3 +111,15 @@ export const LATEST_POSTS_BY_CATEGORIES_QUERY = `*[_type == "post" && slug.curre
       }
   }
 }` as const;
+
+export const SEARCH_QUERY = `*[_type in ["post", "category"] && (title match $query 
+|| name match $query || pt::text(content) match $query)] | order(_type desc, _updatedAt desc) [0...$limit]
+{
+  _id,
+  _type,
+  title,
+  name,
+  slug,
+  _updatedAt,
+  content
+}` as const;

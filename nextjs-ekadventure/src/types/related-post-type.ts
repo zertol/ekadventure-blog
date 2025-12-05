@@ -1,5 +1,3 @@
-import { PostType } from "./post-type";
-
-export type RelatedPostType = {
+type RelatedPostType = {
     relatedPosts: PostType[];
 }; 

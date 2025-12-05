@@ -1,5 +1,3 @@
-import { CategoryType } from "@/types/category-type";
-import { PostType } from "@/types/post-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
 
 export const fetchAllCategories = async (): Promise<ApiResult<CategoryType[]>> => {

@@ -9,6 +9,8 @@ import { ICategoryRepository } from "../shared/interfaces/i-category-repository"
 import { SanityCategoryRepository } from "./repositories/category/sanity-category-repository";
 import { IAboutRepository } from "../shared/interfaces/i-about-repository";
 import { SanityAboutRepository } from "./repositories/about/sanity-about-repository";
+import { SanitySearchRepository } from "./repositories/search/sanity-search-repository";
+import { ISearchRepository } from "../shared/interfaces/i-search-repository";
 
 export class SanityRepositories implements ICMSRepositories {
     page: IPageRepository;
@@ -16,6 +18,7 @@ export class SanityRepositories implements ICMSRepositories {
     comment: ICommentRepository;
     category: ICategoryRepository;
     about: IAboutRepository;
+    search: ISearchRepository;
 
     constructor() {
         this.page = new SanityPageRepository();
@@ -23,5 +26,6 @@ export class SanityRepositories implements ICMSRepositories {
         this.comment = new SanityCommentRepository();
         this.category = new SanityCategoryRepository();
         this.about = new SanityAboutRepository();
+        this.search = new SanitySearchRepository();
     }
 }

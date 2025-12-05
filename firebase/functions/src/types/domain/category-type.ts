@@ -1,7 +1,7 @@
-import { SanityDocument } from "@sanity/client";
 import { ImageType } from "./image-type";
 
-export type CategoryType = SanityDocument & {
+export type CategoryType = {
+    _id: string
     name: string;
     slug: string;
     featuredMedia: ImageType;

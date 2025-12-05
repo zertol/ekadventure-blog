@@ -9,7 +9,6 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { generateBlockComponents } from "@/components/Data/BlockComponents";
 import { usePages } from "@/store/PagesContext";
-import { PostType } from "@/types/post-type";
 
 interface AboutProps {
   about: AboutType | null;
