@@ -64,7 +64,7 @@ export const buildCommentTree = (comments: any[]): CommentType[] => {
 export const escapeHtml = (s: string): string => {
     return s.replace(
         /[&<>"]+/g,
-        (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] || c
+        (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": '&#39;' })[c]!
     );
 }
 
@@ -73,4 +73,14 @@ export const highlightTerm = (text: string, term: string): string => {
     const escapedTerm = term.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
     const re = new RegExp(`(${escapedTerm})`, "ig");
     return escapeHtml(text).replace(re, "<mark>$1</mark>");
+}
+
+export const sanitizeSearchTerm = (term: string) => {
+    const cleaned = term.trim();
+
+    if (cleaned.length === 0) return "";
+    if (cleaned.length > 30) return cleaned.slice(0, 30);
+
+    // whitelist allowed characters: letters, numbers, spaces, dash, apostrophe
+    return cleaned.replace(/[^a-zA-Z0-9\s\-']/g, "");
 }

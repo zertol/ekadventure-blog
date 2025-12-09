@@ -1,7 +1,8 @@
 import { search } from "@/api/controllers/search";
 import { useEffect, useRef, useState } from "react";
+import { sanitizeSearchTerm } from "../data/helpers";
 
-export function useSearch() {
+export const useSearch = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultType[]>([]);
   const [loading, setLoading] = useState(false);
@@ -19,13 +20,12 @@ export function useSearch() {
     setLoading(true);
     setError(null);
 
-    // debounce and abort previous
     const id = setTimeout(async () => {
       controllerRef.current?.abort();
       controllerRef.current = new AbortController();
       try {
-        console.log(111);
-        const data = await search({ query });
+        const sanitizedQuery = sanitizeSearchTerm(query);
+        const data = await search({ query: sanitizedQuery });
         setResults(data.Result || []);
       } catch (e: any) {
         if (e.name !== "AbortError") setError(e.message || "Search error");
@@ -38,4 +38,4 @@ export function useSearch() {
   }, [query]);
 
   return { query, setQuery, results, loading, error };
-}
+};
