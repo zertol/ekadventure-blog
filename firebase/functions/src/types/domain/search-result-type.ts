@@ -1,3 +1,5 @@
+import { PortableTextBlock } from "@portabletext/types";
+
 export type SearchResultType = {
     [key: string]: any;
     _id: string;
@@ -6,5 +8,5 @@ export type SearchResultType = {
     name: string;
     slug: { current: string };
     _updatedAt: string;
-    content: any;
+    content: PortableTextBlock[];
 }

@@ -16,6 +16,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@portabletext/types": "^4.0.0",
     "@sanity/client": "^7.12.1",
     "firebase-admin": "^12.6.0",
     "firebase-functions": "^6.6.0",

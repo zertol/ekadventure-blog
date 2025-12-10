@@ -1,6 +1,7 @@
 import { CategoryType } from "./category-type";
 import { CommentType } from "./comment-type";
 import { ImageType } from "./image-type";
+import { PortableTextBlock } from "@portabletext/types";
 
 export type PostDetailsType = {
     _id: string;
@@ -8,7 +9,8 @@ export type PostDetailsType = {
     categories: CategoryType[];
     title: string;
     modifiedDate: Date;
-    content: any;
+    content: PortableTextBlock[];
+    excerpt: PortableTextBlock[];
     stats: Array<{
         label_en: string;
         label_fr: string;
@@ -21,14 +23,14 @@ export type PostDetailsType = {
         name_en: string;
         name_fr: string;
     };
-    googleMapsHowTo: any;
-    googleMapsHowToTitle: any;
+    googleMapsHowTo: PortableTextBlock[];
+    googleMapsHowToTitle: string;
     youtubeEmbedUrl: any;
-    whereToStay: any;
-    whereToEat: any;
-    hikingPass: any;
-    otherHikes: any;
-    otherAttractions: any;
+    whereToStay: PortableTextBlock[];
+    whereToEat: PortableTextBlock[];
+    hikingPass: PortableTextBlock[];
+    otherHikes: PortableTextBlock[];
+    otherAttractions: PortableTextBlock[];
     capturedMoments: ImageType[];
     featuredMedia: ImageType;
     comments: CommentType[];
