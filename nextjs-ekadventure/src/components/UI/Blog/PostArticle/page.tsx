@@ -28,8 +28,8 @@ const PostArticle: React.FC<PostArticleProps> = ({
       <div className="relative h-[300px] w-full overflow-hidden">
         <Link href={`/${slug}`}>
           <img
-            src={featuredMedia.url}
-            alt={featuredMedia.alt || "Post Featured Image"}
+            src={featuredMedia?.url}
+            alt={featuredMedia?.alt || "Post Featured Image"}
             className="object-cover transition-transform duration-300 hover:scale-105"
           />
         </Link>

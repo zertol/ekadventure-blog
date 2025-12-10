@@ -20,8 +20,8 @@ const CategoryArticle: React.FC<CategoryArticleProps> = ({
         {/* Background Image with Zoom Effect */}
         <div className="absolute inset-0 w-full h-full transition-transform duration-700  ease-in-out group-hover:scale-110">
           <img
-            src={featuredMedia.url || "/images/adventure-header.jpg"}
-            alt={featuredMedia.alt || title}
+            src={featuredMedia?.url || "/images/adventure-header.jpg"}
+            alt={featuredMedia?.alt || title}
             className="object-cover h-full w-full"
           />
         </div>
