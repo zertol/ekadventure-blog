@@ -36,10 +36,10 @@ export async function generateMetadata({
 
   const metaData: Metadata = {
     title: post.title,
-    description: toPlainText(post.excerpt),
+    description: toPlainText(post?.excerpt || []),
     openGraph: {
       title: post.title,
-      description: toPlainText(post.excerpt),
+      description: toPlainText(post?.excerpt || []),
       images: post.featuredMedia ? [post.featuredMedia?.url] : [],
     },
   };
