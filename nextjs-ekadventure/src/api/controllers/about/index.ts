@@ -1,3 +1,4 @@
+import { AboutType } from "@/types/about-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
 
 export const fetchAboutDetails = async (): Promise<ApiResult<AboutType>> => {
