@@ -1,3 +1,4 @@
+import { PostDetailsType } from "@/types/post-details-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
 
 export const fetchAllPosts = async (): Promise<ApiResult<PostType[]>> => {

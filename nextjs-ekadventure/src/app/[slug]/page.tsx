@@ -1,4 +1,4 @@
-import { PortableText } from "@portabletext/react";
+import { PortableText, toPlainText } from "@portabletext/react";
 import App from "@/components/App";
 import Comments from "@/components/UI/Blog/ArticleDetails/Comments/Comments";
 import Sidebar from "@/components/Layout/Sidebar/page";
@@ -17,6 +17,35 @@ import {
 } from "@/api/controllers/posts";
 import { CommentsProvider } from "@/store/CommentsContext";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const postResult = await fetchPostDetails({
+    slug: slug,
+  });
+  const post = postResult.Result;
+
+  if (!post) {
+    return {};
+  }
+
+  const metaData: Metadata = {
+    title: post.title,
+    description: toPlainText(post.excerpt),
+    openGraph: {
+      title: post.title,
+      description: toPlainText(post.excerpt),
+      images: post.featuredMedia ? [post.featuredMedia.url] : [],
+    },
+  };
+
+  return metaData;
+}
 
 export async function generateStaticParams() {
   const posts = await fetchAllPosts();

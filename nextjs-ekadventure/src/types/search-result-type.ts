@@ -1,4 +1,6 @@
-type SearchResultType = {
+import { PortableTextBlock } from "@portabletext/react";
+
+export type SearchResultType = {
     [key: string]: any;
     _id: string;
     _type: string;
@@ -6,5 +8,5 @@ type SearchResultType = {
     name: string;
     slug: { current: string };
     _updatedAt: string;
-    content: any;
+    content: PortableTextBlock[];
 }

@@ -1,10 +1,13 @@
-type PostDetailsType = {
+import { PortableTextBlock } from "next-sanity";
+
+export type PostDetailsType = {
     _id: string;
     slug: { current: string };
     categories: CategoryType[];
     title: string;
     modifiedDate: Date;
-    content: any;
+    content: PortableTextBlock[];
+    excerpt: PortableTextBlock[];
     stats: Array<{
         label_en: string;
         label_fr: string;
@@ -17,14 +20,14 @@ type PostDetailsType = {
         name_en: string;
         name_fr: string;
     };
-    googleMapsHowTo: any;
+    googleMapsHowTo: PortableTextBlock[];
     googleMapsHowToTitle: string;
     youtubeEmbedUrl: any;
-    whereToStay: any;
-    whereToEat: any;
-    hikingPass: any;
-    otherHikes: any;
-    otherAttractions: any;
+    whereToStay: PortableTextBlock[];
+    whereToEat: PortableTextBlock[];
+    hikingPass: PortableTextBlock[];
+    otherHikes: PortableTextBlock[];
+    otherAttractions: PortableTextBlock[];
     capturedMoments: ImageType[];
     featuredMedia: ImageType;
     comments: CommentType[];

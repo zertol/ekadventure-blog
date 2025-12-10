@@ -1,6 +1,7 @@
 import { search } from "@/api/controllers/search";
 import { useEffect, useRef, useState } from "react";
 import { sanitizeSearchTerm } from "../data/helpers";
+import { SearchResultType } from "@/types/search-result-type";
 
 export const useSearch = () => {
   const [query, setQuery] = useState("");

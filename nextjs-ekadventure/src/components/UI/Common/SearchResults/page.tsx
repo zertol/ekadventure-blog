@@ -1,5 +1,6 @@
 import React from "react";
 import SearchResult from "./SearchResult";
+import { SearchResultType } from "@/types/search-result-type";
 
 export const SearchResuls: React.FC<{
   results: SearchResultType[];

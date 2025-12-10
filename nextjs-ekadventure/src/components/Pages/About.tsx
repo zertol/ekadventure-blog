@@ -9,6 +9,7 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { generateBlockComponents } from "@/components/Data/BlockComponents";
 import { usePages } from "@/store/PagesContext";
+import { AboutType } from "@/types/about-type";
 
 interface AboutProps {
   about: AboutType | null;
@@ -63,7 +64,7 @@ const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
           {/* Left Column - Sanity Content */}
           <div className="about-content max-w-none leading-relaxed pl-2">
             <PortableText
-              value={about?.content}
+              value={about?.content || []}
               components={generateBlockComponents()}
             />
           </div>

@@ -1,3 +1,4 @@
+import { SearchResultType } from "@/types/search-result-type";
 import { escapeHtml, highlightTerm } from "@/utils/data/helpers";
 
 const SearchResult: React.FC<{
