@@ -2,7 +2,8 @@ export const PAGES_QUERY = `*[_type == "page" && visible == true] | order(order 
   featuredMedia,
   "slug": slug.current,
   title,
-  order
+  order,
+  metadata
 }` as const;
 
 export const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post" && references(^._id)]) > 0] | order(name asc) {
@@ -61,7 +62,8 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
     "postId": post._ref,
     isAuthor,
     approved
-  }
+  },
+  metadata
 }` as const;
 
 export const POSTS_BY_CATEGORY_QUERY = `*[
@@ -77,7 +79,8 @@ export const POSTS_BY_CATEGORY_QUERY = `*[
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current,
-    headerMedia
+    headerMedia,
+    metadata
   }
 }` as const;
 

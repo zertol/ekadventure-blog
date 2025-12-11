@@ -131,6 +131,13 @@ export const postType = defineType({
       type: "array",
       of: [{ type: "reference", to: [{ type: "comment" }] }]
     }),
+    defineField({
+      name: "metadata",
+      type: 'object',
+      fields: [
+        { name: "ogImage", type: "externalImage" },
+      ]
+    })
   ],
   preview: {
     select: {

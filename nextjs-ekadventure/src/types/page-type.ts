@@ -3,4 +3,5 @@ type PageType = {
     slug: string;
     title: string;
     order: number;
+    metadata: MetadataType;
 };

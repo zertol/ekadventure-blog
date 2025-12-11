@@ -18,8 +18,8 @@ const SearchResult: React.FC<{
 
   return (
     <div className="p-3 rounded">
-    <div className="flex-center-col mb-2">
-        <span className="text-xs p-1 px-3 bg-background-green-accent rounded text-white">{label}</span>
+    <div className="flex-left-col mb-2">
+        <span className="text-xs p-0 px-3 bg-background-green-accent rounded-sm text-white">{label}</span>
     </div>
       <div className="flex items-baseline justify-between">
         

@@ -43,6 +43,14 @@ export const pageType = defineType({
       type: 'reference',
       to: [{ type: 'author' }],
     }),
+    defineField({
+      name: "metadata",
+      type: 'object',
+      fields: [
+        { name: "ogImage", type: "externalImage" },
+        { name: "description", type: "string" }
+      ]
+    })
   ],
   preview: {
     select: {

@@ -5,8 +5,26 @@ import { Suspense } from "react";
 import { fetchAllPages } from "@/api/controllers/pages";
 
 export const metadata: Metadata = {
-  title: "EkAdventure Blog",
-  description: "Share your adventures with the world",
+  title: {
+    default: "Ekadventure Blog",
+    template: "%s | Ekadventure Blog"
+  },
+  description: "Explore outdoor adventures through travel guides, hikes, and articles on Ekadventure Blog.",
+  openGraph: {
+    type: "website",
+    locale: "en_CA",
+    alternateLocale: ["fr_CA"],
+    url: "https://ekadventure.com",
+    title: "Ekadventure",
+    description: "Explore outdoor adventures through travel guides, hikes, and articles on Ekadventure Blog.",
+    images: [
+      {
+        url: "https://r2.ekadventure.com/cdn-cgi/image/width=1200,format=jpg,quality=80/blog/default-og.jpg",
+        width: 1200,
+        alt: "Ekadventure",
+      },
+    ],
+  }
 };
 
 export default async function RootLayout({

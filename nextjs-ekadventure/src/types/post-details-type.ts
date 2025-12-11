@@ -31,4 +31,5 @@ export type PostDetailsType = {
     capturedMoments: ImageType[];
     featuredMedia: ImageType;
     comments: CommentType[];
+    metadata: MetadataType;
 };

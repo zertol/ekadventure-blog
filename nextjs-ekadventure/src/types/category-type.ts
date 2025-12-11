@@ -5,4 +5,5 @@ type CategoryType = {
     featuredMedia: ImageType;
     headerMedia: ImageType;
     postCount: string;
+    metadata: MetadataType;
 };

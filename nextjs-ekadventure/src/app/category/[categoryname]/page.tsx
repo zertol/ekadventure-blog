@@ -7,6 +7,37 @@ import {
   fetchAllCategories,
   fetchCategoryPosts,
 } from "@/api/controllers/categories";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { categoryname: string };
+}): Promise<Metadata> {
+  const { categoryname } = await params;
+  const result = await fetchCategoryPosts({
+    categoryname: categoryname,
+  });
+  const posts = result.Result;
+
+  const category = posts && posts[0]?.categories.find((cat: CategoryType) => cat.slug === categoryname);
+
+  if (!category) {
+    return {};
+  }
+
+  const metaData: Metadata = {
+    title: category.name,
+    description: category.metadata.description,
+    openGraph: {
+      title: category.name,
+      description: category.metadata.description,
+      images: category.metadata ? [category.metadata.ogImage?.url] : [],
+    },
+  };
+
+  return metaData;
+}
 
 export async function generateStaticParams() {
   const categories = await fetchAllCategories();

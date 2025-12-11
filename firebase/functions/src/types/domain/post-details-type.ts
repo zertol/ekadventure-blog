@@ -2,6 +2,7 @@ import { CategoryType } from "./category-type";
 import { CommentType } from "./comment-type";
 import { ImageType } from "./image-type";
 import { PortableTextBlock } from "@portabletext/types";
+import { MetadataType } from "./metadata-type";
 
 export type PostDetailsType = {
     _id: string;
@@ -34,4 +35,5 @@ export type PostDetailsType = {
     capturedMoments: ImageType[];
     featuredMedia: ImageType;
     comments: CommentType[];
+    metadata: MetadataType;
 };

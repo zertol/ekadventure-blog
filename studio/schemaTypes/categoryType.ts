@@ -10,7 +10,15 @@ export const categoryType = defineType({
     defineField({ name: 'name', type: 'string' }),
     defineField({ name: 'slug', type: 'slug' }),
     defineField({ name: 'featuredMedia', type: 'externalImage' }),
-    defineField({ name: 'headerMedia', type: 'externalImage' })
+    defineField({ name: 'headerMedia', type: 'externalImage' }),
+    defineField({
+      name: "metadata",
+      type: 'object',
+      fields: [
+        { name: "ogImage", type: "externalImage" },
+        { name: "description", type: "string" }
+      ]
+    })
   ],
   preview: {
     select: {
