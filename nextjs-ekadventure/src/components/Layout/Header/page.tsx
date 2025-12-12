@@ -66,8 +66,10 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
               {menuItems.map((page) => (
                 <HeaderNavLink
                   key={page.slug}
-                  href={`/${
-                    page.slug.toLowerCase().includes("home") ? "" : page.slug
+                  href={`${
+                    page.slug.toLowerCase().includes("http")
+                      ? page.slug
+                      : "/" + page.slug
                   }`}
                   onClick={toggleMobileMenu}
                 >
@@ -96,7 +98,14 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
 
             <nav className="hidden md:flex space-x-5 lg:space-x-8 flex-1 md:items-center md:justify-center px-[45px] lg:px-0">
               {menuItems.map((page) => (
-                <HeaderNavLink key={page.slug} href={`/${page.slug}`}>
+                <HeaderNavLink
+                  key={page.slug}
+                  href={`${
+                    page.slug.toLowerCase().includes("http")
+                      ? page.slug
+                      : "/" + page.slug
+                  }`}
+                >
                   {page.title.toUpperCase()}
                 </HeaderNavLink>
               ))}
