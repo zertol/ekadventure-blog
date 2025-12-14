@@ -17,14 +17,14 @@ const FormInput: React.FC<FormInputProps> = ({
   register,
   error,
   required,
-  className
+  className,
 }) => {
   return type === "textarea" ? (
-    <div>
+    <>
       <textarea
         placeholder={placeholder}
         {...register(label, {
-          required: required ? `${label} is required` : false,
+          required: required ? `${capitalize(label)} is required` : false,
         })}
         rows={4}
         className={`${className} ${
@@ -32,22 +32,26 @@ const FormInput: React.FC<FormInputProps> = ({
         }`}
       />
       {error && <span className="text-red-900 text-sm">{error}</span>}
-    </div>
+    </>
   ) : (
-    <div>
+    <>
       <input
         type={type}
         placeholder={placeholder}
         {...register(label, {
-          required: required ? `${label} is required` : false,
+          required: required ? `${capitalize(label)} is required` : false,
         })}
         className={`${className} ${
           error ? "border-red-900" : "border-gray-300"
         }`}
       />
       {error && <span className="text-red-900 text-sm">{error}</span>}
-    </div>
+    </>
   );
 };
 
 export default FormInput;
+
+function capitalize(label: string) {
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}

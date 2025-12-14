@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { usePages } from "@/store/PagesContext";
 import { useForm } from "react-hook-form";
-import { ContactType } from "@/types/contact-type";
-import { sendContactMail } from "@/api/controllers/contact";
+import { handleMailService } from "@/api/controllers/contact";
 import FormInput from "../UI/Common/Form/FormInput/FormInput";
 import SubmitStatus from "../UI/Common/Form/SubmitStatus/page";
 
@@ -35,7 +34,7 @@ const Contact: React.FC = () => {
   const onSubmit = async (data: ContactType) => {
     setIsLoading(true);
     try {
-      const response = await sendContactMail(data);
+      const response = await handleMailService(data, "contact");
 
       if (response.ErrorMessages && response.ErrorMessages.length > 0) {
         throw new Error(response.ErrorMessages.join(","));

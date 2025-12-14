@@ -31,6 +31,7 @@ export const addComment = CommentsController.addComment;
 
 // Contact Controllers
 export const sendContactMail = ContactController.sendContactMail;
+export const createNewsletterSubscriptionEmail = ContactController.createNewsletterSubscriptionEmail;
 
 // Search Controllers
 export const search = SearchController.search;

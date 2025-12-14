@@ -1,4 +1,4 @@
-export type ContactType = {
+type ContactType = {
     name: string;
     email: string;
     subject: string;

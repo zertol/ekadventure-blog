@@ -1,0 +1,3 @@
+type SubscriberType = {
+    email: string;
+}
