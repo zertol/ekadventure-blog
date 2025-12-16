@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { handleMailService } from "@/api/controllers/contact";
 import SubmitStatus from "@/components/UI/Common/Form/SubmitStatus/page";
 import FormInput from "@/components/UI/Common/Form/FormInput/FormInput";
+import GoogleAd from "@/components/Ads/GoogleAd";
 
 const Footer: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<{
@@ -148,6 +149,7 @@ const Footer: React.FC = () => {
           © {new Date().getFullYear()} Elie Kadoury
         </p>
       </div>
+      <GoogleAd adSlot="1234567890" style={{ margin: "20px 0" }} />
     </footer>
   );
 };

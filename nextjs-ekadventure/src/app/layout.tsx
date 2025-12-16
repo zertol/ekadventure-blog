@@ -3,6 +3,7 @@ import "./globals.css";
 import PagesContextProvider from "@/store/PagesContext";
 import { Suspense } from "react";
 import { fetchAllPages } from "@/api/controllers/pages";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -53,6 +54,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <Script
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9735828709569989"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <PagesContextProvider pagesProps={pagesProps}>
             <Suspense>
