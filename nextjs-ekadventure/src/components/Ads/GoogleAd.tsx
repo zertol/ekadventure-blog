@@ -26,7 +26,7 @@ const GoogleAd: React.FC<GoogleAdProps> = ({ adSlot, style }) => {
     <div className="w-full flex justify-center">
       <ins
         className="adsbygoogle"
-        style={{ display: "block", height: "60px", width: "768px", ...style }}
+        style={{ display: "inline-block", height: "60px", width: "768px", ...style }}
         data-ad-client="ca-pub-9735828709569989"
         data-ad-slot={adSlot}
         data-ad-format="auto"
