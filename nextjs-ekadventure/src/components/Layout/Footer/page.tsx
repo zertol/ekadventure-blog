@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
               <div className="mt-2 w-full">
                 {errors.email?.message && (
                   <span className="text-red-900 text-sm">
-                    {JSON.stringify(errors.email?.message)}
+                    {errors.email?.message}
                   </span>
                 )}
                 {isLoading && (

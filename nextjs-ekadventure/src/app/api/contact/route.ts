@@ -17,5 +17,9 @@ export async function POST(req: Request) {
         return await sendRequest("https://createnewslettersubscriptionemail-zsszt3mtmq-uc.a.run.app", body);
     }
 
+    if (parsedBody.action?.toLowerCase() === "unsubscribe") {
+        return await sendRequest("https://unsubscribe-zsszt3mtmq-uc.a.run.app", body);
+    }
+
     return await sendRequest("https://sendcontactmail-zsszt3mtmq-uc.a.run.app", body);
 }
