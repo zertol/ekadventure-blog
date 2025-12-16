@@ -31,7 +31,6 @@ const GoogleAd: React.FC<GoogleAdProps> = ({ adSlot, style }) => {
           data-ad-client="ca-pub-9735828709569989"
           data-ad-slot={adSlot}
           data-ad-format="auto"
-          data-full-width-responsive="true"
         />
       </div>
     </div>
