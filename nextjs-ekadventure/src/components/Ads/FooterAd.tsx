@@ -11,9 +11,10 @@ declare global {
 interface GoogleAdProps {
   adSlot: string;
   style?: React.CSSProperties;
+  ref?: React.Ref<HTMLModElement>;
 }
 
-const FooterAd: React.FC<GoogleAdProps> = ({ adSlot, style }) => {
+const FooterAd: React.FC<GoogleAdProps> = ({ adSlot, style, ref }) => {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -23,11 +24,12 @@ const FooterAd: React.FC<GoogleAdProps> = ({ adSlot, style }) => {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-auto bg-background-blue-accent/50 w-full z-50 flex justify-center">
+    <div className="fixed bottom-0 left-auto bg-background-blue-accent/35 w-full z-50 flex justify-center">
       <div className="w-[768px]">
         <ins
+          ref={ref}
           className="adsbygoogle"
-          style={{ display: "block" ,...style }}
+          style={{ display: "block", ...style }}
           data-ad-client="ca-pub-9735828709569989"
           data-ad-slot={adSlot}
           data-ad-format="horizontal"

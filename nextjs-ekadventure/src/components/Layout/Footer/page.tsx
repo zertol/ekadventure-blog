@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import HeaderNavLink from "../Header/NavLink";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
@@ -9,6 +9,26 @@ import FormInput from "@/components/UI/Common/Form/FormInput/FormInput";
 import FooterAd from "@/components/Ads/FooterAd";
 
 const Footer: React.FC = () => {
+  const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
+  const adRef = useRef<HTMLModElement>(null);
+
+  useEffect(() => {
+    const ad = adRef.current;
+    if(!ad) return;
+
+    const observer = new ResizeObserver(() => {
+      setAdVisible({ isVisible: true, height: ad.offsetHeight });
+      observer.disconnect();
+    });
+
+    observer.observe(ad);
+
+    return () => {
+      observer.disconnect();
+    };
+
+  }, []);
+
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
     message: string;
@@ -144,12 +164,12 @@ const Footer: React.FC = () => {
       <div className="w-full h-[1px] bg-background-primary mt-4" />
 
       {/* Copyright container */}
-      <div className="py-1">
+      <div className={`py-1 ${adVisible.isVisible ? "mb-[" + adVisible.height + "px]" : ""}`}>
         <p className="text-center">
           © {new Date().getFullYear()} Elie Kadoury
         </p>
       </div>
-      <FooterAd adSlot="7868749713" />
+      <FooterAd adSlot="7868749713" ref={adRef} />
     </footer>
   );
 };
