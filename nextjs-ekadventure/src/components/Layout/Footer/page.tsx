@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { handleMailService } from "@/api/controllers/contact";
 import SubmitStatus from "@/components/UI/Common/Form/SubmitStatus/page";
 import FormInput from "@/components/UI/Common/Form/FormInput/FormInput";
-import FooterAd from "@/components/Ads/GoogleAd";
+import FooterAd from "@/components/Ads/FooterAd";
 
 const Footer: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<{
