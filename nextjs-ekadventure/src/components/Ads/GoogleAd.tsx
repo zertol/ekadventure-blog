@@ -23,8 +23,8 @@ const GoogleAd: React.FC<GoogleAdProps> = ({ adSlot, style }) => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center max-h-16">
-      <div className="w-[700px] overflow-auto">
+    <div className="w-full flex justify-center" style={{height:"60px !important"}}>
+      <div className="overflow-auto">
         <ins
           className="adsbygoogle"
           style={{ display: "block", ...style }}
