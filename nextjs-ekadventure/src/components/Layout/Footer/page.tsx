@@ -149,7 +149,7 @@ const Footer: React.FC = () => {
           © {new Date().getFullYear()} Elie Kadoury
         </p>
       </div>
-      <GoogleAd adSlot="1234567890" style={{ margin: "20px 0" }} />
+      <GoogleAd adSlot="7868749713" style={{ margin: "20px 0" }} />
     </footer>
   );
 };

@@ -106,11 +106,36 @@
     <priority>0.8</priority>
   </url>
 
+    <!-- Categories -->
+  <url>
+    <loc>https://ekadventure.com/category/hiking-and-camping</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ekadventure.com/category/travel</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ekadventure.com/category/travel-tips</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ekadventure.com/category/road-trips</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Contact -->
   <url>
     <loc>https://ekadventure.com/shop</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
 
   <!-- About -->
@@ -124,6 +149,6 @@
   <url>
     <loc>https://ekadventure.com/contact</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>
