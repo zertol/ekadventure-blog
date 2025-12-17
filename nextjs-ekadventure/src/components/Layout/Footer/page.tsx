@@ -17,8 +17,11 @@ const Footer: React.FC = () => {
     if(!ad) return;
 
     const observer = new ResizeObserver(() => {
-      setAdVisible({ isVisible: true, height: ad.offsetHeight });
-      observer.disconnect();
+      setAdVisible(()=> {
+        observer.disconnect();
+        return { isVisible: true, height: ad.offsetHeight };
+      });
+      
     });
 
     observer.observe(ad);
