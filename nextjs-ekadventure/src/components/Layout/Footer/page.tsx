@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
       observer.disconnect();
     };
 
-  }, []);
+  }, [adRef.current?.offsetHeight]);
 
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -167,7 +167,7 @@ const Footer: React.FC = () => {
       <div className="w-full h-[1px] bg-background-primary mt-4" />
 
       {/* Copyright container */}
-      <div className={`py-1 ${adVisible.isVisible ? "mb-[" + adVisible.height + "px]" : ""}`}>
+      <div className="py-1" style={{ marginBottom: adVisible.isVisible ? `${adVisible.height}px` : 0 }}>
         <p className="text-center">
           © {new Date().getFullYear()} Elie Kadoury
         </p>
