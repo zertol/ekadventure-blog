@@ -3,6 +3,8 @@ import { groupImagePairsOrSingle } from "@/utils/data/helpers";
 import { PortableTextMarkComponentProps } from "next-sanity";
 import Link from "next/link";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
+import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
+import ArticleAd from "../Ads/ArticleAd";
 
 export const generateBlockComponents = (
   isAfterContent = false,
@@ -77,8 +79,17 @@ export const generateBlockComponents = (
       h1: ({ children }: PortableTextComponentProps<any>) => (
         <h1 className="text-3xl font-bold">{children}</h1>
       ),
-      normal: ({ children }: PortableTextComponentProps<any>) => {
-        return <p className="mb-3 leading-6">{children}</p>;
+      normal: ({ children, index }: PortableTextComponentProps<any>) => {
+        return (
+          <>
+            <p className="mb-3 leading-6">{children}</p>
+            {(index === 2 || index === 5) && (
+              <ClientOnlyWrapper>
+                <ArticleAd adSlot="9573541605" />
+              </ClientOnlyWrapper>
+            )}
+          </>
+        );
       },
     },
     list: {

@@ -4,7 +4,6 @@ import React, { useRef, useState } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
-import SquareAd from "../Ads/SquareAd";
 import HorizontalAd from "../Ads/HorizontalAd";
 
 interface BlogProps {
