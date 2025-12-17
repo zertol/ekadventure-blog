@@ -2,6 +2,7 @@ import React from "react";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
+import VerticalAd from "@/components/Ads/VerticalAd";
 
 interface SideBarProps {
   sideImage: ImageType;
@@ -58,7 +59,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         </div>
 
         {/* Featured Adventures */}
-        <div className="flex-center-col">
+        <div className="flex-center-col mb-1">
           <div className="text-center bg-background-green-accent mb-4">
             <div className="py-2 px-6">
               <h3 className="featured-adventure-title">Featured adventures</h3>
@@ -67,6 +68,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
 
           {relatedPosts && <LatestArticles posts={relatedPosts} isLinkOnly />}
         </div>
+        <VerticalAd adSlot="8013946644"/>
       </div>
     </aside>
   );

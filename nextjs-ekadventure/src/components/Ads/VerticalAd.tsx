@@ -2,26 +2,26 @@
 import { useAdSense } from "@/utils/hooks/use-adsense";
 import { useRef } from "react";
 
-interface ArticleAdProps {
+interface VerticalAdProps {
   adSlot: string;
   style?: React.CSSProperties;
 }
 
-const ArticleAd: React.FC<ArticleAdProps> = ({ adSlot, style }) => {
+const VerticalAd: React.FC<VerticalAdProps> = ({ adSlot, style }) => {
   const adRef = useRef(null!);
   useAdSense(adRef);
 
   return (
     <ins
       ref={adRef}
-      className="adsbygoogle"
-      style={{ display: "block", textAlign: "center", ...style }}
+      className="adsbygoogle sidebar-ad"
+      style={{ display: "block", ...style }}
       data-ad-client="ca-pub-9735828709569989"
       data-ad-slot={adSlot}
-      data-ad-layout="in-article"
-      data-ad-format="fluid"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
     />
   );
 };
 
-export default ArticleAd;
+export default VerticalAd;

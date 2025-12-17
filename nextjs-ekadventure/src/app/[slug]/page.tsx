@@ -123,7 +123,7 @@ export default async function PostPage({
                 {post.content && (
                   <PortableText
                     value={groupImagesFromBlocks(post.content)}
-                    components={generateBlockComponents(false)}
+                    components={generateBlockComponents(false, false, true)}
                   />
                 )}
               </div>
@@ -169,7 +169,7 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.googleMapsHowTo)}
-                    components={generateBlockComponents(true)}
+                    components={generateBlockComponents(true, false, true)}
                   />
                 </div>
               )}

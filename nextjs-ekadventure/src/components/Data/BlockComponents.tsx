@@ -8,7 +8,8 @@ import ArticleAd from "../Ads/ArticleAd";
 
 export const generateBlockComponents = (
   isAfterContent = false,
-  fullContainerWidth = false
+  fullContainerWidth = false,
+  adsVisible = false
 ) => {
   return {
     types: {
@@ -37,21 +38,28 @@ export const generateBlockComponents = (
         const { url, width = "100%", height = "400px", title } = value;
 
         return (
-          <div className={`${isAfterContent ? "mt-5" : "mt-8"} mb-6`}>
-            <iframe
-              src={url}
-              width={width}
-              height={height}
-              title={title || "Embedded content"}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full box-shadow-post-detail-image"
-              style={{
-                maxWidth: "100%",
-                aspectRatio: width && height ? "auto" : "16/9",
-              }}
-            />
-          </div>
+          <>
+            <div className={`${isAfterContent ? "mt-5" : "mt-8"} mb-6`}>
+              <iframe
+                src={url}
+                width={width}
+                height={height}
+                title={title || "Embedded content"}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full box-shadow-post-detail-image"
+                style={{
+                  maxWidth: "100%",
+                  aspectRatio: width && height ? "auto" : "16/9",
+                }}
+              />
+            </div>
+            {adsVisible && (
+              <ClientOnlyWrapper>
+                <ArticleAd adSlot="1073133772" />
+              </ClientOnlyWrapper>
+            )}
+          </>
         );
       },
     },
@@ -83,17 +91,9 @@ export const generateBlockComponents = (
         return (
           <>
             <p className="mb-3 leading-6">{children}</p>
-            {/* {!children?.toString().toLowerCase().includes("to eat") && !children?.toString().toLowerCase().includes("sleep")
-            && !children?.toString().toLowerCase().includes("to stay")} */}
-            {(index === 3) && (
+            {adsVisible && index === 2 && (
               <ClientOnlyWrapper>
                 <ArticleAd adSlot="9573541605" />
-              </ClientOnlyWrapper>
-            )}
-
-            {(index === 5) && (
-              <ClientOnlyWrapper>
-                <ArticleAd adSlot="1073133772" />
               </ClientOnlyWrapper>
             )}
           </>
