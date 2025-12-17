@@ -1,14 +1,17 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryArticle from "@/components/UI/Categories/CategoryArticle/page";
 import Image from "next/image";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
+import HorizontalAd from "../Ads/HorizontalAd";
 
 interface HomeProps {
   categories: CategoryType[];
 }
 
 const Home: React.FC<HomeProps> = ({categories}) => {
+
   return (
     <div className="home-page">
       <HeaderImage
@@ -41,6 +44,8 @@ const Home: React.FC<HomeProps> = ({categories}) => {
           </div>
         </div>
       </section>
+
+      <HorizontalAd adSlot="9510559826" />
 
       <section className="mb-c-90">
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">

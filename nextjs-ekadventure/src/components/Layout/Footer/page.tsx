@@ -10,25 +10,13 @@ import FooterAd from "@/components/Ads/FooterAd";
 
 const Footer: React.FC = () => {
   const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
-  const adRef = useRef<HTMLModElement>(null);
+  const adRef = useRef<HTMLModElement>(null!);
 
   useEffect(() => {
     const ad = adRef.current;
     if(!ad) return;
 
-    const observer = new ResizeObserver(() => {
-      setAdVisible(()=> {
-        observer.disconnect();
-        return { isVisible: true, height: ad.offsetHeight };
-      });
-      
-    });
-
-    observer.observe(ad);
-
-    return () => {
-      observer.disconnect();
-    };
+    setAdVisible({ isVisible: true, height: ad.offsetHeight });
 
   }, [adRef.current?.offsetHeight]);
 
@@ -172,7 +160,7 @@ const Footer: React.FC = () => {
           © {new Date().getFullYear()} Elie Kadoury
         </p>
       </div>
-      <FooterAd adSlot="7868749713" ref={adRef} />
+      <FooterAd ref={adRef} />
     </footer>
   );
 };
