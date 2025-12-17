@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryArticle from "@/components/UI/Categories/CategoryArticle/page";
 import Image from "next/image";
@@ -11,6 +11,17 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({categories}) => {
+
+  const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
+  const adRef = useRef<HTMLModElement>(null!);
+
+  useEffect(() => {
+      const ad = adRef.current;
+      if(!ad) return;
+  
+      setAdVisible({ isVisible: true, height: ad.offsetHeight });
+  
+    }, [adRef.current?.offsetHeight]);
 
   return (
     <div className="home-page">
@@ -25,7 +36,7 @@ const Home: React.FC<HomeProps> = ({categories}) => {
           </div>
         }
       />
-      <section className="mt-c-60 mb-c-120">
+      <section className={`mt-c-60 ${adVisible.isVisible ? "mb-c-60" : "mb-c-120"}`}>
         <div className="container-max-w-none container-px-25 md:container-px-60">
           <div className="mb-5">
             <h2 className="font-bold text-left font-ps">
@@ -45,9 +56,9 @@ const Home: React.FC<HomeProps> = ({categories}) => {
         </div>
       </section>
 
-      <HorizontalAd adSlot="9510559826" />
+      <HorizontalAd adSlot="9510559826" ref={adRef} />
 
-      <section className="mb-c-90">
+      <section className={`mb-c-90 ${adVisible.isVisible ? "mt-c-60" : ""}`}>
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-12 flex-center-col">
             <h2 className="font-bold text-center mb-4 uppercase">

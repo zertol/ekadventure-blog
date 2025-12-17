@@ -13,21 +13,15 @@ export const useAdSense = (
 
     if (!ins) return;
 
+    // Skip if already initialized
     if (initializedRef.current) return;
 
-    if (ins.querySelector("iframe")) {
-      initializedRef.current = true;
-      return;
-    }
-
     try {
-        initializedRef.current = true;
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-      
+      initializedRef.current = true;
+      console.log(`Ad slot pushed successfully`);
     } catch (e) {
       console.error("adsbygoogle push error:", e);
     }
   }, [insRef]);
-
-  return {insRef};
 };

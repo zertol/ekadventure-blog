@@ -1,5 +1,4 @@
-"use client"; // important! makes this a client component
-
+"use client";
 import HorizontalAd from "./HorizontalAd";
 
 interface FooterAdProps {
