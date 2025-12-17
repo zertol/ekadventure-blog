@@ -1,27 +1,26 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
-import CategoryArticle from "@/components/UI/Categories/CategoryArticle/page";
 import Image from "next/image";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import HorizontalAd from "../Ads/HorizontalAd";
+import { HeroText } from "../UI/Home/HeroText/page";
+import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
 
 interface HomeProps {
   categories: CategoryType[];
 }
 
-const Home: React.FC<HomeProps> = ({categories}) => {
-
+const Home: React.FC<HomeProps> = ({ categories }) => {
   const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
   const adRef = useRef<HTMLModElement>(null!);
 
   useEffect(() => {
-      const ad = adRef.current;
-      if(!ad) return;
-  
-      setAdVisible({ isVisible: true, height: ad.offsetHeight });
-  
-    }, [adRef.current?.offsetHeight]);
+    const ad = adRef.current;
+    if (!ad) return;
+
+    setAdVisible({ isVisible: true, height: ad.offsetHeight });
+  }, [adRef.current?.offsetHeight]);
 
   return (
     <div className="home-page">
@@ -36,27 +35,17 @@ const Home: React.FC<HomeProps> = ({categories}) => {
           </div>
         }
       />
-      <section className={`mt-c-60 ${adVisible.isVisible ? "mb-c-60" : "mb-c-120"}`}>
-        <div className="container-max-w-none container-px-25 md:container-px-60">
-          <div className="mb-5">
-            <h2 className="font-bold text-left font-ps">
-              A little bit about this land
-            </h2>
-          </div>
-          <div className="mb-0 pl-c-25">
-            <p className="text-left text-wrap font-ps text-[20px]">
-              Hi there! I&apos;m Elie, and welcome to my land filled with adventure
-              and things to discover. I created it in hopes to share with you
-              the world through my eyes and for us to embark together on every
-              journey, to live life to the fullest, and to tell a story about
-              the world.
-              <br /> Ready for your next adventure ? Let&apos;s go!
-            </p>
-          </div>
-        </div>
+      <section
+        className={`mt-c-60 ${adVisible.isVisible ? "mb-c-60" : "mb-c-120"}`}
+      >
+        <HeroText />
       </section>
 
-      <HorizontalAd adSlot="9510559826" ref={adRef} />
+      <div className="w-full flex justify-center">
+        <div className="w-[768px]">
+          <HorizontalAd adSlot="9510559826" ref={adRef} />
+        </div>
+      </div>
 
       <section className={`mb-c-90 ${adVisible.isVisible ? "mt-c-60" : ""}`}>
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
@@ -66,21 +55,7 @@ const Home: React.FC<HomeProps> = ({categories}) => {
             </h2>
             <span className="block w-24 h-1 bg-black"></span>
           </div>
-
-          <div className="flex-wrap-row gap-6">
-            {categories.map((category) => (
-              <div
-                key={category._id}
-                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-              >
-                <CategoryArticle
-                  title={category.name}
-                  slug={category.slug}
-                  featuredMedia={category.featuredMedia}
-                />
-              </div>
-            ))}
-          </div>
+          <CategoryArticles categories={categories} />
         </div>
       </section>
 
