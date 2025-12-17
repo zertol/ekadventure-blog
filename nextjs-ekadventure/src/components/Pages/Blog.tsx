@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
+import SquareAd from "../Ads/SquareAd";
+import HorizontalAd from "../Ads/HorizontalAd";
 
 interface BlogProps {
   posts: PostType[];
@@ -11,6 +13,8 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
+  const adRef = useRef<HTMLModElement>(null!);
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategoryClick = (categorySlug: string | null) => {
@@ -37,6 +41,12 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
           </div>
         }
       />
+      
+      <div className="w-full flex justify-center">
+        <div className="w-[768px]">
+          <HorizontalAd adSlot="5553437940" ref={adRef} />
+        </div>
+      </div>
 
       <div className="container mx-auto px-4 my-c-60">
         <div className="flex flex-wrap gap-5 mb-12 justify-center">
