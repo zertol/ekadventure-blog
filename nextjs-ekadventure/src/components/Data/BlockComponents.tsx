@@ -83,9 +83,17 @@ export const generateBlockComponents = (
         return (
           <>
             <p className="mb-3 leading-6">{children}</p>
-            {(index === 2 || index === 5) && (
+            {/* {!children?.toString().toLowerCase().includes("to eat") && !children?.toString().toLowerCase().includes("sleep")
+            && !children?.toString().toLowerCase().includes("to stay")} */}
+            {(index === 3) && (
               <ClientOnlyWrapper>
                 <ArticleAd adSlot="9573541605" />
+              </ClientOnlyWrapper>
+            )}
+
+            {(index === 5) && (
+              <ClientOnlyWrapper>
+                <ArticleAd adSlot="1073133772" />
               </ClientOnlyWrapper>
             )}
           </>
