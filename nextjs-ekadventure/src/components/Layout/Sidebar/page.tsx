@@ -3,6 +3,7 @@ import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
 import VerticalAd from "@/components/Ads/VerticalAd";
+import { trackEvent } from "@/utils/analytics/handle-gtag-events";
 
 interface SideBarProps {
   sideImage: ImageType;
@@ -20,7 +21,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         <div className="relative w-full mb-4 flex-center-row">
           <img
             src={sideImage.url}
-            alt={ sideImage.alt || "Adventure portrait"}
+            alt={sideImage.alt || "Adventure portrait"}
             className="box-shadow-quote"
           />
         </div>
@@ -38,6 +39,13 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         {/* Navigation Buttons */}
         <div className="flex gap-4 mb-2 justify-center">
           <PrimaryButton
+            handleClick={() =>
+              trackEvent({
+                action: "click",
+                category: "Button",
+                label: "Read More Sidebar Button",
+              })
+            }
             href="/about"
             text="Read More"
             className="font-ps py-0 font-bold text-[16px]"
@@ -68,7 +76,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
 
           {relatedPosts && <LatestArticles posts={relatedPosts} isLinkOnly />}
         </div>
-        <VerticalAd adSlot="8013946644"/>
+        <VerticalAd adSlot="8013946644" />
       </div>
     </aside>
   );
