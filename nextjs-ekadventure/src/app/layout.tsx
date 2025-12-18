@@ -4,6 +4,7 @@ import PagesContextProvider from "@/store/PagesContext";
 import { Suspense } from "react";
 import { fetchAllPages } from "@/api/controllers/pages";
 import Script from "next/script";
+import AnalyticsTracker from "@/components/Analytics/AnalyticsTracker";
 
 export const metadata: Metadata = {
   title: {
@@ -61,6 +62,23 @@ export default async function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9735828709569989"
           crossOrigin="anonymous"
         />
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-NYY4JSF39D');
+          `}
+        </Script>
       </head>
       <body>
         <PagesContextProvider pagesProps={pagesProps}>
@@ -68,6 +86,7 @@ export default async function RootLayout({
               {children}
             </Suspense>
         </PagesContextProvider>
+        <AnalyticsTracker />
       </body>
     </html>
   );
