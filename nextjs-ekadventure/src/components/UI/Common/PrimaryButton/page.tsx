@@ -1,10 +1,10 @@
+"use client";
 import Link from "next/link";
-import { MouseEventHandler } from "react";
 interface PrimaryButtonProps {
   text: string;
   href: string;
   className?: string;
-  handleClick?: MouseEventHandler;
+  handleClick?: () => void;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({

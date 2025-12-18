@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
