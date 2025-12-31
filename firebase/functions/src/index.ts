@@ -38,5 +38,5 @@ export const unsubscribe = ContactController.unsubscribe;
 // Search Controllers
 export const search = SearchController.search;
 
-//YouTube
+// YouTube
 export const getLatestVideos = YouTubeController.getLatestVideos;

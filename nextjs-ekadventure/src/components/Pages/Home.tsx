@@ -7,13 +7,15 @@ import HorizontalAd from "../Ads/HorizontalAd";
 import { HeroText } from "../UI/Home/HeroText/page";
 import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
 import PostArticles from "../UI/Blog/PostArticle/PostArticles";
+import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 
 interface HomeProps {
   categories: CategoryType[];
   latestPosts: PostType[];
+  videos: YouTubePlaylistType | null;
 }
 
-const Home: React.FC<HomeProps> = ({ categories, latestPosts }) => {
+const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
   const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
   const adRef = useRef<HTMLModElement>(null!);
 
@@ -54,7 +56,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts }) => {
               Latest Adventures
             </h2>
             <span className="block w-24 h-1 bg-black"></span>
-            <div className="flex-center-col absolute right-0 top-0">
+            <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
               <PrimaryButton
                 href="/blog"
                 text="View All"
@@ -66,24 +68,26 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts }) => {
         </div>
       </section>
 
-      <section className={`mb-c-90`}>
-        <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
-          <div className="mb-6 flex-center-col relative">
-            <h2 className="font-bold text-center mb-4 uppercase">
-              Latest Videos
-            </h2>
-            <span className="block w-24 h-1 bg-black"></span>
-            <div className="flex-center-col absolute right-0 top-0">
-              <PrimaryButton
-                href="/blog"
-                text="View All"
-                className="py-1 px-4 font-semibold text-[14px]"
-              />
+      {(videos && videos.items.length > 0) && (
+        <section className={`mb-c-90`}>
+          <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
+            <div className="mb-6 flex-center-col relative">
+              <h2 className="font-bold text-center mb-4 uppercase">
+                Latest Videos
+              </h2>
+              <span className="block w-24 h-1 bg-black"></span>
+              <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
+                <PrimaryButton
+                  href="https://www.youtube.com/@e.kadventure"
+                  text="View All"
+                  className="py-1 px-4 font-semibold text-[14px]"
+                />
+              </div>
             </div>
+            <YouTubeVideos {...videos} />
           </div>
-          <PostArticles posts={latestPosts} />
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className={`mb-c-90`}>
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">

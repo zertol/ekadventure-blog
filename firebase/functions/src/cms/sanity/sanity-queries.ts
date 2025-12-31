@@ -25,7 +25,8 @@ export const POSTS_QUERY = `*[_type == "post"] | order(date desc) {
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
-  }
+  },
+  "totalComments": count(*[_type == "comment" && post._ref == ^._id && approved == true])
 }` as const;
 
 export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0] {
@@ -93,11 +94,13 @@ export const LATEST_POSTS_QUERY = `*[_type == "post"] | order(date desc)[0...3]{
   "publishedAt": date,
   title,
   slug,
+  excerpt,
   featuredMedia,
   "categories": *[_type == "category" && _id in ^.categories[]._ref]{
     name,
     "slug": slug.current
-  }
+  },
+  "totalComments": count(*[_type == "comment" && post._ref == ^._id && approved == true])
 }` as const;
 
 export const LATEST_POSTS_BY_CATEGORIES_QUERY = `*[_type == "post" && slug.current == $slug][0]{

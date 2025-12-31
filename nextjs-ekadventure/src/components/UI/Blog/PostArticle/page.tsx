@@ -5,49 +5,49 @@ import Link from "next/link";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
 import { PortableText } from "next-sanity";
 
-interface PostArticleProps {
-  title: string;
-  date: string;
-  categories: CategoryType[];
-  slug: string;
-  featuredMedia: ImageType;
-  excerpt?: any;
-}
+const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
-const PostArticle: React.FC<PostArticleProps> = ({
+const PostArticle: React.FC<PostType> = ({
   title,
-  date,
+  publishedAt: date,
   categories,
-  slug,
+  slug: {current: slug},
   featuredMedia,
   excerpt,
+  totalComments
 }) => {
   return (
     <article className="bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
       {/* Image Container */}
-      <div className="relative h-[300px] w-full overflow-hidden">
+      <div className="relative aspect-video w-full overflow-hidden">
         <Link href={`/${slug}`}>
           <img
             src={featuredMedia?.url}
             alt={featuredMedia?.alt || "Post Featured Image"}
-            className="object-cover transition-transform duration-300 hover:scale-105"
+            className="object-cover transition-transform duration-300 hover:scale-105 h-full w-full"
           />
         </Link>
       </div>
 
       <div className="p-3 flex flex-col flex-grow">
-        <h3 className="font-bold mb-1">{title}</h3>
+        <h3 className="font-bold mb-1 leading-6">{title}</h3>
 
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <div className="flex-1 flex flex-row flex-wrap">
             <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
-              {date}
+              {formatDate(date)}
             </span>
             <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
               /
             </span>
             <span className="text-[12px] text-gray-500 whitespace-nowrap">
-              No Comments
+              {totalComments == 0 ? "No Comments" : totalComments + " Comments" }
             </span>
           </div>
           <div className="gap-2">

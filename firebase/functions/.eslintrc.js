@@ -56,5 +56,6 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'require-jsdoc': 0,
     'max-len': ['error', { code: 300 }],
+    '@typescript-eslint/no-inferrable-types': 'off',
   },
 };

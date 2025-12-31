@@ -3,7 +3,8 @@ type PostType = {
     title: string;
     slug: { current: string };
     publishedAt: string;
-    excerpt: string;
+    excerpt: any;
     featuredMedia: ImageType;
     categories: CategoryType[];
+    totalComments: number;
 }

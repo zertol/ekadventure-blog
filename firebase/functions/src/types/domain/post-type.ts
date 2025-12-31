@@ -9,4 +9,5 @@ export type PostType = {
     excerpt: string;
     featuredMedia: ImageType;
     categories: CategoryType[];
+    totalComments: number;
 }

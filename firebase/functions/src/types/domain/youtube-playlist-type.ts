@@ -20,16 +20,16 @@ type YouTubeItemSnippet = {
     }
 }
 
-type YouTubePlayListItems = {
+type PlayListItems = {
     snippet: YouTubeItemSnippet;
     status: {
         privacyStatus: string;
     }
 }
 
-export type YouTubePlaylistItemsResponse = {
+export type YouTubePlaylistType = {
     nextPageToken: string;
-    items: YouTubePlayListItems[];
+    items: PlayListItems[];
     pageInfo: {
         totalResults: number;
         resultsPerPage: number;
