@@ -14,7 +14,9 @@
     "@portabletext/react": "^3.2.3",
     "@sanity/image-url": "^1.1.0",
     "@types/react-router-dom": "^5.3.3",
+    "dompurify": "^3.3.1",
     "graphemer": "^1.4.0",
+    "jsdom": "^27.4.0",
     "lightgallery": "^2.8.3",
     "next": "^16.0.7",
     "next-sanity": "^11.6.5",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.14.5",
     "@types/babel__traverse": "^7.28.0",
+    "@types/jsdom": "^27.0.0",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.1",
     "@types/react": "^19.2.2",

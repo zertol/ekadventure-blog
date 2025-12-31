@@ -84,3 +84,18 @@ export const sanitizeSearchTerm = (term: string) => {
     // whitelist allowed characters: letters, numbers, spaces, dash, apostrophe
     return cleaned.replace(/[^a-zA-Z0-9\s\-']/g, "");
 }
+
+export const formatStringToHtml = (text: string) => {
+    if (!text) return "";
+
+    // 1. Convert URLs to clickable <a> tags
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    let formattedText = text.replace(urlRegex, (url) => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-background-blue-accent hover:text-background-green-accent underline">${url}</a>`;
+    });
+
+    // 2. Convert newlines (\n) to <br /> tags
+    formattedText = formattedText.replace(/\n/g, '<br />');
+
+    return formattedText;
+}

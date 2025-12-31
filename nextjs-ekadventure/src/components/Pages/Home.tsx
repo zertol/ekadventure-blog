@@ -21,7 +21,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
 
   useEffect(() => {
     const ad = adRef.current;
-    if (!ad) return;
+    if (!ad || ad.offsetHeight == 0) return;
 
     setAdVisible({ isVisible: true, height: ad.offsetHeight });
   }, [adRef.current?.offsetHeight]);
@@ -39,7 +39,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
           </div>
         }
       />
-      <section className={`mt-c-60 mb-c-90`}>
+      <section className={`mt-c-60 mb-c-60`}>
         <HeroText />
       </section>
 
@@ -78,13 +78,13 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
               <span className="block w-24 h-1 bg-black"></span>
               <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
                 <PrimaryButton
-                  href="https://www.youtube.com/@e.kadventure"
+                  href="/videos"
                   text="View All"
                   className="py-1 px-4 font-semibold text-[14px]"
                 />
               </div>
             </div>
-            <YouTubeVideos {...videos} />
+            <YouTubeVideos ytPlaylist={videos}  />
           </div>
         </section>
       )}

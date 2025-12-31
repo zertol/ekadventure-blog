@@ -40,14 +40,14 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
           </div>
         }
       />
-      
+
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
           <HorizontalAd adSlot="5553437940" ref={adRef} />
         </div>
       </div>
 
-      <div className="container mx-auto px-4 my-c-60">
+      <div className="container mx-auto px-4 lg:px-20 my-c-60">
         <div className="flex flex-wrap gap-5 mb-12 justify-center">
           <CategoryFilter
             name="ALL POSTS"

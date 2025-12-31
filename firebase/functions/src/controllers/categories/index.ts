@@ -22,7 +22,6 @@ export const fetchCategoryPosts = onRequest(
     withApiAuth(createApiHandler(
         async (req: Request<any>, res: Response<ApiResult<PostType[]>>): Promise<PostType[]> => {
             const params: ParamsType = req.body;
-            console.log(params);
             return await DIResolutions.getCategoryService().fetchCategoryPosts(params.categoryname);
         }
     )));

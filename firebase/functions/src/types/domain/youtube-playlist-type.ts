@@ -1,4 +1,4 @@
-type YouTubeItemSnippet = {
+type ItemSnippet = {
     publishedAt: string;
     channelId: string;
     title: string;
@@ -20,8 +20,8 @@ type YouTubeItemSnippet = {
     }
 }
 
-type PlayListItems = {
-    snippet: YouTubeItemSnippet;
+type PlayListItem = {
+    snippet: ItemSnippet;
     status: {
         privacyStatus: string;
     }
@@ -29,7 +29,7 @@ type PlayListItems = {
 
 export type YouTubePlaylistType = {
     nextPageToken: string;
-    items: PlayListItems[];
+    items: PlayListItem[];
     pageInfo: {
         totalResults: number;
         resultsPerPage: number;

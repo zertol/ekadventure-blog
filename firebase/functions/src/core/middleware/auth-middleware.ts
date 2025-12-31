@@ -11,11 +11,6 @@ export const withApiAuth = (handler: (req: Request, res: Response) => Promise<vo
             return;
         }
 
-        // if (!Constants.FIREBASE_CORS_LIST.includes(req.headers.origin || "")) {
-        //     res.status(403).json({ Result: null, ErrorMessages: ["Unauthorized API Call"] });
-        //     return;
-        // }
-
         return handler(req, res);
     };
 };
