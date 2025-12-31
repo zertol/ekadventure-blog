@@ -6,12 +6,14 @@ import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import HorizontalAd from "../Ads/HorizontalAd";
 import { HeroText } from "../UI/Home/HeroText/page";
 import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
+import PostArticles from "../UI/Blog/PostArticle/PostArticles";
 
 interface HomeProps {
   categories: CategoryType[];
+  latestPosts: PostType[];
 }
 
-const Home: React.FC<HomeProps> = ({ categories }) => {
+const Home: React.FC<HomeProps> = ({ categories, latestPosts }) => {
   const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
   const adRef = useRef<HTMLModElement>(null!);
 
@@ -35,9 +37,7 @@ const Home: React.FC<HomeProps> = ({ categories }) => {
           </div>
         }
       />
-      <section
-        className={`mt-c-60 ${adVisible.isVisible ? "mb-c-60" : "mb-c-120"}`}
-      >
+      <section className={`mt-c-60 mb-c-90`}>
         <HeroText />
       </section>
 
@@ -49,9 +49,47 @@ const Home: React.FC<HomeProps> = ({ categories }) => {
 
       <section className={`mb-c-90 ${adVisible.isVisible ? "mt-c-60" : ""}`}>
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
+          <div className="mb-6 flex-center-col relative">
+            <h2 className="font-bold text-center mb-4 uppercase">
+              Latest Adventures
+            </h2>
+            <span className="block w-24 h-1 bg-black"></span>
+            <div className="flex-center-col absolute right-0 top-0">
+              <PrimaryButton
+                href="/blog"
+                text="View All"
+                className="py-1 px-4 font-semibold text-[14px]"
+              />
+            </div>
+          </div>
+          <PostArticles posts={latestPosts} />
+        </div>
+      </section>
+
+      <section className={`mb-c-90`}>
+        <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
+          <div className="mb-6 flex-center-col relative">
+            <h2 className="font-bold text-center mb-4 uppercase">
+              Latest Videos
+            </h2>
+            <span className="block w-24 h-1 bg-black"></span>
+            <div className="flex-center-col absolute right-0 top-0">
+              <PrimaryButton
+                href="/blog"
+                text="View All"
+                className="py-1 px-4 font-semibold text-[14px]"
+              />
+            </div>
+          </div>
+          <PostArticles posts={latestPosts} />
+        </div>
+      </section>
+
+      <section className={`mb-c-90`}>
+        <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-12 flex-center-col">
             <h2 className="font-bold text-center mb-4 uppercase">
-              Choose your adventure
+              Featured Topics
             </h2>
             <span className="block w-24 h-1 bg-black"></span>
           </div>

@@ -16,6 +16,8 @@ import { AboutService } from "../services/implementations/about/about-service";
 import { IAboutService } from "../services/interfaces/i-about-service";
 import { ISearchService } from "../services/interfaces/i-search-service";
 import { SearchService } from "../services/implementations/search/search-service";
+import { IYouTubeService } from "../services/interfaces/i-youtube-service";
+import { YouTubeService } from "../services/implementations/youtube/youtube-service";
 
 export class DIRegistration {
     public static registerDependencies(): void {
@@ -48,5 +50,7 @@ export class DIRegistration {
         ));
 
         DependencyContainer.register<IMailService>("IMailService", new MailService());
+
+        DependencyContainer.register<IYouTubeService>("IYouTubeService", new YouTubeService());
     }
 }

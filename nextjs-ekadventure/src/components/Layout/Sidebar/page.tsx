@@ -41,13 +41,6 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         {/* Navigation Buttons */}
         <div className="flex gap-4 mb-2 justify-center">
           <PrimaryButton
-            handleClick={() =>
-              trackEvent({
-                action: "click",
-                category: "Button",
-                label: "Read More Sidebar Button",
-              })
-            }
             href="/about"
             text="Read More"
             className="font-ps py-0 font-bold text-[16px]"

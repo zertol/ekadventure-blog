@@ -5,6 +5,7 @@ import * as AboutController from "./controllers/about/";
 import * as CommentsController from "./controllers/comments/";
 import * as ContactController from "./controllers/contact/";
 import * as SearchController from "./controllers/search/";
+import * as YouTubeController from "./controllers/youtube/";
 import { DIRegistration } from "./utils/di-registration";
 
 // Dependency Registrations
@@ -36,3 +37,6 @@ export const unsubscribe = ContactController.unsubscribe;
 
 // Search Controllers
 export const search = SearchController.search;
+
+//YouTube
+export const getLatestVideos = YouTubeController.getLatestVideos;
