@@ -32,7 +32,7 @@ export function ClientAdWrapper({
 
   return (
     <div
-      className={`${hasContent.isVisible ? "rounded-md border border-neutral-200 bg-background-blue-accent/35" : ""}
+      className={`${hasContent.isVisible ? "rounded-md border border-neutral-400 bg-background-blue-accent/35" : ""}
        ${hasContent.isVisible && className}`}
     >
       {hasContent.isVisible && (
@@ -71,7 +71,7 @@ export function ClientAdWrapper({
         </div>
       )}
       <div
-        className={`custom-scrollbar transition-all duration-300 ease-in-out overflow-auto ${hasContent.isVisible ? "p-2" : ""}`}
+        className={`custom-scrollbar transition-all duration-300 ease-in-out overflow-hidden`}
         ref={containerRef}
         style={{ maxHeight: calc() }}
       >
