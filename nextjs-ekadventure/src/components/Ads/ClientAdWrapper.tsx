@@ -71,11 +71,15 @@ export function ClientAdWrapper({
         </div>
       )}
       <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden`}
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${hasContent.isVisible ? "p-2" : ""}`}
         ref={containerRef}
-        style={{ maxHeight: calc() }}
       >
-        <div className={`${hasContent.isVisible ? "p-2" : ""}`}>{children}</div>
+        <div
+          className={`transition-all duration-300 ease-in-out`}
+          style={{ maxHeight: calc() }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
