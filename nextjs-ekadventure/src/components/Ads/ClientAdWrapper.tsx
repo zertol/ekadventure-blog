@@ -11,23 +11,18 @@ export function ClientAdWrapper({
   headerText?: string;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-
   const [hasContent, setHasContent] = useState({ isVisible: false, height: 0 });
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || container.scrollHeight == 0) return;
+    if (!container || container.offsetHeight == 0) return;
 
     setHasContent({ isVisible: true, height: container.offsetHeight });
-  }, [containerRef.current?.scrollHeight]);
-
-  if (!hasContent.isVisible) {
-    return null;
-  }
+  }, [containerRef.current]);
 
   return (
     <div className={`${hasContent.isVisible && className}`} ref={containerRef}>
-      {headerText && <p>{headerText}</p>}
+      {(headerText && hasContent.isVisible) && <p>{headerText}</p>}
       {children}
     </div>
   );
