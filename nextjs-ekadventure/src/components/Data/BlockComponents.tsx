@@ -3,7 +3,7 @@ import { groupImagePairsOrSingle } from "@/utils/data/helpers";
 import { PortableTextMarkComponentProps } from "next-sanity";
 import Link from "next/link";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
-import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
+import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import ArticleAd from "../Ads/ArticleAd";
 
 export const generateBlockComponents = (
@@ -55,9 +55,9 @@ export const generateBlockComponents = (
               />
             </div>
             {adsVisible && (
-              <ClientOnlyWrapper>
+              <ClientAdWrapper>
                 <ArticleAd adSlot="1073133772" />
-              </ClientOnlyWrapper>
+              </ClientAdWrapper>
             )}
           </>
         );
@@ -92,12 +92,9 @@ export const generateBlockComponents = (
           <>
             <p className="mb-3 leading-6">{children}</p>
             {adsVisible && index === 2 && (
-              <div className="mb-3 rounded-md border border-neutral-200 bg-background-blue-accent/35 p-2">
-                <p>Sponsored</p>
-                <ClientOnlyWrapper>
+                <ClientAdWrapper headerText="Sponsored" className="mb-3 rounded-md border border-neutral-200 bg-background-blue-accent/35 p-2 h-40">
                   <ArticleAd adSlot="9573541605" />
-                </ClientOnlyWrapper>
-              </div>
+                </ClientAdWrapper>
             )}
           </>
         );
