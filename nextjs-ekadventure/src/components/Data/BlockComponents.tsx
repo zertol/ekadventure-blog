@@ -55,7 +55,7 @@ export const generateBlockComponents = (
               />
             </div>
             {adsVisible && (
-              <ClientAdWrapper className="mb-3">
+              <ClientAdWrapper headerText="Sponsored Content by Google" className="mb-3" paddingTop="pt-3">
                 <ArticleAd adSlot="1073133772" />
               </ClientAdWrapper>
             )}
@@ -92,7 +92,7 @@ export const generateBlockComponents = (
           <>
             <p className="mb-3 leading-6">{children}</p>
             {adsVisible && index === 2 && (
-                <ClientAdWrapper headerText="Sponsored Content" className="mb-3">
+                <ClientAdWrapper headerText="Sponsored Content by Google" className="mb-6" paddingTop="pt-3">
                   <ArticleAd adSlot="9573541605" />
                 </ClientAdWrapper>
             )}

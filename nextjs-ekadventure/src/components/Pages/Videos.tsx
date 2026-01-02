@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import HorizontalAd from "../Ads/HorizontalAd";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
+import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 
 interface VideosProps {
   ytPlaylist: YouTubePlaylistType;
@@ -29,7 +30,13 @@ const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
 
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
-          <HorizontalAd adSlot="5553437940" ref={adRef} />
+          <ClientAdWrapper
+            headerText="Sponsored Content By Google"
+            className="mt-3"
+            isCollapsible={false}
+          >
+            <HorizontalAd adSlot="5553437940" ref={adRef} />
+          </ClientAdWrapper>
         </div>
       </div>
 

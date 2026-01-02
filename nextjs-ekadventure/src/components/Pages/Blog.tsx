@@ -5,6 +5,7 @@ import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
 import HorizontalAd from "../Ads/HorizontalAd";
+import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 
 interface BlogProps {
   posts: PostType[];
@@ -43,7 +44,13 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
 
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
-          <HorizontalAd adSlot="5553437940" ref={adRef} />
+          <ClientAdWrapper
+            headerText="Sponsored Content By Google"
+            className="mt-3"
+            isCollapsible={false}
+          >
+            <HorizontalAd adSlot="5553437940" ref={adRef} />
+          </ClientAdWrapper>
         </div>
       </div>
 

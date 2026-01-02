@@ -8,6 +8,7 @@ import { HeroText } from "../UI/Home/HeroText/page";
 import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
 import PostArticles from "../UI/Blog/PostArticle/PostArticles";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
+import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 
 interface HomeProps {
   categories: CategoryType[];
@@ -45,7 +46,12 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
 
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
-          <HorizontalAd adSlot="9510559826" ref={adRef} />
+          <ClientAdWrapper
+            headerText="Sponsored Content By Google"
+            isCollapsible={false}
+          >
+            <HorizontalAd adSlot="9510559826" ref={adRef} />
+          </ClientAdWrapper>
         </div>
       </div>
 
@@ -68,7 +74,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         </div>
       </section>
 
-      {(videos && videos.items.length > 0) && (
+      {videos && videos.items.length > 0 && (
         <section className={`mb-c-90`}>
           <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
             <div className="mb-6 flex-center-col relative">
@@ -84,7 +90,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
                 />
               </div>
             </div>
-            <YouTubeVideos ytPlaylist={videos}  />
+            <YouTubeVideos ytPlaylist={videos} />
           </div>
         </section>
       )}

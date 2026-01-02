@@ -5,6 +5,7 @@ import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
 import VerticalAd from "@/components/Ads/VerticalAd";
+import { ClientAdWrapper } from "@/components/Ads/ClientAdWrapper";
 
 interface SideBarProps {
   sideImage: ImageType;
@@ -70,7 +71,17 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
 
           {relatedPosts && <LatestArticles posts={relatedPosts} isLinkOnly />}
         </div>
-        <VerticalAd adSlot="8013946644" />
+        <ClientAdWrapper
+          headerText="Sponsored Content By Google"
+          className="mt-10"
+          isCollapsible={false}
+        >
+          <div className="w-full flex justify-center">
+            <div className="w-[768px]">
+              <VerticalAd adSlot="8013946644" />
+            </div>
+          </div>
+        </ClientAdWrapper>
       </div>
     </aside>
   );

@@ -155,7 +155,7 @@ const Footer: React.FC = () => {
       <div className="w-full h-[1px] bg-background-primary mt-4" />
 
       {/* Copyright container */}
-      <div className="py-1" style={{ marginBottom: adVisible.isVisible ? `${adVisible.height}px` : 0 }}>
+      <div className="py-1" style={{ marginBottom: adVisible.height > 0 ? `${adVisible.height + 40}px` : 0 }}>
         <p className="text-center">
           © {new Date().getFullYear()} Elie Kadoury
         </p>

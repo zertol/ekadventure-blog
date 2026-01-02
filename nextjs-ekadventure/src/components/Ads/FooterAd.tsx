@@ -1,4 +1,5 @@
 "use client";
+import { ClientAdWrapper } from "./ClientAdWrapper";
 import HorizontalAd from "./HorizontalAd";
 
 interface FooterAdProps {
@@ -7,11 +8,13 @@ interface FooterAdProps {
 
 const FooterAd: React.FC<FooterAdProps> = ({ ref }) => {
   return (
-    <div className="fixed bottom-0 left-auto bg-background-blue-accent/35 w-full z-50 flex justify-center">
-      <div className="w-[768px]">
-        <HorizontalAd ref={ref} adSlot="7868749713" />
+    <ClientAdWrapper headerText="Sponsored Content By Google" className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full">
+      <div className="w-full flex justify-center">
+        <div className="w-[768px]">
+          <HorizontalAd ref={ref} adSlot="7868749713" />
+        </div>
       </div>
-    </div>
+    </ClientAdWrapper>
   );
 };
 
