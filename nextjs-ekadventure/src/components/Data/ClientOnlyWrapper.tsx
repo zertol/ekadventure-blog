@@ -1,13 +1,19 @@
 "use client";
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-export function ClientOnlyWrapper({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false)
+export function ClientOnlyWrapper({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return null
-  return <>{children}</>
+  if (!mounted) return null;
+  return <div className={`${className}`}>{children}</div>;
 }

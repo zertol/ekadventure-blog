@@ -36,7 +36,7 @@ const PostArticle: React.FC<PostType> = ({
       </div>
 
       <div className="p-3 flex flex-col flex-grow">
-        <h3 className="font-bold mb-1 leading-6">{title}</h3>
+        <h4 className="font-bold mb-1 leading-5">{title}</h4>
 
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <div className="flex-1 flex flex-row flex-wrap">

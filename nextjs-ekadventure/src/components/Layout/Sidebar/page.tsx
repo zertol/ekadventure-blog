@@ -5,7 +5,6 @@ import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
 import VerticalAd from "@/components/Ads/VerticalAd";
-import { trackEvent } from "@/utils/analytics/handle-gtag-events";
 
 interface SideBarProps {
   sideImage: ImageType;
