@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   const [categories, latestPosts, videos] = await Promise.all([fetchAllCategories(), fetchLatestPosts(), getLatestYouTubeVideos()]);
-console.log("Videos Fetched: ", videos);
+
   return (
     <App currentPage="home">
       <Home categories={categories.Result ?? []} latestPosts={latestPosts.Result ?? []} videos={videos.Result} />

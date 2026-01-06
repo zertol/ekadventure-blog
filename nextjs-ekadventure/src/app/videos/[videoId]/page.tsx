@@ -30,8 +30,10 @@ export async function generateMetadata({
     openGraph: {
       title: video.items[0].snippet.title,
       description: video.items[0].snippet.description,
-      videos: [`https://youtube.com/watch?v=${video.items[0].snippet.resourceId.videoId}`]
-    }
+      videos: [
+        `https://youtube.com/watch?v=${video.items[0].snippet.resourceId.videoId}`,
+      ],
+    },
   };
 
   return metaData;
@@ -39,6 +41,10 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const videos = await getAllYouTubeVideos();
+
+  if (!videos.Result || !videos.Result.items) {
+    return [];
+  }
 
   return (
     videos.Result &&
@@ -95,7 +101,9 @@ export default async function VideoPage({
 
           <div
             dangerouslySetInnerHTML={{
-              __html: purify.sanitize(formatStringToHtml(video.items[0].snippet.description)),
+              __html: purify.sanitize(
+                formatStringToHtml(video.items[0].snippet.description)
+              ),
             }}
           ></div>
         </div>
