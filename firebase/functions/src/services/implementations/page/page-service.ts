@@ -8,4 +8,8 @@ export class PageService implements IPageService {
     async fetchAllPages(): Promise<PageType[]> {
         return await this.cmsClient.getRepositories().page.fetchAllPages();
     }
+
+    async fetchPrivacyPolicyPage(): Promise<PageType> {
+        return await this.cmsClient.getRepositories().page.fetchPrivacyPolicyPage();
+    }
 }

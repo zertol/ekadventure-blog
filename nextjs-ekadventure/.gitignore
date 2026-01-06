@@ -42,3 +42,6 @@ next-env.d.ts
 # distribution directories
 /dist
 /*/dist/
+
+# dynamic video sitemap dev purposes
+/src/app/api/video_sitemap/

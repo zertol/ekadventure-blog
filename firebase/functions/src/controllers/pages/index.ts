@@ -13,3 +13,11 @@ export const fetchAllPages = onRequest(
             return await DIResolution.getPageService().fetchAllPages();
         }
     )));
+
+export const fetchPrivacyPolicyPage = onRequest(
+    { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
+    withApiAuth(createApiHandler<PageType>(
+        async (req: Request<any>, res: Response<ApiResult<PageType>>): Promise<PageType> => {
+            return await DIResolution.getPageService().fetchPrivacyPolicyPage();
+        }
+    )));

@@ -1,3 +1,4 @@
+import { PortableTextBlock } from "@portabletext/types";
 import { ImageType } from "./image-type";
 import { MetadataType } from "./metadata-type";
 
@@ -7,4 +8,5 @@ export type PageType = {
     title: string;
     order: number;
     metadata: MetadataType;
+    content: PortableTextBlock[];
 };

@@ -13,6 +13,7 @@ DIRegistration.registerDependencies();
 
 // Page Controllers
 export const fetchAllPages = PagesController.fetchAllPages;
+export const fetchPrivacyPolicyPage = PagesController.fetchPrivacyPolicyPage;
 
 // Post Controllers
 export const fetchAllPosts = PostsController.fetchAllPosts;

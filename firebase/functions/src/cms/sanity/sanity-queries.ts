@@ -6,6 +6,10 @@ export const PAGES_QUERY = `*[_type == "page" && visible == true] | order(order 
   metadata
 }` as const;
 
+export const PRIVACY_PAGE_QUERY = `*[_type == "page" && slug.current == "privacy-policy"][0] {
+  content
+}` as const;
+
 export const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post" && references(^._id)]) > 0] | order(name asc) {
       _id,
       name,

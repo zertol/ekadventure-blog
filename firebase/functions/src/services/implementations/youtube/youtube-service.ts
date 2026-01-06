@@ -27,10 +27,10 @@ export class YouTubeService implements IYouTubeService {
     }
 
     async getAllYouTubeVideos(): Promise<YouTubePlaylistType> {
-        const url = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${this.playlistId}&key=
+        let url = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${this.playlistId}&key=
         ${this.ytApiKey}&channelId=${this.channelId}&part=snippet,contentDetails,status&order=date`;
 
-        const response = await fetch(url);
+        let response = await fetch(url);
 
         if (!response.ok) {
             const errorData = (await response.json());
@@ -38,6 +38,28 @@ export class YouTubeService implements IYouTubeService {
         }
 
         const data = await response.json() as YouTubePlaylistType;
+
+        let pageToken = data.nextPageToken;
+
+        while (pageToken) {
+            url = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${this.playlistId}&key=
+        ${this.ytApiKey}&channelId=${this.channelId}&part=snippet,contentDetails,status&order=date&pageToken=${pageToken}`;
+
+            await new Promise((resolve) => setTimeout(resolve, 250));
+
+            response = await fetch(url);
+
+            if (!response.ok) {
+                const errorData = (await response.json());
+                throw new Error(`YouTube fetch error: ${JSON.stringify(errorData.error)}`);
+            }
+
+            const nextPageData = await response.json() as YouTubePlaylistType;
+
+            data.items = [...data.items, ...nextPageData.items];
+
+            pageToken = nextPageData.nextPageToken;
+        }
 
         return data;
     }
