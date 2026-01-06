@@ -20,7 +20,7 @@ export async function generateMetadata({
   });
   const video = videoResult.Result;
 
-  if (!video || video.items.length === 0) {
+  if (!video || !video.items || video.items?.length === 0) {
     return {};
   }
 
@@ -61,7 +61,7 @@ export default async function VideoPage({
     }),
   ]);
 
-  if (!videoResult.Result || videoResult.Result.items.length === 0) {
+  if (!videoResult.Result || videoResult.Result.items?.length === 0) {
     return notFound();
   }
 

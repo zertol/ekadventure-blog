@@ -28,11 +28,11 @@ export async function generateMetadata({
 
   const metaData: Metadata = {
     title: category.name,
-    description: category.metadata.description,
+    description: category.metadata?.description,
     openGraph: {
       title: category.name,
-      description: category.metadata.description,
-      images: category.metadata ? [category.metadata.ogImage?.url] : [],
+      description: category.metadata?.description,
+      images: category.metadata ? [category.metadata?.ogImage?.url] : [],
     },
   };
 
@@ -75,7 +75,7 @@ const CategoryPage: React.FC<any> = async ({
           </div>
         }
       />
-
+    {posts.Result && (  
       <div className="container mx-auto px-4 py-12">
         <div className="mb-8">
           <Link
@@ -88,15 +88,16 @@ const CategoryPage: React.FC<any> = async ({
 
         <div className="mb-8 flex-center-col">
           <h2 className="font-bold text-center mb-4 uppercase">
-            {posts.Result!.length > 0
+            {posts.Result.length > 0
               ? category?.name
               : "categoryname"}
           </h2>
           <span className="block w-24 h-1 bg-black"></span>
         </div>
 
-        <PostArticles posts={posts.Result!} />
+        <PostArticles posts={posts.Result} />
       </div>
+    )}
     </App>
   );
 };

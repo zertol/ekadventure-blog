@@ -14,11 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const metaData: Metadata = {
     title: page.title,
-    description: page.metadata.description,
+    description: page.metadata?.description,
     openGraph: {
       title: page.title,
-      description: page.metadata.description,
-      images: page.metadata ? [page.metadata.ogImage?.url] : [],
+      description: page.metadata?.description,
+      images: page.metadata ? [page.metadata?.ogImage?.url] : [],
     },
   };
 
