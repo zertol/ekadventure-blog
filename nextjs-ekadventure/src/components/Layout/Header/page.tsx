@@ -8,6 +8,7 @@ import HeaderNavLink from "./NavLink";
 import { usePages } from "@/store/PagesContext";
 import { useParams } from "next/navigation";
 import SearchBox from "@/components/UI/Common/SearchBox/page";
+import { PageType } from "@/types/page-type";
 
 const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,7 +42,7 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   };
 
   // Sort pages by order property
-  const menuItems = pages.sort((a, b) => a.order - b.order);
+  const menuItems = pages.sort((a: PageType, b: PageType) => a.order - b.order);
 
   return (
     <>
@@ -64,7 +65,7 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
             } `}
           >
             <nav className="flex flex-col justify-between gap-0 w-full h-full text-center">
-              {menuItems.map((page) => (
+              {menuItems.map((page: PageType) => (
                 <HeaderNavLink
                   key={page.slug}
                   href={`${
@@ -98,7 +99,7 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
             </div>
 
             <nav className="hidden md:flex space-x-5 lg:space-x-8 flex-1 md:items-center md:justify-center px-[45px] lg:px-0">
-              {menuItems.map((page) => (
+              {menuItems.map((page: PageType) => (
                 <HeaderNavLink
                   key={page.slug}
                   href={`${

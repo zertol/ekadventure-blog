@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { fetchAllPages } from "@/api/controllers/pages";
 import Script from "next/script";
 import AnalyticsTracker from "@/components/Analytics/AnalyticsTracker";
+import { PagesContextType } from "@/types/pages-context-type";
 
 export const metadata: Metadata = {
   title: {

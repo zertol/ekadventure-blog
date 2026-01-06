@@ -10,6 +10,7 @@ import { PortableText } from "@portabletext/react";
 import { generateBlockComponents } from "@/components/Data/BlockComponents";
 import { usePages } from "@/store/PagesContext";
 import { AboutType } from "@/types/about-type";
+import { PageType } from "@/types/page-type";
 
 interface AboutProps {
   about: AboutType | null;
@@ -24,7 +25,7 @@ interface AccordionItem {
 const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
   const { pages } = usePages();
   const aboutPage: PageType | null =
-    pages.find((page) => page.slug === "about") ?? null;
+    pages.find((page: PageType) => page.slug === "about") ?? null;
 
   const accordionItems: AccordionItem[] = [
     {

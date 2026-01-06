@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import SocialIcons from "../SocialIcons/page";
 import { usePages } from "@/store/PagesContext";
+import { PageType } from "@/types/page-type";
 
 interface HeaderImageProps {
   text: ReactNode;
@@ -23,7 +24,7 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
   const currentSlug = pathname === "/" ? "home" : pathname.slice(1);
 
   // Find the current page data
-  const currentPage = pages.find((page) => page.slug === currentSlug);
+  const currentPage = pages.find((page: PageType) => page.slug === currentSlug);
 
   // Use the page's imageUrl or fall back to the provided backgroundImage or default
   const headerImage =

@@ -6,10 +6,11 @@ import { useForm } from "react-hook-form";
 import { handleMailService } from "@/api/controllers/contact";
 import FormInput from "../UI/Common/Form/FormInput/FormInput";
 import SubmitStatus from "../UI/Common/Form/SubmitStatus/page";
+import { PageType } from "@/types/page-type";
 
 const Contact: React.FC = () => {
   const { pages } = usePages();
-  const contactPage = pages.find((page) => page.slug === "contact");
+  const contactPage = pages.find((page: PageType) => page.slug === "contact");
 
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
