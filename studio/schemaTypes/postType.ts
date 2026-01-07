@@ -137,6 +137,14 @@ export const postType = defineType({
       fields: [
         { name: "ogImage", type: "externalImage" },
       ]
+    }),
+    defineField({
+      name: "broadcastData",
+      type: 'object',
+      fields: [
+        { name: "articleUrl", type: "string" },
+        { name: "articleBroadcastIntro", type: "string" }
+      ]
     })
   ],
   preview: {

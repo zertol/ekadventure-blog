@@ -1,7 +1,8 @@
-import { CreateEmailResponse, RemoveContactsResponse, Resend } from "resend";
+import { CreateBatchResponse, CreateEmailResponse, ListContactsResponse, RemoveContactsResponse, Resend } from "resend";
 import { IMailService } from "../../interfaces/i-mail-service";
 import { ContactType } from "../../../types/domain/contact-type";
 import { SubscriberType } from "../../../types/domain/subscriber-type";
+import { BroadcastType } from "../../../types/domain/broadcast-type";
 
 export class MailService implements IMailService {
     async sendContactMail(contactInfo: ContactType): Promise<CreateEmailResponse> {
@@ -23,7 +24,7 @@ export class MailService implements IMailService {
         });
 
         if (resendResult.error) {
-            throw new Error(`Resend email error: ${resendResult.error}`);
+            throw new Error(`Resend email error: ${JSON.stringify(resendResult.error)}`);
         }
 
         return resendResult;
@@ -46,7 +47,18 @@ export class MailService implements IMailService {
         });
 
         if (createResult.error) {
-            throw new Error(`Resend email error: ${createResult.error}`);
+            throw new Error(`Resend email error: ${JSON.stringify(createResult.error)}`);
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        const addToSegmentResult: CreateEmailResponse = await resend.contacts.segments.add({
+            email: subscriberInfo.email,
+            segmentId: "d1389b4b-7128-46ac-bfdc-21cfcff0556f"
+        });
+
+        if (addToSegmentResult.error) {
+            throw new Error(`Resend email error: ${addToSegmentResult.error}`);
         }
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -65,7 +77,37 @@ export class MailService implements IMailService {
         });
 
         if (sendResult.error) {
-            throw new Error(`Resend email error: ${sendResult.error}`);
+            throw new Error(`Resend email error: ${JSON.stringify(sendResult.error)}`);
+        }
+
+        return sendResult;
+    }
+
+    async sendBroadcastEmail(broadcast: BroadcastType): Promise<CreateBatchResponse<any>> {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+
+        const listResult: ListContactsResponse = await resend.contacts.list();
+
+        if (listResult.error) {
+            throw new Error(`Resend email error Upon Fetching List: ${JSON.stringify(listResult.error)}`);
+        }
+
+        const contactsBatch = listResult.data.data.map((contact) => {
+            return {
+                from: "Ekadventure Blog <blog@ekadventure.com>",
+                replyTo: "e.kadvnture@gmail.com",
+                to: contact.email,
+                template: {
+                    id: "03a05155-d2ef-47ff-983f-998c7246a3ea",
+                    variables: { contactName: "Fellow Adventurer", ...broadcast }
+                }
+            };
+        });
+
+        const sendResult: CreateBatchResponse<any> = await resend.batch.send(contactsBatch);
+
+        if (sendResult.error) {
+            throw new Error(`Resend email error Upon Sending The Broadcast: ${JSON.stringify(sendResult.error)}`);
         }
 
         return sendResult;
@@ -79,7 +121,7 @@ export class MailService implements IMailService {
         });
 
         if (removeResult.error) {
-            throw new Error(`Resend email error: ${removeResult.error}`);
+            throw new Error(`Resend email error: ${JSON.stringify(removeResult.error)}`);
         }
 
         return removeResult;
