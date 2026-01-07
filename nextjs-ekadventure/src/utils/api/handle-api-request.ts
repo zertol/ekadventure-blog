@@ -14,7 +14,8 @@ export const handleApiRequest = async <T>(
                 "Content-Type": "application/json",
                 "X-API-KEY": process.env.X_API_KEY || '',
                 ...options?.headers
-            }
+            },
+            next: { revalidate: 60 },
         }).then(res => res.json());
 
         if (response.ErrorMessages && response.ErrorMessages.length > 0) {
