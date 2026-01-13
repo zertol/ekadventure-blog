@@ -13,10 +13,10 @@ const HorizontalAd: React.FC<HorizontalAdProps> = ({ adSlot, style, ref }) => {
     <ins
       ref={ref}
       className="adsbygoogle"
-      style={{ display: "block", ...style }}
+      style={{ display: "inline-block", width: "100%", height: "60px", ...style }}
       data-ad-client="ca-pub-9735828709569989"
       data-ad-slot={adSlot}
-      data-ad-format="horizontal"
+      data-ad-format=""
     />
   );
 };
