@@ -6,8 +6,14 @@ import App from "@/components/App";
 import Home from "@/components/Pages/Home";
 import { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const pages = await fetchAllPages();
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const localParams = await params;
+
+  const pages = await fetchAllPages(localParams);
 
   const page = pages.Result?.find((page) => page.slug === "home");
 
@@ -28,12 +34,25 @@ export async function generateMetadata(): Promise<Metadata> {
   return metaData;
 }
 
-export default async function HomePage() {
-  const [categories, latestPosts, videos] = await Promise.all([fetchAllCategories(), fetchLatestPosts(), getLatestYouTubeVideos()]);
+export default async function HomePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const localParams = await params;
+  const [categories, latestPosts, videos] = await Promise.all([
+    fetchAllCategories(localParams),
+    fetchLatestPosts(localParams),
+    getLatestYouTubeVideos(),
+  ]);
 
   return (
     <App currentPage="home">
-      <Home categories={categories.Result ?? []} latestPosts={latestPosts.Result ?? []} videos={videos.Result} />
+      <Home
+        categories={categories.Result ?? []}
+        latestPosts={latestPosts.Result ?? []}
+        videos={videos.Result}
+      />
     </App>
   );
 }

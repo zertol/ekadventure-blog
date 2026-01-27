@@ -5,10 +5,12 @@ import { fetchAboutDetails } from "@/api/controllers/about";
 import { Metadata } from "next";
 import { fetchAllPages } from "@/api/controllers/pages";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const pages = await fetchAllPages();
+export async function generateMetadata({params}: {params: {locale: string}}): Promise<Metadata> {
+  const pages = await fetchAllPages(await params);
 
-  const page = pages.Result?.find((page) => page.slug === "about");
+  const page = pages.Result?.find(
+    (page) => page.slug === "about" || page.slug === "a-propos",
+  );
 
   if (!page) {
     return {};
@@ -22,15 +24,28 @@ export async function generateMetadata(): Promise<Metadata> {
       description: page.metadata?.description,
       images: page.metadata ? [page.metadata?.ogImage?.url] : [],
     },
+    alternates: {
+      canonical: `/${page.slug}`,
+      languages: {
+        en: `/${page.slug}`,
+        fr: `/fr/a-propos`,
+      },
+    },
   };
 
   return metaData;
 }
 
-export default async function AboutPage() {
+export default async function AboutPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const localParams = await params;
+  
   const [posts, about] = await Promise.all([
-    fetchLatestPosts(),
-    fetchAboutDetails(),
+    fetchLatestPosts(localParams),
+    fetchAboutDetails(localParams),
   ]);
 
   return (

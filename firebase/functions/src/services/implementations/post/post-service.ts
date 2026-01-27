@@ -7,23 +7,23 @@ import { IPostService } from "../../interfaces/i-post-service";
 export class PostService implements IPostService {
     constructor(private cmsClient: ICMSClient) { }
 
-    async fetchAllPosts(): Promise<PostType[]> {
-        const result = await this.cmsClient.getRepositories().post.fetchAllPosts();
+    async fetchAllPosts(locale: string): Promise<PostType[]> {
+        const result = await this.cmsClient.getRepositories().post.fetchAllPosts(locale);
         return result;
     }
 
-    async fetchLatestPostsByCategories(slug: string): Promise<RelatedPostType> {
-        const result = await this.cmsClient.getRepositories().post.fetchLatestPostsByCategories(slug);
+    async fetchLatestPostsByCategories(slug: string, locale: string): Promise<RelatedPostType> {
+        const result = await this.cmsClient.getRepositories().post.fetchLatestPostsByCategories(slug, locale);
         return result;
     }
 
-    async fetchPostDetails(slug: string): Promise<PostDetailsType> {
-        const result = await this.cmsClient.getRepositories().post.fetchPostDetails(slug);
+    async fetchPostDetails(slug: string, locale: string): Promise<PostDetailsType> {
+        const result = await this.cmsClient.getRepositories().post.fetchPostDetails(slug, locale);
         return result;
     }
 
-    async fetchLatestPosts(): Promise<PostType[]> {
-        const result = await this.cmsClient.getRepositories().post.fetchLatestPosts();
+    async fetchLatestPosts(locale: string): Promise<PostType[]> {
+        const result = await this.cmsClient.getRepositories().post.fetchLatestPosts(locale);
         return result;
     }
 }

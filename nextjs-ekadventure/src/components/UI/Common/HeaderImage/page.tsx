@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import SocialIcons from "../SocialIcons/page";
 import { usePages } from "@/store/PagesContext";
 import { PageType } from "@/types/page-type";
@@ -25,7 +25,6 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
 
   // Find the current page data
   const currentPage = pages.find((page: PageType) => page.slug === currentSlug);
-
   // Use the page's imageUrl or fall back to the provided backgroundImage or default
   const headerImage =
     currentPage?.featuredMedia?.url || backgroundImage?.url || "/images/adventure-header.jpg";

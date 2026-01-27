@@ -5,8 +5,12 @@ import { fetchAllCategories } from "@/api/controllers/categories";
 import { fetchAllPages } from "@/api/controllers/pages";
 import { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const pages = await fetchAllPages();
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const pages = await fetchAllPages(await params);
 
   const page = pages.Result?.find((page) => page.slug === "blog");
 
@@ -27,10 +31,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return metaData;
 }
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const localParams = await params;
+
   const [posts, categories] = await Promise.all([
-    fetchAllPosts(),
-    fetchAllCategories(),
+    fetchAllPosts(localParams),
+    fetchAllCategories(localParams),
   ]);
 
   return (

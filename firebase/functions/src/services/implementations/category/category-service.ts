@@ -6,11 +6,11 @@ import { ICategoryService } from "../../interfaces/i-category-service";
 export class CategoryService implements ICategoryService {
     constructor(private cmsClient: ICMSClient) { }
 
-    async fetchAllCategories(): Promise<CategoryType[]> {
-        return await this.cmsClient.getRepositories().category.fetchAllCategories();
+    async fetchAllCategories(locale: string): Promise<CategoryType[]> {
+        return await this.cmsClient.getRepositories().category.fetchAllCategories(locale);
     }
 
-    async fetchCategoryPosts(categoryName: string): Promise<PostType[]> {
-        return await this.cmsClient.getRepositories().category.fetchCategoryPosts(categoryName);
+    async fetchCategoryPosts(categoryName: string, locale: string): Promise<PostType[]> {
+        return await this.cmsClient.getRepositories().category.fetchCategoryPosts(categoryName, locale);
     }
 }

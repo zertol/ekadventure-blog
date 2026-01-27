@@ -54,7 +54,7 @@ export default {
     preview: {
         select: {
             name: "name",
-            post: "post.title",
+            post: "post.title.en",
             media: "post.featuredMedia.url",
             approved: "approved"
         },

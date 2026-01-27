@@ -7,7 +7,13 @@ export const postType = defineType({
   type: 'document',
   icon: ComposeIcon,
   fields: [
-    defineField({ name: 'title', type: 'string' }),
+    defineField({
+      name: 'title', type: 'object',
+      fields: [
+        { name: 'en', type: 'string' },
+        { name: 'fr', type: 'string' }
+      ]
+    }),
     defineField({ name: 'slug', type: 'slug' }),
     defineField({ name: 'date', type: 'datetime' }),
     defineField({ name: 'modified', type: 'datetime' }),
@@ -29,7 +35,11 @@ export const postType = defineType({
     }),
     defineField({
       name: 'content',
-      type: 'portableText',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: "stats",
@@ -69,11 +79,19 @@ export const postType = defineType({
     }),
     defineField({
       name: 'googleMapsHowToTitle',
-      type: 'string',
+      type: 'object',
+      fields: [
+        { name: "en", type: "string" },
+        { name: "fr", type: "string" }
+      ]
     }),
     defineField({
       name: 'googleMapsHowTo',
-      type: 'portableText',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'youtubeEmbedUrl',
@@ -81,27 +99,51 @@ export const postType = defineType({
     }),
     defineField({
       name: 'whereToEat',
-      type: 'portableText'
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'whereToStay',
-      type: 'portableText'
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'hikingPass',
-      type: 'portableText'
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'excerpt',
-      type: 'portableText',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ],
     }),
     defineField({
       name: 'otherHikes',
-      type: 'portableText'
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'otherAttractions',
-      type: 'portableText'
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({ name: 'featuredMedia', type: 'externalImage' }),
     defineField({ name: 'sticky', type: 'boolean' }),
@@ -149,7 +191,7 @@ export const postType = defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
       subtitle: 'author.name',
       imageUrl: 'featuredMedia.url',
     },

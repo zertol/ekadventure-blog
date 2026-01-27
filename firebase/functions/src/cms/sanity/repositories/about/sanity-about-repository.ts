@@ -7,8 +7,10 @@ import { IAboutRepository } from "../../../shared/interfaces/i-about-repository"
 import { ABOUT_PAGE_QUERY } from "../../sanity-queries";
 
 export class SanityAboutRepository implements IAboutRepository {
-    async fetchAboutDetails(): Promise<AboutType> {
-        const response = await fetch(`${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/query/production?query=${encodeURIComponent(ABOUT_PAGE_QUERY)}`);
+    async fetchAboutDetails(locale: string): Promise<AboutType> {
+        const finalQuery = ABOUT_PAGE_QUERY.replace(/\$locale/g, `'${locale}'`);
+
+        const response = await fetch(`${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/query/production?query=${encodeURIComponent(finalQuery)}`);
 
         if (!response.ok) {
             const errorData = (await response.json()) as SanityError;

@@ -7,10 +7,22 @@ import { handleMailService } from "@/api/controllers/contact";
 import SubmitStatus from "@/components/UI/Common/Form/SubmitStatus/page";
 import FormInput from "@/components/UI/Common/Form/FormInput/FormInput";
 import FooterAd from "@/components/Ads/FooterAd";
+import { usePages } from "@/store/PagesContext";
+import { PageType } from "@/types/page-type";
 
 const Footer: React.FC = () => {
   const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
   const adRef = useRef<HTMLModElement>(null!);
+
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { pages } = usePages();
+  const menuItems = pages.sort((a: PageType, b: PageType) => a.order - b.order);
 
   useEffect(() => {
     const ad = adRef.current;
@@ -20,14 +32,7 @@ const Footer: React.FC = () => {
 
   }, [adRef.current?.offsetHeight]);
 
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const {
+    const {
     register,
     handleSubmit,
     formState: { errors },
@@ -86,11 +91,20 @@ const Footer: React.FC = () => {
           </div>
 
           <nav className="space-y-3 hidden lg:block">
-            <HeaderNavLink href="/">HOME</HeaderNavLink>
-            <HeaderNavLink href="/blog">BLOG</HeaderNavLink>
-            <HeaderNavLink href="/shop">SHOP</HeaderNavLink>
-            <HeaderNavLink href="/about">ABOUT</HeaderNavLink>
-            <HeaderNavLink href="/contact">CONTACT</HeaderNavLink>
+            {menuItems.map((page: PageType) => (
+                <HeaderNavLink
+                  key={page.slug}
+                  href={`${
+                    page.slug?.toLowerCase().includes("http")
+                      ? page.slug
+                      : page.slug?.toLocaleLowerCase() === "home"
+                        ? "/"
+                        : "/" + page.slug
+                  }`}
+                >
+                  {page.title.toUpperCase()}
+                </HeaderNavLink>
+              ))}
           </nav>
 
           {/* Newsletter Subscription */}

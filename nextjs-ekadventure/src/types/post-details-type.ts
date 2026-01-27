@@ -8,13 +8,13 @@ export type PostDetailsType = {
     modifiedDate: Date;
     content: PortableTextBlock[];
     excerpt: PortableTextBlock[];
-    stats: Array<{
+    stats: Array<Record<string, string> & {
         label_en: string;
         label_fr: string;
         value_en: string;
         value_fr: string;
     }>;
-    statsTitle: {
+    statsTitle: Record<string, string> & {
         title_en: string;
         title_fr: string;
         name_en: string;

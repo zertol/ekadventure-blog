@@ -80,6 +80,10 @@
   h3 {
     @apply text-[20px] font-medium leading-none;
   }
+
+  h4, h5, h6 {
+    @apply text-[18px] font-medium leading-none;
+  }
   
   p, a, span, input, button, textarea, label, li {
     @apply text-[14px] leading-relaxed;

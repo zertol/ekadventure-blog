@@ -1,0 +1,35 @@
+{
+    "Ads": {
+        "sponsoredContentWrapperTitle": "Contenu Sponsorisé Par"
+    },
+    "Article": {
+        "articleDetailedVideoTitle": "Vidéo détaillée de l'Aventure",
+        "capturedMomentsTitle": "Moments Capturés",
+        "hikingPassTitle": "Passe de Randonnée",
+        "otherAttractionsTitle": "Autres attractions à proximité",
+        "otherHikesTitle": "Autres randonnées à proximité",
+        "whereToEatTitle": "Où Manger",
+        "whereToStayTitle": "Où Séjourner"
+    },
+    "Common": {
+        "featuredAdventuresTitle": "Aventures en Vedette",
+        "featuredTopicsTitle": "Sujets en Vedette",
+        "featuredVideosTitle": "Vidéos en Vedette"
+    },
+    "Home": {
+        "buildABlogLikeThisTitle": "Souhaitez-vous créer un blog comme celui-ci?",
+        "heroTextContent": "Salut ! Je m&apos;appelle Elie, et bienvenue dans mon univers rempli d&apos;aventure et de choses à découvrir. Je l&apos;ai créé dans l&apos;espoir de partager avec vous le monde à travers mes yeux et que nous partions ensemble dans chaque aventure, pour vivre pleinement et raconter une histoire du monde. <br /> Prêt(e) pour ta prochaine aventure? C&apos;est parti!",
+        "heroTextTitle": "Un petit mot à propos de ce territoire",
+        "homeHeaderCaptionFirstPart": "Où Chaque Jour est Une",
+        "homeHeaderCaptionSecondPart": "Aventure",
+        "shareYourExperienceButtonText": "Commencez à partager votre expérience"
+    },
+    "UI": {
+        "backToHome": "Retour à l'Accueil",
+        "loading": "Chargement...",
+        "loadMore": "Charger Plus",
+        "readMore": "Lire Plus",
+        "searchPlaceholder": "Rechercher...",
+        "viewAll": "Voir Tout"
+    }
+}

@@ -19,6 +19,7 @@
     "jsdom": "^27.4.0",
     "lightgallery": "^2.8.3",
     "next": "^16.0.7",
+    "next-intl": "^4.7.0",
     "next-sanity": "^11.6.5",
     "nodemailer": "^7.0.5",
     "react": "^19.2.0",

@@ -1,7 +1,7 @@
 import React from "react";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
-import Link from "next/link";
+import {Link} from "@/i18n/navigation";
 import App from "@/components/App";
 import {
   fetchAllCategories,

@@ -1,7 +1,10 @@
 import { handleApiRequest } from "@/utils/api/handle-api-request";
 
-export const fetchAllCategories = async (): Promise<ApiResult<CategoryType[]>> => {
-    return await handleApiRequest<CategoryType[]>("https://fetchallcategories-zsszt3mtmq-uc.a.run.app");
+export const fetchAllCategories = async (params: Record<string, any>): Promise<ApiResult<CategoryType[]>> => {
+    return await handleApiRequest<CategoryType[]>("https://fetchallcategories-zsszt3mtmq-uc.a.run.app", {
+        method: "POST",
+        body: JSON.stringify(params)
+    });
 }
 
 export const fetchCategoryPosts = async (

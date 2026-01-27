@@ -31,7 +31,7 @@ const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
           <ClientAdWrapper
-            headerText="Sponsored Content By Google"
+            headerText="Google"
             className="mt-3"
             isCollapsible={false}
           >

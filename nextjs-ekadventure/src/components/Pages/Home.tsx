@@ -9,6 +9,7 @@ import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArtic
 import PostArticles from "../UI/Blog/PostArticle/PostArticles";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
+import { useTranslations } from "next-intl";
 
 interface HomeProps {
   categories: CategoryType[];
@@ -27,6 +28,10 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
     setAdVisible({ isVisible: true, height: ad.offsetHeight });
   }, [adRef.current?.offsetHeight]);
 
+  const tHome = useTranslations('Home');
+  const tUI = useTranslations('UI');
+  const tCommon = useTranslations('Common');
+
   return (
     <div className="home-page">
       <HeaderImage
@@ -34,8 +39,8 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         text={
           <div>
             <h2 className="font-bold italic">
-              Where Every Day Is An{" "}
-              <span className="font-ps text-[28px]">Adventure</span>
+              {tHome("homeHeaderCaptionFirstPart")}{" "}
+              <span className="font-ps text-[28px]">{tHome("homeHeaderCaptionSecondPart")}</span>
             </h2>
           </div>
         }
@@ -47,7 +52,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
           <ClientAdWrapper
-            headerText="Sponsored Content By Google"
+            headerText="Google"
             isCollapsible={false}
           >
             <HorizontalAd adSlot="9510559826" ref={adRef} />
@@ -59,13 +64,13 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-6 flex-center-col relative">
             <h2 className="font-bold text-center mb-4 uppercase">
-              Latest Adventures
+              {tCommon("featuredAdventuresTitle")}
             </h2>
             <span className="block w-24 h-1 bg-black"></span>
             <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
               <PrimaryButton
                 href="/blog"
-                text="View All"
+                text={tUI("viewAll")}
                 className="py-1 px-4 font-semibold text-[14px]"
               />
             </div>
@@ -79,13 +84,13 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
           <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
             <div className="mb-6 flex-center-col relative">
               <h2 className="font-bold text-center mb-4 uppercase">
-                Latest Videos
+                {tCommon("featuredVideosTitle")}
               </h2>
               <span className="block w-24 h-1 bg-black"></span>
               <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
                 <PrimaryButton
                   href="/videos"
-                  text="View All"
+                  text={tUI("viewAll")}
                   className="py-1 px-4 font-semibold text-[14px]"
                 />
               </div>
@@ -99,7 +104,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-12 flex-center-col">
             <h2 className="font-bold text-center mb-4 uppercase">
-              Featured Topics
+              {tCommon("featuredTopicsTitle")}
             </h2>
             <span className="block w-24 h-1 bg-black"></span>
           </div>
@@ -119,10 +124,10 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
 
         <div className="relative z-10 text-center text-white">
           <h1 className="text-[30px] md:text-[40px] font-bold mb-6 italic">
-            Want to build a Blog like this?
+            {tHome("buildABlogLikeThisTitle")}
           </h1>
           <PrimaryButton
-            text="Start sharing your experience"
+            text={tHome("shareYourExperienceButtonText")}
             href="/contact"
             className="px-[24px] py-[12px] text-[16px]"
           />

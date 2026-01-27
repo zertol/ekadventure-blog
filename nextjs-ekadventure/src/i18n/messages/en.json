@@ -1,0 +1,35 @@
+{
+    "Ads": {
+        "sponsoredContentWrapperTitle": "Sponsored Content By"
+    },
+    "Article": {
+        "articleDetailedVideoTitle": "Detailed Video of the Adventure",
+        "capturedMomentsTitle": "Captured Moments",
+        "hikingPassTitle": "Hiking Pass",
+        "otherAttractionsTitle": "Other attractions nearby",
+        "otherHikesTitle": "Other hikes nearby",
+        "whereToEatTitle": "Where to Eat",
+        "whereToStayTitle": "Where to Stay"
+    },
+    "Common": {
+        "featuredAdventuresTitle": "Featured Adventures",
+        "featuredTopicsTitle": "Featured Topics",
+        "featuredVideosTitle": "Featured Videos"
+    },
+    "Home": {
+        "buildABlogLikeThisTitle": "Want to build a Blog like this?",
+        "heroTextContent": "Hi there! I&apos;m Elie, and welcome to my land filled with adventure and things to discover. I created it in hopes to share with you the world through my eyes and for us to embark together on every journey, to live life to the fullest, and to tell a story about the world. <br /> Ready for your next adventure? Let&apos;s go!",
+        "heroTextTitle": "A little bit about this land",
+        "homeHeaderCaptionFirstPart": "Where Every Day Is An",
+        "homeHeaderCaptionSecondPart": "Adventure",
+        "shareYourExperienceButtonText": "Start sharing your experience"
+    },
+    "UI": {
+        "backToHome": "Back to Home",
+        "loading": "Loading...",
+        "loadMore": "Load More",
+        "readMore": "Read More",
+        "searchPlaceholder": "Search...",
+        "viewAll": "View All"
+    }
+}

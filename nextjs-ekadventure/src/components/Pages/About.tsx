@@ -25,7 +25,7 @@ interface AccordionItem {
 const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
   const { pages } = usePages();
   const aboutPage: PageType | null =
-    pages.find((page: PageType) => page.slug === "about") ?? null;
+    pages.find((page: PageType) => page.slug === "about" || page.slug === "a-propos") ?? null;
 
   const accordionItems: AccordionItem[] = [
     {
