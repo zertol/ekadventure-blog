@@ -5,11 +5,11 @@ import { IPageService } from "../../interfaces/i-page-service";
 export class PageService implements IPageService {
     constructor(private cmsClient: ICMSClient) { }
 
-    async fetchAllPages(): Promise<PageType[]> {
-        return await this.cmsClient.getRepositories().page.fetchAllPages();
+    async fetchAllPages(locale: string): Promise<PageType[]> {
+        return await this.cmsClient.getRepositories().page.fetchAllPages(locale);
     }
 
-    async fetchPrivacyPolicyPage(): Promise<PageType> {
-        return await this.cmsClient.getRepositories().page.fetchPrivacyPolicyPage();
+    async fetchPrivacyPolicyPage(locale: string): Promise<PageType> {
+        return await this.cmsClient.getRepositories().page.fetchPrivacyPolicyPage(locale);
     }
 }

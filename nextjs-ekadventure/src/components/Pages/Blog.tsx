@@ -45,7 +45,7 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
       <div className="w-full flex justify-center">
         <div className="w-[768px]">
           <ClientAdWrapper
-            headerText="Sponsored Content By Google"
+            headerText="Google"
             className="mt-3"
             isCollapsible={false}
           >

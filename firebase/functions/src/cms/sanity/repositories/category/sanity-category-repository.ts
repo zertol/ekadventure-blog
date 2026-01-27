@@ -8,8 +8,9 @@ import { ICategoryRepository } from "../../../shared/interfaces/i-category-repos
 import { CATEGORIES_QUERY, POSTS_BY_CATEGORY_QUERY } from "../../sanity-queries";
 
 export class SanityCategoryRepository implements ICategoryRepository {
-    async fetchAllCategories(): Promise<CategoryType[]> {
-        const response = await fetch(`${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/query/production?query=${encodeURIComponent(CATEGORIES_QUERY)}`);
+    async fetchAllCategories(locale: string): Promise<CategoryType[]> {
+        const finalQuery = CATEGORIES_QUERY.replace(/\$locale/g, `'${locale}'`);
+        const response = await fetch(`${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/query/production?query=${encodeURIComponent(finalQuery)}`);
 
         if (!response.ok) {
             const errorData = (await response.json()) as SanityError;
@@ -19,8 +20,8 @@ export class SanityCategoryRepository implements ICategoryRepository {
         return response.json().then((data: SanityQueryResult<CategoryType[]>) => data.result);
     }
 
-    async fetchCategoryPosts(categoryName: string): Promise<PostType[]> {
-        const finalQuery = POSTS_BY_CATEGORY_QUERY.replace(/\$categoryname/g, "'" + categoryName + "'");
+    async fetchCategoryPosts(categoryName: string, locale: string): Promise<PostType[]> {
+        const finalQuery = POSTS_BY_CATEGORY_QUERY.replace(/\$categoryname/g, "'" + categoryName + "'").replace(/\$locale/g, `'${locale}'`);
         const response = await fetch(`${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/query/production?query=${encodeURIComponent(finalQuery)}`);
 
         if (!response.ok) {

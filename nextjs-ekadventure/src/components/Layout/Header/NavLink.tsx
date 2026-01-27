@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { ComponentProps } from "react";
+import {Link} from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 
 interface HeaderNavLinkProps {
   href: string;
@@ -16,11 +16,13 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
   onClick,
 }) => {
   const pathname = usePathname();
-  const isActive = pathname === href || (href === "/home" && pathname === "/");
+  const isActive = pathname === href;
 
   const handleClick = () => {
     if (onClick) onClick();
   };
+
+  type LinkProps = ComponentProps<typeof Link>;
 
   return (
     <div
@@ -29,7 +31,7 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
         ${isActive ? "bg-background-dark md:bg-transparent" : ""}`}
     >
       <Link
-        href={href}
+        href={href as LinkProps["href"]}
         onClick={handleClick}
         className={`text-white text-[14px] uppercase tracking-wide transition-colors relative group
           md:inline-block block w-full md:w-auto font-semibold

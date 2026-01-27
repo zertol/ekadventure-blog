@@ -1,7 +1,7 @@
 "use-client";
 
 import React from "react";
-import Link from "next/link";
+import {Link} from "@/i18n/navigation";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
 import { PortableText } from "next-sanity";
 

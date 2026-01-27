@@ -9,7 +9,13 @@ export const pageType = defineType({
   fields: [
     defineField({ name: 'visible', type: 'boolean', initialValue: true }),
     defineField({ name: 'order', type: 'number', initialValue: 0 }),
-    defineField({ name: 'title', type: 'string' }),
+    defineField({
+      name: 'title', type: "object",
+      fields: [
+        { name: 'en', type: 'string' },
+        { name: 'fr', type: 'string' }
+      ]
+    }),
     defineField({ name: 'slug', type: 'slug' }),
     defineField({ name: 'date', type: 'datetime' }),
     defineField({ name: 'modified', type: 'datetime' }),
@@ -31,7 +37,11 @@ export const pageType = defineType({
     }),
     defineField({
       name: 'content',
-      type: 'portableText',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'excerpt',
@@ -48,13 +58,19 @@ export const pageType = defineType({
       type: 'object',
       fields: [
         { name: "ogImage", type: "externalImage" },
-        { name: "description", type: "string" }
+        {
+          name: "description", type: "object",
+          fields: [
+            { name: 'en', type: 'string' },
+            { name: 'fr', type: 'string' }
+          ]
+        }
       ]
     })
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
       subtitle: 'author.name',
       imageUrl: 'featuredMedia.url',
     },

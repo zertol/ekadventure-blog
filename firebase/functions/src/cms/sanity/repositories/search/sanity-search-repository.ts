@@ -9,10 +9,11 @@ import { blocksToTexts, extractSnippetFromBlocks } from "../../sanity-helpers";
 import { SEARCH_QUERY } from "../../sanity-queries";
 
 export class SanitySearchRepository extends SharedRepository implements ISearchRepository {
-    async search(query: string, limit?: number, offset?: number): Promise<SearchResultType[]> {
+    async search(query: string, locale: string, limit?: number, offset?: number): Promise<SearchResultType[]> {
         const groqTerm = `*${query.replace(/[*?\\]/g, "")}*`;
 
-        const finalQuery = SEARCH_QUERY.replace(/\$query/g, "'" + groqTerm + "'").replace(/\$limit/g, limit ? limit.toString() : "10").replace(/\$offset/g, offset ? offset.toString() : "0");
+        const finalQuery = SEARCH_QUERY.replace(/\$query/g, "'" + groqTerm + "'").replace(/\$limit/g, limit ? limit.toString() : "10")
+            .replace(/\$offset/g, offset ? offset.toString() : "0").replace(/\$locale/g, `'${locale}'`);
 
         const response = await fetch(`${formatString(Constants.SANITY_BASE_URL, process.env.SANITY_PROJECT_ID)}/query/production?query=${encodeURIComponent(finalQuery)}`);
 

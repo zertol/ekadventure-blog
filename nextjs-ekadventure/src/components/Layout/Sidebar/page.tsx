@@ -72,7 +72,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
           {relatedPosts && <LatestArticles posts={relatedPosts} isLinkOnly />}
         </div>
         <ClientAdWrapper
-          headerText="Sponsored Content By Google"
+          headerText="Google"
           className="mt-10"
           isCollapsible={false}
         >

@@ -11,6 +11,6 @@ export const search = onRequest(
     withApiAuth(createApiHandler<any>(
         async (req: Request<any>, res: Response<ApiResult<any>>): Promise<any> => {
             const params: SearchParamsType = req.body;
-            return await DIResolutions.getSearchService().search(params.query, params.limit, params.offset);
+            return await DIResolutions.getSearchService().search(params.query, params.locale, params.limit, params.offset);
         }
     )));

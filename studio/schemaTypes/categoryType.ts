@@ -7,7 +7,13 @@ export const categoryType = defineType({
   type: 'document',
   icon: FilterIcon,
   fields: [
-    defineField({ name: 'name', type: 'string' }),
+    defineField({
+      name: 'name', type: "object",
+      fields: [
+        { name: 'en', type: 'string' },
+        { name: 'fr', type: 'string' }
+      ]
+    }),
     defineField({ name: 'slug', type: 'slug' }),
     defineField({ name: 'featuredMedia', type: 'externalImage' }),
     defineField({ name: 'headerMedia', type: 'externalImage' }),
@@ -16,13 +22,19 @@ export const categoryType = defineType({
       type: 'object',
       fields: [
         { name: "ogImage", type: "externalImage" },
-        { name: "description", type: "string" }
+        {
+          name: "description", type: "object",
+          fields: [
+            { name: 'en', type: 'string' },
+            { name: 'fr', type: 'string' }
+          ]
+        }
       ]
     })
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'name.en',
       subtitle: 'slug.current',
       imageUrl: 'featuredMedia.url',
     },

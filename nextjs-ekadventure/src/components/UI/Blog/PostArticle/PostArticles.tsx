@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import PostArticle from "./page";
 
 interface PostArticlesProps {
@@ -18,10 +18,15 @@ const PostArticles: React.FC<PostArticlesProps> = ({
     setVisiblePosts((prev) => prev + postsPerPage);
   };
 
+  const visiblePostsList = useMemo(
+    () => posts.slice(0, visiblePosts),
+    [posts, visiblePosts]
+  );
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
-        {posts.slice(0, visiblePosts).map((post: PostType) => (
+        {visiblePostsList.map((post: PostType) => (
           <PostArticle key={post._id} {...post} />
         ))}
       </div>

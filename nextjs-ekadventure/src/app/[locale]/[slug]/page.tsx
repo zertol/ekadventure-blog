@@ -8,7 +8,7 @@ import { generateBlockComponents } from "@/components/Data/BlockComponents";
 import {
   buildCommentTree,
   groupImagesFromBlocks,
-} from "../../utils/data/helpers";
+} from "../../../utils/data/helpers";
 import ImageCarousel from "@/components/UI/Carousel/ImageCarousel";
 import {
   fetchAllPosts,
@@ -18,6 +18,9 @@ import {
 import { CommentsProvider } from "@/store/CommentsContext";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { routing } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -48,30 +51,28 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const posts = await fetchAllPosts();
+  const posts = await fetchAllPosts({});
 
-  return (
-    posts.Result &&
-    posts.Result.map((post: any) => ({
+  const params = posts.Result?.flatMap((post: PostType) => {
+    return routing.locales.map((locale) => ({
+      locale: locale,
       slug: post.slug.current,
-    }))
-  );
+    }));
+  });
+
+  return params || [];
 }
 
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string };
+  params: { locale: string; slug: string };
 }) {
-  const { slug } = await params;
+  const localParams = await params;
 
   const [postResult, relatedPostsResult] = await Promise.all([
-    fetchPostDetails({
-      slug: slug,
-    }),
-    fetchLatestPostsByCategories({
-      slug: slug,
-    }),
+    fetchPostDetails(localParams),
+    fetchLatestPostsByCategories(localParams),
   ]);
 
   if (!postResult.Result) {
@@ -81,9 +82,9 @@ export default async function PostPage({
   const post = postResult.Result;
   const relatedPosts = relatedPostsResult.Result?.relatedPosts ?? [];
 
-  const statsTitleParts: string[] = post.statsTitle?.title_en?.split("$name");
-  const statsTitle: string = post.statsTitle?.title_en;
-  const statsName: string = post.statsTitle?.name_en;
+  const statsTitleParts: string[] = post.statsTitle && post.statsTitle["title_" + localParams.locale]?.split("$name");
+  const statsTitle: string = post.statsTitle && post.statsTitle["title_" + localParams.locale];
+  const statsName: string = post.statsTitle && post.statsTitle["name_" + localParams.locale];
 
   const isStatsDisplayed: boolean = !!(
     post.stats?.length > 0 &&
@@ -91,6 +92,8 @@ export default async function PostPage({
     statsName &&
     statsTitleParts?.length > 1
   );
+
+  const t = await getTranslations('Article');
 
   return (
     <App currentPage="post">
@@ -148,8 +151,8 @@ export default async function PostPage({
                         className="mb-1 flex-start-row font-ps text-white w-full"
                       >
                         <p className="text-[22px]">
-                          <strong>{stat.label_en}</strong>:{" "}
-                          <em>{stat.value_en}</em>
+                          <strong>{stat["label_" + localParams.locale]}</strong>:{" "}
+                          <em>{stat["value_" + localParams.locale]}</em>
                         </p>
                       </div>
                     ))}
@@ -181,12 +184,12 @@ export default async function PostPage({
                       alt="🎥"
                       src="https://s.w.org/images/core/emoji/15.0.3/svg/1f3a5.svg"
                     />
-                    Detailed Video of the Adventure
+                    {t("articleDetailedVideoTitle")}
                   </h2>
 
                   <iframe
                     src={post.youtubeEmbedUrl}
-                    title="Detailed Video of the Adventure"
+                    title={t("articleDetailedVideoTitle")}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-[375px] box-shadow-post-detail-image"
@@ -201,7 +204,7 @@ export default async function PostPage({
                       alt="🎫"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    Hiking Pass
+                    {t("hikingPassTitle")}
                   </h2>
 
                   <PortableText
@@ -218,7 +221,7 @@ export default async function PostPage({
                       alt="🏠"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    Where to Stay
+                    {t("whereToStayTitle")}
                   </h2>
 
                   <PortableText
@@ -235,7 +238,7 @@ export default async function PostPage({
                       alt="🥪"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    Where to Eat
+                    {t("whereToEatTitle")}
                   </h2>
 
                   <PortableText
@@ -252,7 +255,7 @@ export default async function PostPage({
                       alt="🥾"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    Other hikes nearby
+                    {t("otherHikesTitle")}
                   </h2>
 
                   <PortableText
@@ -269,7 +272,7 @@ export default async function PostPage({
                       alt="🚗"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    Other attractions nearby
+                    {t("otherAttractionsTitle")}
                   </h2>
 
                   <PortableText
@@ -286,7 +289,7 @@ export default async function PostPage({
                       alt="📸"
                       src="https://s.w.org/images/core/emoji/14.0.0/svg/1f4f8.svg"
                     />
-                    Captured Moments
+                    {t("capturedMomentsTitle")}
                   </h2>
                   <ImageCarousel images={post.capturedMoments} />
                 </div>

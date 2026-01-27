@@ -3,8 +3,8 @@ import { PostType } from "../../../types/domain/post-type";
 import { RelatedPostType } from "../../../types/domain/related-post-type";
 
 export interface IPostRepository {
-    fetchAllPosts(): Promise<PostType[]>;
-    fetchLatestPostsByCategories(slug: string): Promise<RelatedPostType>;
-    fetchPostDetails(slug: string): Promise<PostDetailsType>;
-    fetchLatestPosts(): Promise<PostType[]>;
+    fetchAllPosts(locale: string): Promise<PostType[]>;
+    fetchLatestPostsByCategories(slug: string, locale: string): Promise<RelatedPostType>;
+    fetchPostDetails(slug: string, locale: string): Promise<PostDetailsType>;
+    fetchLatestPosts(locale: string): Promise<PostType[]>;
 }

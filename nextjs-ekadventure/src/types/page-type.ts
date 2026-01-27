@@ -7,4 +7,5 @@ export type PageType = {
     order: number;
     metadata: MetadataType;
     content: PortableTextBlock[];
+    updatedAt: string;
 };

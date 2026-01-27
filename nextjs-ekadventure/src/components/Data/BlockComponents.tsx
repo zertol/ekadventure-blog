@@ -1,7 +1,7 @@
 import { PortableTextComponentProps } from "next-sanity";
 import { groupImagePairsOrSingle } from "@/utils/data/helpers";
 import { PortableTextMarkComponentProps } from "next-sanity";
-import Link from "next/link";
+import {Link} from "@/i18n/navigation";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import ArticleAd from "../Ads/ArticleAd";
@@ -55,7 +55,7 @@ export const generateBlockComponents = (
               />
             </div>
             {adsVisible && (
-              <ClientAdWrapper headerText="Sponsored Content by Google" className="mb-3" paddingTop="pt-3">
+              <ClientAdWrapper headerText="Google" className="mb-3" paddingTop="pt-3">
                 <ArticleAd adSlot="1073133772" />
               </ClientAdWrapper>
             )}
@@ -84,15 +84,13 @@ export const generateBlockComponents = (
       ),
     },
     block: {
-      h1: ({ children }: PortableTextComponentProps<any>) => (
-        <h1 className="text-3xl font-bold">{children}</h1>
-      ),
       normal: ({ children, index }: PortableTextComponentProps<any>) => {
+        const renderedText= children?.toString().toLocaleLowerCase() === "$spacing$" ? <br /> : <p className="mb-3 leading-6">{children}</p>;
         return (
           <>
-            <p className="mb-3 leading-6">{children}</p>
+            {renderedText}
             {adsVisible && index === 2 && (
-                <ClientAdWrapper headerText="Sponsored Content by Google" className="mb-6" paddingTop="pt-3">
+                <ClientAdWrapper headerText="Google" className="mb-6" paddingTop="pt-3">
                   <ArticleAd adSlot="9573541605" />
                 </ClientAdWrapper>
             )}

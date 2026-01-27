@@ -5,12 +5,14 @@ import { PageType } from "../../types/domain/page-type";
 import { withApiAuth } from "../../core/middleware/auth-middleware";
 import { createApiHandler } from "../../core/handler/create-api-handler";
 import { DIResolutions as DIResolution } from "../../utils/di-resolution";
+import { ParamsType } from "../../types/api/params-type";
 
 export const fetchAllPages = onRequest(
     { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
     withApiAuth(createApiHandler<PageType[]>(
         async (req: Request<any>, res: Response<ApiResult<PageType[]>>): Promise<PageType[]> => {
-            return await DIResolution.getPageService().fetchAllPages();
+            const params: ParamsType = req.body;
+            return await DIResolution.getPageService().fetchAllPages(params.locale);
         }
     )));
 
@@ -18,6 +20,7 @@ export const fetchPrivacyPolicyPage = onRequest(
     { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
     withApiAuth(createApiHandler<PageType>(
         async (req: Request<any>, res: Response<ApiResult<PageType>>): Promise<PageType> => {
-            return await DIResolution.getPageService().fetchPrivacyPolicyPage();
+            const params: ParamsType = req.body;
+            return await DIResolution.getPageService().fetchPrivacyPolicyPage(params.locale);
         }
     )));

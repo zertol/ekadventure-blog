@@ -6,12 +6,14 @@ import { AboutType } from "../../types/domain/about-type";
 import { withApiAuth } from "../../core/middleware/auth-middleware";
 import { createApiHandler } from "../../core/handler/create-api-handler";
 import { DIResolutions } from "../../utils/di-resolution";
+import { ParamsType } from "../../types/api/params-type";
 
 export const fetchAboutDetails = onRequest(
     { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"], cors: Constants.FIREBASE_CORS_LIST },
     withApiAuth(createApiHandler(
         async (req: Request<any>, res: Response<ApiResult<AboutType>>): Promise<AboutType> => {
-            return await DIResolutions.getAboutService().fetchAboutDetails();
+            const params: ParamsType = req.body;
+            return await DIResolutions.getAboutService().fetchAboutDetails(params.locale);
         }
     ))
 );

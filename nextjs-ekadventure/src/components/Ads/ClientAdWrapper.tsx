@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "use-intl";
 
 export function ClientAdWrapper({
   children,
@@ -34,6 +35,8 @@ export function ClientAdWrapper({
     return "initial";
   };
 
+  const t = useTranslations('Ads');
+
   return (
     <>
       {paddingTop && hasContent.isVisible && <div className={paddingTop}></div>}
@@ -45,7 +48,7 @@ export function ClientAdWrapper({
           <div className={`w-full p-2`}>
             {!isCollapsible && (
               <div>
-                <p className="font-semibold">{headerText}</p>
+                <p className="font-semibold">{t("sponsoredContentWrapperTitle")} {headerText}</p>
               </div>
             )}
             {isCollapsible && (
@@ -54,7 +57,9 @@ export function ClientAdWrapper({
                 className="flex w-full justify-between"
               >
                 <div>
-                  <p className="font-semibold">{headerText}</p>
+                  <p className="font-semibold">
+                    {t("sponsoredContentWrapperTitle")} {headerText}
+                  </p>
                 </div>
                 {opened ? (
                   <svg

@@ -13,7 +13,8 @@ export const fetchAllCategories = onRequest(
     { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"], cors: Constants.FIREBASE_CORS_LIST },
     withApiAuth(createApiHandler(
         async (req: Request<any>, res: Response<ApiResult<CategoryType[]>>): Promise<CategoryType[]> => {
-            return await DIResolutions.getCategoryService().fetchAllCategories();
+            const params: ParamsType = req.body;
+            return await DIResolutions.getCategoryService().fetchAllCategories(params.locale);
         }
     )));
 
@@ -22,6 +23,6 @@ export const fetchCategoryPosts = onRequest(
     withApiAuth(createApiHandler(
         async (req: Request<any>, res: Response<ApiResult<PostType[]>>): Promise<PostType[]> => {
             const params: ParamsType = req.body;
-            return await DIResolutions.getCategoryService().fetchCategoryPosts(params.categoryname);
+            return await DIResolutions.getCategoryService().fetchCategoryPosts(params.categoryname, params.locale);
         }
     )));

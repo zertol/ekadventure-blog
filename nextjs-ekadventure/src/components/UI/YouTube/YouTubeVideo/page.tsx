@@ -1,7 +1,7 @@
 "use-client";
 
 import React from "react";
-import Link from "next/link";
+import {Link} from "@/i18n/navigation";
 
 const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString("en-US", {

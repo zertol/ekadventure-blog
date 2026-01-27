@@ -5,7 +5,7 @@ import { IAboutService } from "../../interfaces/i-about-service";
 export class AboutService implements IAboutService {
     constructor(private cmsClient: ICMSClient) { }
 
-    async fetchAboutDetails(): Promise<AboutType> {
-        return await this.cmsClient.getRepositories().about.fetchAboutDetails();
+    async fetchAboutDetails(locale: string): Promise<AboutType> {
+        return await this.cmsClient.getRepositories().about.fetchAboutDetails(locale);
     }
 }

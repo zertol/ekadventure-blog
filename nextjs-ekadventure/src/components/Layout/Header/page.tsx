@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import HeaderNavLink from "./NavLink";
 import { usePages } from "@/store/PagesContext";
 import { useParams } from "next/navigation";
@@ -23,7 +23,11 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
 
   const { pages } = usePages();
   const isScrollable =
-    !isAboutPage && !isBlogDetailsPage && !isContactPage && !notFound && !isVideoDetailsPage;
+    !isAboutPage &&
+    !isBlogDetailsPage &&
+    !isContactPage &&
+    !notFound &&
+    !isVideoDetailsPage;
 
   useEffect(() => {
     if (isScrollable) {
@@ -69,9 +73,11 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
                 <HeaderNavLink
                   key={page.slug}
                   href={`${
-                    page.slug.toLowerCase().includes("http")
+                    page.slug?.toLowerCase().includes("http")
                       ? page.slug
-                      : "/" + page.slug
+                      : page.slug?.toLocaleLowerCase() === "home"
+                        ? "/"
+                        : "/" + page.slug
                   }`}
                   onClick={toggleMobileMenu}
                 >
@@ -103,9 +109,11 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
                 <HeaderNavLink
                   key={page.slug}
                   href={`${
-                    page.slug.toLowerCase().includes("http")
+                    page.slug?.toLowerCase().includes("http")
                       ? page.slug
-                      : "/" + page.slug
+                      : page.slug?.toLocaleLowerCase() === "home"
+                        ? "/"
+                        : "/" + page.slug
                   }`}
                 >
                   {page.title.toUpperCase()}
