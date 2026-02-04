@@ -5,7 +5,7 @@ import { getLatestYouTubeVideos } from "@/api/controllers/youtube";
 import Videos from "@/components/Pages/Videos";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pages = await fetchAllPages();
+  const pages = await fetchAllPages({});
 
   const page = pages.Result?.find((page) => page.slug === "videos");
 

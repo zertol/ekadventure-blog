@@ -7,36 +7,47 @@ import Script from "next/script";
 import AnalyticsTracker from "@/components/Analytics/AnalyticsTracker";
 import { PagesContextType } from "@/types/pages-context-type";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
-const locales = ['en', 'fr'];
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const { locale } = await params;
 
-export const metadata: Metadata = {
-  title: {
-    default: "Ekadventure Blog",
-    template: "%s | Ekadventure Blog",
-  },
-  description:
-    "Explore outdoor adventures through travel guides, hikes, and articles on Ekadventure Blog.",
-  openGraph: {
-    type: "website",
-    locale: "en_CA",
-    alternateLocale: ["fr_CA"],
-    url: "https://ekadventure.com",
-    title: "Ekadventure",
-    description:
-      "Explore outdoor adventures through travel guides, hikes, and articles on Ekadventure Blog.",
-    images: [
-      {
-        url: "https://r2.ekadventure.com/cdn-cgi/image/width=1200,format=jpg,quality=80/blog/default-og.jpg",
-        width: 1200,
-        alt: "Ekadventure",
-      },
-    ],
-  },
-};
+  const tLayout = await getTranslations({ locale, namespace: "Layout" });
+
+  const metadata: Metadata = {
+    title: {
+      default: "Ekadventure Blog",
+      template: "%s | Ekadventure Blog",
+    },
+    description: tLayout("metadataDescription"),
+    openGraph: {
+      type: "website",
+      locale: "en_CA",
+      alternateLocale: ["fr_CA"],
+      url: "https://ekadventure.com",
+      title: "Ekadventure",
+      description: tLayout("metadataDescription"),
+      images: [
+        {
+          url: "https://r2.ekadventure.com/cdn-cgi/image/width=1200,format=jpg,quality=80/blog/default-og.jpg",
+          width: 1200,
+          alt: "Ekadventure",
+        },
+      ],
+    },
+  };
+
+  return metadata;
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -49,7 +60,6 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-
   const locale = (await params).locale;
 
   // Enable static rendering by setting the locale for the request
@@ -60,7 +70,7 @@ export default async function LocaleLayout({
 
   const pagesProps: PagesContextType = { pages: [], error: null };
   try {
-    const result = await fetchAllPages({locale});
+    const result = await fetchAllPages({ locale });
 
     if (result.ErrorMessages && result.ErrorMessages.length > 0) {
       throw new Error(result.ErrorMessages.join(", "));
@@ -69,10 +79,6 @@ export default async function LocaleLayout({
     pagesProps.pages = result.Result || [];
   } catch (err) {
     console.error("Error fetching Pages Data:", err);
-    // pagesProps.error =
-    //   err instanceof Error
-    //     ? err
-    //     : new Error("An error occurred while fetching Pages Data");
   }
 
   return (
@@ -102,7 +108,9 @@ export default async function LocaleLayout({
       <body>
         <PagesContextProvider pagesProps={pagesProps}>
           <Suspense>
-            <NextIntlClientProvider locale={locale} messages={messages}>{children}</NextIntlClientProvider>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              {children}
+            </NextIntlClientProvider>
           </Suspense>
         </PagesContextProvider>
         <AnalyticsTracker />

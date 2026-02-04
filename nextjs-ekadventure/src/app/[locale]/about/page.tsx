@@ -9,7 +9,7 @@ export async function generateMetadata({params}: {params: {locale: string}}): Pr
   const pages = await fetchAllPages(await params);
 
   const page = pages.Result?.find(
-    (page) => page.slug === "about" || page.slug === "a-propos",
+    (page) => page.slug === "about",
   );
 
   if (!page) {

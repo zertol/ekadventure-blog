@@ -10,3 +10,7 @@ export type SearchResultType = {
     _updatedAt: string;
     content: PortableTextBlock[];
 }
+
+export type SearchLocaleKeysResultType = {
+    title: Record<string, string>;
+}

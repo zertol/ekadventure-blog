@@ -38,7 +38,7 @@ export class MailService implements IMailService {
         });
 
         if (fetchResult.data?.id) {
-            throw new Error(`It looks like you are already subscribed with the email: ${subscriberInfo.email}`);
+            return fetchResult;
         }
 
         const createResult: CreateEmailResponse = await resend.contacts.create({

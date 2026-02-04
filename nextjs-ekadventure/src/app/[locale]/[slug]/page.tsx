@@ -19,17 +19,17 @@ import { CommentsProvider } from "@/store/CommentsContext";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { locale:string, slug: string };
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const postResult = await fetchPostDetails({
     slug: slug,
+    locale: locale
   });
   const post = postResult.Result;
 

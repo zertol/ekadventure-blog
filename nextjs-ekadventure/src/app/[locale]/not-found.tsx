@@ -4,8 +4,13 @@ import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import { useSearch } from "@/utils/hooks/use-search";
 import { useRef } from "react";
 import { SearchResuls } from "@/components/UI/Common/SearchResults/page";
+import { useTranslations } from "next-intl";
+import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 
 export default function NotFound() {
+  const tNotFound = useTranslations("NotFound");
+  const tUI = useTranslations("UI");
+
   const { query, setQuery, results, loading } = useSearch();
 
   const searchRef = useRef<HTMLInputElement>(null);
@@ -30,45 +35,28 @@ export default function NotFound() {
           <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start lg:justify-center text-center lg:text-left">
             <div className="lg:w-[80%]">
               <h1 className="leading-7 md:leading-9 mb-4 text-2xl md:text-[30px]">
-                Oops! Seems like you got lost in the wilderness.
+              {tNotFound("notFoundTitle")}
               </h1>
 
               <p className="mb-4 md:mb-6 text-lg md:text-2xl font-ps leading-6 md:leading-7">
-                Even the best explorers lose their way sometimes. Don&apos;t
-                worry, we&apos;ll help you find your way back to the Experience.
+                {tNotFound("notFoundHelpText")}
               </p>
 
-              <div className="flex gap-4 mb-6 justify-center">
-                <PrimaryButton
-                  href="/"
-                  text="📍 Trailhead"
-                  className="font-ps py-0 font-bold text-[14px] md:text-[18px]"
-                />
-                <PrimaryButton
-                  href="/blog"
-                  text="🥾 Adventures"
-                  className="font-ps py-0 font-bold text-[14px] md:text-[18px]"
-                />
-                <PrimaryButton
-                  href="/contact"
-                  text="📞 Get Help"
-                  className="font-ps py-0 font-bold text-[14px] md:text-[18px]"
-                />
-              </div>
+              <HelpButtons />
 
               <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
                 <h3 className="md:text-2xl font-semibold mb-2">
-                  Still can&apos;t find your trail?
+                  {tNotFound("notFoundStillCantFind")}
                 </h3>
                 <p className="text-white font-semibold mb-3 text-sm/5">
-                  Try searching below for your next adventure.
+                  {tNotFound("notFoundTrySearching")}
                 </p>
                 <form onSubmit={searchSite} method="POST" className="w-full">
                   <div className="flex flex-row w-full overflow-hidden">
                     <input
                       type="text"
                       name="query"
-                      placeholder="Search an adventure..."
+                      placeholder={tUI("searchPlaceholderAdventure")}
                       className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
                       ref={searchRef}
                     />
@@ -77,12 +65,17 @@ export default function NotFound() {
                       className="bg-background-blue-accent
                          text-white px-6 py-2 whitespace-nowrap hover:bg-background-dark transition-colors"
                     >
-                      Search
+                      {tUI("searchButton")}
                     </button>
                   </div>
                 </form>
                 {(query || loading) && (
-                  <SearchResuls isInContainer={true} query={query} results={results} loading={loading}/>
+                  <SearchResuls
+                    isInContainer={true}
+                    query={query}
+                    results={results}
+                    loading={loading}
+                  />
                 )}
               </div>
             </div>

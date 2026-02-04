@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { UseFormRegister } from "react-hook-form";
 
 interface FormInputProps {
@@ -8,6 +9,7 @@ interface FormInputProps {
   error?: string;
   required: boolean;
   className?: string;
+  registrationName: string;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -18,13 +20,16 @@ const FormInput: React.FC<FormInputProps> = ({
   error,
   required,
   className,
+  registrationName
 }) => {
+  const tCommon = useTranslations("Common");
+  
   return type === "textarea" ? (
     <>
       <textarea
         placeholder={placeholder}
-        {...register(label, {
-          required: required ? `${capitalize(label)} is required` : false,
+        {...register(registrationName, {
+          required: required ? `${tCommon("requiredFieldMessage", { 0: capitalize(label) })}` : false,
         })}
         rows={4}
         className={`${className} ${
@@ -38,8 +43,8 @@ const FormInput: React.FC<FormInputProps> = ({
       <input
         type={type}
         placeholder={placeholder}
-        {...register(label, {
-          required: required ? `${capitalize(label)} is required` : false,
+        {...register(registrationName, {
+          required: required ? `${tCommon("requiredFieldMessage", { 0: capitalize(label) })}` : false,
         })}
         className={`${className} ${
           error ? "border-red-900" : "border-gray-300"

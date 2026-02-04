@@ -129,8 +129,11 @@ export const LATEST_POSTS_BY_CATEGORIES_QUERY = `*[_type == "post" && slug.curre
   }
 }` as const;
 
-export const SEARCH_QUERY = `*[_type in ["post", "category"] && (coalesce(title[$locale], title["en"]) match $query 
-|| coalesce(name[$locale], name["en"]) match $query || pt::text(coalesce(content[$locale], content["en"])) match $query)] | order(_type desc, _updatedAt desc) [0...$limit]
+export const SEARCH_KEYS_QUERY = `*[_type in ["post"] && defined(title)][0] {
+  title
+}` as const;
+
+export const SEARCH_QUERY = `*[_type in ["post", "category"] && $matchquery] | order(_type desc, _updatedAt desc) [0...$limit]
 {
   _id,
   _type,

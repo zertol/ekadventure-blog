@@ -9,7 +9,10 @@ export const routing = defineRouting({
     pathnames: {
         '/': '/',
         '/home': '/',
+        '/blog': '/blog',
         '/accueil': '/',
+        '/videos': '/videos',
+        '/videos/[videoId]': '/videos/[videoId]',
         '/about': {
             en: '/about',
             fr: '/a-propos'
@@ -25,6 +28,10 @@ export const routing = defineRouting({
         '/privacy-policy': {
             en: '/privacy-policy',
             fr: '/politique-de-confidentialite'
+        },
+        '/unsubscribe': {
+            en: '/unsubscribe',
+            fr: '/désabonnez'
         }
     }
 });

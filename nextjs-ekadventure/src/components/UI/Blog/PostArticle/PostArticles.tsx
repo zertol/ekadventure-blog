@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import PostArticle from "./page";
+import { useTranslations } from "next-intl";
 
 interface PostArticlesProps {
   posts: PostType[];
@@ -23,6 +24,8 @@ const PostArticles: React.FC<PostArticlesProps> = ({
     [posts, visiblePosts]
   );
 
+  const tUI = useTranslations("UI");
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
@@ -34,7 +37,7 @@ const PostArticles: React.FC<PostArticlesProps> = ({
       {visiblePosts < posts.length && (
         <div className="text-center">
           <button onClick={handleLoadMore} className="primary-button px-6 py-2">
-            Load More
+            {tUI("loadMore")}
           </button>
         </div>
       )}

@@ -33,7 +33,7 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
       <Link
         href={href as LinkProps["href"]}
         onClick={handleClick}
-        className={`text-white text-[14px] uppercase tracking-wide transition-colors relative group
+        className={`text-white whitespace-nowrap uppercase tracking-wide transition-colors relative group
           md:inline-block block w-full md:w-auto font-semibold
         `}
       >

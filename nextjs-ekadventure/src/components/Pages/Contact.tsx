@@ -7,10 +7,13 @@ import { handleMailService } from "@/api/controllers/contact";
 import FormInput from "../UI/Common/Form/FormInput/FormInput";
 import SubmitStatus from "../UI/Common/Form/SubmitStatus/page";
 import { PageType } from "@/types/page-type";
+import { useTranslations } from "next-intl";
 
 const Contact: React.FC = () => {
   const { pages } = usePages();
   const contactPage = pages.find((page: PageType) => page.slug === "contact");
+
+  const tContact = useTranslations("Contact");
 
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -43,7 +46,7 @@ const Contact: React.FC = () => {
 
       setSubmitStatus({
         type: "success",
-        message: "Thank you for your message! We'll get back to you soon.",
+        message: tContact("requestSuccessMessage"),
       });
 
       reset();
@@ -52,10 +55,7 @@ const Contact: React.FC = () => {
 
       setSubmitStatus({
         type: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Failed to send message. Please try again later.",
+        message: tContact("requestFailedMessage"),
       });
     } finally {
       setIsLoading(false);
@@ -66,22 +66,15 @@ const Contact: React.FC = () => {
     <div className="contact-page px-c-25 lg:px-[60px] mb-c-60">
       <div className="container container-max-w-1280 mx-auto mt-28">
         <h1 className="text-[48px] font-bold font-ps text-center mb-12">
-          Can&apos;t wait to hear from you!
+          {tContact("contactTitle")}
         </h1>
 
         <div className="flex flex-col lg:flex-row gap-8 min-h-[700px]">
           <div className="lg:flex-1 flex flex-col">
             <div className="flex-center-col text-center p-4 mb-4">
               <div className="mb-4">
-                <p>
-                  Whether it&apos;s for working together or just simply sharing
-                  your adventure, I will be so thrilled to read all about it!
-                </p>
-                <p>
-                  As I mostly will be adventuring and it might take a while,
-                  rest assured that I will take the time to reply to every mail
-                  personally!
-                </p>
+                <p>{tContact("contactDescriptionFirstPart")}</p>
+                <p>{tContact("contactDescriptionSecondPart")}</p>
               </div>
               <span className="block w-24 h-1 bg-black"></span>
             </div>
@@ -92,43 +85,47 @@ const Contact: React.FC = () => {
               className="flex-1 flex flex-col space-y-4 bg-background-green-accent p-6 rounded-lg box-shadow-quote"
             >
               <FormInput
-                label="name"
+                label={tContact("nameLabel")}
                 type="text"
-                placeholder="Your Name"
+                placeholder={tContact("namePlaceholder")}
                 register={register}
                 required={true}
                 error={errors.name?.message}
                 className="contact-form-input"
+                registrationName="name"
               />
 
               <FormInput
-                label="email"
+                label={tContact("emailLabel")}
                 type="email"
-                placeholder="Your Email"
+                placeholder={tContact("emailPlaceholder")}
                 register={register}
                 required={true}
                 error={errors.email?.message}
                 className="contact-form-input"
+                registrationName="email"
               />
 
               <FormInput
-                label="subject"
+                label={tContact("subjectLabel")}
                 type="text"
-                placeholder="Subject"
+                placeholder={tContact("subjectPlaceholder")}
                 register={register}
                 required={true}
                 error={errors.subject?.message}
                 className="contact-form-input"
+                registrationName="subject"
               />
 
               <FormInput
-                label="message"
+                label={tContact("messageLabel")}
                 type="textarea"
-                placeholder="Message"
+                placeholder={tContact("messagePlaceholder")}
                 register={register}
                 required={true}
                 error={errors.message?.message}
                 className="contact-form-input"
+                registrationName="message"
               />
 
               <div className="flex flex-col items-center">
@@ -137,7 +134,7 @@ const Contact: React.FC = () => {
                   className="bg-background-blue-accent text-white tracking-wide px-8 py-2 font-bold text-[12px]
                    rounded-sm hover:bg-background-dark transition-colors duration-300"
                 >
-                  SUBMIT
+                  {tContact("submitButtonText")}
                 </button>
                 {isLoading && (
                   <div className="mt-4 flex justify-center">
@@ -156,14 +153,11 @@ const Contact: React.FC = () => {
               </div>
             </form>
           </div>
-          
+
           <div className="h-[250px] lg:h-auto lg:flex-1 relative">
             <img
               src={contactPage?.featuredMedia?.url}
-              alt={
-                contactPage?.featuredMedia?.alt ||
-                "Contact Featured Media"
-              }
+              alt={contactPage?.featuredMedia?.alt || "Contact Featured Media"}
               className="inset-0 w-full h-full object-cover rounded-lg"
             />
           </div>

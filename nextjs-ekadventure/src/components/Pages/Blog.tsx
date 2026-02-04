@@ -6,6 +6,7 @@ import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
 import HorizontalAd from "../Ads/HorizontalAd";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
+import { useTranslations } from "next-intl";
 
 interface BlogProps {
   posts: PostType[];
@@ -23,9 +24,11 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
 
   const filteredPosts = selectedCategory
     ? posts?.filter((post) =>
-        post.categories?.some((cat) => cat.slug === selectedCategory)
+        post.categories?.some((cat) => cat.slug === selectedCategory),
       ) || []
     : posts || [];
+
+  const tBlog = useTranslations("Blog");
 
   return (
     <div>
@@ -34,9 +37,11 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
         text={
           <div>
             <h2 className="font-bold italic">
-              Where Adventures Belong
+              {tBlog("blogHeaderCaptionFirstPart")}
               <br />
-              <span className="font-ps text-[28px]">Welcome!</span>
+              <span className="font-ps text-[28px]">
+                {tBlog("blogHeaderCaptionSecondPart")}
+              </span>
             </h2>
           </div>
         }
