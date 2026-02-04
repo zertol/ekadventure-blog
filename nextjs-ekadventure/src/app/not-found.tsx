@@ -5,9 +5,10 @@ import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import { useSearch } from "@/utils/hooks/use-search";
 import { useRef } from "react";
 import { SearchResuls } from "@/components/UI/Common/SearchResults/page";
+import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 
 export default function NotFound() {
-  const { query, setQuery, results, loading } = useSearch();
+  const { query, setQuery, results, loading } = useSearch(true);
 
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -42,26 +43,7 @@ export default function NotFound() {
                     Experience.
                   </p>
 
-                  <div className="flex gap-4 mb-6 justify-center">
-                    <PrimaryButton
-                      href="/"
-                      text="📍 Trailhead"
-                      className="font-ps py-0 font-bold text-[14px] md:text-[18px]"
-                      outsideLocale={true}
-                    />
-                    <PrimaryButton
-                      href="/blog"
-                      text="🥾 Adventures"
-                      className="font-ps py-0 font-bold text-[14px] md:text-[18px]"
-                      outsideLocale={true}
-                    />
-                    <PrimaryButton
-                      href="/contact"
-                      text="📞 Get Help"
-                      className="font-ps py-0 font-bold text-[14px] md:text-[18px]"
-                      outsideLocale={true}
-                    />
-                  </div>
+                  <HelpButtons outsideLocale={true} />
 
                   <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
                     <h3 className="md:text-2xl font-semibold mb-2">

@@ -11,6 +11,7 @@ import { generateBlockComponents } from "@/components/Data/BlockComponents";
 import { usePages } from "@/store/PagesContext";
 import { AboutType } from "@/types/about-type";
 import { PageType } from "@/types/page-type";
+import { useTranslations } from "next-intl";
 
 interface AboutProps {
   about: AboutType | null;
@@ -25,38 +26,25 @@ interface AccordionItem {
 const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
   const { pages } = usePages();
   const aboutPage: PageType | null =
-    pages.find((page: PageType) => page.slug === "about" || page.slug === "a-propos") ?? null;
+    pages.find((page: PageType) => page.slug === "about") ?? null;
 
-  const accordionItems: AccordionItem[] = [
-    {
-      question: "What is your favorite adventure activity?",
-      answer:
-        "My favorite outdoor activity is backpacking. I can't even describe how satisfying it is to hike 15-20 Kms a day, set up camp when you arrive, wake up and do it again! ",
-    },
-    {
-      question: "Why the outdoors?",
-      answer:
-        "Don't get me wrong, there are a lot of times where I need to just stay at home and do absolutely nothing! However, the outdoors always seem to have a way of keeping my energy levels high.",
-    },
-    {
-      question: "What's your biggest accomplishment?",
-      answer:
-        "In 2020, I was able to hike Mount Hermon Lebanon's second highest peak! 20 km back and forth with an altitude of 2,814 m.",
-    },
-  ];
+  const tAbout = useTranslations("About");
+  const tCommon = useTranslations("Common");
+
+  const accordionItems: AccordionItem[] = tAbout.raw("accordionItems") as AccordionItem[];
 
   return (
     <div className="about-page px-c-25 lg:px-[60px]">
       <section className="mt-28 mb-c-90">
         <div className="container max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 items-center">
           <AboutBrief />
-          <AboutImage featuredMedia={aboutPage?.featuredMedia} />
+          <AboutImage featuredMedia={aboutPage?.featuredMedia} quote={tAbout("aboutBriefQuote")} />
         </div>
       </section>
 
       <section className="container max-w-[1280px] mx-auto mb-6">
         <h1 className="font-ps text-[42px] font-semibold">
-          Hey there! I&apos;m Elie
+          {tAbout("helloTitle")}
         </h1>
       </section>
       {/* New Content Section */}
@@ -83,7 +71,7 @@ const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
                   width={100}
                 />
                 <h3 className="font-bold font-ps text-[22px]">
-                  Get to know me a bit more
+                  {tAbout("accordionTitle")}
                 </h3>
               </div>
 
@@ -94,7 +82,7 @@ const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
               <div className="text-center bg-background-green-accent mb-4">
                 <div className="py-2 px-6">
                   <h3 className="featured-adventure-title">
-                    My Latest Adventures
+                    {tCommon("featuredAdventuresTitle")}
                   </h3>
                 </div>
               </div>

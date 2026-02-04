@@ -4,7 +4,7 @@ import Contact from "@/components/Pages/Contact";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pages = await fetchAllPages();
+  const pages = await fetchAllPages({});
 
   const page = pages.Result?.find((page) => page.slug === "contact");
 

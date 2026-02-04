@@ -1,11 +1,15 @@
 import { SearchResultType } from "@/types/search-result-type";
 import { escapeHtml, highlightTerm } from "@/utils/data/helpers";
+import { useTranslations } from "next-intl";
 
 const SearchResult: React.FC<{
   result: SearchResultType;
   highlight: string;
 }> = ({ result, highlight }) => {
-  const label = result._type === "category" ? "Category" : "Post";
+
+  const tUI = useTranslations("UI");
+
+  const label = result._type === "category" ? tUI("searchResultCategoryHeader") : tUI("searchResultPostHeader");
 
   const titleHtml = highlight
     ? highlightTerm(result.title || result.name, highlight)

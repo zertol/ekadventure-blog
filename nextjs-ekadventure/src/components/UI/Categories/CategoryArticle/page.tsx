@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { ComponentProps } from "react";
 import {Link} from "@/i18n/navigation";
 
 interface CategoryArticleProps {
@@ -14,13 +14,15 @@ const CategoryArticle: React.FC<CategoryArticleProps> = ({
   slug,
   featuredMedia,
 }) => {
+  type LinkProps = ComponentProps<typeof Link>;
+  
   return (
-    <Link href={`/category/${slug}`}>
+    <Link href={`/category/${slug}` as LinkProps["href"]}>
       <article className="relative h-[450px] overflow-hidden group cursor-pointer shadow-md rounded-md">
         {/* Background Image with Zoom Effect */}
         <div className="absolute inset-0 w-full h-full transition-transform duration-700  ease-in-out group-hover:scale-110">
           <img
-            src={featuredMedia?.url || "/images/adventure-header.jpg"}
+            src={featuredMedia?.url || "/images/adventure-header.jpg"}
             alt={featuredMedia?.alt || title}
             className="object-cover h-full w-full"
           />

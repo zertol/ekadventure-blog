@@ -1,6 +1,6 @@
 "use-client";
 
-import React from "react";
+import React, { ComponentProps } from "react";
 import {Link} from "@/i18n/navigation";
 
 const formatDate = (date: string) => {
@@ -12,9 +12,10 @@ const formatDate = (date: string) => {
 };
 
 const YouTubeVideo: React.FC<ItemSnippet> = (ytPlaylistItem) => {
+  type LinkProps = ComponentProps<typeof Link>;
   return (
     <article className="relative group rounded-lg hover:cursor-pointer transition-shadow duration-300 flex flex-col flex-1">
-      <Link href={`/videos/${ytPlaylistItem.resourceId.videoId}`}>
+      <Link href={`/videos/${ytPlaylistItem.resourceId.videoId}` as LinkProps["href"]}>
         <div className="absolute -inset-3 rounded-lg bg-background-green-accent/20 opacity-40 transition-opacity duration-300 group-hover:opacity-100 -z-10" />
 
         <div className="relative aspect-video w-full">

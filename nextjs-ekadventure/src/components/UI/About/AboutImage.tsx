@@ -5,9 +5,10 @@ import AboutQuote from "./AboutQuote";
 
 interface AboutImageProps {
   featuredMedia?: ImageType;
+  quote: string;
 }
 
-const AboutImage: React.FC<AboutImageProps> = ({featuredMedia}) => {
+const AboutImage: React.FC<AboutImageProps> = ({featuredMedia, quote}) => {
   return (
     <div className="w-full lg:w-3/5 relative h-[400px]">
       <img
@@ -16,7 +17,7 @@ const AboutImage: React.FC<AboutImageProps> = ({featuredMedia}) => {
         className="object-cover rounded-lg w-full h-full"
       />
       <div className=" w-[80%] lg:w-[350px] absolute bottom-0 left-auto right-[50%] lg:right-0 lg:left-0 translate-x-[50%] translate-y-[50%] lg:translate-x-[-25%] lg:translate-y-[50%]">
-        <AboutQuote />
+        <AboutQuote quote={quote} />
       </div>
     </div>
   );

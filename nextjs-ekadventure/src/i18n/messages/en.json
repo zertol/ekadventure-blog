@@ -1,4 +1,27 @@
 {
+    "About": {
+        "aboutBriefFirstDescription": "ADVENTUROUS",
+        "aboutBriefQuote": "If you want to see more to life, head outside and look for it",
+        "aboutBriefSecondDescription": "ENERGETIC",
+        "aboutBriefThirdDescription": "AMBITIOUS",
+        "aboutBriefTitle": "A little bit about me",
+        "accordionItems": [
+            {
+                "answer": "My favorite outdoor activity is backpacking. I can't even describe how satisfying it is to hike 15-20 Kms a day, set up camp when you arrive, wake up and do it again! ",
+                "question": "What is your favorite adventure activity?"
+            },
+            {
+                "answer": "Don't get me wrong, there are a lot of times where I need to just stay at home and do absolutely nothing! However, the outdoors always seem to have a way of keeping my energy levels high.",
+                "question": "Why the outdoors?"
+            },
+            {
+                "answer": "In 2020, I was able to hike Mount Hermon Lebanon's second highest peak! 20 km back and forth with an altitude of 2,814 m.",
+                "question": "What's your biggest accomplishment?"
+            }
+        ],
+        "accordionTitle": "Get to know me a bit more",
+        "helloTitle": "Hey there! I'm Elie"
+    },
     "Ads": {
         "sponsoredContentWrapperTitle": "Sponsored Content By"
     },
@@ -11,10 +34,43 @@
         "whereToEatTitle": "Where to Eat",
         "whereToStayTitle": "Where to Stay"
     },
+    "Blog": {
+        "blogHeaderCaptionFirstPart": "Where Adventures Belong",
+        "blogHeaderCaptionSecondPart": "Welcome"
+    },
+    "Categories": {
+        "categoriesHeaderCaptionFirstPart": "Where Every Day Is An",
+        "categoriesHeaderCaptionSecondPart": "Adventure",
+        "filterAllPosts": "All Posts"
+    },
+    "Comments": {
+        "nbComments": "{0} Comments",
+        "noComments": "No Comments"
+    },
     "Common": {
         "featuredAdventuresTitle": "Featured Adventures",
         "featuredTopicsTitle": "Featured Topics",
-        "featuredVideosTitle": "Featured Videos"
+        "featuredVideosTitle": "Featured Videos",
+        "requiredFieldMessage": "{0} is required"
+    },
+    "Contact": {
+        "contactDescriptionFirstPart": "Whether it's for working together or just simply sharing your adventure, I will be so thrilled to read all about it!",
+        "contactDescriptionSecondPart": "As I mostly will be adventuring and it might take a while, rest assured that I will take the time to reply to every email personally!",
+        "contactTitle": "Can't wait to hear from you!",
+        "emailLabel": "email",
+        "emailPlaceholder": "Your Email",
+        "messageLabel": "message",
+        "messagePlaceholder": "Your Message",
+        "nameLabel": "name",
+        "namePlaceholder": "Your Name",
+        "requestFailedMessage": "Failed to send message. Please try again later.",
+        "requestSuccessMessage": "Thank you for your message! We'll get back to you soon.",
+        "subjectLabel": "subject",
+        "subjectPlaceholder": "Subject",
+        "submitButtonText": "Submit"
+    },
+    "Footer": {
+        "privacyPolicyLinkText": "Privacy Policy"
     },
     "Home": {
         "buildABlogLikeThisTitle": "Want to build a Blog like this?",
@@ -24,12 +80,50 @@
         "homeHeaderCaptionSecondPart": "Adventure",
         "shareYourExperienceButtonText": "Start sharing your experience"
     },
+    "Layout": {
+        "metadataDescription": "Explore outdoor adventures through travel guides, hikes, and articles on Ekadventure Blog."
+    },
+    "Newsletter": {
+        "emailLabel": "email",
+        "emailPlaceholder": "example@mail.com",
+        "errorMessage": "Oops! Something went wrong. Please try again later.",
+        "newsletterDescription": "Stay up to date with my latest experiences and exclusive adventures I wanna share.",
+        "newsletterTitle": "Never miss an adventure!",
+        "subscribeButtonText": "Subscribe",
+        "subscribeSuccessMessage": "Thank you! If you haven't subscribed yet, you'll receive a confirmation email shortly.",
+        "unsubscribeButtonText": "Unsubscribe",
+        "unsubscribeNotReadyMessage": "Not ready to unsubscribe? We'd love for you to stay! Check out some of our latest adventures and tips to keep your outdoor spirit alive.",
+        "unsubscribeStillSureMessage": "If you still wish to unsubscribe from our mailing list, enter your email below:",
+        "unsubscribeSuccessMessage": "Your request to unsubscribe has been processed.",
+        "unsubscribeTitle": "We're sorry to see you go!"
+    },
     "UI": {
+        "searchButton": "Search",
+        "searchPlaceholderAdventure": "Search an adventure...",
+        "backToBlog": "Back to Blog",
         "backToHome": "Back to Home",
+        "helpButtonBlog": "Adventures",
+        "helpButtonContact": "Get Help",
+        "helpButtonHome": "Trailhead",
         "loading": "Loading...",
+        "loadingAdventure": "Loading your adventure...",
         "loadMore": "Load More",
         "readMore": "Read More",
         "searchPlaceholder": "Search...",
+        "searchResultCategoryHeader": "Category",
+        "searchResultNoResultsFound": "No results found!",
+        "searchResultPostHeader": "Post",
+        "selectLanguage": "Select a language",
         "viewAll": "View All"
+    },
+    "Videos": {
+        "videosHeaderCaptionFirstPart": "Where Adventures Come Alive",
+        "videosHeaderCaptionSecondPart": "Welcome"
+    },
+    "NotFound": {
+        "notFoundTitle": "Oops! Seems like you got lost in the wilderness.",
+        "notFoundHelpText": "Even the best explorers lose their way sometimes. Don't worry, we'll help you find your way back to the Experience.",
+        "notFoundStillCantFind": "Still can't find your trail?",
+        "notFoundTrySearching": "Try searching below for your next adventure."
     }
 }

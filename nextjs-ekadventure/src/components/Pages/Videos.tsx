@@ -5,6 +5,7 @@ import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import HorizontalAd from "../Ads/HorizontalAd";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
+import { useTranslations } from "next-intl";
 
 interface VideosProps {
   ytPlaylist: YouTubePlaylistType;
@@ -13,6 +14,8 @@ interface VideosProps {
 const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
   const adRef = useRef<HTMLModElement>(null!);
 
+  const tVideos = useTranslations("Videos");
+
   return (
     <div>
       <HeaderImage
@@ -20,9 +23,9 @@ const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
         text={
           <div>
             <h2 className="font-bold italic">
-              Where Adventures Come Alive
+              {tVideos("videosHeaderCaptionFirstPart")}
               <br />
-              <span className="font-ps text-[28px]">Welcome!</span>
+              <span className="font-ps text-[28px]">{tVideos("videosHeaderCaptionSecondPart")}</span>
             </h2>
           </div>
         }

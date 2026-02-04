@@ -1,4 +1,27 @@
 {
+    "About": {
+        "aboutBriefFirstDescription": "AVENTUREUX",
+        "aboutBriefQuote": "Si vous voulez voir plus de la vie, sortez et cherchez-la",
+        "aboutBriefSecondDescription": "ÉNERGÉTIQUE",
+        "aboutBriefThirdDescription": "AMBITIEUX",
+        "aboutBriefTitle": "Un peu à propos de moi",
+        "accordionItems": [
+            {
+                "answer": "Mon activité préférée en plein air est le backpacking. Je ne peux même pas décrire combien c'est satisfaisant de faire 15-20 km par jour, monter un campement à votre arrivée, vous réveiller et recommencer! ",
+                "question": "Quelle est votre activité d'aventure préférée?"
+            },
+            {
+                "answer": "Ne me mal interprétez pas, il y a beaucoup de fois où j'ai besoin de rester chez moi et de ne rien faire ! Cependant, l'extérieur semble toujours avoir un moyen de maintenir mes niveaux d'énergie élevés.",
+                "question": "Pourquoi l'extérieur?"
+            },
+            {
+                "answer": "En 2020, j'ai pu faire l'ascension du deuxième sommet le plus haut du Mont Hermon au Liban ! 20 km en allant et en retournant avec une altitude de 2,814 m.",
+                "question": "Quel est votre plus grand accomplissement?"
+            }
+        ],
+        "accordionTitle": "Apprenez à me connaître un peu plus",
+        "helloTitle": "Salut! Je suis Elie"
+    },
     "Ads": {
         "sponsoredContentWrapperTitle": "Contenu Sponsorisé Par"
     },
@@ -11,10 +34,43 @@
         "whereToEatTitle": "Où Manger",
         "whereToStayTitle": "Où Séjourner"
     },
+    "Blog": {
+        "blogHeaderCaptionFirstPart": "Où les Aventures Appartiennent",
+        "blogHeaderCaptionSecondPart": "Bienvenue"
+    },
+    "Categories": {
+        "categoriesHeaderCaptionFirstPart": "Où Chaque Jour est Une",
+        "categoriesHeaderCaptionSecondPart": "Aventure",
+        "filterAllPosts": "Tous les Articles"
+    },
+    "Comments": {
+        "nbComments": "{0} Commentaires",
+        "noComments": "Pas de Commentaires"
+    },
     "Common": {
         "featuredAdventuresTitle": "Aventures en Vedette",
         "featuredTopicsTitle": "Sujets en Vedette",
-        "featuredVideosTitle": "Vidéos en Vedette"
+        "featuredVideosTitle": "Vidéos en Vedette",
+        "requiredFieldMessage": "{0} est requis"
+    },
+    "Contact": {
+        "contactDescriptionFirstPart": "Que ce soit pour travailler ensemble ou simplement partager votre aventure, je serai ravi de tout lire!",
+        "contactDescriptionSecondPart": "Comme je serai principalement en train d'aventurer et que cela peut prendre un certain temps, soyez assuré(e) que je prendrai le temps de répondre à chaque courriel personnellement!",
+        "contactTitle": "J'ai hâte d'avoir de vos nouvelles!",
+        "emailLabel": "courriel",
+        "emailPlaceholder": "Votre Adresse Courriel",
+        "messageLabel": "message",
+        "messagePlaceholder": "Votre Message",
+        "nameLabel": "nom",
+        "namePlaceholder": "Votre Nom",
+        "requestFailedMessage": "Échec de l'envoi du message. Veuillez réessayer plus tard.",
+        "requestSuccessMessage": "Merci pour votre message! Nous vous répondrons très bientôt.",
+        "subjectLabel": "sujet",
+        "subjectPlaceholder": "Sujet",
+        "submitButtonText": "Envoyer"
+    },
+    "Footer": {
+        "privacyPolicyLinkText": "Politique de Confidentialité"
     },
     "Home": {
         "buildABlogLikeThisTitle": "Souhaitez-vous créer un blog comme celui-ci?",
@@ -24,12 +80,50 @@
         "homeHeaderCaptionSecondPart": "Aventure",
         "shareYourExperienceButtonText": "Commencez à partager votre expérience"
     },
+    "Layout": {
+        "metadataDescription": "Explorez des aventures en plein air à travers des guides de voyage, des randonnées et des articles sur le blog Ekadventure."
+    },
+    "Newsletter": {
+        "emailLabel": "courriel",
+        "emailPlaceholder": "exemple@mail.com",
+        "errorMessage": "Oops! Quelque chose a mal tourné. Veuillez réessayer plus tard.",
+        "newsletterDescription": "Restez informé(e) de mes dernières expériences et aventures exclusives que je souhaite partager.",
+        "newsletterTitle": "Ne manquez jamais une aventure !",
+        "subscribeButtonText": "S'abonner",
+        "subscribeSuccessMessage": "Merci! Si vous ne vous êtes pas encore abonné(e), vous recevrez un email de confirmation sous peu.",
+        "unsubscribeButtonText": "Se désabonner",
+        "unsubscribeNotReadyMessage": "Pas encore prêt(e) à vous désabonner? Nous aimerions que vous restiez ! Découvrez quelques-unes de nos dernières aventures et conseils pour garder votre esprit aventureux vivant.",
+        "unsubscribeStillSureMessage": "Si vous souhaitez toujours vous désabonner de notre liste de diffusion, entrez votre email ci-dessous ",
+        "unsubscribeSuccessMessage": "Votre demande de désabonnement a bien été prise en charge.",
+        "unsubscribeTitle": "Nous sommes désolés de vous voir partir!"
+    },
     "UI": {
+        "searchButton": "Recherchez",
+        "searchPlaceholderAdventure": "Recherchez une aventure...",
+        "backToBlog": "Retour au Blog",
         "backToHome": "Retour à l'Accueil",
+        "helpButtonBlog": "Aventures",
+        "helpButtonContact": "Obtenez de l'aide",
+        "helpButtonHome": "Début du sentier",
         "loading": "Chargement...",
+        "loadingAdventure": "Chargement de votre aventure...",
         "loadMore": "Charger Plus",
         "readMore": "Lire Plus",
         "searchPlaceholder": "Rechercher...",
+        "searchResultCategoryHeader": "Catégorie",
+        "searchResultNoResultsFound": "Aucun résultat trouvé!",
+        "searchResultPostHeader": "Article",
+        "selectLanguage": "Sélectionnez une langue",
         "viewAll": "Voir Tout"
+    },
+    "Videos": {
+        "videosHeaderCaptionFirstPart": "Où les Aventures Vivent",
+        "videosHeaderCaptionSecondPart": "Bienvenue"
+    },
+    "NotFound": {
+        "notFoundTitle": "Oups ! On dirait que vous vous êtes perdu(e) en pleine nature.",
+        "notFoundHelpText": "Même les meilleurs explorateurs se perdent parfois. Ne vous inquiétez pas, nous allons vous aider à retrouver le chemin vers l'Expérience.",
+        "notFoundStillCantFind": "Vous ne trouvez toujours pas votre sentier?",
+        "notFoundTrySearching": "Essayez de chercher ci-dessous, votre prochaine aventure."
     }
 }

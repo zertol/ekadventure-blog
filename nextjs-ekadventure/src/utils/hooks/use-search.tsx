@@ -2,12 +2,15 @@ import { search } from "@/api/controllers/search";
 import { useEffect, useRef, useState } from "react";
 import { sanitizeSearchTerm } from "../data/helpers";
 import { SearchResultType } from "@/types/search-result-type";
+import { useLocale } from "next-intl";
 
-export const useSearch = () => {
+export const useSearch = (outsideLocale?: boolean) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const locale = outsideLocale ? "en" : useLocale();
 
   const controllerRef = useRef<AbortController | null>(null);
 
@@ -26,7 +29,7 @@ export const useSearch = () => {
       controllerRef.current = new AbortController();
       try {
         const sanitizedQuery = sanitizeSearchTerm(query);
-        const data = await search({ query: sanitizedQuery });
+        const data = await search({ query: sanitizedQuery, locale });
         setResults(data.Result || []);
       } catch (e: any) {
         if (e.name !== "AbortError") setError(e.message || "Search error");

@@ -1,8 +1,10 @@
 import { useSearch } from "@/utils/hooks/use-search";
 import { SearchResuls } from "../SearchResults/page";
+import { useTranslations } from "next-intl";
 
 const SearchBox: React.FC = () => {
   const { query, setQuery, results, loading } = useSearch();
+  const tUI = useTranslations("UI");
 
   return (
     <>
@@ -12,7 +14,7 @@ const SearchBox: React.FC = () => {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search..."
+          placeholder={tUI("searchPlaceholder")}
           className="bg-transparent border-b border-white text-white placeholder-white/70 px-2 py-1 focus:outline-none w-[200px]"
         />
         <button className="absolute right-2 top-1/2 transform -translate-y-1/2">

@@ -21,7 +21,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
 }) => {
   return isLinkOnly ? (
     <Link
-      href={`/${slug}`}
+      href={`/${slug}` as any}
       className="inline-flex items-center font-bold text-background-blue-accent underline hover:text-background-green-accent"
     >
       {title}
@@ -40,7 +40,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
         ></div>
 
         <div className="flex-start-col text-wrap mb-2 w-[65%]">
-          <Link href={`/${slug}`}>
+          <Link href={`/${slug}` as any}>
             <h4 className="text-[16px] font-bold mb-1 hover:text-gray-500 transition-colors">
               {title}
             </h4>
@@ -68,7 +68,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
       <div className="p-1">
         <div className="flex justify-end">
           <Link
-            href={`/${slug}`}
+            href={`/${slug}` as any}
             className="inline-flex items-center font-semibold text-background-blue-accent underline hover:text-background-green-accent"
           >
             Read More

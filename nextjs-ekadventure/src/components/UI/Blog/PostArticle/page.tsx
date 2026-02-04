@@ -4,6 +4,7 @@ import React from "react";
 import {Link} from "@/i18n/navigation";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
 import { PortableText } from "next-sanity";
+import { useTranslations } from "next-intl";
 
 const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-US", {
@@ -22,11 +23,15 @@ const PostArticle: React.FC<PostType> = ({
   excerpt,
   totalComments
 }) => {
+
+  const tUI = useTranslations("UI");
+  const tComments = useTranslations("Comments");
+
   return (
     <article className="bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
       {/* Image Container */}
       <div className="relative aspect-video w-full overflow-hidden">
-        <Link href={`/${slug}`}>
+        <Link href={`/${slug}` as any}>
           <img
             src={featuredMedia?.url}
             alt={featuredMedia?.alt || "Post Featured Image"}
@@ -47,7 +52,7 @@ const PostArticle: React.FC<PostType> = ({
               /
             </span>
             <span className="text-[12px] text-gray-500 whitespace-nowrap">
-              {totalComments == 0 ? "No Comments" : totalComments + " Comments" }
+              {totalComments == 0 ? tComments("noComments") : tComments("nbComments", {0: totalComments}) }
             </span>
           </div>
           <div className="gap-2">
@@ -70,10 +75,10 @@ const PostArticle: React.FC<PostType> = ({
 
         <div className="mt-auto pt-4 justify-end flex">
           <Link
-            href={`/${slug}`}
+            href={`/${slug}` as any}
             className="inline-flex items-center font-semibold text-background-blue-accent hover:underline hover:text-background-green-accent"
           >
-            Read More
+            {tUI("readMore")}
           </Link>
         </div>
       </div>

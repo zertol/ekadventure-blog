@@ -1,13 +1,19 @@
 import React from "react";
 import SearchResult from "./SearchResult";
 import { SearchResultType } from "@/types/search-result-type";
+import { useTranslations } from "next-intl";
 
 export const SearchResuls: React.FC<{
   results: SearchResultType[];
   loading: boolean;
   query: string;
   isInContainer?: boolean;
-}> = ({ results, loading, query, isInContainer }) => {
+  outsideLocale?: boolean;
+}> = ({ results, loading, query, isInContainer, outsideLocale }) => {
+  const noResults = outsideLocale
+    ? "No results found!"
+    : useTranslations("UI")("searchResultNoResultsFound");
+
   return (
     <div
       className={`${!isInContainer ? "absolute" : ""} mt-1 left-auto top-full
@@ -22,7 +28,7 @@ export const SearchResuls: React.FC<{
 
       {!loading && results.length === 0 && (
         <div className="p-3">
-          <p className="text-white">No results found!</p>
+          <p className="text-white">{noResults}</p>
         </div>
       )}
 

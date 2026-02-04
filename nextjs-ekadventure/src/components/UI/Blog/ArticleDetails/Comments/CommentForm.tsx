@@ -55,6 +55,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
             required={true}
             error={errors.comment?.message}
             className="comment-form-input webkit-autofill-override"
+            registrationName="comment"
           />
           <FormInput
             label="name"
@@ -64,6 +65,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
             required={true}
             error={errors.name?.message}
             className="comment-form-input webkit-autofill-override"
+            registrationName="name"
           />
           <FormInput
             label="email"
@@ -73,6 +75,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
             required={true}
             error={errors.email?.message}
             className="comment-form-input webkit-autofill-override"
+            registrationName="email"
           />
 
           {/* Submit Button */}
