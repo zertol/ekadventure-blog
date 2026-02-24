@@ -5,8 +5,7 @@ import {
   getAllYouTubeVideos,
   getYouTubeVideoById,
 } from "@/api/controllers/youtube";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { formatStringToHtml } from "@/utils/data/helpers";
 
 export async function generateMetadata({
@@ -79,9 +78,6 @@ export default async function VideoPage({
 
   const video = videoResult.Result;
 
-  const window = new JSDOM("").window;
-  const purify = DOMPurify(window);
-
   return (
     <App currentPage="video">
       {video && (
@@ -107,7 +103,7 @@ export default async function VideoPage({
 
           <div
             dangerouslySetInnerHTML={{
-              __html: purify.sanitize(
+              __html: DOMPurify.sanitize(
                 formatStringToHtml(video.items[0].snippet.description)
               ),
             }}
