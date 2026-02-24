@@ -6,5 +6,5 @@ export default createMiddleware(routing);
 
 export const config = {
     // Match all paths except, _next, and files with extensions (dots)
-    matcher: ['/', '/(en|fr)/:path*', '/((?!_vercel|.*\\..*).*)']
+    matcher: ['/', '/(en|fr)/:path*', '/((?!_next|_vercel|.*\\..*).*)']
 };

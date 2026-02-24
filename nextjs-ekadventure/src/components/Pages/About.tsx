@@ -50,7 +50,6 @@ const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
       {/* New Content Section */}
       <section className="container max-w-[1280px] mx-auto mb-c-90">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column - Sanity Content */}
           <div className="about-content max-w-none leading-relaxed pl-2">
             <PortableText
               value={about?.content || []}

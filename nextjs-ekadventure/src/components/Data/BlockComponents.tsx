@@ -1,6 +1,6 @@
-import { PortableTextComponentProps } from "next-sanity";
+import { PortableTextComponentProps } from "@portabletext/react";
 import { groupImagePairsOrSingle } from "@/utils/data/helpers";
-import { PortableTextMarkComponentProps } from "next-sanity";
+import { PortableTextMarkComponentProps } from "@portabletext/react";
 import {Link} from "@/i18n/navigation";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";

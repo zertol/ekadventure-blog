@@ -3,7 +3,7 @@
 import React from "react";
 import {Link} from "@/i18n/navigation";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
-import { PortableText } from "next-sanity";
+import { PortableText } from "@portabletext/react";
 import { useLocale, useTranslations } from "next-intl";
 import { formatDate } from "@/utils/data/helpers";
 
