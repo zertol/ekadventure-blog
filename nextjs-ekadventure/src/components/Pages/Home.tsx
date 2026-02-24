@@ -21,13 +21,6 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
   const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
   const adRef = useRef<HTMLModElement>(null!);
 
-  useEffect(() => {
-    const ad = adRef.current;
-    if (!ad || ad.offsetHeight == 0) return;
-
-    setAdVisible({ isVisible: true, height: ad.offsetHeight });
-  }, [adRef.current?.offsetHeight]);
-
   const tHome = useTranslations('Home');
   const tUI = useTranslations('UI');
   const tCommon = useTranslations('Common');
@@ -54,13 +47,14 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
           <ClientAdWrapper
             headerText="Google"
             isCollapsible={false}
+            className="pb-c-60"
           >
             <HorizontalAd adSlot="9510559826" ref={adRef} />
           </ClientAdWrapper>
         </div>
       </div>
 
-      <section className={`mb-c-90 ${adVisible.isVisible ? "mt-c-60" : ""}`}>
+      <section className={`mb-c-90`}>
         <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
           <div className="mb-6 flex-center-col relative">
             <h2 className="font-bold text-center mb-4 uppercase">

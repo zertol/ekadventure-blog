@@ -2,17 +2,13 @@
 
 import React, { ComponentProps } from "react";
 import {Link} from "@/i18n/navigation";
-
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
+import { useLocale } from "next-intl";
+import { formatDate } from "@/utils/data/helpers";
 
 const YouTubeVideo: React.FC<ItemSnippet> = (ytPlaylistItem) => {
+  const locale = useLocale();
   type LinkProps = ComponentProps<typeof Link>;
+
   return (
     <article className="relative group rounded-lg hover:cursor-pointer transition-shadow duration-300 flex flex-col flex-1">
       <Link href={`/videos/${ytPlaylistItem.resourceId.videoId}` as LinkProps["href"]}>
@@ -42,8 +38,8 @@ const YouTubeVideo: React.FC<ItemSnippet> = (ytPlaylistItem) => {
 
           <div className="flex flex-wrap items-center justify-between gap-2 mb-0">
             <div className="flex-1 flex flex-row flex-wrap">
-              <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
-                {formatDate(ytPlaylistItem.publishedAt)}
+              <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap capitalize">
+                {formatDate(ytPlaylistItem.publishedAt, locale)}
               </span>
             </div>
           </div>

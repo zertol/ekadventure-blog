@@ -99,3 +99,11 @@ export const formatStringToHtml = (text: string) => {
 
     return formattedText;
 }
+
+export const formatDate = (date: string, locale: string) => {
+    return new Date(date).toLocaleDateString(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+};

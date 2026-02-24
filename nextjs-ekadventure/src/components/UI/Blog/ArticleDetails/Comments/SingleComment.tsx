@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import CommentForm from "./CommentForm";
 import { useComments } from "@/store/CommentsContext";
 import SubmitStatus from "@/components/UI/Common/Form/SubmitStatus/page";
+import { formatDate } from "@/utils/data/helpers";
+import { useLocale } from "next-intl";
+import { useTranslations } from "use-intl";
 
 interface SingleCommentProps {
   comment: CommentType;
@@ -10,6 +13,8 @@ interface SingleCommentProps {
 const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const { submitStatus } = useComments();
+  const locale = useLocale();
+  const tComments = useTranslations("Comments");
 
   useEffect(() => {
     if (
@@ -24,25 +29,26 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
     <div>
       <div className="flex justify-between items-start">
         <div>
-          <h4 className="font-medium">{comment.name} {comment.isAuthor && <span className="text-xs text-gray-500">(Author)</span>}</h4>
+          <h4 className="font-medium">
+            {comment.name}{" "}
+            {comment.isAuthor && (
+              <span className="text-xs text-gray-500">({tComments("authorText")})</span>
+            )}
+          </h4>
           <p className="text-xs text-gray-500">
-            {new Date(comment.createdAt).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit"
-            })}
+            {formatDate(comment.createdAt, locale)}
           </p>
         </div>
       </div>
-      <p className="mt-2 text-gray-700 whitespace-pre-line">{comment.comment}</p>
+      <p className="mt-2 text-gray-700 whitespace-pre-line">
+        {comment.comment}
+      </p>
       <div className="justify-end flex">
         <button
           onClick={() => setShowReplyForm(!showReplyForm)}
           className="inline-flex items-center font-semibold text-background-blue-accent hover:underline hover:text-background-green-accent"
         >
-          {!showReplyForm ? "Reply" : "Cancel"}
+          {!showReplyForm ? tComments("replyButtonText") : tComments("cancelReplyButtonText")}
         </button>
       </div>
 

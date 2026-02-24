@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "@/i18n/navigation";
 import PrimaryButton from "../PrimaryButton/page";
+import { useTranslations } from "next-intl";
  
 interface LatestArticleProps {
   title: string;
@@ -19,6 +20,8 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
   featuredMedia,
   isLinkOnly = false,
 }) => {
+  const tUI = useTranslations("UI");
+
   return isLinkOnly ? (
     <Link
       href={`/${slug}` as any}
@@ -46,7 +49,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
             </h4>
           </Link>
           <div className="flex-1 flex flex-row flex-wrap">
-            <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
+            <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap capitalize">
               {date}
             </span>
           </div>
@@ -71,7 +74,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
             href={`/${slug}` as any}
             className="inline-flex items-center font-semibold text-background-blue-accent underline hover:text-background-green-accent"
           >
-            Read More
+            {tUI("readMore")}
           </Link>
         </div>
       </div>

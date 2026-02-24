@@ -1,4 +1,5 @@
 "use client";
+import { useCookieConsent } from "@/store/CookieConsentContext";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "use-intl";
 
@@ -6,18 +7,18 @@ export function ClientAdWrapper({
   children,
   className,
   headerText,
-  paddingTop,
   isCollapsible = true,
 }: {
   children: React.ReactNode;
   className?: string;
   headerText?: string;
-  paddingTop?: string;
   isCollapsible?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [hasContent, setHasContent] = useState({ isVisible: false, height: 0 });
   const [opened, setOpened] = useState(true);
+
+  const consentData = useCookieConsent();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -26,7 +27,7 @@ export function ClientAdWrapper({
     setHasContent((prev) => {
       return { isVisible: true, height: container.offsetHeight };
     });
-  }, [containerRef.current]);
+  }, [containerRef.current?.offsetHeight, consentData.isFirstVisit]);
 
   const calc = (): string => {
     if (hasContent.isVisible) {
@@ -35,20 +36,23 @@ export function ClientAdWrapper({
     return "initial";
   };
 
-  const t = useTranslations('Ads');
+  const t = useTranslations("Ads");
 
   return (
-    <>
-      {paddingTop && hasContent.isVisible && <div className={paddingTop}></div>}
+    <div
+      className={`${consentData.isFirstVisit ? "hidden" : " "} ${hasContent.isVisible && className}`}
+    >
       <div
         className={`${hasContent.isVisible ? "rounded-md border border-neutral-400 bg-background-blue-accent/40" : ""}
-       ${hasContent.isVisible && className}`}
+       `}
       >
         {hasContent.isVisible && (
           <div className={`w-full p-2`}>
             {!isCollapsible && (
               <div>
-                <p className="font-semibold">{t("sponsoredContentWrapperTitle")} {headerText}</p>
+                <p className="font-semibold">
+                  {t("sponsoredContentWrapperTitle")} {headerText}
+                </p>
               </div>
             )}
             {isCollapsible && (
@@ -96,6 +100,6 @@ export function ClientAdWrapper({
           {children}
         </div>
       </div>
-    </>
+    </div>
   );
 }

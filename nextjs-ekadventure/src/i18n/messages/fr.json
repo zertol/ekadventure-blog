@@ -28,7 +28,9 @@
     "Article": {
         "articleDetailedVideoTitle": "Vidéo détaillée de l'Aventure",
         "capturedMomentsTitle": "Moments Capturés",
+        "creditsShotTakenByText": "Photo prise par",
         "hikingPassTitle": "Passe de Randonnée",
+        "lastUpdatedText": "Dernière Mise à Jour:",
         "otherAttractionsTitle": "Autres attractions à proximité",
         "otherHikesTitle": "Autres randonnées à proximité",
         "whereToEatTitle": "Où Manger",
@@ -44,8 +46,22 @@
         "filterAllPosts": "Tous les Articles"
     },
     "Comments": {
+        "authorText": "Auteur",
+        "cancelReplyButtonText": "Annuler",
+        "commentLabel": "commentaire",
+        "commentPlaceholder": "Commentaire*",
+        "emailLabel": "courriel",
+        "emailPlaceholder": "Courriel*",
+        "leaveACommentTitle": "Laissez un Commentaire",
+        "nameLabel": "nom",
+        "namePlaceholder": "Nom*",
         "nbComments": "{0} Commentaires",
-        "noComments": "Pas de Commentaires"
+        "noComments": "Pas de Commentaires",
+        "oneComment": "1 Commentaire",
+        "replyButtonText": "Répondre",
+        "requestFailedMessage": "Échec de la soumission du commentaire. Veuillez réessayer plus tard.",
+        "requestSuccessMessage": "Merci pour votre commentaire! Il apparaîtra une fois approuvé.",
+        "submitButtonText": "Soumettre"
     },
     "Common": {
         "featuredAdventuresTitle": "Aventures en Vedette",
@@ -69,12 +85,31 @@
         "subjectPlaceholder": "Sujet",
         "submitButtonText": "Envoyer"
     },
+    "CookieConsent": {
+        "acceptAllButtonText": "Accepter Tout",
+        "analyticsDescription": "Aident l'opérateur du site web à comprendre comment son site web fonctionne, comment les visiteurs interagissent avec le site et s'il peut y avoir des problèmes techniques.",
+        "analyticsLabel": "Analytiques",
+        "cookieConsentDescription": "Ce site web utilise des technologies telles que les cookies pour permettre des fonctionnalités essentielles, ainsi que pour l'analyse, la personnalisation et la publicité ciblée. Vous pouvez modifier vos paramètres à tout moment ou accepter les paramètres par défaut. Vous pouvez fermer cette bannière pour continuer avec uniquement les cookies essentiels.",
+        "cookieConsentLinkText": "Politique de Confidentialité",
+        "disclosuresText": "Voir les divulgations",
+        "essentialDescription": "Ces cookies sont requis pour les fonctionnalités de base telles que la sécurité et la mémorisation de vos paramètres de confidentialité. Cette catégorie comprend également la publicité contextuelle, qui nous permet de garder notre contenu gratuit. Ces publicités sont basées uniquement sur la page que vous consultez actuellement et ne suivent pas votre activité sur d'autres sites web.",
+        "essentialLabel": "Essentiel",
+        "personalizationDescription": "Permet au site web de se souvenir des choix que vous faites (comme votre nom d'utilisateur, langue ou la région dans laquelle vous vous trouvez) et de fournir des fonctionnalités améliorées et plus personnelles. Par exemple, un site web peut vous fournir des rapports météorologiques locaux ou des nouvelles de trafic en stockant des données sur votre emplacement général.",
+        "personalizationLabel": "Personnalisation",
+        "rejectNonEssentialButtonText": "Rejeter Non-Essentiel",
+        "saveButtonText": "Sauvegarder",
+        "storagePreferencesButtonText": "Préférences de Stockage",
+        "storagePreferencesTitle": "Préférences de Stockage",
+        "targetedAdvertisingDescription": "Utilisés pour fournir une publicité plus pertinente pour vous et vos intérêts. Peut également être utilisé pour limiter le nombre de fois que vous voyez une publicité et mesurer l'efficacité des campagnes publicitaires. Les réseaux publicitaires les placent généralement avec la permission de l'opérateur du site web.",
+        "targetedAdvertisingLabel": "Publicité Ciblée"
+    },
     "Footer": {
+        "manageCookiesLinkText": "Gérer les Cookies",
         "privacyPolicyLinkText": "Politique de Confidentialité"
     },
     "Home": {
         "buildABlogLikeThisTitle": "Souhaitez-vous créer un blog comme celui-ci?",
-        "heroTextContent": "Salut ! Je m&apos;appelle Elie, et bienvenue dans mon univers rempli d&apos;aventure et de choses à découvrir. Je l&apos;ai créé dans l&apos;espoir de partager avec vous le monde à travers mes yeux et que nous partions ensemble dans chaque aventure, pour vivre pleinement et raconter une histoire du monde. <br /> Prêt(e) pour ta prochaine aventure? C&apos;est parti!",
+        "heroTextContent": "Salut ! Je m'appelle Elie, et bienvenue dans mon univers rempli d'aventure et de choses à découvrir. Je l'ai créé dans l'espoir de partager avec vous le monde à travers mes yeux et que nous partions ensemble dans chaque aventure, pour vivre pleinement et raconter une histoire du monde. <br></br> Prêt(e) pour ta prochaine aventure? C'est parti!",
         "heroTextTitle": "Un petit mot à propos de ce territoire",
         "homeHeaderCaptionFirstPart": "Où Chaque Jour est Une",
         "homeHeaderCaptionSecondPart": "Aventure",
@@ -97,9 +132,22 @@
         "unsubscribeSuccessMessage": "Votre demande de désabonnement a bien été prise en charge.",
         "unsubscribeTitle": "Nous sommes désolés de vous voir partir!"
     },
+    "NotFound": {
+        "notFoundHelpText": "Même les meilleurs explorateurs se perdent parfois. Ne vous inquiétez pas, nous allons vous aider à retrouver le chemin vers l'Expérience.",
+        "notFoundStillCantFind": "Vous ne trouvez toujours pas votre sentier?",
+        "notFoundTitle": "Oups ! On dirait que vous vous êtes perdu(e) en pleine nature.",
+        "notFoundTrySearching": "Essayez de chercher ci-dessous, votre prochaine aventure."
+    },
+    "PrivacyPolicy": {
+        "lastUpdatedText": "Dernière Mise à Jour:",
+        "privacyPolicyTitle": "Politique de Confidentialité"
+    },
+    "Sidebar": {
+        "aboutMeBottomText": "J'ai créé <brand>EKADVENTURE</brand> comme un moyen de poursuivre mes rêves, et d'espérer vous inspirer à travers mes expériences, en partageant ce que j'aime faire le plus.",
+        "aboutMeTitle": "Salut!",
+        "aboutMeTopText": "Je m'appelle Elie, et une grande partie de ce que j'aime en montagne, c'est la paix que j'y trouve, peu importe le type de terrain, ainsi que l'adrénaline de chaque ascension exigeante, des distances parcourues et des difficultés variées."
+    },
     "UI": {
-        "searchButton": "Recherchez",
-        "searchPlaceholderAdventure": "Recherchez une aventure...",
         "backToBlog": "Retour au Blog",
         "backToHome": "Retour à l'Accueil",
         "helpButtonBlog": "Aventures",
@@ -109,21 +157,18 @@
         "loadingAdventure": "Chargement de votre aventure...",
         "loadMore": "Charger Plus",
         "readMore": "Lire Plus",
+        "searchButton": "Recherchez",
         "searchPlaceholder": "Rechercher...",
+        "searchPlaceholderAdventure": "Recherchez une aventure...",
         "searchResultCategoryHeader": "Catégorie",
         "searchResultNoResultsFound": "Aucun résultat trouvé!",
         "searchResultPostHeader": "Article",
         "selectLanguage": "Sélectionnez une langue",
-        "viewAll": "Voir Tout"
+        "viewAll": "Voir Tout",
+        "workWithMe": "Travaillez avec moi"
     },
     "Videos": {
         "videosHeaderCaptionFirstPart": "Où les Aventures Vivent",
         "videosHeaderCaptionSecondPart": "Bienvenue"
-    },
-    "NotFound": {
-        "notFoundTitle": "Oups ! On dirait que vous vous êtes perdu(e) en pleine nature.",
-        "notFoundHelpText": "Même les meilleurs explorateurs se perdent parfois. Ne vous inquiétez pas, nous allons vous aider à retrouver le chemin vers l'Expérience.",
-        "notFoundStillCantFind": "Vous ne trouvez toujours pas votre sentier?",
-        "notFoundTrySearching": "Essayez de chercher ci-dessous, votre prochaine aventure."
     }
 }

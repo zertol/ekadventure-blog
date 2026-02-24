@@ -13,6 +13,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { CookieConsentProvider } from "@/store/CookieConsentContext";
 
 export async function generateMetadata({
   params,
@@ -106,14 +107,16 @@ export default async function LocaleLayout({
         </Script>
       </head>
       <body>
-        <PagesContextProvider pagesProps={pagesProps}>
-          <Suspense>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              {children}
-            </NextIntlClientProvider>
-          </Suspense>
-        </PagesContextProvider>
-        <AnalyticsTracker />
+        <CookieConsentProvider>
+          <PagesContextProvider pagesProps={pagesProps}>
+            <Suspense>
+              <NextIntlClientProvider locale={locale} messages={messages}>
+                {children}
+              </NextIntlClientProvider>
+            </Suspense>
+          </PagesContextProvider>
+          <AnalyticsTracker />
+        </CookieConsentProvider>
       </body>
     </html>
   );

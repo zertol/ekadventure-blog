@@ -6,6 +6,7 @@ import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
 import VerticalAd from "@/components/Ads/VerticalAd";
 import { ClientAdWrapper } from "@/components/Ads/ClientAdWrapper";
+import { useTranslations } from "next-intl";
 
 interface SideBarProps {
   sideImage: ImageType;
@@ -13,12 +14,16 @@ interface SideBarProps {
 }
 
 const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
+  const tUI = useTranslations("UI");
+  const tSidebar = useTranslations("Sidebar");
+  const tCommon = useTranslations("Common");
+  
   return (
     <aside className="w-full bg-transparent">
       {/* Header Section */}
       <div className="mb-8">
         <h1 className="font-ps text-[32px] text-center font-bold mb-4">
-          Hey there!
+          {tSidebar("aboutMeTitle")}
         </h1>
         <div className="relative w-full mb-4 flex-center-row">
           <img
@@ -28,26 +33,24 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
           />
         </div>
         <p className="text-gray-700 mb-6">
-          I&apos;m Elie, and a big part of what I love about the mountains is
-          the peace I find even in all types of territories, and the adrenaline
-          of every challenging climb, distance and various difficulties.
+          {tSidebar("aboutMeTopText")}
         </p>
         <p className="text-gray-700 mb-6">
-          I created <span className="font-bold">EKADVENTURE</span> as a way to
-          pursue my dreams, and to hopefully inspire you through my experiences,
-          by sharing what I love to do the most.
+          {tSidebar.rich("aboutMeBottomText",{
+            brand: (chunks) => <span className="font-bold">{chunks}</span>
+          })}
         </p>
 
         {/* Navigation Buttons */}
         <div className="flex gap-4 mb-2 justify-center">
           <PrimaryButton
             href="/about"
-            text="Read More"
+            text={tUI("readMore")}
             className="font-ps py-0 font-bold text-[16px]"
           />
           <PrimaryButton
             href="/contact"
-            text="Work with me"
+            text={tUI("workWithMe")}
             className="font-ps py-0 font-bold text-[16px]"
           />
         </div>
@@ -65,7 +68,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         <div className="flex-center-col mb-1">
           <div className="text-center bg-background-green-accent mb-4">
             <div className="py-2 px-6">
-              <h3 className="featured-adventure-title">Featured adventures</h3>
+              <h3 className="featured-adventure-title">{tCommon("featuredAdventuresTitle")}</h3>
             </div>
           </div>
 

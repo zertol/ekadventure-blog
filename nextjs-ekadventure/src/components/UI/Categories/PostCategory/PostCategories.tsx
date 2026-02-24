@@ -13,7 +13,6 @@ const PostCategories: React.FC<PostCategoriesProps> = ({ categories }) => {
         <PostCategory
           key={`${category.slug}-${index}`}
           category={category}
-          className={`${index < categories.length - 1 ? "mr-2" : ""}`}
         />
       ))}
     </>

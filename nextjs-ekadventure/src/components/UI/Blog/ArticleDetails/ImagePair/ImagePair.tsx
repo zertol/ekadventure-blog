@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 
 interface ImagePairProps {
   img: ImageType;
@@ -6,6 +7,7 @@ interface ImagePairProps {
 const ImagePair: React.FC<ImagePairProps> = ({
   img: { url, alt, credit },
 }) => {
+  const tArticle = useTranslations("Article");
   return (
     <div className="w-full">
       <img
@@ -20,7 +22,7 @@ const ImagePair: React.FC<ImagePairProps> = ({
             alt="📷"
             src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4f7.svg"
           />
-          Shot taken by &nbsp;
+          {tArticle("creditsShotTakenByText")} &nbsp;
           <strong>
             <em>{credit}</em>
           </strong>

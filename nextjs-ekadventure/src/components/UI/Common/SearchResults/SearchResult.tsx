@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import { SearchResultType } from "@/types/search-result-type";
 import { escapeHtml, highlightTerm } from "@/utils/data/helpers";
 import { useTranslations } from "next-intl";
@@ -27,7 +28,7 @@ const SearchResult: React.FC<{
     </div>
       <div className="flex items-baseline justify-between">
         
-        <a
+        <Link
           href={result.href || "#"}
           className="font-semibold text-xs text-white underline hover:text-background-green-accent"
           dangerouslySetInnerHTML={{ __html: titleHtml }}

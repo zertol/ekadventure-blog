@@ -7,6 +7,7 @@ import PostCategories from "@/components/UI/Categories/PostCategory/PostCategori
 import { generateBlockComponents } from "@/components/Data/BlockComponents";
 import {
   buildCommentTree,
+  formatDate,
   groupImagesFromBlocks,
 } from "../../../utils/data/helpers";
 import ImageCarousel from "@/components/UI/Carousel/ImageCarousel";
@@ -93,7 +94,7 @@ export default async function PostPage({
     statsTitleParts?.length > 1
   );
 
-  const t = await getTranslations('Article');
+  const tArticle = await getTranslations('Article');
 
   return (
     <App currentPage="post">
@@ -102,7 +103,7 @@ export default async function PostPage({
           <div className="flex flex-col lg:flex-row justify-center gap-4">
             <div className="w-full lg:w-[70%] mb-c-60 lg:mb-0 lg:pr-[5px]">
               <div className="flex-between-row mb-6">
-                <div className="gap-1 md:gap-0 flex-start-col md:flex-start-row">
+                <div className="gap-2 flex-start-col md:flex-start-row">
                   <PostCategories categories={post.categories} />
                 </div>
                 <div className="flex-center-row">
@@ -112,14 +113,10 @@ export default async function PostPage({
               <h1 className="font-semibold mb-0">{post.title}</h1>
               <div className="prose max-w-none mb-5">
                 <span className="mr-1 font-semibold text-[11px]">
-                  Last Updated:
+                  {tArticle("lastUpdatedText")}
                 </span>
-                <span className="text-text-dark/75 text-[11px]">
-                  {new Date(post.modifiedDate).toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                <span className="text-text-dark/75 text-[11px] capitalize">
+                  {formatDate(post.modifiedDate, localParams.locale)}
                 </span>
               </div>
               <div>
@@ -184,12 +181,12 @@ export default async function PostPage({
                       alt="🎥"
                       src="https://s.w.org/images/core/emoji/15.0.3/svg/1f3a5.svg"
                     />
-                    {t("articleDetailedVideoTitle")}
+                    {tArticle("articleDetailedVideoTitle")}
                   </h2>
 
                   <iframe
                     src={post.youtubeEmbedUrl}
-                    title={t("articleDetailedVideoTitle")}
+                    title={tArticle("articleDetailedVideoTitle")}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-[375px] box-shadow-post-detail-image"
@@ -204,7 +201,7 @@ export default async function PostPage({
                       alt="🎫"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    {t("hikingPassTitle")}
+                    {tArticle("hikingPassTitle")}
                   </h2>
 
                   <PortableText
@@ -221,7 +218,7 @@ export default async function PostPage({
                       alt="🏠"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    {t("whereToStayTitle")}
+                    {tArticle("whereToStayTitle")}
                   </h2>
 
                   <PortableText
@@ -238,7 +235,7 @@ export default async function PostPage({
                       alt="🥪"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    {t("whereToEatTitle")}
+                    {tArticle("whereToEatTitle")}
                   </h2>
 
                   <PortableText
@@ -255,7 +252,7 @@ export default async function PostPage({
                       alt="🥾"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    {t("otherHikesTitle")}
+                    {tArticle("otherHikesTitle")}
                   </h2>
 
                   <PortableText
@@ -272,7 +269,7 @@ export default async function PostPage({
                       alt="🚗"
                       className="inline-block w-6 h-6 mr-2"
                     />
-                    {t("otherAttractionsTitle")}
+                    {tArticle("otherAttractionsTitle")}
                   </h2>
 
                   <PortableText
@@ -289,7 +286,7 @@ export default async function PostPage({
                       alt="📸"
                       src="https://s.w.org/images/core/emoji/14.0.0/svg/1f4f8.svg"
                     />
-                    {t("capturedMomentsTitle")}
+                    {tArticle("capturedMomentsTitle")}
                   </h2>
                   <ImageCarousel images={post.capturedMoments} />
                 </div>

@@ -3,7 +3,7 @@
 import { PagesContextType } from "@/types/pages-context-type";
 import { createContext, useContext } from "react";
 
-export const PagesContext = createContext<PagesContextType>({
+const PagesContext = createContext<PagesContextType>({
   pages: [],
   error: null
 });

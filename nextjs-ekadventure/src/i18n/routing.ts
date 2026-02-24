@@ -6,6 +6,7 @@ export const routing = defineRouting({
     // This is the key: it hides /en but keeps /fr visible
     localePrefix: 'as-needed',
     localeDetection: false, //If the user types ekadventure.com/about but he's already in fr locale, don't redirect him to /fr/about
+    localeCookie: false, // Don't store the locale in a cookie until the user consents to it
     pathnames: {
         '/': '/',
         '/home': '/',

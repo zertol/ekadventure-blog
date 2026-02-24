@@ -4,6 +4,7 @@ import { CommentFormData } from "@/models/comments/comment-form-data";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import SubmitStatus from "@/components/UI/Common/Form/SubmitStatus/page";
+import { useTranslations } from "next-intl";
 
 interface CommentFormProps {
   parentId?: string;
@@ -36,10 +37,12 @@ const CommentForm: React.FC<CommentFormProps> = ({
     [addComment, parentId, reset]
   );
 
+  const tComments = useTranslations("Comments");
+
   return (
     <>
       {!isReply && (
-        <h3 className="text-xl font-semibold mb-4">Leave a Comment</h3>
+        <h3 className="text-xl font-semibold mb-4">{tComments("leaveACommentTitle")}</h3>
       )}
       <form
         onSubmit={handleSubmit(onSubmitForm)}
@@ -48,9 +51,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
       >
         <>
           <FormInput
-            label="comment"
+            label={tComments("commentLabel")}
             type="textarea"
-            placeholder="Comment*"
+            placeholder={tComments("commentPlaceholder")}
             register={register}
             required={true}
             error={errors.comment?.message}
@@ -58,9 +61,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
             registrationName="comment"
           />
           <FormInput
-            label="name"
+            label={tComments("nameLabel")}
             type="text"
-            placeholder="Name*"
+            placeholder={tComments("namePlaceholder")}
             register={register}
             required={true}
             error={errors.name?.message}
@@ -68,9 +71,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
             registrationName="name"
           />
           <FormInput
-            label="email"
+            label={tComments("emailLabel")}
             type="email"
-            placeholder="Email*"
+            placeholder={tComments("emailPlaceholder")}
             register={register}
             required={true}
             error={errors.email?.message}
@@ -93,7 +96,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
                        : ""
                    }`}
             >
-              SUBMIT
+              {tComments("submitButtonText")}
               {isLoading?.isLoading && isLoading?.parentId === parentId && (
                 <div className="absolute flex items-center justify-center inset-0">
                   <div className="w-6 h-6 border-4 border-t-transparent rounded-full animate-spin"></div>

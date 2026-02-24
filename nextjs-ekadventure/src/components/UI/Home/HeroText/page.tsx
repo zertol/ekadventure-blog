@@ -11,8 +11,10 @@ export const HeroText: React.FC = () => {
         </h2>
       </div>
       <div className="mb-0 pl-c-25">
-        <p className="text-left text-wrap font-ps text-[20px]" dangerouslySetInnerHTML={{ __html: t("heroTextContent") }}>
-          
+        <p className="text-left text-wrap font-ps text-[20px]">
+          {t.rich("heroTextContent", {
+            br: () => <br />
+          })}
         </p>
       </div>
     </div>

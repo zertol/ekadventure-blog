@@ -9,7 +9,7 @@ export type PostDetailsType = {
     slug: { current: string };
     categories: CategoryType[];
     title: string;
-    modifiedDate: Date;
+    modifiedDate: string;
     content: PortableTextBlock[];
     excerpt: PortableTextBlock[];
     stats: Array<{

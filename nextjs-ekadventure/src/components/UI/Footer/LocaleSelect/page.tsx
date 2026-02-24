@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { useCookieConsent } from "@/store/CookieConsentContext";
 import { useLocale, useTranslations } from "next-intl";
 import { ChangeEvent, useTransition } from "react";
 
@@ -8,10 +9,19 @@ const LocaleSelect: React.FC = () => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const consent = useCookieConsent();
   const [isPending, startTransition] = useTransition();
 
-  function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
+  async function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
     const nextLocale = e.target.value;
+
+    if (consent.cookiePreferences.personalization) {
+      const userSettings: UserSettings = {
+        selected_language: nextLocale,
+      };
+      const value = encodeURIComponent(JSON.stringify(userSettings));
+      document.cookie = `EK_USER_SETTINGS=${value}; path=/; max-age=${365 * 24 * 60 * 60}; SameSite=Lax`;
+    }
 
     startTransition(() => {
       router.replace(pathname as any, { locale: nextLocale });

@@ -4,9 +4,11 @@ import React, { useMemo } from "react";
 import CommentForm from "./CommentForm";
 import SingleComment from "./SingleComment";
 import { useComments } from "@/store/CommentsContext";
+import { useTranslations } from "next-intl";
 
 const Comments: React.FC = () => {
   const { comments: allComments } = useComments();
+  const tComments = useTranslations("Comments");
 
   const totalComments: number = useMemo(() => {
     const calculateTotalComments = (comments: CommentType[]): number => {
@@ -23,7 +25,7 @@ const Comments: React.FC = () => {
   return (
     <div className="mt-c-60">
       <h2 className="text-2xl font-bold mb-6">
-        {totalComments} {totalComments === 1 ? "Comment" : "Comments"}
+        {totalComments === 1 ? tComments("oneComment") : tComments("nbComments", {0: totalComments})}
       </h2>
 
       <div className="mb-8">

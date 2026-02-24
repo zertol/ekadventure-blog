@@ -2,6 +2,7 @@
 
 import { addComment } from "@/api/controllers/comments";
 import { CommentFormData } from "@/models/comments/comment-form-data";
+import { useTranslations } from "next-intl";
 import React, { createContext, useContext, useState } from "react";
 
 type LoadingType = {
@@ -34,6 +35,8 @@ export function CommentsProvider({
   initialComments?: CommentType[];
   postId: string;
 }) {
+
+  const tComments = useTranslations("Comments");
 
   const [isLoading, setIsLoading] = useState<LoadingType>({ isLoading: false });
 
@@ -77,7 +80,7 @@ export function CommentsProvider({
     setSubmitStatus({
       parentId,
       type: "success",
-      message: "Thank you for your comment! It will appear once approved.",
+      message: tComments("requestSuccessMessage"),
     });
   };
 

@@ -4,15 +4,8 @@ import React from "react";
 import {Link} from "@/i18n/navigation";
 import PostCategories from "@/components/UI/Categories/PostCategory/PostCategories";
 import { PortableText } from "next-sanity";
-import { useTranslations } from "next-intl";
-
-const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
+import { useLocale, useTranslations } from "next-intl";
+import { formatDate } from "@/utils/data/helpers";
 
 const PostArticle: React.FC<PostType> = ({
   title,
@@ -23,6 +16,8 @@ const PostArticle: React.FC<PostType> = ({
   excerpt,
   totalComments
 }) => {
+
+  const locale = useLocale()
 
   const tUI = useTranslations("UI");
   const tComments = useTranslations("Comments");
@@ -45,17 +40,17 @@ const PostArticle: React.FC<PostType> = ({
 
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <div className="flex-1 flex flex-row flex-wrap">
-            <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
-              {formatDate(date)}
+            <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap capitalize">
+              {formatDate(date, locale)}
             </span>
             <span className="text-[12px] mr-1 text-gray-500 whitespace-nowrap">
               /
             </span>
             <span className="text-[12px] text-gray-500 whitespace-nowrap">
-              {totalComments == 0 ? tComments("noComments") : tComments("nbComments", {0: totalComments}) }
+              {totalComments == 0 ? tComments("noComments") : totalComments === 1 ? tComments("oneComment") : tComments("nbComments", {0: totalComments}) }
             </span>
           </div>
-          <div className="gap-2">
+          <div className="gap-2 flex flex-row flex-wrap">
             <PostCategories categories={categories} />
           </div>
         </div>
