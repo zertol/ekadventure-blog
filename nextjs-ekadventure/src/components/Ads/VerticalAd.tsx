@@ -1,6 +1,6 @@
 "use client";
 import { useAdSense } from "@/utils/hooks/use-adsense";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface VerticalAdProps {
   adSlot: string;
@@ -8,11 +8,20 @@ interface VerticalAdProps {
 }
 
 const VerticalAd: React.FC<VerticalAdProps> = ({ adSlot, style }) => {
+const [slotKey, setSlotKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSlotKey(`ads-${Date.now()}-${Math.random()}`);
+  }, []);
+
   const adRef = useRef(null!);
-  useAdSense(adRef);
+  useAdSense(adRef, slotKey);
+
+  if(!slotKey) return null; // Don't render until slotKey is set to avoid SSR issues
 
   return (
     <ins
+      key={slotKey} // Force re-render on page reload
       ref={adRef}
       className="adsbygoogle sidebar-ad"
       style={{ display: "block", ...style }}

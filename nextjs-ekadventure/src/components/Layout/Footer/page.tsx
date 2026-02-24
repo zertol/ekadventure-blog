@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
             <PrimaryButton
               href="#"
               handleClick={() => openModal()}
-              text="Manage Cookies"
+              text={tFooter("manageCookiesLinkText")}
               className="bg-transparent p-0 ml-1 text-[10px] underline hover:text-gray-300 transition-colors hover:bg-transparent"
             />
           </div>

@@ -22,12 +22,21 @@ export function ClientAdWrapper({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || container.offsetHeight == 0) return;
+    if (!container) return;
 
-    setHasContent((prev) => {
-      return { isVisible: true, height: container.offsetHeight };
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const height = entry.borderBoxSize[0].blockSize;
+
+        if (height > 0) {
+          setHasContent({ isVisible: true, height: height });
+        }
+      }
     });
-  }, [containerRef.current?.offsetHeight, consentData.isFirstVisit]);
+
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
+  }, [consentData.isFirstVisit]);
 
   const calc = (): string => {
     if (hasContent.isVisible) {

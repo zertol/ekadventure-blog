@@ -4,7 +4,8 @@ import { useCookieConsent } from "@/store/CookieConsentContext";
 import { useEffect, useRef } from "react";
 
 export const useAdSense = (
-  insRef?: React.RefObject<HTMLElement | null>
+  insRef?: React.RefObject<HTMLElement | null>,
+  slotKey?: string | null
 ) => {
   const initializedRef = useRef(false);
   const consentData = useCookieConsent();
@@ -30,5 +31,5 @@ export const useAdSense = (
     } catch (e) {
       console.error("adsbygoogle push error:", e);
     }
-  }, [insRef, consentData.cookiePreferences.targeted_ads, consentData.isFirstVisit]);
+  }, [insRef, slotKey, consentData.cookiePreferences.targeted_ads, consentData.isFirstVisit]);
 };
