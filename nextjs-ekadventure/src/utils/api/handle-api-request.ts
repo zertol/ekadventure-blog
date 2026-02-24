@@ -26,6 +26,7 @@ export const handleApiRequest = async <T>(
         result.Result = response.Result;
 
     } catch (err) {
+        console.error("API request error:", err);
         result.ErrorMessages?.push((err as Error).message);
     }
 

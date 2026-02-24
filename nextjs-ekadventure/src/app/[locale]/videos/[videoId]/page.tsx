@@ -61,11 +61,17 @@ export default async function VideoPage({
 }) {
   const { videoId } = await params;
 
-  const [videoResult] = await Promise.all([
-    getYouTubeVideoById({
-      videoId: videoId,
-    }),
-  ]);
+  let videoResult;
+  try {
+    [videoResult] = await Promise.all([
+      getYouTubeVideoById({
+        videoId: videoId,
+      }),
+    ]);
+  } catch (error) {
+    console.error("Error fetching video:", error);
+    return notFound();
+  }
 
   if (!videoResult.Result || videoResult.Result.items?.length === 0) {
     return notFound();
