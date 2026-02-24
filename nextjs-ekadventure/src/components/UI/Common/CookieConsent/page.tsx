@@ -23,8 +23,6 @@ const CookieConsent: React.FC = () => {
     openModal,
   } = useCookieConsent();
 
-  console.log(cookiePreferences);
-
   const [preferences, setPreferences] =
     useState<CookiePreferences>(cookiePreferences);
 
