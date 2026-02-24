@@ -3,12 +3,14 @@
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useCookieConsent } from "@/store/CookieConsentContext";
 import { useLocale, useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import { ChangeEvent, useTransition } from "react";
 
 const LocaleSelect: React.FC = () => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams();
   const consent = useCookieConsent();
   const [isPending, startTransition] = useTransition();
 
@@ -24,7 +26,7 @@ const LocaleSelect: React.FC = () => {
     }
 
     startTransition(() => {
-      router.replace(pathname as any, { locale: nextLocale });
+      router.replace({ pathname, params } as any, { locale: nextLocale });
     });
   }
 
