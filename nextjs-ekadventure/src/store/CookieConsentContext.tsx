@@ -1,12 +1,12 @@
 "use client";
-
 import { createContext, useContext, useEffect, useState } from "react";
-import { set } from "react-hook-form";
 
 type CookieContextType = {
   cookiePreferences: CookiePreferences;
+  localCookiePreferences: CookiePreferences;
   isFirstVisit: boolean;
   saveCookiePreferences: (prefs: CookiePreferences) => void;
+  togglePreference: (key: keyof CookiePreferences) => void;
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
   openModal: (callBackFn?: () => void) => void;
@@ -36,6 +36,14 @@ export const CookieConsentProvider = ({
     },
   );
 
+  const [localCookiePreferences, setLocalCookiePreferences] =
+    useState<CookiePreferences>({
+      essential: true,
+      analytics: false,
+      targeted_ads: false,
+      personalization: false,
+    });
+
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,12 +60,20 @@ export const CookieConsentProvider = ({
   const openModal = (callBackFn?: () => void) => {
     callBackFn && callBackFn();
     setIsModalOpen(true);
+    setLocalCookiePreferences(cookiePreferences); // Sync local state with current preferences when opening modal
   };
 
   const saveCookiePreferences = (prefs: CookiePreferences) => {
     localStorage.setItem("ek_consent", JSON.stringify(prefs));
     setCookiePreferences(prefs);
     setIsFirstVisit(false);
+  };
+
+  const togglePreference = (key: keyof CookiePreferences) => {
+    setLocalCookiePreferences((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
   return (
@@ -68,7 +84,9 @@ export const CookieConsentProvider = ({
         saveCookiePreferences,
         isModalOpen,
         setIsModalOpen,
-        openModal
+        openModal,
+        localCookiePreferences,
+        togglePreference,
       }}
     >
       {children}

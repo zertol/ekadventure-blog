@@ -10,7 +10,6 @@ import NewsLetterForm from "@/components/UI/Common/Form/NewsLetterForm/page";
 import { ClientAdWrapper } from "@/components/Ads/ClientAdWrapper";
 import HorizontalAd from "@/components/Ads/HorizontalAd";
 import { useCookieConsent } from "@/store/CookieConsentContext";
-import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import { usePathname } from "@/i18n/navigation";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";
 
@@ -65,7 +64,7 @@ const Footer: React.FC = () => {
           {/* Newsletter Subscription */}
           <div className="w-full md:w-auto md:max-w-sm">
             <div className="flex items-center justify-center mb-6">
-             <LocaleSelect />
+              <LocaleSelect />
             </div>
             <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
               <h3 className="md:text-2xl font-semibold mb-2">
@@ -90,9 +89,7 @@ const Footer: React.FC = () => {
           marginBottom: effectiveMargin, // Add margin at the bottom based on ad height
         }}
       >
-        <p className="text-center">
-          © {new Date().getFullYear()} Elie Kadoury
-        </p>
+        <p className="text-center">© {new Date().getFullYear()} Elie Kadoury</p>
         {pathName !== "/privacy-policy" && (
           <div className={`flex flex-row`}>
             <a
@@ -102,12 +99,12 @@ const Footer: React.FC = () => {
             >
               {tFooter("privacyPolicyLinkText")}
             </a>
-            <PrimaryButton
-              href="#"
-              handleClick={() => openModal()}
-              text={tFooter("manageCookiesLinkText")}
+            <button
+              onClick={() => openModal()}
               className="bg-transparent p-0 ml-1 text-[10px] underline hover:text-gray-300 transition-colors hover:bg-transparent"
-            />
+            >
+              {tFooter("manageCookiesLinkText")}
+            </button>
           </div>
         )}
       </div>

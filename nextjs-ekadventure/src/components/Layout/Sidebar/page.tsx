@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
+import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
 import VerticalAd from "@/components/Ads/VerticalAd";
@@ -43,12 +43,12 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
 
         {/* Navigation Buttons */}
         <div className="flex gap-4 mb-2 justify-center">
-          <PrimaryButton
+          <PrimaryLink
             href="/about"
             text={tUI("readMore")}
             className="font-ps py-0 font-bold text-[16px]"
           />
-          <PrimaryButton
+          <PrimaryLink
             href="/contact"
             text={tUI("workWithMe")}
             className="font-ps py-0 font-bold text-[16px]"

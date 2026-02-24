@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "@/i18n/navigation";
-import PrimaryButton from "../PrimaryButton/page";
+import PrimaryLink from "../PrimaryLink/page";
 import { useTranslations } from "next-intl";
  
 interface LatestArticleProps {
@@ -55,7 +55,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
           </div>
           <div className="gap-2">
             {categories.map((category, index) => (
-              <PrimaryButton
+              <PrimaryLink
                 key={`${category.slug}-${index}`}
                 text={category.name}
                 href={`/category/${category.slug}`}

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Image from "next/image";
-import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
+import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
 import HorizontalAd from "../Ads/HorizontalAd";
 import { HeroText } from "../UI/Home/HeroText/page";
 import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
@@ -18,9 +18,6 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
-  const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
-  const adRef = useRef<HTMLModElement>(null!);
-
   const tHome = useTranslations('Home');
   const tUI = useTranslations('UI');
   const tCommon = useTranslations('Common');
@@ -49,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
             isCollapsible={false}
             className="pb-c-60"
           >
-            <HorizontalAd adSlot="9510559826" ref={adRef} />
+            <HorizontalAd adSlot="9510559826" />
           </ClientAdWrapper>
         </div>
       </div>
@@ -62,7 +59,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
             </h2>
             <span className="block w-24 h-1 bg-black"></span>
             <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
-              <PrimaryButton
+              <PrimaryLink
                 href="/blog"
                 text={tUI("viewAll")}
                 className="py-1 px-4 font-semibold text-[14px]"
@@ -82,7 +79,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
               </h2>
               <span className="block w-24 h-1 bg-black"></span>
               <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
-                <PrimaryButton
+                <PrimaryLink
                   href="/videos"
                   text={tUI("viewAll")}
                   className="py-1 px-4 font-semibold text-[14px]"
@@ -120,7 +117,7 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
           <h1 className="text-[30px] md:text-[40px] font-bold mb-6 italic">
             {tHome("buildABlogLikeThisTitle")}
           </h1>
-          <PrimaryButton
+          <PrimaryLink
             text={tHome("shareYourExperienceButtonText")}
             href="/contact"
             className="px-[24px] py-[12px] text-[16px]"

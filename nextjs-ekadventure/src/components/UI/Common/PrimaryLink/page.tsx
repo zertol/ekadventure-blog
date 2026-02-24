@@ -2,15 +2,15 @@
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { ComponentProps } from "react";
-interface PrimaryButtonProps {
+interface PrimaryLinkProps {
   text: string;
   href: string;
   className?: string;
-  handleClick?: () => void;
+  handleClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   outsideLocale?: boolean;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+const PrimaryLink: React.FC<PrimaryLinkProps> = ({
   text,
   href,
   className,
@@ -42,4 +42,4 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default PrimaryLink;

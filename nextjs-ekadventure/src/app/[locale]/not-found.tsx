@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import PrimaryButton from "@/components/UI/Common/PrimaryButton/page";
 import { useSearch } from "@/utils/hooks/use-search";
 import { useRef } from "react";
 import { SearchResuls } from "@/components/UI/Common/SearchResults/page";
