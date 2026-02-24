@@ -34,7 +34,6 @@
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.14.5",
     "@types/babel__traverse": "^7.28.0",
-    "@types/jsdom": "^27.0.0",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.1",
     "@types/react": "^19.2.2",
