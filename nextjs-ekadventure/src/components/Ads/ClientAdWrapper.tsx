@@ -8,11 +8,13 @@ export function ClientAdWrapper({
   className,
   headerText,
   isCollapsible = true,
+  onHeightChange,
 }: {
   children: React.ReactNode;
   className?: string;
   headerText?: string;
   isCollapsible?: boolean;
+  onHeightChange?: (height: number) => void;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [hasContent, setHasContent] = useState({ isVisible: false, height: 0 });
@@ -30,6 +32,7 @@ export function ClientAdWrapper({
 
         if (height > 0) {
           setHasContent({ isVisible: true, height: height });
+          onHeightChange?.(height);
         }
       }
     });

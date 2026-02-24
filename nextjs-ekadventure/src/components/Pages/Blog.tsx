@@ -14,8 +14,6 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
-  const adRef = useRef<HTMLModElement>(null!);
-
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategoryClick = (categorySlug: string | null) => {
@@ -54,7 +52,7 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
             className="mt-3"
             isCollapsible={false}
           >
-            <HorizontalAd adSlot="5553437940" ref={adRef} />
+            <HorizontalAd adSlot="5553437940" />
           </ClientAdWrapper>
         </div>
       </div>

@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import HeaderNavLink from "../Header/NavLink";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
@@ -16,9 +15,6 @@ import { usePathname } from "@/i18n/navigation";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";
 
 const Footer: React.FC = () => {
-  const [adVisible, setAdVisible] = useState({ isVisible: false, height: 0 });
-  const adRef = useRef<HTMLModElement>(null!);
-
   const { pages } = usePages();
   const menuItems = pages.sort((a: PageType, b: PageType) => a.order - b.order);
 
@@ -29,12 +25,10 @@ const Footer: React.FC = () => {
 
   const pathName = usePathname();
 
-  useEffect(() => {
-    const ad = adRef.current;
-    if (!ad) return;
+  const [adHeight, setAdHeight] = useState(0);
 
-    setAdVisible({ isVisible: true, height: ad.offsetHeight });
-  }, [adRef.current?.offsetHeight, isFirstVisit]);
+  // We only care about the height if it's not the first visit
+  const effectiveMargin = !isFirstVisit && adHeight > 0 ? adHeight + 50 : 0;
 
   return (
     <footer className="bg-[#2D2D2D] text-white">
@@ -93,7 +87,7 @@ const Footer: React.FC = () => {
       <div
         className="py-1 flex flex-col justify-center items-center gap-1"
         style={{
-          marginBottom: adVisible.height > 0 ? `${adVisible.height + 50}px` : 0,
+          marginBottom: effectiveMargin, // Add margin at the bottom based on ad height
         }}
       >
         <p className="text-center">
@@ -120,10 +114,11 @@ const Footer: React.FC = () => {
       <ClientAdWrapper
         headerText="Google"
         className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full"
+        onHeightChange={setAdHeight}
       >
         <div className="w-full flex justify-center">
           <div className="w-[768px]">
-            <HorizontalAd ref={adRef} adSlot="7868749713" />
+            <HorizontalAd adSlot="7868749713" />
           </div>
         </div>
       </ClientAdWrapper>

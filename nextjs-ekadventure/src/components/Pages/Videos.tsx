@@ -12,8 +12,6 @@ interface VideosProps {
 }
 
 const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
-  const adRef = useRef<HTMLModElement>(null!);
-
   const tVideos = useTranslations("Videos");
 
   return (
@@ -38,7 +36,7 @@ const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
             className="mt-3"
             isCollapsible={false}
           >
-            <HorizontalAd adSlot="5553437940" ref={adRef} />
+            <HorizontalAd adSlot="5553437940" />
           </ClientAdWrapper>
         </div>
       </div>
