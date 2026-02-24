@@ -5,6 +5,6 @@ import { routing } from './i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-    // Match all paths files with extensions (dots)
-    matcher: ['/', '/(en|fr)/:path*', '/((?!.*\\..*).*)']
+    // Match all paths except, _next, and files with extensions (dots)
+    matcher: ['/', '/(en|fr)/:path*', '/((?!_next|_vercel|.*\\..*).*)']
 };
