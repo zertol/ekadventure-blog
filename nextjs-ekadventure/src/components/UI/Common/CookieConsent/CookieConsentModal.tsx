@@ -51,7 +51,7 @@ const CookieConsentModal: React.FC<{ handleSave: () => void, closeModal: () => v
         />
 
         {/* Footer - Save Button */}
-        <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+        <div className="lg:sticky lg:bottom-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
           <button
             onClick={handleSave}
             className="w-full bg-black text-white px-6 py-2 rounded-full hover:bg-background-green-accent active:bg-black transition-colors duration-300 font-medium"
