@@ -3,7 +3,7 @@ import SearchResult from "./SearchResult";
 import { SearchResultType } from "@/types/search-result-type";
 import { useTranslations } from "next-intl";
 
-export const SearchResuls: React.FC<{
+export const SearchResults: React.FC<{
   results: SearchResultType[];
   loading: boolean;
   query: string;
@@ -17,7 +17,7 @@ export const SearchResuls: React.FC<{
   return (
     <div
       className={`${!isInContainer ? "absolute" : ""} mt-1 left-auto top-full
-             bg-background-dark rounded min-w-[200px] shadow-lg z-50 ${isInContainer ? "max-h-20 md:max-h-40" : "max-h-80"} 
+             bg-background-dark rounded min-w-[200px] shadow-lg z-50 ${isInContainer ? "max-h-32 md:max-h-40" : "max-h-80"} 
              overflow-auto`}
     >
       {loading && (

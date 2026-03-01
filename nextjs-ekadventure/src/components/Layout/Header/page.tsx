@@ -1,18 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Link } from "@/i18n/navigation";
-import Image from "next/image";
 import { usePathname } from "@/i18n/navigation";
-import HeaderNavLink from "./NavLink";
 import { usePages } from "@/store/PagesContext";
 import { useParams } from "next/navigation";
-import SearchBox from "@/components/UI/Common/SearchBox/page";
 import { PageType } from "@/types/page-type";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
+import Logo from "./Logo";
+import Hamburger from "./Hamburger";
 
 const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuClosing, setIsMobileMenuClosing] = useState(false);
   const pathname = usePathname();
   const isAboutPage = pathname === "/about";
   const isContactPage = pathname === "/contact";
@@ -45,110 +46,39 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuClosing(true);
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+      setIsMobileMenuClosing(false);
+    }, 300);
+  }
+
   // Sort pages by order property
   const menuItems = pages.sort((a: PageType, b: PageType) => a.order - b.order);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 px-3 md:pl-c-25 md:pr-c-25 py-[12px] transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-[52] px-3 md:pl-c-25 md:pr-c-25 py-[12px] transition-all duration-200 ${
           isScrolled || !isScrollable
-            ? "bg-background-green-accent"
-            : "bg-transparent"
+            ? "bg-background-green-accent h-auto"
+            : "bg-transparent h-auto"
         }`}
       >
-        {/* Mobile Menu */}
         <div
-          className={`absolute inset-x-0 top-[100%] bg-background-green-accent z-[100] max-h-0 h-56 overflow-hidden transition-all duration-200 ease-in-out ${
-            isMobileMenuOpen ? "max-h-56 h-56" : "max-h-0"
-          } md:hidden`}
+          className={`container container-max-w-none flex items-center justify-between gap-1 xl:gap-4`}
         >
-          <div
-            className={`flex-start-col w-full h-full transform transition-all duration-200 ease-in-out ${
-              isMobileMenuOpen ? "opacity-100" : "opacity-0"
-            } `}
-          >
-            <nav className="flex flex-col justify-between gap-0 w-full h-full text-center">
-              {menuItems.map((page: PageType) => (
-                <HeaderNavLink
-                  key={page.slug}
-                  href={`${
-                    page.slug?.toLowerCase().includes("http")
-                      ? page.slug
-                      : page.slug?.toLocaleLowerCase() === "home"
-                        ? "/"
-                        : "/" + page.slug
-                  }`}
-                  onClick={toggleMobileMenu}
-                >
-                  {page.title.toUpperCase()}
-                </HeaderNavLink>
-              ))}
-            </nav>
-          </div>
-        </div>
-
-        <div className="container container-max-w-none ">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center flex-1">
-              <Link href="/">
-                <Image
-                  src="/images/Logo_Site-Horizontal_UPG.png"
-                  alt="EkAdventure Logo"
-                  width={500}
-                  height={500}
-                  className={`transition-all duration-200 h-auto ${
-                    isScrolled || !isScrollable ? "w-[110px]" : "w-[150px]"
-                  }`}
-                />
-              </Link>
-            </div>
-
-            <nav className="hidden md:flex space-x-5 lg:space-x-8 flex-1 md:items-center md:justify-center px-[45px] lg:px-0">
-              {menuItems.map((page: PageType) => (
-                <HeaderNavLink
-                  key={page.slug}
-                  href={`${
-                    page.slug?.toLowerCase().includes("http")
-                      ? page.slug
-                      : page.slug?.toLocaleLowerCase() === "home"
-                        ? "/"
-                        : "/" + page.slug
-                  }`}
-                >
-                  {page.title.toUpperCase()}
-                </HeaderNavLink>
-              ))}
-            </nav>
-
-            <SearchBox />
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-white"
-              onClick={toggleMobileMenu}
-              aria-label="Toggle mobile menu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-8 h-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d={
-                    isMobileMenuOpen
-                      ? "M6 18L18 6M6 6l12 12"
-                      : "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  }
-                />
-              </svg>
-            </button>
-          </div>
+          <Logo isScrolled={isScrolled} isScrollable={isScrollable} />
+          <DesktopNav menuItems={menuItems} />
+          {isMobileMenuOpen && (
+            <MobileNav
+              menuItems={menuItems}
+              isMobileMenuClosing={isMobileMenuClosing}
+              closeMobileMenu={closeMobileMenu}
+            />
+          )}
+          <Hamburger toggleMobileMenu={toggleMobileMenu} />
         </div>
       </header>
     </>

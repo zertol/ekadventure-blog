@@ -67,7 +67,8 @@
         "featuredAdventuresTitle": "Featured Adventures",
         "featuredTopicsTitle": "Featured Topics",
         "featuredVideosTitle": "Featured Videos",
-        "requiredFieldMessage": "{0} is required"
+        "requiredFieldMessage": "{0} is required",
+        "invalidEmailMessage": "Please enter a valid Email Address"
     },
     "Contact": {
         "contactDescriptionFirstPart": "Whether it's for working together or just simply sharing your adventure, I will be so thrilled to read all about it!",

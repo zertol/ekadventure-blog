@@ -26,21 +26,21 @@ const HeaderNavLink: React.FC<HeaderNavLinkProps> = ({
 
   return (
     <div
-      className={`flex items-center transition-colors justify-center md:justify-start
-        md:h-auto w-full md:w-auto hover:bg-background-dark md:hover:bg-transparent
-        ${isActive ? "bg-background-dark md:bg-transparent" : ""}`}
+      className={`py-1 lg:py-0 flex items-center transition-colors justify-center lg:justify-between
+        lg:h-auto w-full lg:w-auto hover:bg-background-dark lg:hover:bg-transparent
+        ${isActive ? "bg-background-dark lg:bg-transparent" : ""}`}
     >
       <Link
         href={href as LinkProps["href"]}
         onClick={handleClick}
         className={`text-white whitespace-nowrap uppercase tracking-wide transition-colors relative group
-          md:inline-block block w-full md:w-auto font-semibold
+          lg:inline-block block w-full lg:w-auto font-semibold
         `}
       >
         {children}
         <span
           className={`absolute -bottom-1.5 left-0 w-full h-1 bg-white transition-all duration-200
-            opacity-0 md:block hidden
+            opacity-0 lg:block hidden
             ${isActive ? "opacity-100" : "group-hover:opacity-100"}
           `}
         ></span>

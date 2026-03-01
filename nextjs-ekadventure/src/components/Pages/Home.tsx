@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Image from "next/image";
 import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
@@ -39,8 +39,8 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         <HeroText />
       </section>
 
-      <div className="w-full flex justify-center">
-        <div className="w-[768px]">
+      <div className="flex justify-center">
+        <div className="w-full md:w-[768px]">
           <ClientAdWrapper
             headerText="Google"
             isCollapsible={false}

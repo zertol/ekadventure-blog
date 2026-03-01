@@ -74,6 +74,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
         onSubmit={handleSubmit(onSubmit)}
         onReset={onReset}
         className="w-full"
+        noValidate
       >
         <div className="flex flex-row w-full overflow-hidden">
           <FormInput

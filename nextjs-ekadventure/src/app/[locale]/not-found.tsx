@@ -1,28 +1,16 @@
 "use client";
 import Image from "next/image";
-import { useSearch } from "@/utils/hooks/use-search";
-import { useRef } from "react";
-import { SearchResuls } from "@/components/UI/Common/SearchResults/page";
 import { useTranslations } from "next-intl";
 import HelpButtons from "@/components/UI/Common/HelpButtons/page";
+import SearchBox from "@/components/UI/Common/SearchBox/page";
 
 export default function NotFound() {
   const tNotFound = useTranslations("NotFound");
-  const tUI = useTranslations("UI");
-
-  const { query, setQuery, results, loading } = useSearch();
-
-  const searchRef = useRef<HTMLInputElement>(null);
-
-  const searchSite = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setQuery(searchRef.current!.value || "");
-  };
 
   return (
-    <div className="h-screen flex-center-col overflow-auto">
+    <div className="md:h-screen flex-center-col overflow-auto">
       <div className="container px-c-25 lg:px-0">
-        <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
+        <div className="flex flex-col lg:flex-row justify-center gap-4">
           <div className="relative w-full lg:w-[50%] h-[200px] md:h-[300px] lg:h-auto">
             <Image
               src="/images/hiker_not_found.png"
@@ -33,7 +21,7 @@ export default function NotFound() {
           </div>
           <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start lg:justify-center text-center lg:text-left">
             <div className="lg:w-[80%]">
-              <h1 className="leading-7 md:leading-9 mb-4 text-2xl md:text-[30px]">
+              <h1 className="leading-7 md:leading-9 mb-2 text-xl md:text-[30px]">
               {tNotFound("notFoundTitle")}
               </h1>
 
@@ -50,32 +38,7 @@ export default function NotFound() {
                 <p className="text-white font-semibold mb-3 text-sm/5">
                   {tNotFound("notFoundTrySearching")}
                 </p>
-                <form onSubmit={searchSite} method="POST" className="w-full">
-                  <div className="flex flex-row w-full overflow-hidden">
-                    <input
-                      type="text"
-                      name="query"
-                      placeholder={tUI("searchPlaceholderAdventure")}
-                      className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
-                      ref={searchRef}
-                    />
-                    <button
-                      type="submit"
-                      className="bg-background-blue-accent
-                         text-white px-6 py-2 whitespace-nowrap hover:bg-background-dark transition-colors"
-                    >
-                      {tUI("searchButton")}
-                    </button>
-                  </div>
-                </form>
-                {(query || loading) && (
-                  <SearchResuls
-                    isInContainer={true}
-                    query={query}
-                    results={results}
-                    loading={loading}
-                  />
-                )}
+                <SearchBox isInContainer={true} />
               </div>
             </div>
           </div>

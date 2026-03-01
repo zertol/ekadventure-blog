@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CookieCategoryRows from "./CookieCategoryRows";
 import CookieConsentActions from "./CookieConsentActions";
 import CloseButton from "../CloseButton/page";
 import { useCookieConsent } from "@/store/CookieConsentContext";
@@ -30,7 +29,6 @@ const CookieConsent: React.FC = () => {
   const tPrivacy = useTranslations("PrivacyPolicy");
 
   useEffect(() => {
-    console.log("CookieConsentContext values changed:");
     if (isFirstVisit) {
       // Mount banner after 300ms
       const timer = setTimeout(() => {

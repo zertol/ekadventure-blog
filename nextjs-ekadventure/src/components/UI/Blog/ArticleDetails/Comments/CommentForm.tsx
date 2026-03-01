@@ -48,6 +48,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         onSubmit={handleSubmit(onSubmitForm)}
         onReset={clearStatus}
         className="flex-1 flex flex-col space-y-4"
+        noValidate
       >
         <>
           <FormInput

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { UseFormRegister } from "react-hook-form";
+import { RegisterOptions, UseFormRegister } from "react-hook-form";
 
 interface FormInputProps {
   label: string;
@@ -20,17 +20,28 @@ const FormInput: React.FC<FormInputProps> = ({
   error,
   required,
   className,
-  registrationName
+  registrationName,
 }) => {
   const tCommon = useTranslations("Common");
-  
+
+  const rules: RegisterOptions = {
+    required: required
+      ? `${tCommon("requiredFieldMessage", { 0: capitalize(label) })}`
+      : false,
+  };
+
+  if (type === "email") {
+    rules.pattern = {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: tCommon("invalidEmailMessage"),
+    };
+  }
+
   return type === "textarea" ? (
     <>
       <textarea
         placeholder={placeholder}
-        {...register(registrationName, {
-          required: required ? `${tCommon("requiredFieldMessage", { 0: capitalize(label) })}` : false,
-        })}
+        {...register(registrationName, rules)}
         rows={4}
         className={`${className} ${
           error ? "border-red-900" : "border-gray-300"
@@ -43,9 +54,7 @@ const FormInput: React.FC<FormInputProps> = ({
       <input
         type={type}
         placeholder={placeholder}
-        {...register(registrationName, {
-          required: required ? `${tCommon("requiredFieldMessage", { 0: capitalize(label) })}` : false,
-        })}
+        {...register(registrationName, rules)}
         className={`${className} ${
           error ? "border-red-900" : "border-gray-300"
         }`}

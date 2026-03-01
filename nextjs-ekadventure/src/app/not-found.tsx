@@ -3,7 +3,7 @@ import Image from "next/image";
 import "./globals.css";
 import { useSearch } from "@/utils/hooks/use-search";
 import { useRef } from "react";
-import { SearchResuls } from "@/components/UI/Common/SearchResults/page";
+import { SearchResults } from "@/components/UI/Common/SearchResults/page";
 import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 
 export default function NotFound() {
@@ -19,9 +19,9 @@ export default function NotFound() {
   return (
     <html lang="en">
       <body>
-        <div className="h-screen flex-center-col overflow-auto">
+        <div className="md:h-screen flex-center-col overflow-auto">
           <div className="container px-c-25 lg:px-0">
-            <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
+            <div className="flex flex-col lg:flex-row justify-center gap-4">
               <div className="relative w-full lg:w-[50%] h-[200px] md:h-[300px] lg:h-auto">
                 <Image
                   src="/images/hiker_not_found.png"
@@ -32,7 +32,7 @@ export default function NotFound() {
               </div>
               <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start lg:justify-center text-center lg:text-left">
                 <div className="lg:w-[80%]">
-                  <h1 className="leading-7 md:leading-9 mb-4 text-2xl md:text-[30px]">
+                  <h1 className="leading-7 md:leading-9 mb-2 text-xl md:text-[30px]">
                     Oops! Seems like you got lost in the wilderness.
                   </h1>
 
@@ -74,7 +74,7 @@ export default function NotFound() {
                       </div>
                     </form>
                     {(query || loading) && (
-                      <SearchResuls
+                      <SearchResults
                         isInContainer={true}
                         query={query}
                         results={results}

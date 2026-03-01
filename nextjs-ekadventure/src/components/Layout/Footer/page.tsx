@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
         onHeightChange={setAdHeight}
       >
         <div className="w-full flex justify-center">
-          <div className="w-[768px]">
+          <div className="w-full md:w-[768px]">
             <HorizontalAd adSlot="7868749713" />
           </div>
         </div>

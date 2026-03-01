@@ -67,7 +67,8 @@
         "featuredAdventuresTitle": "Aventures en Vedette",
         "featuredTopicsTitle": "Sujets en Vedette",
         "featuredVideosTitle": "Vidéos en Vedette",
-        "requiredFieldMessage": "{0} est requis"
+        "requiredFieldMessage": "{0} est requis",
+        "invalidEmailMessage": "Veuillez entrer une adresse courriel valide"
     },
     "Contact": {
         "contactDescriptionFirstPart": "Que ce soit pour travailler ensemble ou simplement partager votre aventure, je serai ravi de tout lire!",

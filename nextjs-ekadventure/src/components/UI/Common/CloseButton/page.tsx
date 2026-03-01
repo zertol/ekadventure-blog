@@ -1,10 +1,11 @@
-const CloseButton: React.FC<{ handleClose: () => void }> = ({
+const CloseButton: React.FC<{ handleClose: () => void, className?: string }> = ({
   handleClose,
+  className
 }) => {
   return (
     <button
       onClick={handleClose}
-      className="text-gray-500 hover:text-gray-700 hover:rotate-90 transition-all duration-300"
+      className={`text-gray-500 hover:text-gray-700 hover:rotate-90 transition-all duration-300 ${className}`}
       aria-label="Close"
     >
       <svg

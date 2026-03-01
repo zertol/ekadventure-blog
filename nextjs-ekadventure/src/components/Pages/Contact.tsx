@@ -83,6 +83,7 @@ const Contact: React.FC = () => {
               onSubmit={handleSubmit(onSubmit)}
               onReset={onReset}
               className="flex-1 flex flex-col space-y-4 bg-background-green-accent p-6 rounded-lg box-shadow-quote"
+              noValidate
             >
               <FormInput
                 label={tContact("nameLabel")}
