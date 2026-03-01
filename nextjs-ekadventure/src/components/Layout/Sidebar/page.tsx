@@ -80,7 +80,7 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
           isCollapsible={false}
         >
           <div className="w-full flex justify-center">
-            <div className="w-[768px]">
+            <div className="w-full md:w-[768px]">
               <VerticalAd adSlot="8013946644" />
             </div>
           </div>

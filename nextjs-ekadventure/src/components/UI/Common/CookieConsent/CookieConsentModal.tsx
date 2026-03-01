@@ -5,11 +5,11 @@ import CloseButton from "../CloseButton/page";
 import CookieCategoryRows from "./CookieCategoryRows";
 import { useCookieConsent } from "@/store/CookieConsentContext";
 
-const CookieConsentModal: React.FC<{ handleSave: () => void, closeModal: () => void, isModalClosing: boolean }> = ({
-  handleSave,
-  closeModal,
-  isModalClosing
-}) => {
+const CookieConsentModal: React.FC<{
+  handleSave: () => void;
+  closeModal: () => void;
+  isModalClosing: boolean;
+}> = ({ handleSave, closeModal, isModalClosing }) => {
   const tConsent = useTranslations("CookieConsent");
 
   const { localCookiePreferences, togglePreference } = useCookieConsent();
@@ -30,14 +30,14 @@ const CookieConsentModal: React.FC<{ handleSave: () => void, closeModal: () => v
 
       {/* Modal content */}
       <div
-        className={`relative bg-white w-full max-w-md h-screen overflow-y-auto  ${
+        className={`relative bg-white w-full max-w-md h-dvh flex-col flex ${
           isModalClosing
             ? "animate-modal-right-exit"
             : "animate-modal-right-enter"
         }`}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex justify-between items-center z-10">
+        <div className="shrink-0 bg-white border-b border-gray-200 px-4 py-4 flex justify-between items-center z-10">
           <h2 className="text-base font-semibold text-text-dark">
             {tConsent("storagePreferencesTitle")}
           </h2>
@@ -45,13 +45,15 @@ const CookieConsentModal: React.FC<{ handleSave: () => void, closeModal: () => v
         </div>
 
         {/* Content */}
-        <CookieCategoryRows
-          preferences={localCookiePreferences}
-          handleToggle={handleToggle}
-        />
+        <div className="flex-1 overflow-y-auto">
+          <CookieCategoryRows
+            preferences={localCookiePreferences}
+            handleToggle={handleToggle}
+          />
+        </div>
 
         {/* Footer - Save Button */}
-        <div className="lg:sticky lg:bottom-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+        <div className="shrink-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
           <button
             onClick={handleSave}
             className="w-full bg-black text-white px-6 py-2 rounded-full hover:bg-background-green-accent active:bg-black transition-colors duration-300 font-medium"

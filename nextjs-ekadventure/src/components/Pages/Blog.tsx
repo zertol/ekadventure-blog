@@ -46,7 +46,7 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
       />
 
       <div className="w-full flex justify-center">
-        <div className="w-[768px]">
+        <div className="w-full md:w-[768px]">
           <ClientAdWrapper
             headerText="Google"
             className="mt-3"

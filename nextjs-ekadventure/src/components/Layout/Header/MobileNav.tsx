@@ -37,7 +37,7 @@ const MobileNav: React.FC<{
       />
 
       <div
-        className={`relative bg-background-green-accent pb-[12px] w-full max-w-[300px] h-screen overflow-y-auto custom-scrollbar  ${
+        className={`relative bg-background-green-accent pb-[12px] w-full max-w-[300px] h-dvh overflow-y-auto custom-scrollbar  ${
           isMobileMenuClosing
             ? "animate-modal-right-exit"
             : "animate-modal-right-enter"
