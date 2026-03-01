@@ -17,19 +17,18 @@ export function ClientAdWrapper({
   onHeightChange?: (height: number) => void;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const [hasContent, setHasContent] = useState({ isVisible: false, height: 0 });
   const [opened, setOpened] = useState(true);
 
   const consentData = useCookieConsent();
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
+    const content = contentRef.current;
+    if (!content) return;
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
-        const height = entry.borderBoxSize[0].blockSize;
-
+        const height = entry.contentRect.height;
         if (height > 0) {
           setHasContent({ isVisible: true, height: height });
           onHeightChange?.(height);
@@ -37,7 +36,7 @@ export function ClientAdWrapper({
       }
     });
 
-    resizeObserver.observe(container);
+    resizeObserver.observe(content);
     return () => resizeObserver.disconnect();
   }, [consentData.isFirstVisit]);
 
@@ -109,7 +108,7 @@ export function ClientAdWrapper({
           ref={containerRef}
           style={{ maxHeight: calc() }}
         >
-          {children}
+          <div ref={contentRef}>{children}</div>
         </div>
       </div>
     </div>
