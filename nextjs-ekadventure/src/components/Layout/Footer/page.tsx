@@ -10,7 +10,7 @@ import NewsLetterForm from "@/components/UI/Common/Form/NewsLetterForm/page";
 import { ClientAdWrapper } from "@/components/Ads/ClientAdWrapper";
 import HorizontalAd from "@/components/Ads/HorizontalAd";
 import { useCookieConsent } from "@/store/CookieConsentContext";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";
 
 const Footer: React.FC = () => {
@@ -92,13 +92,13 @@ const Footer: React.FC = () => {
         <p className="text-center">© {new Date().getFullYear()} Elie Kadoury</p>
         {pathName !== "/privacy-policy" && (
           <div className={`flex flex-row`}>
-            <a
+            <Link
               href="/privacy-policy"
               target="_blank"
               className="text-[10px] text-center underline hover:text-gray-300 transition-colors"
             >
               {tFooter("privacyPolicyLinkText")}
-            </a>
+            </Link>
             <button
               onClick={() => openModal()}
               className="bg-transparent p-0 ml-1 text-[10px] underline hover:text-gray-300 transition-colors hover:bg-transparent"
