@@ -67,8 +67,8 @@
         "featuredAdventuresTitle": "Featured Adventures",
         "featuredTopicsTitle": "Featured Topics",
         "featuredVideosTitle": "Featured Videos",
-        "requiredFieldMessage": "{0} is required",
-        "invalidEmailMessage": "Please enter a valid Email Address"
+        "invalidEmailMessage": "Please enter a valid Email Address",
+        "requiredFieldMessage": "{0} is required"
     },
     "Contact": {
         "contactDescriptionFirstPart": "Whether it's for working together or just simply sharing your adventure, I will be so thrilled to read all about it!",
@@ -151,6 +151,7 @@
     "UI": {
         "backToBlog": "Back to Blog",
         "backToHome": "Back to Home",
+        "closeButtonText": "Close",
         "helpButtonBlog": "Adventures",
         "helpButtonContact": "Get Help",
         "helpButtonHome": "Trailhead",
@@ -164,6 +165,7 @@
         "searchResultCategoryHeader": "Category",
         "searchResultNoResultsFound": "No results found!",
         "searchResultPostHeader": "Post",
+        "searchResultsForText": "Search results for: \"{0}\"",
         "selectLanguage": "Select a language",
         "viewAll": "View All",
         "workWithMe": "Work with me"
