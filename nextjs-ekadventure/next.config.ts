@@ -12,22 +12,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'ekadventure.com', pathname: '/cdn-cgi/image/**' }
     ]
-  },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push({
-        jsdom: 'jsdom',
-      });
-      // Also ignore jsdom during bundling
-      const webpack = require('webpack');
-      config.plugins.push(
-        new webpack.IgnorePlugin({
-          resourceRegExp: /^jsdom$/,
-        })
-      );
-    }
-    return config;
-  },
+  }
 };
 
 const withNextIntl = createNextIntlPlugin();

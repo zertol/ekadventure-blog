@@ -5,7 +5,7 @@ import {
   getAllYouTubeVideos,
   getYouTubeVideoById,
 } from "@/api/controllers/youtube";
-import DOMPurify from "isomorphic-dompurify";
+import SanitizedHTML from "@/components/UI/YouTube/SanitizedHTML";
 import { formatStringToHtml } from "@/utils/data/helpers";
 
 export async function generateMetadata({
@@ -101,13 +101,9 @@ export default async function VideoPage({
             ></iframe>
           </div>
 
-          <div
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(
-                formatStringToHtml(video.items[0].snippet.description)
-              ),
-            }}
-          ></div>
+          <div>
+            <SanitizedHTML html={formatStringToHtml(video.items[0].snippet.description)} />
+          </div>
         </div>
       )}
     </App>
