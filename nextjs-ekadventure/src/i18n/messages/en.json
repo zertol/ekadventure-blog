@@ -27,6 +27,7 @@
     },
     "Article": {
         "articleDetailedVideoTitle": "Detailed Video of the Adventure",
+        "captionLabel": "Caption",
         "capturedMomentsTitle": "Captured Moments",
         "creditsShotTakenByText": "Shot taken by",
         "hikingPassTitle": "Hiking Pass",

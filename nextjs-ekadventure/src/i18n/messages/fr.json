@@ -27,6 +27,7 @@
     },
     "Article": {
         "articleDetailedVideoTitle": "Vidéo détaillée de l'Aventure",
+        "captionLabel": "Légende",
         "capturedMomentsTitle": "Moments Capturés",
         "creditsShotTakenByText": "Photo prise par",
         "hikingPassTitle": "Passe de Randonnée",

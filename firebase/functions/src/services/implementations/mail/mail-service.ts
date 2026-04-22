@@ -84,6 +84,8 @@ export class MailService implements IMailService {
     }
 
     async sendBroadcastEmail(broadcast: BroadcastType): Promise<CreateBatchResponse<any>> {
+        console.log("Preparing to send broadcast email with the following details:", JSON.stringify(broadcast));
+
         const resend = new Resend(process.env.RESEND_API_KEY);
 
         const listResult: ListContactsResponse = await resend.contacts.list();
@@ -99,10 +101,15 @@ export class MailService implements IMailService {
                 to: contact.email,
                 template: {
                     id: "03a05155-d2ef-47ff-983f-998c7246a3ea",
-                    variables: { contactName: "Fellow Adventurer", ...broadcast }
+                    variables: {
+                        contactName: "Fellow Adventurer",
+                        ...broadcast
+                    }
                 }
             };
         });
+
+        console.log("Constructed contacts batch for broadcast email:", JSON.stringify(contactsBatch));
 
         const sendResult: CreateBatchResponse<any> = await resend.batch.send(contactsBatch);
 

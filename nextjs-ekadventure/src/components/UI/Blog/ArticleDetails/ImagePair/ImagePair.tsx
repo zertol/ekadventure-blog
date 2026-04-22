@@ -5,7 +5,7 @@ interface ImagePairProps {
 }
 
 const ImagePair: React.FC<ImagePairProps> = ({
-  img: { url, alt, credit },
+  img: { url, alt, credit, info },
 }) => {
   const tArticle = useTranslations("Article");
   return (
@@ -25,6 +25,14 @@ const ImagePair: React.FC<ImagePairProps> = ({
           {tArticle("creditsShotTakenByText")} &nbsp;
           <strong>
             <em>{credit}</em>
+          </strong>
+        </p>
+      )}
+      {info && (
+        <p className="text-xs leading-none flex-start-row mt-2 text-text-dark/70">
+          {tArticle("captionLabel")}: &nbsp;
+          <strong>
+            <em>{info}</em>
           </strong>
         </p>
       )}
