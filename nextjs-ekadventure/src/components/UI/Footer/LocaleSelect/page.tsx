@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useCookieConsent } from "@/store/CookieConsentContext";
+import { COOKIE_MAX_AGE, EK_USER_SETTINGS_COOKIE_NAME } from "@/utils/constants";
 import { useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useTransition } from "react";
@@ -22,7 +23,7 @@ const LocaleSelect: React.FC = () => {
         selected_language: nextLocale,
       };
       const value = encodeURIComponent(JSON.stringify(userSettings));
-      document.cookie = `EK_USER_SETTINGS=${value}; path=/; max-age=${365 * 24 * 60 * 60}; SameSite=Lax`;
+      document.cookie = `${EK_USER_SETTINGS_COOKIE_NAME}=${value}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
     }
 
     startTransition(() => {
