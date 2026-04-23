@@ -9,7 +9,7 @@ interface SocialIconsProps {
 const SOCIAL_LINKS = [
   { icon: "instagram", href: "https://instagram.com/e.kadventure" },
   { icon: "youtube", href: "https://youtube.com/@e.kadventure" },
-  { icon: "facebook", href: "https://facebook.com/e.kadventure" },
+  { icon: "facebook", href: "https://facebook.com/e.kadvnture" },
   { icon: "tiktok", href: "https://tiktok.com/@e.kadventure" },
 ] as const;
 
