@@ -2,6 +2,38 @@
 	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 	<url>
+		<loc>https://ekadventure.com/video/VO9sPeR1buk</loc>
+		<video:video>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/VO9sPeR1buk/maxresdefault.jpg</video:thumbnail_loc>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/VO9sPeR1buk/sddefault.jpg</video:thumbnail_loc>
+			<video:title>
+				<![CDATA[ How AI Is Faking the Outdoors And Why It Matters | The Ekadventure Podcast ]]>
+			</video:title>
+			<video:description>
+				<![CDATA[ AI is everywhere, and the outdoor space is no exception. In this episode, I talk about how AI-generated content is quietly flooding our feeds, from fake trail photos to gear reviews written by nobody who ever touched the gear, and why most of us can't even tell the difference. We break down what to actually look for, how to protect yourself from bad AI-generated trail beta, and why the real, imperfect, muddy outdoor experience is more valuable now than ever. If you've ever saved a hiking photo that turned out to be fake, this one's for you. Useful Resources & More Hiking Content: ▶ Patreon: https://www.patreon.com/c/ekadventure ▶ Link to Conjointly Study: https://conjointly.com/blog/real-vs-ai-images-2025/ ▶ Social Media: - Instagram: https://instagram.com/e.kadventure - Tiktok: https://tiktok.com/@e.kadventure ▶ Blog: https://ekadventure.com/ In this episode, I cover: 00:00 Intro: Fake Is The New Smoking 00:54 The Problem & The Study 01:30 How To Spot Fake Content 03:38 Personal Thoughs 04:22 Thank You #socialmedia #outdoor #podcast #ai #influencer #modernliving #documenting #filming #mountains #hiking #camping #burnout #energy #fakecontent #content #fakenews #fake ]]>
+			</video:description>
+			<video:player_loc allow_embed="yes">https://youtube.com/watch?v=VO9sPeR1buk</video:player_loc>
+			<video:upload_date>2026-04-27T01:18:45Z</video:upload_date>
+			<video:duration>279</video:duration>
+		</video:video>
+	</url>
+	<url>
+		<loc>https://ekadventure.com/video/t_7TWoqTubE</loc>
+		<video:video>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/t_7TWoqTubE/maxresdefault.jpg</video:thumbnail_loc>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/t_7TWoqTubE/sddefault.jpg</video:thumbnail_loc>
+			<video:title>
+				<![CDATA[ Social Media & AI's Impact on The Outdoors | The Ekadventure Podcast ]]>
+			</video:title>
+			<video:description>
+				<![CDATA[ Outdoor burnout is real, and if you're struggling with Social Media and Outdoor Influencers, this episode is for you! I share my thoughts on how modern day Hiking is impacted negatively by Social Media and how we can better use AI to our advantage instead of relying on it. Useful Resources & More Hiking Content: ▶ Patreon: https://www.patreon.com/c/ekadventure ▶ Social Media: - Instagram: https://instagram.com/e.kadventure - Tiktok: https://tiktok.com/@e.kadventure ▶ Blog: https://ekadventure.com/ In this episode, I cover: 00:00 Intro: The Way We're Experiencing The Outdoors 00:30 Social Media Outdoor Videos 02:18 Admiring Nature Vs. Documenting It 04:08 Let's Talk AI 05:55 Recap & Main Points 06:25 Thank You #socialmedia #outdoor #podcast #ai #influencer #modernliving #documenting #filming #mountains #hiking #camping #burnout #energy #tired ]]>
+			</video:description>
+			<video:player_loc allow_embed="yes">https://youtube.com/watch?v=t_7TWoqTubE</video:player_loc>
+			<video:upload_date>2026-04-19T21:44:47Z</video:upload_date>
+			<video:duration>399</video:duration>
+		</video:video>
+	</url>
+	<url>
 		<loc>https://ekadventure.com/video/Vb3x0Bhj3hc</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/Vb3x0Bhj3hc/maxresdefault.jpg</video:thumbnail_loc>
