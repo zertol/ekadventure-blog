@@ -27,7 +27,7 @@ const YouTubeVideo: React.FC<ItemSnippet> = (ytPlaylistItem) => {
             </div>
           </div>
           <img
-            src={ytPlaylistItem.thumbnails.maxres.url}
+            src={ytPlaylistItem.thumbnails.maxres?.url || ytPlaylistItem.thumbnails.standard?.url}
             alt={`${ytPlaylistItem.title} Thumbnail Image`}
             className="object-cover transition-transform duration-300 group-hover:scale-[101%] h-full w-full rounded-lg"
           />
