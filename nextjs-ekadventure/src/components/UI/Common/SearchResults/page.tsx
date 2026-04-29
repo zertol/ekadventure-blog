@@ -16,9 +16,9 @@ export const SearchResults: React.FC<{
 
   return (
     <div
-      className={`${!isInContainer ? "absolute" : ""} mt-1 left-auto top-full
-             bg-background-dark rounded min-w-[200px] shadow-lg z-50 ${isInContainer ? "max-h-32 md:max-h-40" : "max-h-80"} 
-             overflow-auto`}
+      className={`${!isInContainer ? "absolute left-auto top-full" : ""} mt-1 
+             bg-background-dark rounded shadow-lg z-50 ${isInContainer ? "w-full" : " max-h-80"} 
+             overflow-auto custom-scrollbar`}
     >
       {loading && (
         <div className="p-2 flex justify-center w-full">
@@ -34,7 +34,7 @@ export const SearchResults: React.FC<{
 
       {!loading &&
         results.map((r) => (
-          <SearchResult key={r._id} result={r} highlight={query} />
+          <SearchResult key={r._id} result={r} highlight={query} outsideLocale={outsideLocale} />
         ))}
     </div>
   );

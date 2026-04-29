@@ -15,11 +15,6 @@ const MobileNav: React.FC<{
 
   useEffect(() => {
     setBackdropOpen(!isMobileMenuClosing);
-    if (!isMobileMenuClosing) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "auto";
-    }
   }, [isMobileMenuClosing]);
 
   return (

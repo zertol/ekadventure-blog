@@ -1,7 +1,23 @@
-const CloseButton: React.FC<{ handleClose: () => void, className?: string }> = ({
-  handleClose,
-  className
-}) => {
+import { useTranslations } from "next-intl";
+
+const CloseButton: React.FC<{
+  handleClose: () => void;
+  className?: string;
+  isModalCloseButton?: boolean;
+}> = ({ handleClose, className, isModalCloseButton }) => {
+  if (isModalCloseButton) {
+    const tUI = useTranslations("UI");
+    return (
+      <button
+        onClick={handleClose}
+        className={`primary-button px-6 py-2 ${className}`}
+        aria-label="Close"
+      >
+        {tUI("closeButtonText")}
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={handleClose}

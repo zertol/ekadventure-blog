@@ -85,7 +85,15 @@ export const generateBlockComponents = (
     },
     block: {
       normal: ({ children, index }: PortableTextComponentProps<any>) => {
-        const renderedText= children?.toString().toLocaleLowerCase() === "$spacing$" ? <br /> : <p className="mb-3 leading-6">{children}</p>;
+        const renderedText =
+          children?.toString().toLocaleLowerCase() === "$spacing$" ? (
+            <br />
+          ) : children?.toString().toLocaleLowerCase() === "$parspacing$" ? (
+            <div className="mb-3"></div>
+          ) : (
+            <p className="mb-3 leading-6">{children}</p>
+          );
+
         return (
           <>
             {renderedText}

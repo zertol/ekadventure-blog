@@ -1,19 +1,30 @@
 import { useSearch } from "@/utils/hooks/use-search";
 import { SearchResults } from "../SearchResults/page";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import ModalDialog from "../ModalDialog/page";
 
 const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
   isInContainer,
 }) => {
   const { query, setQuery, results, loading } = useSearch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const tUI = useTranslations("UI");
 
   const searchRef = useRef<HTMLInputElement>(null);
 
   const searchSite = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsModalOpen(true);
     setQuery(searchRef.current!.value || "");
+  };
+
+  const closeSearchResultsModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setQuery("");
+    }, 300);
   };
 
   if (isInContainer) {
@@ -38,12 +49,25 @@ const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
           </div>
         </form>
         {(query || loading) && (
-          <SearchResults
-            isInContainer={true}
-            query={query}
-            results={results}
-            loading={loading}
-          />
+          <ModalDialog
+            isOpen={isModalOpen}
+            onClose={closeSearchResultsModal}
+            className="p-4 bg-background-green-accent"
+          >
+            {!loading && (
+              <div className="mb-3">
+                <h4 className="text-white">
+                  {tUI("searchResultsForText", { 0: query })}
+                </h4>
+              </div>
+            )}
+            <SearchResults
+              isInContainer={true}
+              query={query}
+              results={results}
+              loading={loading}
+            />
+          </ModalDialog>
         )}
       </>
     );

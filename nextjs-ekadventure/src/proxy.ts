@@ -1,6 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
+import { EK_USER_SETTINGS_COOKIE_NAME } from './utils/constants';
 
 type ValidLocale = typeof routing.locales[number];
 
@@ -52,9 +53,7 @@ export default function proxy(request: NextRequest) {
         }
 
         if (newPathname !== pathname) {
-            const redirectUrl = new URL(newPathname, request.url);
-            redirectUrl.search = request.nextUrl.search;
-            return NextResponse.redirect(redirectUrl);
+            return NextResponse.redirect(new URL(newPathname, request.url));
         }
     }
 

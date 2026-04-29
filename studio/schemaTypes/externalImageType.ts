@@ -20,6 +20,11 @@ export const externalImageType = defineType({
       title: 'Photo Credit',
       type: 'string',
     },
+    {
+      name: 'info',
+      title: 'Photo Info',
+      type: 'string',
+    }
   ],
   preview: {
     select: {

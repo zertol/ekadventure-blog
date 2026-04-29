@@ -2,18 +2,28 @@
 import Image from "next/image";
 import "./globals.css";
 import { useSearch } from "@/utils/hooks/use-search";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { SearchResults } from "@/components/UI/Common/SearchResults/page";
 import HelpButtons from "@/components/UI/Common/HelpButtons/page";
+import ModalDialog from "@/components/UI/Common/ModalDialog/page";
 
 export default function NotFound() {
   const { query, setQuery, results, loading } = useSearch(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const searchRef = useRef<HTMLInputElement>(null);
 
   const searchSite = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsModalOpen(true);
     setQuery(searchRef.current!.value || "");
+  };
+
+  const closeSearchResultsModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setQuery("");
+    }, 300);
   };
 
   return (
@@ -74,12 +84,27 @@ export default function NotFound() {
                       </div>
                     </form>
                     {(query || loading) && (
-                      <SearchResults
-                        isInContainer={true}
-                        query={query}
-                        results={results}
-                        loading={loading}
-                      />
+                      <ModalDialog
+                        isOpen={isModalOpen}
+                        onClose={closeSearchResultsModal}
+                        className="p-4 bg-background-green-accent"
+                        outsideLocale={true}
+                      >
+                        {!loading && (
+                          <div className="mb-3">
+                            <h4 className="text-white">
+                              Search results for: {query}
+                            </h4>
+                          </div>
+                        )}
+                        <SearchResults
+                          isInContainer={true}
+                          query={query}
+                          results={results}
+                          loading={loading}
+                          outsideLocale={true}
+                        />
+                      </ModalDialog>
                     )}
                   </div>
                 </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+// @ts-ignore
 import "../globals.css";
 import PagesContextProvider from "@/store/PagesContext";
 import { Suspense } from "react";
