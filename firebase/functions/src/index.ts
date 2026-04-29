@@ -1,3 +1,4 @@
+
 import * as PagesController from "./controllers/pages/";
 import * as PostsController from "./controllers/posts/";
 import * as CategoriesController from "./controllers/categories/";
@@ -6,6 +7,7 @@ import * as CommentsController from "./controllers/comments/";
 import * as ContactController from "./controllers/contact/";
 import * as SearchController from "./controllers/search/";
 import * as YouTubeController from "./controllers/youtube/";
+import * as ECommerceController from "./controllers/ecommerce";
 import { DIRegistration } from "./utils/di-registration";
 
 // Dependency Registrations
@@ -44,3 +46,9 @@ export const search = SearchController.search;
 export const getLatestYouTubeVideos = YouTubeController.getLatestYouTubeVideos;
 export const getAllYouTubeVideos = YouTubeController.getAllYouTubeVideos;
 export const getYouTubeVideoById = YouTubeController.getYouTubeVideoById;
+
+// ECommerce
+export const getProducts = ECommerceController.getProducts;
+export const createCheckoutSession = ECommerceController.createCheckoutSession;
+export const sendProductLink = ECommerceController.sendProductLink;
+export const generateProductDownloadLink = ECommerceController.generateProductDownloadLink;

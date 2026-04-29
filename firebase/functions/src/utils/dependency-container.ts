@@ -7,7 +7,7 @@ export class DependencyContainer {
 
     static resolve<T>(key: string): T {
         const instance = this.instances.get(key);
-        if (!instance) {
+        if (instance === undefined) {
             throw new Error(`Dependency '${key}' not found in container.`);
         }
         return instance as T;

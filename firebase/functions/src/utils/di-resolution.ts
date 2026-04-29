@@ -16,6 +16,8 @@ import { ISearchService } from "../services/interfaces/i-search-service";
 import { SearchService } from "../services/implementations/search/search-service";
 import { IYouTubeService } from "../services/interfaces/i-youtube-service";
 import { YouTubeService } from "../services/implementations/youtube/youtube-service";
+import { IEcommerceService } from "../services/interfaces/i-ecommerce-service";
+import { EcommerceService } from "../services/implementations/ecommerce/ecommerce-service";
 
 export class DIResolutions {
     // Service Instances
@@ -27,6 +29,7 @@ export class DIResolutions {
     static getAboutService = (): IAboutService => DependencyContainer.resolve<AboutService>("IAboutService");
     static getSearchService = (): ISearchService => DependencyContainer.resolve<SearchService>("ISearchService");
     static getYouTubeService = (): IYouTubeService => DependencyContainer.resolve<YouTubeService>("IYouTubeService");
+    static getEcommerceService = (): IEcommerceService => DependencyContainer.resolve<EcommerceService>("IEcommerceService");
 
     // CMS Client Instance
     static getCMSClient = (): ICMSClient => DependencyContainer.resolve<ICMSClient>("ICMSClient");

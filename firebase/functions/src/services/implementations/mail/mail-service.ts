@@ -3,6 +3,11 @@ import { IMailService } from "../../interfaces/i-mail-service";
 import { ContactType } from "../../../types/domain/contact-type";
 import { SubscriberType } from "../../../types/domain/subscriber-type";
 import { BroadcastType } from "../../../types/domain/broadcast-type";
+import { StripeWebhookEvent } from "../../../types/ecommerce/stripe-webhook-event-type";
+import { ekadventureBlogDb } from "../../../cms/firestore/firestore-db";
+import { Constants } from "../../../Constants";
+import * as Helpers from "../../../utils/helpers";
+import { Locale, t } from "../../../utils/localizer";
 
 export class MailService implements IMailService {
     async sendContactMail(contactInfo: ContactType): Promise<CreateEmailResponse> {
@@ -125,5 +130,47 @@ export class MailService implements IMailService {
         }
 
         return removeResult;
+    }
+
+    async sendProductLink(event: StripeWebhookEvent): Promise<CreateEmailResponse | { received: boolean }> {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const token = crypto.randomUUID();
+        const session = event.data.object;
+
+        if (session.payment_status !== "paid") {
+            return { received: true };
+        }
+
+        try {
+            await ekadventureBlogDb.collection("product_download_tokens").doc(token).set({
+                metadata: Helpers.mapMetadata(session.metadata),
+                customerDetails: session.customer_details,
+                locale: session.locale,
+                expiresIn: Constants.DOWNLOAD_LINK_EXPIRES_IN,
+                used: false
+            });
+        } catch (err) {
+            throw new Error(`Failed to create download token: ${err}`);
+        }
+
+        const sendResult: CreateEmailResponse = await resend.emails.send({
+            from: "Elie from Ekadventure <hello@ekadventure.com>",
+            replyTo: "e.kadvnture@gmail.com",
+            to: session.customer_details.email,
+            template: {
+                id: "b8d038da-4a6c-42fa-a3a4-2cd006bffe78",
+                variables: {
+                    subjectProduct: t("email.afterCheckout.subject", session.locale as Locale),
+                    customerName: session.customer_details.name,
+                    productLink: "https://ekadventure.com"
+                }
+            }
+        });
+
+        if (sendResult.error) {
+            throw new Error(`Resend email error: ${JSON.stringify(sendResult.error)}`);
+        }
+
+        return sendResult;
     }
 }

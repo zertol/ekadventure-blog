@@ -13,7 +13,7 @@ export const createApiHandler = <T>(handler: Handler<T>) => {
             apiResult.Result = result ?? null;
             res.status(200).json(apiResult);
         } catch (err) {
-            apiResult.ErrorMessages.push((err as Error).message || "Unknown error");
+            apiResult.ErrorMessages?.push((err as Error).message || "Unknown error");
             res.status(500).json(apiResult);
         }
     };

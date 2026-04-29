@@ -5,7 +5,7 @@ import { IYouTubeService } from "../../interfaces/i-youtube-service";
 export class YouTubeService implements IYouTubeService {
     private channelId: string = "UOdgQ-R9q50rOmIDTVU8b_A";
     private playlistId: string = "UULFOdgQ-R9q50rOmIDTVU8b_A";
-    private ytApiKey: string = process.env.YOUTUBE_API_KEY;
+    private ytApiKey: string = process.env.YOUTUBE_API_KEY!;
 
     async getLatestYouTubeVideos(params: YouTubePlaylistParamsType): Promise<YouTubePlaylistType> {
         const pageTokenParam: string = params.pageToken ? `&pageToken=${params.pageToken}` : "";

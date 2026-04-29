@@ -5,11 +5,12 @@ import { withApiAuth } from "../../core/middleware/auth-middleware";
 import { createApiHandler } from "../../core/handler/create-api-handler";
 import { DIResolutions } from "../../utils/di-resolution";
 import { SearchParamsType } from "../../types/api/search-params-type";
+import { SearchResultType } from "../../types/domain/search-result-type";
 
 export const search = onRequest(
     { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<any> => {
+        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<SearchResultType[]> => {
             const params: SearchParamsType = req.body;
             return await DIResolutions.getSearchService().search(params.query, params.locale, params.limit, params.offset);
         }

@@ -5,11 +5,12 @@ import { withApiAuth } from "../../core/middleware/auth-middleware";
 import { ApiResult } from "../../types/api/api-result";
 import { DIResolutions } from "../../utils/di-resolution";
 import { YouTubePlaylistParamsType } from "../../types/domain/youtube-playlist-params-type";
+import { YouTubePlaylistType } from "../../types/domain/youtube-playlist-type";
 
 export const getLatestYouTubeVideos = onRequest(
     { secrets: ["YOUTUBE_API_KEY", "X_API_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<any> => {
+        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<YouTubePlaylistType> => {
             const ytService = DIResolutions.getYouTubeService();
             return await ytService.getLatestYouTubeVideos(req.body as YouTubePlaylistParamsType);
         }
@@ -18,7 +19,7 @@ export const getLatestYouTubeVideos = onRequest(
 export const getAllYouTubeVideos = onRequest(
     { secrets: ["YOUTUBE_API_KEY", "X_API_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<any> => {
+        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<YouTubePlaylistType> => {
             const ytService = DIResolutions.getYouTubeService();
             return await ytService.getAllYouTubeVideos();
         }
@@ -27,7 +28,7 @@ export const getAllYouTubeVideos = onRequest(
 export const getYouTubeVideoById = onRequest(
     { secrets: ["YOUTUBE_API_KEY", "X_API_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<any> => {
+        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<YouTubePlaylistType> => {
             const ytService = DIResolutions.getYouTubeService();
             return await ytService.getYouTubeVideoById(req.body as YouTubePlaylistParamsType);
         }
