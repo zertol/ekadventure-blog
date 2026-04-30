@@ -1,6 +1,7 @@
 export const handleApiRequest = async <T>(
     url: string,
-    options?: RequestInit
+    options?: RequestInit,
+    revalidateIn?: number
 ): Promise<ApiResult<T>> => {
     const result: ApiResult<T> = {
         Result: null,
@@ -15,7 +16,7 @@ export const handleApiRequest = async <T>(
                 "X-API-KEY": process.env.X_API_KEY || '',
                 ...options?.headers
             },
-            next: { revalidate: 60 },
+            next: { revalidate: revalidateIn ?? 60 },
         }).then(res => res.json());
 
         if (response.ErrorMessages && response.ErrorMessages.length > 0) {

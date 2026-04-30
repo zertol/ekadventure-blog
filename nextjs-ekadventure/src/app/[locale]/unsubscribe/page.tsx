@@ -4,7 +4,7 @@ import NewsLetterForm from "@/components/UI/Common/Form/NewsLetterForm/page";
 import { useTranslations } from "next-intl";
 import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 
-const Unsubscribe: React.FC = () => {
+const UnsubscribePage: React.FC = () => {
   const tLetter = useTranslations("Newsletter");
 
   return (
@@ -46,4 +46,4 @@ const Unsubscribe: React.FC = () => {
   );
 };
 
-export default Unsubscribe;
+export default UnsubscribePage;

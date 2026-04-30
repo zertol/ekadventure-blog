@@ -6,5 +6,13 @@ export class Constants {
     public static readonly S3_BUCKET_NAME = "ekadventure_images";
     public static readonly S3_DIGITAL_PHOTOS_DIR = "digital-photos";
 
-    public static readonly DOWNLOAD_LINK_EXPIRES_IN = 86400;
+    // Ecommerce
+    public static readonly DOWNLOAD_LINK_EXPIRES_IN_DAYS = 3;
+    public static readonly DOWNLOAD_LINK_EXPIRES_IN_SECONDS = this.DOWNLOAD_LINK_EXPIRES_IN_DAYS * 24 * 60 * 60; // 3 days
+
+    // Resend Email
+    public static readonly RESEND_HELLO_EMAIL_FROM = "Elie - Ekadventure <hello@ekadventure.com>";
+    public static readonly RESEND_BROADCAST_EMAIL_FROM = "Ekadventure Blog <blog@ekadventure.com>";
+    public static readonly RESEND_PRODUCT_EMAIL_FROM = "Ekadventure Shop <shop@ekadventure.com>";
+    public static readonly RESEND_EMAIL_REPLY_TO = "e.kadvnture@gmail.com";
 }

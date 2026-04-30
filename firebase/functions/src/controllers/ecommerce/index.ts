@@ -6,7 +6,6 @@ import { ApiResult } from "../../types/api/api-result";
 import { ProductsResponseType } from "../../types/ecommerce/product-response-type";
 import { DIResolutions } from "../../utils/di-resolution";
 import { CheckoutSessionParamsType } from "../../types/ecommerce/checkout-session-params-type";
-import { ProductDownloadLinkType } from "../../types/ecommerce/product-download-link-type";
 import { ParamsType } from "../../types/api/params-type";
 import { URLType } from "../../types/domain/url-type";
 import { StripeWebhookEvent } from "../../types/ecommerce/stripe-webhook-event-type";
@@ -46,9 +45,9 @@ export const sendProductLink = onRequest(
 export const generateProductDownloadLink = onRequest(
     { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY", "R2_ENDPOINT", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<ProductDownloadLinkType> => {
+        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<URLType> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
-            return await EcommerceService.generateProductDownloadLink(params.item_key, params.expiresIn ? parseInt(params.expiresIn) : undefined);
+            return await EcommerceService.generateProductDownloadLink(params.token);
         }
     )));

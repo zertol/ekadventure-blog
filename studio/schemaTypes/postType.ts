@@ -184,8 +184,20 @@ export const postType = defineType({
       name: "broadcastData",
       type: 'object',
       fields: [
-        { name: "articleUrl", type: "string" },
-        { name: "articleBroadcastIntro", type: "string" }
+        {
+          name: "articleUrl", type: 'object',
+          fields: [
+            { name: 'en', type: 'string' },
+            { name: 'fr', type: 'string' }
+          ]
+        },
+        {
+          name: "articleBroadcastIntro", type: 'object',
+          fields: [
+            { name: 'en', type: 'string' },
+            { name: 'fr', type: 'string' }
+          ]
+        }
       ]
     })
   ],

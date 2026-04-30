@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import FormInput from "../FormInput/FormInput";
 import { useState } from "react";
 import { handleMailService } from "@/api/controllers/contact";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import SubmitStatus from "../SubmitStatus/page";
 
 interface NewsLetterFormProps {
@@ -15,6 +15,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
   newsLetterAction,
 }) => {
   const tLetter = useTranslations("Newsletter");
+  const locale = useLocale();
 
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -28,7 +29,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<SubscriberType>();
+  } = useForm<ContactType>();
 
   const onReset = () => {
     setTimeout(() => {
@@ -36,11 +37,16 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
     }, 3000);
   };
 
-  const onSubmit = async (subscriberData: SubscriberType) => {
+  const onSubmit = async (subscriberData: ContactType) => {
     setIsLoading(true);
     try {
       const response = await handleMailService(
-        subscriberData,
+        {
+          ...subscriberData,
+          preferences: {
+            locale: locale,
+          },
+        },
         newsLetterAction,
       );
 

@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ContactType>();
+  } = useForm<ContactFormType>();
 
   const onReset = () => {
     setTimeout(() => {
@@ -35,7 +35,7 @@ const Contact: React.FC = () => {
     }, 3000);
   };
 
-  const onSubmit = async (data: ContactType) => {
+  const onSubmit = async (data: ContactFormType) => {
     setIsLoading(true);
     try {
       const response = await handleMailService(data, "contact");

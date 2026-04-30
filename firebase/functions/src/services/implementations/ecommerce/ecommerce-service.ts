@@ -1,6 +1,5 @@
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { CheckoutSessionParamsType } from "../../../types/ecommerce/checkout-session-params-type";
-import { ProductDownloadLinkType } from "../../../types/ecommerce/product-download-link-type";
 import { ProductsResponseType } from "../../../types/ecommerce/product-response-type";
 import { ProductType } from "../../../types/ecommerce/product-type";
 import * as Helpers from "../../../utils/helpers";
@@ -9,6 +8,8 @@ import Stripe from "stripe";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { Constants } from "../../../Constants";
 import { URLType } from "../../../types/domain/url-type";
+import { ProductDownloadTokenType } from "../../../types/ecommerce/product-download-token-type";
+import { ekadventureBlogDb } from "../../../cms/firestore/firestore-db";
 
 type StripeProduct = Awaited<ReturnType<typeof Stripe.prototype.products.list>>["data"][number];
 
@@ -16,7 +17,7 @@ export class EcommerceService implements IEcommerceService {
     private stripe: Stripe.Stripe;
 
     initStripe() {
-        const stripeKey = process.env.STRIPE_SECRET_KEY_LOCAL;
+        const stripeKey = process.env.STRIPE_SECRET_KEY;
 
         if (!stripeKey) {
             throw new Error("Stripe Key is not defined check your variables");
@@ -98,34 +99,56 @@ export class EcommerceService implements IEcommerceService {
         return { url: session.url };
     }
 
-    async generateProductDownloadLink(itemKey: string, expiresIn?: number): Promise<ProductDownloadLinkType> {
-        const client = new S3Client({
-            endpoint: process.env.R2_ENDPOINT,
-            region: "auto",
-            credentials: {
-                accessKeyId: process.env.R2_ACCESS_KEY_ID,
-                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
+    async generateProductDownloadLink(token: string): Promise<URLType> {
+        try {
+            if (!token) {
+                throw new Error("Token should have a value");
             }
-        });
 
-        const bucketName = "ekadventure-images"; // Your bucket name
-        const objectKey = `digital-photos/${itemKey}`; // Your file path
-        const fileName = itemKey.split("/").pop();
+            const tokenRef = ekadventureBlogDb
+                .collection("product_download_tokens")
+                .doc(token);
 
-        const command = new GetObjectCommand({
-            Bucket: bucketName,
-            Key: objectKey,
-            ResponseContentDisposition: `attachment; filename=${fileName}`,
-            ResponseContentType: Helpers.getContentType(fileName ?? "")
-        });
+            const tokenDoc = await tokenRef.get();
 
-        const url = await getSignedUrl(client, command, { expiresIn: expiresIn ?? Constants.DOWNLOAD_LINK_EXPIRES_IN });
+            if (!tokenDoc.exists) {
+                throw new Error("Download token not found");
+            }
 
-        if (!url) {
-            throw new Error("Downloadable URL is null");
+            const tokenData = tokenDoc.data() as ProductDownloadTokenType;
+
+            if (tokenData.used) throw new Error("Download token already used");
+            if (tokenData.expiresAt < Date.now()) throw new Error("Download token expired");
+
+            // mark as used before generating the link
+            await tokenRef.update({ used: true });
+
+            const client = new S3Client({
+                endpoint: process.env.R2_ENDPOINT,
+                region: "auto",
+                credentials: {
+                    accessKeyId: process.env.R2_ACCESS_KEY_ID,
+                    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
+                }
+            });
+
+            const bucketName = "ekadventure-images"; // Your bucket name
+            const objectKey = `digital-photos/${tokenData.metadata.item_key}`; // Your file path
+            const fileName = tokenData.metadata.item_key.split("/").pop();
+
+            const command = new GetObjectCommand({
+                Bucket: bucketName,
+                Key: objectKey,
+                ResponseContentDisposition: `attachment; filename=${fileName}`,
+                ResponseContentType: Helpers.getContentType(fileName ?? "")
+            });
+
+            const url = await getSignedUrl(client, command, { expiresIn: tokenData.expiresAt ?? Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS });
+
+            return { url: encodeURIComponent(url) };
+        } catch (err) {
+            throw new Error(`Failed to retrieve download token: ${err}`);
         }
-
-        return { url: encodeURIComponent(url) };
     }
 }
 

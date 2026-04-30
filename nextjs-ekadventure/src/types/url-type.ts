@@ -1,0 +1,3 @@
+type URLType = {
+    url: string;
+}

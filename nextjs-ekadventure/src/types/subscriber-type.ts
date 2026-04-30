@@ -1,3 +1,0 @@
-type SubscriberType = {
-    email: string;
-}

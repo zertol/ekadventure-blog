@@ -1,4 +1,6 @@
+import { BroadcastLocaleType, BroadcastType } from "../types/domain/broadcast-type";
 import { ProductItemSource, ProductItemType, ProductMetadataType } from "../types/ecommerce/product-metadata-type";
+import { Locale } from "./localizer";
 
 // ECommerce
 export function isValidProductMetadata(meta: Record<string, string>): meta is ProductMetadataType {
@@ -44,4 +46,31 @@ export function sanitizeMetadata(metadata: Record<string, string | null | undefi
 export function localizeMetadata(metadata: ProductMetadataType, field: "item_display_name" | "item_description", locale?: string): string {
     locale = locale ?? "en";
     return metadata[`${field}_${locale}` as keyof ProductMetadataType] as string;
+}
+
+// Email
+export function mapBroadcastDataBasedOnLocale(broadcast: BroadcastType, locale?: Locale): BroadcastLocaleType {
+    locale = locale ?? "en";
+    switch (locale) {
+        case "en":
+            return {
+                articleBroadcastIntro: broadcast.articleBroadcastIntroEn,
+                articleTitle: broadcast.articleTitleEn,
+                articleUrl: broadcast.articleUrlEn
+            };
+
+        case "fr":
+            return {
+                articleBroadcastIntro: broadcast.articleBroadcastIntroFr,
+                articleTitle: broadcast.articleTitleFr,
+                articleUrl: broadcast.articleUrlFr
+            };
+
+        default:
+            return {
+                articleBroadcastIntro: broadcast.articleBroadcastIntroEn,
+                articleTitle: broadcast.articleTitleEn,
+                articleUrl: broadcast.articleUrlEn
+            };
+    }
 }

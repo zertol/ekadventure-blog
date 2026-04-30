@@ -1,23 +1,24 @@
-import { CreateBatchResponse, CreateEmailResponse, ListContactsResponse, RemoveContactsResponse, Resend } from "resend";
+import { CreateBatchResponse, CreateEmailResponse, GetContactResponse, ListContactsResponse, RemoveContactsResponse, Resend, UpdateContactResponse } from "resend";
 import { IMailService } from "../../interfaces/i-mail-service";
-import { ContactType } from "../../../types/domain/contact-type";
-import { SubscriberType } from "../../../types/domain/subscriber-type";
+import { ContactFormType } from "../../../types/domain/contact-form-type";
 import { BroadcastType } from "../../../types/domain/broadcast-type";
 import { StripeWebhookEvent } from "../../../types/ecommerce/stripe-webhook-event-type";
 import { ekadventureBlogDb } from "../../../cms/firestore/firestore-db";
 import { Constants } from "../../../Constants";
 import * as Helpers from "../../../utils/helpers";
-import { Locale, t } from "../../../utils/localizer";
+import { Locale, strings } from "../../../utils/localizer";
+import { ContactType } from "../../../types/domain/contact-type";
+import { ProductDownloadTokenType } from "../../../types/ecommerce/product-download-token-type";
 
 export class MailService implements IMailService {
-    async sendContactMail(contactInfo: ContactType): Promise<CreateEmailResponse> {
+    async sendContactMail(contactInfo: ContactFormType): Promise<CreateEmailResponse> {
         const resend = new Resend(process.env.RESEND_API_KEY);
 
         const { name, email, subject, message } = contactInfo;
 
         const resendResult: CreateEmailResponse = await resend.emails.send({
             from: "Ekadventure Contact <contact@ekadventure.com>",
-            to: "e.kadvnture@gmail.com",
+            to: Constants.RESEND_EMAIL_REPLY_TO,
             subject: `Contact Form: ${subject}`,
             html: `
                 <h3>New Contact Form Submission</h3>
@@ -35,19 +36,32 @@ export class MailService implements IMailService {
         return resendResult;
     }
 
-    async createNewsletterSubscriptionEmail(subscriberInfo: SubscriberType): Promise<CreateEmailResponse> {
+    async createNewsletterSubscriptionEmail(contactInfo: ContactType): Promise<CreateEmailResponse> {
         const resend = new Resend(process.env.RESEND_API_KEY);
 
-        const fetchResult: CreateEmailResponse = await resend.contacts.get({
-            email: subscriberInfo.email
+        const fetchResult: GetContactResponse = await resend.contacts.get({
+            email: contactInfo.email
         });
 
-        if (fetchResult.data?.id) {
-            return fetchResult;
+        // If contact exists but unsubscribed, mark him as subscribed
+        if (fetchResult.data?.id && fetchResult.data.unsubscribed) {
+            const updateResult: UpdateContactResponse = await resend.contacts.update({
+                email: contactInfo.email,
+                unsubscribed: false
+            });
+
+            if (updateResult.error) {
+                throw new Error(`Resend update contact error: ${JSON.stringify(updateResult.error)}`);
+            }
+
+            return {
+                data: null,
+                error: null
+            } as CreateEmailResponse;
         }
 
         const createResult: CreateEmailResponse = await resend.contacts.create({
-            email: subscriberInfo.email,
+            email: contactInfo.email,
             unsubscribed: false
         });
 
@@ -58,7 +72,7 @@ export class MailService implements IMailService {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const addToSegmentResult: CreateEmailResponse = await resend.contacts.segments.add({
-            email: subscriberInfo.email,
+            email: contactInfo.email,
             segmentId: "d1389b4b-7128-46ac-bfdc-21cfcff0556f"
         });
 
@@ -68,15 +82,43 @@ export class MailService implements IMailService {
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
+        const locale = contactInfo.preferences.locale;
+
+        try {
+            await ekadventureBlogDb.collection("contacts").doc(createResult.data.id).set({
+                email: contactInfo.email,
+                preferences: {
+                    locale: locale ?? "en"
+                }
+            });
+        } catch (err) {
+            throw new Error(`Failed to create contact: ${err}`);
+        }
+
+        const subject = strings.email.onboarding.subject[locale];
+        const greeting = strings.email.onboarding.greeting[locale];
+        const unsubscribe = strings.email.onboarding.unsubscribe[locale];
+        const body = strings.email.onboarding.body[locale];
+        const cta = strings.email.onboarding.cta[locale];
+        const footer = strings.email.onboarding.footer[locale];
+        const signature = strings.email.onboarding.signature[locale];
+
         const sendResult: CreateEmailResponse = await resend.emails.send({
-            from: "Elie from Ekadventure <hello@ekadventure.com>",
-            replyTo: "e.kadvnture@gmail.com",
-            to: subscriberInfo.email,
+            from: Constants.RESEND_HELLO_EMAIL_FROM,
+            replyTo: Constants.RESEND_EMAIL_REPLY_TO,
+            to: contactInfo.email,
             template: {
                 id: "15a867be-40b9-4f6c-b61f-4103216d78c2",
                 variables: {
-                    contactName: "Fellow Adventurer",
-                    siteUrl: "https://ekadventure.com"
+                    SUBJECT: subject,
+                    GREETING: greeting,
+                    UNSUBSCRIBE: unsubscribe,
+                    BODY: body,
+                    CTA: cta,
+                    FOOTER: footer,
+                    SIGNATURE: signature,
+                    BLOG_URL: `https://ekadventure.com/${locale}`,
+                    UNSUBSCRIBE_URL: `https://ekadventure.com/${locale}/unsubscribe`
                 }
             }
         });
@@ -99,16 +141,50 @@ export class MailService implements IMailService {
             throw new Error(`Resend email error Upon Fetching List: ${JSON.stringify(listResult.error)}`);
         }
 
-        const contactsBatch = listResult.data.data.map((contact) => {
+        const contactsMap = new Map<string, ContactType>();
+
+        try {
+            const contactsSnapshot = await ekadventureBlogDb.collection("contacts").get();
+            contactsSnapshot.docs.forEach((doc) => {
+                const data = doc.data() as ContactType;
+                contactsMap.set(data.email, data);
+            });
+        } catch (err) {
+            throw new Error(`Failed to get contacts: ${err}`);
+        }
+
+        const contactsBatch = listResult.data.data.filter((contact) => !contact.unsubscribed).map((contact) => {
+            const dbContact = contactsMap.get(contact.email);
+            const locale = dbContact?.preferences?.locale ?? "en";
+
+            const broadcastLocale = Helpers.mapBroadcastDataBasedOnLocale(broadcast, locale as Locale);
+
+            const subject = strings.email.broadcast.subject[locale](broadcastLocale.articleTitle);
+            const greeting = strings.email.broadcast.greeting[locale];
+            const unsubscribe = strings.email.broadcast.unsubscribe[locale];
+            const body = strings.email.broadcast.body[locale];
+            const cta = strings.email.broadcast.cta[locale];
+            const footer = strings.email.broadcast.footer[locale];
+            const signature = strings.email.broadcast.signature[locale];
+
             return {
-                from: "Ekadventure Blog <blog@ekadventure.com>",
-                replyTo: "e.kadvnture@gmail.com",
+                from: Constants.RESEND_BROADCAST_EMAIL_FROM,
+                replyTo: Constants.RESEND_EMAIL_REPLY_TO,
                 to: contact.email,
                 template: {
                     id: "03a05155-d2ef-47ff-983f-998c7246a3ea",
                     variables: {
-                        contactName: "Fellow Adventurer",
-                        ...broadcast
+                        SUBJECT: subject,
+                        GREETING: greeting,
+                        UNSUBSCRIBE: unsubscribe,
+                        BODY: body,
+                        CTA: cta,
+                        FOOTER: footer,
+                        SIGNATURE: signature,
+                        ARTICLE_URL: broadcastLocale.articleUrl,
+                        ARTICLE_INTRO: broadcastLocale.articleBroadcastIntro,
+                        ARTICLE_TITLE: broadcastLocale.articleTitle,
+                        UNSUBSCRIBE_URL: `https://ekadventure.com/${locale}/unsubscribe`
                     }
                 }
             };
@@ -125,18 +201,19 @@ export class MailService implements IMailService {
         return sendResult;
     }
 
-    async unsubscribe(subscriberInfo: SubscriberType): Promise<RemoveContactsResponse> {
+    async unsubscribe(contactInfo: ContactType): Promise<UpdateContactResponse> {
         const resend = new Resend(process.env.RESEND_API_KEY);
 
-        const removeResult: RemoveContactsResponse = await resend.contacts.remove({
-            email: subscriberInfo.email
+        const updateResult: UpdateContactResponse = await resend.contacts.update({
+            email: contactInfo.email,
+            unsubscribed: true
         });
 
-        if (removeResult.error) {
-            throw new Error(`Resend email error: ${JSON.stringify(removeResult.error)}`);
+        if (updateResult.error) {
+            throw new Error(`Resend update contact error: ${JSON.stringify(updateResult.error)}`);
         }
 
-        return removeResult;
+        return updateResult;
     }
 
     async sendProductLink(event: StripeWebhookEvent): Promise<CreateEmailResponse | { received: boolean }> {
@@ -144,32 +221,55 @@ export class MailService implements IMailService {
         const token = crypto.randomUUID();
         const session = event.data.object;
 
+        if (!Helpers.isValidProductMetadata(session.metadata)) {
+            throw new Error(`Invalid metadata: ${JSON.stringify(session.metadata)}`);
+        }
+
         if (session.payment_status !== "paid") {
-            return { received: true };
+            return { data: null, error: null } as CreateEmailResponse;
         }
 
         try {
-            await ekadventureBlogDb.collection("product_download_tokens").doc(token).set({
+            const productDownloadToken: ProductDownloadTokenType = {
                 metadata: Helpers.mapMetadata(session.metadata),
                 customerDetails: session.customer_details,
-                locale: session.locale,
-                expiresIn: Constants.DOWNLOAD_LINK_EXPIRES_IN,
+                locale: session.locale as Locale,
+                expiresAt: Date.now() + (Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS * 1000), // Store in Milliseconds to compare later
+                createdAt: Date.now(),
                 used: false
-            });
+            };
+
+            await ekadventureBlogDb.collection("product_download_tokens").doc(token).set(productDownloadToken);
         } catch (err) {
             throw new Error(`Failed to create download token: ${err}`);
         }
 
+        const locale = session.locale as Locale;
+
+        const itemLabel = strings.common.productItemLabel[session.metadata.item_type][locale];
+        const subject = strings.email.downloadReady.subject[locale](itemLabel);
+        const greeting = strings.email.downloadReady.greeting[locale](session.customer_details.name);
+        const thankYou = strings.email.downloadReady.thankYou[locale];
+        const body = strings.email.downloadReady.body[locale](itemLabel, Constants.DOWNLOAD_LINK_EXPIRES_IN_DAYS.toString());
+        const cta = strings.email.downloadReady.cta[locale](itemLabel);
+        const footer = strings.email.downloadReady.footer[locale];
+        const signature = strings.email.downloadReady.signature[locale];
+
         const sendResult: CreateEmailResponse = await resend.emails.send({
-            from: "Elie from Ekadventure <hello@ekadventure.com>",
-            replyTo: "e.kadvnture@gmail.com",
+            from: Constants.RESEND_PRODUCT_EMAIL_FROM,
+            replyTo: Constants.RESEND_EMAIL_REPLY_TO,
             to: session.customer_details.email,
             template: {
                 id: "b8d038da-4a6c-42fa-a3a4-2cd006bffe78",
                 variables: {
-                    subjectProduct: t("email.afterCheckout.subject", session.locale as Locale),
-                    customerName: session.customer_details.name,
-                    productLink: "https://ekadventure.com"
+                    SUBJECT: subject,
+                    GREETING: greeting,
+                    THANK_YOU: thankYou,
+                    BODY: body,
+                    CTA: cta,
+                    FOOTER: footer,
+                    SIGNATURE: signature,
+                    PRODUCT_LINK: `https://ekadventure.com/download?token=${token}`
                 }
             }
         });
