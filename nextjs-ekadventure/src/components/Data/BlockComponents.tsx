@@ -1,7 +1,7 @@
 import { PortableTextComponentProps } from "@portabletext/react";
 import { groupImagePairsOrSingle } from "@/utils/data/helpers";
 import { PortableTextMarkComponentProps } from "@portabletext/react";
-import {Link} from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import ArticleAd from "../Ads/ArticleAd";
@@ -9,7 +9,7 @@ import ArticleAd from "../Ads/ArticleAd";
 export const generateBlockComponents = (
   isAfterContent = false,
   fullContainerWidth = false,
-  adsVisible = false
+  adsVisible = false,
 ) => {
   return {
     types: {
@@ -54,11 +54,11 @@ export const generateBlockComponents = (
                 }}
               />
             </div>
-            {adsVisible && (
+            {/* {adsVisible && (
               <ClientAdWrapper headerText="Google" className="mb-3 pt-3">
                 <ArticleAd adSlot="1073133772" />
               </ClientAdWrapper>
-            )}
+            )} */}
           </>
         );
       },
@@ -90,20 +90,14 @@ export const generateBlockComponents = (
             <br />
           ) : children?.toString().toLocaleLowerCase() === "$parspacing$" ? (
             <div className="mb-3"></div>
+          ) : children?.toString().toLocaleLowerCase().includes("$ads$") &&
+            adsVisible ? (
+            getAdComponent(children?.toString().toLocaleLowerCase())
           ) : (
             <p className="mb-3 leading-6">{children}</p>
           );
 
-        return (
-          <>
-            {renderedText}
-            {adsVisible && index === 2 && (
-                <ClientAdWrapper headerText="Google" className="mb-6 pt-3">
-                  <ArticleAd adSlot="9573541605" />
-                </ClientAdWrapper>
-            )}
-          </>
-        );
+        return <>{renderedText}</>;
       },
     },
     list: {
@@ -124,4 +118,14 @@ export const generateBlockComponents = (
       ),
     },
   };
+};
+
+const getAdComponent = (adString: string) => {
+  const adSlot = adString.split("$").pop() || "9573541605";
+
+  return (
+    <ClientAdWrapper headerText="Google" className="mb-6 pt-3">
+      <ArticleAd adSlot={adSlot} />
+    </ClientAdWrapper>
+  );
 };
