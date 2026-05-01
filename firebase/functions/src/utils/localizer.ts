@@ -43,7 +43,7 @@ export const strings = {
             },
             signature: {
                 en: "See you on the Trail,<br />Elie - Ekadventure",
-                fr: "On se rejoint au sentier,<br />Elie - Ekadventure"
+                fr: "Bonne Rando,<br />Elie - Ekadventure"
             }
         },
         broadcast: {
@@ -73,7 +73,7 @@ export const strings = {
             },
             signature: {
                 en: "See you on the Trail,<br />Elie - Ekadventure",
-                fr: "On se rejoint au sentier,<br />Elie - Ekadventure"
+                fr: "Bonne Rando,<br />Elie - Ekadventure"
             }
         },
         downloadReady: {
