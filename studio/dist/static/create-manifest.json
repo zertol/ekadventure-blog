@@ -1,20 +1,21 @@
 {
+  "createdAt": "2026-05-01T19:13:04.579Z",
+  "studioVersion": "5.23.0",
   "version": 3,
-  "createdAt": "2026-04-29T20:10:22.389Z",
   "workspaces": [
     {
-      "name": "default",
-      "title": "Ekadventure",
       "basePath": "/",
-      "projectId": "0evq1ccg",
       "dataset": "production",
       "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><rect width=\"32\" height=\"32\" rx=\"2\" fill=\"#01794f\"></rect><text x=\"50%\" y=\"50%\" text-anchor=\"middle\" alignment-baseline=\"middle\" fill=\"hsla(159, 98%, 0%, 1)\" style=\"font-family:Inter, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Liberation Sans&quot;, Helvetica, Arial, system-ui, sans-serif;font-weight:500;font-size:13px;transform:translateY(1px)\">E</text></svg>",
       "mediaLibrary": {
-        "enabled": false
+        "enabled": false,
+        "__internal": {}
       },
-      "schema": "bfe52e63.create-schema.json",
-      "tools": "ba47da56.create-tools.json"
+      "name": "default",
+      "projectId": "0evq1ccg",
+      "schema": "0f2f9502.create-schema.json",
+      "title": "Ekadventure",
+      "tools": "ef87c8fe.create-tools.json"
     }
-  ],
-  "studioVersion": "4.22.0"
+  ]
 }

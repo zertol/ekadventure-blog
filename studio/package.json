@@ -16,10 +16,10 @@
   ],
   "dependencies": {
     "@sanity/studio-secrets": "^3.0.2",
-    "@sanity/vision": "^4.22.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sanity": "^4.22.0",
+    "@sanity/vision": "^5.23.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sanity": "^5.23.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
