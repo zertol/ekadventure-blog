@@ -1,7 +1,7 @@
 "use client";
 
 import { addComment } from "@/api/controllers/comments";
-import { CommentFormData } from "@/models/comments/comment-form-data";
+import { CommentFormData } from "@/domain/comments/comment-form-data";
 import { useTranslations } from "next-intl";
 import React, { createContext, useContext, useState } from "react";
 

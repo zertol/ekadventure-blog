@@ -1,10 +1,15 @@
 import { PortableTextComponentProps } from "@portabletext/react";
-import { groupImagePairsOrSingle } from "@/utils/data/helpers";
+import {
+  groupImagePairsOrSingle,
+} from "@/utils/data/helpers";
 import { PortableTextMarkComponentProps } from "@portabletext/react";
 import { Link } from "@/i18n/navigation";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
-import ArticleAd from "../Ads/ArticleAd";
+import ArticleAd from "../Ads/Google/ArticleAd";
+import { adManager } from "@/domain/ads/ad-manager";
+import { GoogleAdSlotType } from "@/domain/ads/google/google-ad-slot-type";
+import { GoogleAdConfigValidator } from "@/domain/ads/google/implementations/google-ad-config";
 
 export const generateBlockComponents = (
   isAfterContent = false,
@@ -62,6 +67,14 @@ export const generateBlockComponents = (
           </>
         );
       },
+      googleAdSlot: ({
+        value,
+      }: PortableTextComponentProps<GoogleAdSlotType>) => {
+        return adsVisible && adManager.render({
+          provider: "google",
+          ...value
+        });
+      },
     },
     marks: {
       link: ({ children, value }: PortableTextMarkComponentProps<any>) => (
@@ -84,7 +97,7 @@ export const generateBlockComponents = (
       ),
     },
     block: {
-      normal: ({ children, index }: PortableTextComponentProps<any>) => {
+      normal: ({ children }: PortableTextComponentProps<any>) => {
         const renderedText =
           children?.toString().toLocaleLowerCase() === "$spacing$" ? (
             <br />
@@ -108,7 +121,6 @@ export const generateBlockComponents = (
         <ol className="list-decimal ml-6 mb-4">{children}</ol>
       ),
     },
-
     listItem: {
       bullet: ({ children }: PortableTextComponentProps<any>) => (
         <li className="mb-1">{children}</li>

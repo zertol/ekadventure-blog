@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
-import HorizontalAd from "../Ads/HorizontalAd";
+import HorizontalAd from "../Ads/Google/HorizontalAd";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import { useTranslations } from "next-intl";
 

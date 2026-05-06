@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 interface HorizontalAdProps {
   adSlot: string;
   style?: React.CSSProperties;
-  ref?: React.RefObject<HTMLModElement>;
 }
 
 const HorizontalAd: React.FC<HorizontalAdProps> = ({ adSlot, style }) => {

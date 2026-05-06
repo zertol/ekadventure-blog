@@ -1,6 +1,6 @@
 import FormInput from "@/components/UI/Common/Form/FormInput/FormInput";
 import { useComments } from "@/store/CommentsContext";
-import { CommentFormData } from "@/models/comments/comment-form-data";
+import { CommentFormData } from "@/domain/comments/comment-form-data";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import SubmitStatus from "@/components/UI/Common/Form/SubmitStatus/page";

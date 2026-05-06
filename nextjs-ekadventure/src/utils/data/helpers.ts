@@ -1,3 +1,6 @@
+import { BaseAdConfig } from "@/domain/ads/base-ad-config";
+import { GoogleAdSlotConfig } from "@/domain/ads/google/google-ad-slot-config";
+
 export const groupImagesFromBlocks = (blocks: any[]) => {
     if (!blocks || !Array.isArray(blocks)) return [];
 
@@ -107,3 +110,8 @@ export const formatDate = (date: string, locale: string) => {
         day: "numeric",
     });
 };
+
+// Ads
+export const isGoogleAdSlotConfig = (config: BaseAdConfig): config is GoogleAdSlotConfig => {
+    return config.provider === "google";
+}

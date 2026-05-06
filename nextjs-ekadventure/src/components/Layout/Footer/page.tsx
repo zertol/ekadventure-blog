@@ -8,7 +8,7 @@ import { PageType } from "@/types/page-type";
 import { useTranslations } from "next-intl";
 import NewsLetterForm from "@/components/UI/Common/Form/NewsLetterForm/page";
 import { ClientAdWrapper } from "@/components/Ads/ClientAdWrapper";
-import HorizontalAd from "@/components/Ads/HorizontalAd";
+import HorizontalAd from "@/components/Ads/Google/HorizontalAd";
 import { useCookieConsent } from "@/store/CookieConsentContext";
 import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";

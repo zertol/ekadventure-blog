@@ -4,7 +4,7 @@ import React from "react";
 import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
 import SocialIcons from "@/components/UI/Common/SocialIcons/page";
 import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles";
-import VerticalAd from "@/components/Ads/VerticalAd";
+import VerticalAd from "@/components/Ads/Google/VerticalAd";
 import { ClientAdWrapper } from "@/components/Ads/ClientAdWrapper";
 import { useTranslations } from "next-intl";
 

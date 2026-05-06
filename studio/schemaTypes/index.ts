@@ -7,6 +7,7 @@ import { tagType } from './tagType'
 import { portableTextType } from './portableTextType'
 import iframeType from './iframeType'
 import commentType from './commentType'
+import { googleAdSlotType } from './googleAdSlotType'
 
 export const schemaTypes = [
   authorType,
@@ -17,5 +18,6 @@ export const schemaTypes = [
   externalImageType,
   portableTextType,
   iframeType,
-  commentType
+  commentType,
+  googleAdSlotType
 ];

@@ -3,7 +3,7 @@ import React from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Image from "next/image";
 import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
-import HorizontalAd from "../Ads/HorizontalAd";
+import HorizontalAd from "../Ads/Google/HorizontalAd";
 import { HeroText } from "../UI/Home/HeroText/page";
 import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
 import PostArticles from "../UI/Blog/PostArticle/PostArticles";

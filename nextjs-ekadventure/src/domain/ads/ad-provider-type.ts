@@ -1,0 +1,1 @@
+type AdProviderType = "google" | "ezoic";

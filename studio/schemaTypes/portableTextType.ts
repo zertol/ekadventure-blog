@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 export const portableTextType = defineField({
   name: 'portableText',
   type: 'array',
@@ -11,5 +11,5 @@ export const portableTextType = defineField({
         { title: "Bordered Thick", value: "borderedThick" },
       ],
     },
-  }, { type: 'image' }, { type: 'externalImage' }, { type: 'iframe' }],
+  }, { type: 'image' }, { type: 'externalImage' }, { type: 'iframe' }, { type: 'googleAdSlot' }],
 });

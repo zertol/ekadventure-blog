@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
-import HorizontalAd from "../Ads/HorizontalAd";
+import HorizontalAd from "../Ads/Google/HorizontalAd";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import { useTranslations } from "next-intl";

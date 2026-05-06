@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-01T19:13:04.579Z",
+  "createdAt": "2026-05-05T01:27:32.670Z",
   "studioVersion": "5.23.0",
   "version": 3,
   "workspaces": [
@@ -13,7 +13,7 @@
       },
       "name": "default",
       "projectId": "0evq1ccg",
-      "schema": "0f2f9502.create-schema.json",
+      "schema": "92db8bc1.create-schema.json",
       "title": "Ekadventure",
       "tools": "ef87c8fe.create-tools.json"
     }
