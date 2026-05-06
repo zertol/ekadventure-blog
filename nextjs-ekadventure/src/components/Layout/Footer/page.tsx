@@ -12,6 +12,8 @@ import HorizontalAd from "@/components/Ads/Google/HorizontalAd";
 import { useCookieConsent } from "@/store/CookieConsentContext";
 import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";
+import GoogleAdSlot from "@/components/Ads/Google/GoogleAdSlot";
+import { AdFormatEnum } from "@/domain/ads/google/implementations/google-ad-format-enum";
 
 const Footer: React.FC = () => {
   const { pages } = usePages();
@@ -115,6 +117,12 @@ const Footer: React.FC = () => {
       >
         <div className="w-full flex justify-center">
           <div className="w-full md:w-[768px]">
+            {/* <GoogleAdSlot config={{
+              adFormat: AdFormatEnum.None,
+              provider: "google",
+              slotId: "7868749713",
+              title: "Google"
+            }} */}
             <HorizontalAd adSlot="7868749713" />
           </div>
         </div>

@@ -15,7 +15,11 @@ export class GoogleAd implements IAd {
     new GoogleAdConfigValidator(config).validate();
 
     return (
-      <ClientAdWrapper headerText={config.title} className="mb-6 pt-3">
+      <ClientAdWrapper
+        headerText={config.title}
+        className={config.wrapper?.className}
+        isCollapsible={config.wrapper?.isCollapsible}
+      >
         <GoogleAdSlot config={config} />
       </ClientAdWrapper>
     );

@@ -10,7 +10,6 @@ interface GoogleAdSlotProps {
 const GoogleAdSlot: React.FC<GoogleAdSlotProps> = ({
   config,
 }) => {
-  console.log("_" + config);
   const adRef = useRef(null!);
   const consentData = useCookieConsent();
 
@@ -49,11 +48,10 @@ const GoogleAdSlot: React.FC<GoogleAdSlotProps> = ({
       key={slotKey}
       ref={adRef}
       className={`adsbygoogle ${config.className}`}
-      style={{ display: "block", textAlign: "center" }}
       data-ad-client="ca-pub-9735828709569989"
       data-ad-slot={config.slotId}
       data-ad-layout={config.adLayout}
-      data-ad-format={config.adFormat ?? "auto"}
+      data-ad-format={config.adFormat}
     />
   );
 };

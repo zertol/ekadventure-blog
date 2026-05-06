@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 interface VerticalAdProps {
   adSlot: string;
-  style?: React.CSSProperties;
 }
 
-const VerticalAd: React.FC<VerticalAdProps> = ({ adSlot, style }) => {
+const VerticalAd: React.FC<VerticalAdProps> = ({ adSlot }) => {
 const [slotKey, setSlotKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,7 +23,6 @@ const [slotKey, setSlotKey] = useState<string | null>(null);
       key={slotKey} // Force re-render on page reload
       ref={adRef}
       className="adsbygoogle sidebar-ad"
-      style={{ display: "block", ...style }}
       data-ad-client="ca-pub-9735828709569989"
       data-ad-slot={adSlot}
       data-ad-format="auto"

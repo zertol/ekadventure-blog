@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 interface HorizontalAdProps {
   adSlot: string;
-  style?: React.CSSProperties;
 }
 
-const HorizontalAd: React.FC<HorizontalAdProps> = ({ adSlot, style }) => {
+const HorizontalAd: React.FC<HorizontalAdProps> = ({ adSlot }) => {
   const [slotKey, setSlotKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,16 +22,10 @@ const HorizontalAd: React.FC<HorizontalAdProps> = ({ adSlot, style }) => {
     <ins
       key={slotKey} // Force re-render on page reload
       ref={adRef}
-      className="adsbygoogle"
-      style={{
-        display: "inline-block",
-        width: "100%",
-        height: "60px",
-        ...style,
-      }}
+      className="adsbygoogle horizontal-ad"
       data-ad-client="ca-pub-9735828709569989"
       data-ad-slot={adSlot}
-      data-ad-format=""
+      data-ad-format="" // Only works when layout is undefined
     />
   );
 };

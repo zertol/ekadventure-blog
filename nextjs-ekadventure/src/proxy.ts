@@ -29,7 +29,7 @@ export default function proxy(request: NextRequest) {
                 languageCookie = lang;
             }
         } catch (error) {
-            console.log('parse error:', error);
+            console.error('parse error:', error);
         }
     }
 

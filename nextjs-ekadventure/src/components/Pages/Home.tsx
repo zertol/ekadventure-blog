@@ -3,13 +3,13 @@ import React from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Image from "next/image";
 import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
-import HorizontalAd from "../Ads/Google/HorizontalAd";
 import { HeroText } from "../UI/Home/HeroText/page";
 import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArticles";
 import PostArticles from "../UI/Blog/PostArticle/PostArticles";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import { useTranslations } from "next-intl";
+import HorizontalAd from "../Ads/Google/HorizontalAd";
 
 interface HomeProps {
   categories: CategoryType[];

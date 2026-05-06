@@ -381,7 +381,14 @@
   text-align: center;
 }
 
-.sidebar-ad {
+.adsbygoogle.horizontal-ad {
+  display: inline-block;
+  width: 100%;
+  height: 60px;
+}
+
+.adsbygoogle.sidebar-ad {
+  display: block;
   @media screen and (max-width:1024px) {
     display: none !important;
   }

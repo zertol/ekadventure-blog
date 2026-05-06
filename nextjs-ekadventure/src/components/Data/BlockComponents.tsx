@@ -5,11 +5,8 @@ import {
 import { PortableTextMarkComponentProps } from "@portabletext/react";
 import { Link } from "@/i18n/navigation";
 import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
-import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
-import ArticleAd from "../Ads/Google/ArticleAd";
 import { adManager } from "@/domain/ads/ad-manager";
 import { GoogleAdSlotType } from "@/domain/ads/google/google-ad-slot-type";
-import { GoogleAdConfigValidator } from "@/domain/ads/google/implementations/google-ad-config";
 
 export const generateBlockComponents = (
   isAfterContent = false,
@@ -59,19 +56,18 @@ export const generateBlockComponents = (
                 }}
               />
             </div>
-            {/* {adsVisible && (
-              <ClientAdWrapper headerText="Google" className="mb-3 pt-3">
-                <ArticleAd adSlot="1073133772" />
-              </ClientAdWrapper>
-            )} */}
           </>
         );
       },
       googleAdSlot: ({
         value,
       }: PortableTextComponentProps<GoogleAdSlotType>) => {
+        value.className = "article-ad";
         return adsVisible && adManager.render({
           provider: "google",
+          wrapper: {
+            className: "pt-3 mb-6"
+          },
           ...value
         });
       },
@@ -103,9 +99,6 @@ export const generateBlockComponents = (
             <br />
           ) : children?.toString().toLocaleLowerCase() === "$parspacing$" ? (
             <div className="mb-3"></div>
-          ) : children?.toString().toLocaleLowerCase().includes("$ads$") &&
-            adsVisible ? (
-            getAdComponent(children?.toString().toLocaleLowerCase())
           ) : (
             <p className="mb-3 leading-6">{children}</p>
           );
@@ -130,14 +123,4 @@ export const generateBlockComponents = (
       ),
     },
   };
-};
-
-const getAdComponent = (adString: string) => {
-  const adSlot = adString.split("$").pop() || "9573541605";
-
-  return (
-    <ClientAdWrapper headerText="Google" className="mb-6 pt-3">
-      <ArticleAd adSlot={adSlot} />
-    </ClientAdWrapper>
-  );
 };
