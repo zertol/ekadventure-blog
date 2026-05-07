@@ -3,22 +3,16 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 import SearchBox from "@/components/UI/Common/SearchBox/page";
+import { HikerImage } from "@/components/UI/Common/Hiker/HikerImage";
 
 export default function NotFound() {
   const tNotFound = useTranslations("NotFound");
 
   return (
-    <div className="md:h-screen flex-center-col overflow-auto">
+    <div className="h-screen flex-center-col overflow-auto">
       <div className="container px-c-25 lg:px-0">
-        <div className="flex flex-col lg:flex-row justify-center gap-4">
-          <div className="relative w-full lg:w-[50%] h-[200px] md:h-[300px] lg:h-auto">
-            <Image
-              src="/images/hiker_not_found.png"
-              alt="Contact"
-              fill
-              className="inset-0 w-full h-full object-contain rounded-lg"
-            />
-          </div>
+        <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
+          <HikerImage />
           <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start lg:justify-center text-center lg:text-left">
             <div className="lg:w-[80%]">
               <h1 className="leading-7 md:leading-9 mb-2 text-xl md:text-[30px]">

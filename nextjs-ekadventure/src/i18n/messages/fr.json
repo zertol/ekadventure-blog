@@ -105,6 +105,12 @@
         "targetedAdvertisingDescription": "Utilisés pour fournir une publicité plus pertinente pour vous et vos intérêts. Peut également être utilisé pour limiter le nombre de fois que vous voyez une publicité et mesurer l'efficacité des campagnes publicitaires. Les réseaux publicitaires les placent généralement avec la permission de l'opérateur du site web.",
         "targetedAdvertisingLabel": "Publicité Ciblée"
     },
+    "Download": {
+        "downloadDescriptionText": "Pendant que vous attendez, pourquoi ne pas jeter un coup d'œil à certaines de mes dernières aventures et conseils pour garder votre esprit d'aventure en plein air vivant?",
+        "downloadHeaderText": "Votre téléchargement commencera bientôt.<br></br> Si ce n'est pas le cas, cliquez sur le bouton ci-dessous.",
+        "downloadSubscribeNewsletterText": "N'oubliez pas de vous abonner pour rester à jour avec mes dernières expériences et aventures exclusives que je veux partager.",
+        "startDownloadButtonText": "Commencer le Téléchargement"
+    },
     "Footer": {
         "manageCookiesLinkText": "Gérer les Cookies",
         "privacyPolicyLinkText": "Politique de Confidentialité"
@@ -124,6 +130,8 @@
         "emailLabel": "courriel",
         "emailPlaceholder": "exemple@mail.com",
         "errorMessage": "Oops! Quelque chose a mal tourné. Veuillez réessayer plus tard.",
+        "nameLabel": "nom",
+        "namePlaceholder": "Votre Nom",
         "newsletterDescription": "Restez informé(e) de mes dernières expériences et aventures exclusives que je souhaite partager.",
         "newsletterTitle": "Ne manquez jamais une aventure !",
         "subscribeButtonText": "S'abonner",

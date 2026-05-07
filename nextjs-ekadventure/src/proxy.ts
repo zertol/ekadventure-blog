@@ -53,7 +53,9 @@ export default function proxy(request: NextRequest) {
         }
 
         if (newPathname !== pathname) {
-            return NextResponse.redirect(new URL(newPathname, request.url));
+            const newUrl = new URL(newPathname, request.url);
+            newUrl.search = request.nextUrl.search;
+            return NextResponse.redirect(newUrl);
         }
     }
 

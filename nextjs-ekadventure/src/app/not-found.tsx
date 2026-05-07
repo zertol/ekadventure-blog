@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
+// @ts-ignore
 import "./globals.css";
 import { useSearch } from "@/utils/hooks/use-search";
 import { useRef, useState } from "react";
 import { SearchResults } from "@/components/UI/Common/SearchResults/page";
 import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 import ModalDialog from "@/components/UI/Common/ModalDialog/page";
+import { HikerImage } from "@/components/UI/Common/Hiker/HikerImage";
 
 export default function NotFound() {
   const { query, setQuery, results, loading } = useSearch(true);
@@ -29,17 +31,10 @@ export default function NotFound() {
   return (
     <html lang="en">
       <body>
-        <div className="md:h-screen flex-center-col overflow-auto">
+        <div className="h-screen flex-center-col overflow-auto">
           <div className="container px-c-25 lg:px-0">
-            <div className="flex flex-col lg:flex-row justify-center gap-4">
-              <div className="relative w-full lg:w-[50%] h-[200px] md:h-[300px] lg:h-auto">
-                <Image
-                  src="/images/hiker_not_found.png"
-                  alt="Contact"
-                  fill
-                  className="inset-0 w-full h-full object-contain rounded-lg"
-                />
-              </div>
+            <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
+              <HikerImage />
               <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start lg:justify-center text-center lg:text-left">
                 <div className="lg:w-[80%]">
                   <h1 className="leading-7 md:leading-9 mb-2 text-xl md:text-[30px]">

@@ -117,12 +117,6 @@ const Footer: React.FC = () => {
       >
         <div className="w-full flex justify-center">
           <div className="w-full md:w-[768px]">
-            {/* <GoogleAdSlot config={{
-              adFormat: AdFormatEnum.None,
-              provider: "google",
-              slotId: "7868749713",
-              title: "Google"
-            }} */}
             <HorizontalAd adSlot="7868749713" />
           </div>
         </div>

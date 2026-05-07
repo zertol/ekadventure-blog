@@ -61,6 +61,7 @@ export class MailService implements IMailService {
         }
 
         const createResult: CreateEmailResponse = await resend.contacts.create({
+            firstName: contactInfo.name,
             email: contactInfo.email,
             unsubscribed: false
         });
@@ -86,6 +87,7 @@ export class MailService implements IMailService {
 
         try {
             await ekadventureBlogDb.collection("contacts").doc(createResult.data.id).set({
+                name: contactInfo.name,
                 email: contactInfo.email,
                 preferences: {
                     locale: locale ?? "en"
@@ -96,7 +98,7 @@ export class MailService implements IMailService {
         }
 
         const subject = strings.email.onboarding.subject[locale];
-        const greeting = strings.email.onboarding.greeting[locale];
+        const greeting = strings.email.onboarding.greeting[locale](contactInfo.name);
         const unsubscribe = strings.email.onboarding.unsubscribe[locale];
         const body = strings.email.onboarding.body[locale];
         const cta = strings.email.onboarding.cta[locale];
@@ -160,7 +162,7 @@ export class MailService implements IMailService {
             const broadcastLocale = Helpers.mapBroadcastDataBasedOnLocale(broadcast, locale as Locale);
 
             const subject = strings.email.broadcast.subject[locale](broadcastLocale.articleTitle);
-            const greeting = strings.email.broadcast.greeting[locale];
+            const greeting = strings.email.broadcast.greeting[locale](dbContact.name);
             const unsubscribe = strings.email.broadcast.unsubscribe[locale];
             const body = strings.email.broadcast.body[locale];
             const cta = strings.email.broadcast.cta[locale];

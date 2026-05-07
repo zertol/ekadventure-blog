@@ -56,9 +56,10 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
 
       setSubmitStatus({
         type: "success",
-        message: newsLetterAction === "subscribe"
-          ? tLetter("subscribeSuccessMessage")
-          : tLetter("unsubscribeSuccessMessage"),
+        message:
+          newsLetterAction === "subscribe"
+            ? tLetter("subscribeSuccessMessage")
+            : tLetter("unsubscribeSuccessMessage"),
       });
 
       reset();
@@ -67,7 +68,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
 
       setSubmitStatus({
         type: "error",
-        message: tLetter("errorMessage")
+        message: tLetter("errorMessage"),
       });
     } finally {
       setIsLoading(false);
@@ -82,7 +83,18 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
         className="w-full"
         noValidate
       >
-        <div className="flex flex-row w-full overflow-hidden">
+        <div className="flex flex-row w-full overflow-hidden mt-2">
+          <FormInput
+            label={tLetter("nameLabel")}
+            type="text"
+            placeholder={tLetter("namePlaceholder")}
+            register={register}
+            required={true}
+            className={`${errors.name?.message ? "border-red-900" : "border-gray-300"} flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none`}
+            registrationName="name"
+          />
+        </div>
+        <div className="flex flex-row w-full overflow-hidden mt-2">
           <FormInput
             label={tLetter("emailLabel")}
             type="email"
@@ -92,6 +104,9 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
             className={`${errors.email?.message ? "border-red-900" : "border-gray-300"} flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none`}
             registrationName="email"
           />
+        </div>
+
+        <div className="flex flex-row w-full overflow-hidden mt-2 justify-center">
           <button
             type="submit"
             className="bg-background-blue-accent text-white px-6 py-2 whitespace-nowrap hover:bg-background-dark transition-colors"
@@ -104,7 +119,10 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
       </form>
       <div className="mt-2 w-full">
         {errors.email?.message && (
-          <span className="text-red-900 text-sm">{errors.email?.message}</span>
+          <span className="text-red-900 text-sm block">{errors.email?.message}</span>
+        )}
+        {errors.name?.message && (
+          <span className="text-red-900 text-sm block">{errors.name?.message}</span>
         )}
         {isLoading && (
           <div className="mt-4 flex justify-center">

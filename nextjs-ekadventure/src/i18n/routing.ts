@@ -33,6 +33,10 @@ export const routing = defineRouting({
         '/unsubscribe': {
             en: '/unsubscribe',
             fr: '/désabonnez'
+        },
+        '/download': {
+            en: '/download',
+            fr: '/téléchargez'
         }
     }
 });

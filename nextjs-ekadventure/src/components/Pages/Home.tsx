@@ -10,6 +10,7 @@ import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import { useTranslations } from "next-intl";
 import HorizontalAd from "../Ads/Google/HorizontalAd";
+import { FeaturedSection } from "../UI/Home/FeaturedSection/page";
 
 interface HomeProps {
   categories: CategoryType[];
@@ -18,9 +19,9 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
-  const tHome = useTranslations('Home');
-  const tUI = useTranslations('UI');
-  const tCommon = useTranslations('Common');
+  const tHome = useTranslations("Home");
+  const tUI = useTranslations("UI");
+  const tCommon = useTranslations("Common");
 
   return (
     <div className="home-page">
@@ -30,12 +31,14 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
           <div>
             <h2 className="font-bold italic">
               {tHome("homeHeaderCaptionFirstPart")}{" "}
-              <span className="font-ps text-[28px]">{tHome("homeHeaderCaptionSecondPart")}</span>
+              <span className="font-ps text-[28px]">
+                {tHome("homeHeaderCaptionSecondPart")}
+              </span>
             </h2>
           </div>
         }
       />
-      <section className={`mt-c-60 mb-c-60`}>
+      <section className={`mt-c-30 mb-c-30`}>
         <HeroText />
       </section>
 
@@ -44,64 +47,45 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
           <ClientAdWrapper
             headerText="Google"
             isCollapsible={false}
-            className="pb-c-60"
+            className="mb-c-30"
           >
             <HorizontalAd adSlot="9510559826" />
           </ClientAdWrapper>
         </div>
       </div>
 
-      <section className={`mb-c-90`}>
-        <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
-          <div className="mb-6 flex-center-col relative">
-            <h2 className="font-bold text-center mb-4 uppercase">
-              {tCommon("featuredAdventuresTitle")}
-            </h2>
-            <span className="block w-24 h-1 bg-black"></span>
-            <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
-              <PrimaryLink
-                href="/blog"
-                text={tUI("viewAll")}
-                className="py-1 px-4 font-semibold text-[14px]"
-              />
-            </div>
-          </div>
-          <PostArticles posts={latestPosts} />
-        </div>
-      </section>
+      <FeaturedSection
+        title={tCommon("featuredAdventuresTitle")}
+        canViewAll={{ page: { url: "/blog" }, text: tUI("viewAll") }}
+      >
+        <PostArticles posts={latestPosts} />
+      </FeaturedSection>
 
-      {videos && videos.items.length > 0 && (
-        <section className={`mb-c-90`}>
-          <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
-            <div className="mb-6 flex-center-col relative">
-              <h2 className="font-bold text-center mb-4 uppercase">
-                {tCommon("featuredVideosTitle")}
-              </h2>
-              <span className="block w-24 h-1 bg-black"></span>
-              <div className="flex-center-col mt-2 md:mt-0 md:absolute md:right-0 md:top-0">
-                <PrimaryLink
-                  href="/videos"
-                  text={tUI("viewAll")}
-                  className="py-1 px-4 font-semibold text-[14px]"
-                />
-              </div>
-            </div>
-            <YouTubeVideos ytPlaylist={videos} />
-          </div>
-        </section>
-      )}
+      <FeaturedSection
+        title={tCommon("featuredVideosTitle")}
+        canViewAll={{ page: { url: "/videos" }, text: tUI("viewAll") }}
+        className="mb-c-30"
+      >
+        {videos && videos.items.length > 0 && (
+          <YouTubeVideos ytPlaylist={videos} />
+        )}
+      </FeaturedSection>
 
-      <section className={`mb-c-90`}>
-        <div className="mx-auto container-px-25 md:container-px-60 container-max-w-1280">
-          <div className="mb-12 flex-center-col">
-            <h2 className="font-bold text-center mb-4 uppercase">
-              {tCommon("featuredTopicsTitle")}
-            </h2>
-            <span className="block w-24 h-1 bg-black"></span>
-          </div>
-          <CategoryArticles categories={categories} />
+      <div className="flex justify-center">
+        <div className="w-full md:w-[768px]">
+          <ClientAdWrapper
+            headerText="Google"
+            isCollapsible={false}
+            className="mb-c-30"
+          >
+            <HorizontalAd adSlot="2079251461" />
+          </ClientAdWrapper>
         </div>
-      </section>
+      </div>
+
+      <FeaturedSection title={tCommon("featuredTopicsTitle")}>
+        <CategoryArticles categories={categories} />
+      </FeaturedSection>
 
       <section className="relative h-[400px] flex-center-row mb-c-60">
         <div className="absolute inset-0 z-0">

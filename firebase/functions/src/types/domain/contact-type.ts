@@ -1,4 +1,5 @@
 export type ContactType = {
+    name: string;
     email: string;
     unsubscribed: boolean;
     preferences: {

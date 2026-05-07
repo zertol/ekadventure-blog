@@ -22,8 +22,8 @@ export const strings = {
                 fr: "Bienvenue au Ekadventure"
             },
             greeting: {
-                en: "Hey Fellow Adventurer,",
-                fr: "Salut l'aventurier(ère),"
+                en: (name: string) => `Hey ${name},`,
+                fr: (name: string) => `Salut ${name},`
             },
             body: {
                 en: "Thanks for subscribing! You'll get hiking guides, trail tips, and outdoor stories straight to your inbox.",
@@ -52,8 +52,8 @@ export const strings = {
                 fr: (title: string) => `Nouvel Article: ${title} par Ekadventure`
             },
             greeting: {
-                en: "Hey Fellow Adventurer,",
-                fr: "Salut l'aventurier(ère),"
+                en: (name: string) => `Hey ${name},`,
+                fr: (name: string) => `Salut ${name},`
             },
             body: {
                 en: "I'm so excited to share my latest article with you!",

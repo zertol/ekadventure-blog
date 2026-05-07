@@ -105,6 +105,12 @@
         "targetedAdvertisingDescription": "Used to deliver advertising that is more relevant to you and your interests. May also be used to limit the number of times you see an advertisement and measure the effectiveness of advertising campaigns. Advertising networks usually place them with the website operator's permission.",
         "targetedAdvertisingLabel": "Targeted Advertising"
     },
+    "Download": {
+        "downloadDescriptionText": "While you wait, why not check out some of my latest adventures and tips to keep your outdoor spirit alive?",
+        "downloadHeaderText": "Your download will begin shortly.<br></br> If it doesn't, click the button below.",
+        "downloadSubscribeNewsletterText": "Don't forget to subscribe to my newsletter to stay up to date with my latest experiences and exclusive adventures I wanna share.",
+        "startDownloadButtonText": "Start Download"
+    },
     "Footer": {
         "manageCookiesLinkText": "Manage Cookies",
         "privacyPolicyLinkText": "Privacy Policy"
@@ -124,6 +130,8 @@
         "emailLabel": "email",
         "emailPlaceholder": "example@mail.com",
         "errorMessage": "Oops! Something went wrong. Please try again later.",
+        "nameLabel": "name",
+        "namePlaceholder": "Your Name",
         "newsletterDescription": "Stay up to date with my latest experiences and exclusive adventures I wanna share.",
         "newsletterTitle": "Never miss an adventure!",
         "subscribeButtonText": "Subscribe",

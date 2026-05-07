@@ -1,5 +1,6 @@
 import DownloadContent from "@/components/ECommerce/DownloadContent";
 import { generateProductDownloadLink } from "@/api/controllers/ecommerce";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   searchParams: Promise<{ token?: string }>;
@@ -10,7 +11,7 @@ const DownloadPage: React.FC<PageProps> = async ({ searchParams }) => {
   const token = params.token;
 
   if (!token) {
-    return <p>Invalid download link. Token is missing.</p>;
+    return notFound();
   }
 
   let downloadUrl: URLType | null = null;
@@ -21,17 +22,18 @@ const DownloadPage: React.FC<PageProps> = async ({ searchParams }) => {
     if (response.ErrorMessages && response.ErrorMessages.length > 0) {
       throw new Error(response.ErrorMessages.join(","));
     }
+    
     downloadUrl = response.Result;
-
   } catch (err) {
     console.error(err);
+    return notFound();
   }
 
-  return (
-    downloadUrl && (
-      <DownloadContent downloadUrl={downloadUrl} />
-      )
-  );
+  if (!downloadUrl) {
+    return notFound();
+  }
+
+  return downloadUrl && <DownloadContent downloadUrl={downloadUrl} />;
 };
 
 export default DownloadPage;
