@@ -1,4 +1,4 @@
-import DownloadContent from "@/components/ECommerce/DownloadContent";
+import Download from "@/components/Pages/Download";
 import { generateProductDownloadLink } from "@/api/controllers/ecommerce";
 import { notFound } from "next/navigation";
 
@@ -33,7 +33,7 @@ const DownloadPage: React.FC<PageProps> = async ({ searchParams }) => {
     return notFound();
   }
 
-  return downloadUrl && <DownloadContent downloadUrl={downloadUrl} />;
+  return downloadUrl && <Download downloadUrl={downloadUrl} />;
 };
 
 export default DownloadPage;

@@ -3,18 +3,17 @@
 import { useEffect } from "react";
 import NewsLetterForm from "../UI/Common/Form/NewsLetterForm/page";
 import HelpButtons from "../UI/Common/HelpButtons/page";
-import Image from "next/image";
 import PrimaryLink from "../UI/Common/PrimaryLink/page";
 import { HikerImage } from "../UI/Common/Hiker/HikerImage";
 import { useTranslations } from "next-intl";
 import { HikerHeaderText } from "../UI/Common/Hiker/HikerHeaderText";
 import { HikerDescrtiptionText } from "../UI/Common/Hiker/HikerDescriptionText";
 
-interface DownloadContentProps {
+interface DownloadProps {
   downloadUrl: URLType | null;
 }
 
-const DownloadContent: React.FC<DownloadContentProps> = ({ downloadUrl }) => {
+const Download: React.FC<DownloadProps> = ({ downloadUrl }) => {
   useEffect(() => {
     if (downloadUrl?.url) {
       // trigger download
@@ -68,4 +67,4 @@ const DownloadContent: React.FC<DownloadContentProps> = ({ downloadUrl }) => {
   );
 };
 
-export default DownloadContent;
+export default Download;
