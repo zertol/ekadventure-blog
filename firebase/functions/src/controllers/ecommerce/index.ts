@@ -9,22 +9,73 @@ import { CheckoutSessionParamsType } from "../../types/ecommerce/checkout-sessio
 import { ParamsType } from "../../types/api/params-type";
 import { URLType } from "../../types/domain/url-type";
 import { StripeWebhookEvent } from "../../types/ecommerce/stripe-webhook-event-type";
+import { ProductType } from "../../types/ecommerce/product-type";
+import { CreateProductParamsType } from "../../types/ecommerce/create-product-params-type";
+import { UpdateProductParamsType } from "../../types/ecommerce/update-product-params-type";
 
-export const getProducts = onRequest(
+export const createProduct = onRequest(
     { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<ProductsResponseType> => {
+        async (req: Request<any>, res: Response<ApiResult<ProductType>>): Promise<ProductType> => {
+            const params: CreateProductParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
             EcommerceService.initStripe();
 
-            return await EcommerceService.getProducts();
+            return await EcommerceService.createProduct(params);
+        }
+    )));
+
+export const updateProductImages = onRequest(
+    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    withApiAuth(createApiHandler<any>(
+        async (req: Request<any>, res: Response<ApiResult<ProductType>>): Promise<ProductType> => {
+            const params: UpdateProductParamsType = req.body;
+            const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
+
+            return await EcommerceService.updateProductImages(params.id, params.images);
+        }
+    )));
+
+export const getLatestProducts = onRequest(
+    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    withApiAuth(createApiHandler<any>(
+        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<ProductsResponseType> => {
+            const params: ParamsType = req.body;
+            const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
+
+            return await EcommerceService.getLatestProducts(params?.lastProductId);
+        }
+    )));
+
+export const getProductById = onRequest(
+    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    withApiAuth(createApiHandler<any>(
+        async (req: Request<any>, res: Response<ApiResult<ProductType>>): Promise<ProductType> => {
+            const params: ParamsType = req.body;
+            const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
+
+            return await EcommerceService.getProductById(params.id);
+        }
+    )));
+
+export const getTotalProducts = onRequest(
+    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    withApiAuth(createApiHandler<any>(
+        async (req: Request<any>, res: Response<ApiResult<{ count: number }>>): Promise<{ count: number }> => {
+            const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
+
+            return await EcommerceService.getTotalProducts();
         }
     )));
 
 export const createCheckoutSession = onRequest(
     { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<URLType> => {
+        async (req: Request<any>, res: Response<ApiResult<URLType>>): Promise<URLType> => {
             const EcommerceService = DIResolutions.getEcommerceService();
             EcommerceService.initStripe();
 
@@ -45,7 +96,7 @@ export const sendProductLink = onRequest(
 export const generateProductDownloadLink = onRequest(
     { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY", "R2_ENDPOINT", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<URLType> => {
+        async (req: Request<any>, res: Response<ApiResult<URLType>>): Promise<URLType> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
             return await EcommerceService.generateProductDownloadLink(params.token);

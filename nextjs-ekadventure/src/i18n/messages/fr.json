@@ -66,6 +66,7 @@
     },
     "Common": {
         "featuredAdventuresTitle": "Aventures en Vedette",
+        "featuredProductsTitle": "Produits en Vedette",
         "featuredTopicsTitle": "Sujets en Vedette",
         "featuredVideosTitle": "Vidéos en Vedette",
         "invalidEmailMessage": "Veuillez entrer une adresse courriel valide",
@@ -151,6 +152,10 @@
     "PrivacyPolicy": {
         "lastUpdatedText": "Dernière Mise à Jour:",
         "privacyPolicyTitle": "Politique de Confidentialité"
+    },
+    "Shop": {
+        "shopHeaderCaptionFirstPart": "Où les Aventures Sont Gardées Précieusement",
+        "shopHeaderCaptionSecondPart": "Bienvenue"
     },
     "Sidebar": {
         "aboutMeBottomText": "J'ai créé <brand>EKADVENTURE</brand> comme un moyen de poursuivre mes rêves, et d'espérer vous inspirer à travers mes expériences, en partageant ce que j'aime faire le plus.",

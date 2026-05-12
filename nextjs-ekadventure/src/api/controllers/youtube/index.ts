@@ -19,7 +19,7 @@ export const getYouTubeVideoById = async (
 }
 
 export const getYouTubeVideosByRoute = async (params?: YouTubeParams): Promise<ApiResult<YouTubePlaylistType>> => {
-    return await handleApiRequest<YouTubePlaylistType>("/api/youtube", {
+    return await handleApiRequest<YouTubePlaylistType>("/api/youtube", params && {
         method: "POST",
         body: JSON.stringify(params),
     });

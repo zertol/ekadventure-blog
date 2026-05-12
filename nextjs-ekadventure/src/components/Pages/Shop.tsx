@@ -3,16 +3,18 @@
 import React from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import HorizontalAd from "../Ads/Google/HorizontalAd";
-import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import { useTranslations } from "next-intl";
+import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
+import ProductsList from "../UI/ECommerce/ProductsList";
 
-interface VideosProps {
-  ytPlaylist: YouTubePlaylistType;
+interface ShopProps {
+  products: ProductsResponseType;
+  totalProducts: number;
 }
 
-const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
-  const tVideos = useTranslations("Videos");
+const Shop: React.FC<ShopProps> = ({ products, totalProducts }) => {
+  const tShop = useTranslations("Shop");
 
   return (
     <div>
@@ -21,9 +23,9 @@ const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
         text={
           <div>
             <h2 className="font-bold italic">
-              {tVideos("videosHeaderCaptionFirstPart")}
+              {tShop("shopHeaderCaptionFirstPart")}
               <br />
-              <span className="font-ps text-[28px]">{tVideos("videosHeaderCaptionSecondPart")}</span>
+              <span className="font-ps text-[28px]">{tShop("shopHeaderCaptionSecondPart")}</span>
             </h2>
           </div>
         }
@@ -42,10 +44,10 @@ const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
       </div>
 
       <div className="container mx-auto px-6 lg:px-20 my-c-60">
-        <YouTubeVideos ytPlaylist={ytPlaylist} showLoadMore={true} />
+        <ProductsList products={products} totalProducts={totalProducts} />
       </div>
     </div>
   );
 };
 
-export default Videos;
+export default Shop;

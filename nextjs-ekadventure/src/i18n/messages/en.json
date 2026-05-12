@@ -66,6 +66,7 @@
     },
     "Common": {
         "featuredAdventuresTitle": "Featured Adventures",
+        "featuredProductsTitle": "Featured Products",
         "featuredTopicsTitle": "Featured Topics",
         "featuredVideosTitle": "Featured Videos",
         "invalidEmailMessage": "Please enter a valid Email Address",
@@ -151,6 +152,10 @@
     "PrivacyPolicy": {
         "lastUpdatedText": "Last Updated:",
         "privacyPolicyTitle": "Privacy Policy"
+    },
+    "Shop": {
+        "shopHeaderCaptionFirstPart": "Where Adventures Are Kept Alive",
+        "shopHeaderCaptionSecondPart": "Welcome"
     },
     "Sidebar": {
         "aboutMeBottomText": "I created <brand>EKADVENTURE</brand> as a way to pursue my dreams, and to hopefully inspire you through my experiences, by sharing what I love to do the most.",

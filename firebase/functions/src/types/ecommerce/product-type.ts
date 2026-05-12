@@ -6,11 +6,17 @@ export type ProductType = {
     active: boolean;
     created: number;
     default_price: string | PriceType | null;
-    description: string;
+    description: {
+        en: string;
+        fr: string;
+    };
     images: string[];
     livemode: boolean;
     metadata: ProductMetadataType;
-    name: string;
+    name: {
+        en: string;
+        fr: string;
+    };
     statement_descriptor: string | null;
     tax_code: string | null;
     unit_label: string | null;

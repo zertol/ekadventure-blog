@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import React, { Suspense } from "react";
 import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Image from "next/image";
 import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
@@ -8,20 +7,32 @@ import { CategoryArticles } from "../UI/Categories/CategoryArticle/CategoryArtic
 import PostArticles from "../UI/Blog/PostArticle/PostArticles";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
-import { useTranslations } from "next-intl";
 import HorizontalAd from "../Ads/Google/HorizontalAd";
 import { FeaturedSection } from "../UI/Home/FeaturedSection/page";
+import { getTranslations } from "next-intl/server";
+import { CategoriesSkeleton } from "../Skeletons/Category/CategoriesSkeleton";
+import { PostsSkeleton } from "../Skeletons/Post/PostsSkeleton";
+import { VideosSkeleton } from "../Skeletons/Video/VideosSkeleton";
+import { ProductType } from "@/types/ecommerce/product-type";
+import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
+import ProductsList from "../UI/ECommerce/ProductsList";
 
 interface HomeProps {
-  categories: CategoryType[];
-  latestPosts: PostType[];
-  videos: YouTubePlaylistType | null;
+  categories: Promise<ApiResult<CategoryType[]>>;
+  latestPosts: Promise<ApiResult<PostType[]>>;
+  videos: Promise<ApiResult<YouTubePlaylistType>>;
+  products: Promise<ApiResult<ProductsResponseType>>;
 }
 
-const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
-  const tHome = useTranslations("Home");
-  const tUI = useTranslations("UI");
-  const tCommon = useTranslations("Common");
+const Home: React.FC<HomeProps> = async ({
+  categories,
+  latestPosts,
+  videos,
+  products,
+}) => {
+  const tHome = await getTranslations("Home");
+  const tUI = await getTranslations("UI");
+  const tCommon = await getTranslations("Common");
 
   return (
     <div className="home-page">
@@ -55,10 +66,21 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
       </div>
 
       <FeaturedSection
+        title={tCommon("featuredProductsTitle")}
+        canViewAll={{ page: { url: "/products" }, text: tUI("viewAll") }}
+      >
+        <Suspense fallback={<VideosSkeleton />}>
+          <LatestProductsSection promise={products} />
+        </Suspense>
+      </FeaturedSection>
+
+      <FeaturedSection
         title={tCommon("featuredAdventuresTitle")}
         canViewAll={{ page: { url: "/blog" }, text: tUI("viewAll") }}
       >
-        <PostArticles posts={latestPosts} />
+        <Suspense fallback={<PostsSkeleton />}>
+          <LatestPostsSection promise={latestPosts} />
+        </Suspense>
       </FeaturedSection>
 
       <FeaturedSection
@@ -66,9 +88,9 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         canViewAll={{ page: { url: "/videos" }, text: tUI("viewAll") }}
         className="mb-c-30"
       >
-        {videos && videos.items.length > 0 && (
-          <YouTubeVideos ytPlaylist={videos} />
-        )}
+        <Suspense fallback={<VideosSkeleton />}>
+          <VideosSection promise={videos} />
+        </Suspense>
       </FeaturedSection>
 
       <div className="flex justify-center">
@@ -84,7 +106,9 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
       </div>
 
       <FeaturedSection title={tCommon("featuredTopicsTitle")}>
-        <CategoryArticles categories={categories} />
+        <Suspense fallback={<CategoriesSkeleton />}>
+          <CategoriesSection promise={categories} />
+        </Suspense>
       </FeaturedSection>
 
       <section className="relative h-[400px] flex-center-row mb-c-60">
@@ -109,6 +133,53 @@ const Home: React.FC<HomeProps> = ({ categories, latestPosts, videos }) => {
         </div>
       </section>
     </div>
+  );
+};
+
+async function CategoriesSection({
+  promise,
+}: {
+  promise: Promise<ApiResult<CategoryType[]>>;
+}) {
+  const categories = await promise;
+  return <CategoryArticles categories={categories.Result ?? []} />;
+}
+
+async function LatestPostsSection({
+  promise,
+}: {
+  promise: Promise<ApiResult<PostType[]>>;
+}) {
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  const latestPosts = await promise;
+  return <PostArticles posts={latestPosts.Result ?? []} />;
+}
+
+async function VideosSection({
+  promise,
+}: {
+  promise: Promise<ApiResult<YouTubePlaylistType>>;
+}) {
+  const videos = await promise;
+  return (
+    videos.Result &&
+    videos?.Result?.items.length > 0 && (
+      <YouTubeVideos ytPlaylist={videos.Result} />
+    )
+  );
+}
+
+async function LatestProductsSection({
+  promise,
+}: {
+  promise: Promise<ApiResult<ProductsResponseType>>;
+}) {
+  const products = await promise;
+  return (
+    products.Result &&
+    products?.Result?.data.length > 0 && (
+      <ProductsList products={products.Result} />
+    )
   );
 };
 

@@ -1,4 +1,5 @@
 import { fetchAllCategories } from "@/api/controllers/categories";
+import { getLatestProducts as getLatestProducts } from "@/api/controllers/ecommerce";
 import { fetchAllPages } from "@/api/controllers/pages";
 import { fetchLatestPosts } from "@/api/controllers/posts";
 import { getLatestYouTubeVideos } from "@/api/controllers/youtube";
@@ -40,18 +41,14 @@ export default async function HomePage({
   params: { locale: string };
 }) {
   const localParams = await params;
-  const [categories, latestPosts, videos] = await Promise.all([
-    fetchAllCategories(localParams),
-    fetchLatestPosts(localParams),
-    getLatestYouTubeVideos(),
-  ]);
 
   return (
     <App currentPage="home">
       <Home
-        categories={categories.Result ?? []}
-        latestPosts={latestPosts.Result ?? []}
-        videos={videos.Result}
+        categories={fetchAllCategories(localParams)}
+        latestPosts={fetchLatestPosts(localParams)}
+        videos={getLatestYouTubeVideos()}
+        products={getLatestProducts()}
       />
     </App>
   );
