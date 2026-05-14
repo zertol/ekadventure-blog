@@ -1,4 +1,5 @@
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
+import { ProductType } from "@/types/ecommerce/product-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
 
 export const generateProductDownloadLink = async (params: Record<string, any>): Promise<ApiResult<URLType>> => {
@@ -12,12 +13,16 @@ export const getLatestProducts = async (): Promise<ApiResult<ProductsResponseTyp
     return await handleApiRequest<ProductsResponseType>("https://getlatestproducts-zsszt3mtmq-uc.a.run.app");
 };
 
+export const getAllProducts = async (): Promise<ApiResult<ProductType[]>> => {
+    return await handleApiRequest<ProductType[]>("https://getallproducts-zsszt3mtmq-uc.a.run.app");
+};
+
 export const getTotalProducts = async (): Promise<ApiResult<{ count: number }>> => {
     return await handleApiRequest<{ count: number }>("https://gettotalproducts-zsszt3mtmq-uc.a.run.app");
 };
 
-export const getProductById = async (params: Record<string, any>): Promise<ApiResult<ProductsResponseType>> => {
-    return await handleApiRequest<ProductsResponseType>("https://getproductbyid-zsszt3mtmq-uc.a.run.app", {
+export const getProductById = async (params: Record<string, any>): Promise<ApiResult<ProductType>> => {
+    return await handleApiRequest<ProductType>("https://getproductbyid-zsszt3mtmq-uc.a.run.app", {
         method: "POST",
         body: JSON.stringify(params),
     });

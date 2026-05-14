@@ -1,13 +1,13 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React from "react";
 import { usePathname } from "@/i18n/navigation";
 import SocialIcons from "../SocialIcons/page";
 import { usePages } from "@/store/PagesContext";
 import { PageType } from "@/types/page-type";
 
-interface HeaderImageProps {
-  text: ReactNode;
+export interface HeaderImageProps {
+  text?: {firstPart: string, secondPart: string};
   backgroundImage?: ImageType;
   roundedImage?: string;
 }
@@ -41,7 +41,17 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
       <div className="absolute inset-0 flex-center-col justify-end pb-10">
         {/* Text container */}
         <div className="text-center text-white mb-[10px] max-w-3xl px-4">
-          {text}
+          {text && (
+            <h2 className="font-bold italic">
+              {text.firstPart}
+              {text.secondPart && (
+                <>
+                  <br />{" "}
+                  <span className="font-ps text-[28px]">{text.secondPart}</span>
+                </>
+              )}
+            </h2>
+          )}
         </div>
 
         {/* Rounded image */}

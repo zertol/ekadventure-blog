@@ -50,6 +50,10 @@
     scrollbar-width: thin; /* "auto" or "thin" */
     scrollbar-color: #888 #f1f1f1; /* thumb color track color */
   }
+
+  .no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 :root {
@@ -392,4 +396,9 @@
   @media screen and (max-width:1024px) {
     display: none !important;
   }
+}
+
+/* Cursor styles */
+.cursor-fullscreen {
+  cursor: url(/images/fullscreen-cursor.svg) 32 32, zoom-in;
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
-import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import { Link } from "@/i18n/navigation";
 import App from "@/components/App";
 import {
@@ -65,7 +64,7 @@ const CategoryPage: React.FC<any> = async ({
 
   const posts = await fetchCategoryPosts({
     categoryname,
-    locale,
+    locale
   });
 
   const category =
@@ -80,19 +79,16 @@ const CategoryPage: React.FC<any> = async ({
   const tUI = await getTranslations("UI");
 
   return (
-    <App currentPage="category">
-      <HeaderImage
-        backgroundImage={headerMedia}
-        roundedImage="/images/profile-avatar.webp"
-        text={
-          <div>
-            <h2 className="font-bold italic">
-              {tCategories("categoriesHeaderCaptionFirstPart")}{" "}
-              <span className="font-ps text-[28px]">{tCategories("categoriesHeaderCaptionSecondPart")}</span>
-            </h2>
-          </div>
+    <App
+      currentPage="category"
+      headerImage={{
+        backgroundImage: headerMedia,
+        text: {
+          firstPart: tCategories("categoriesHeaderCaptionFirstPart"),
+          secondPart: tCategories("categoriesHeaderCaptionSecondPart"),
         }
-      />
+      }}
+    >
       {posts.Result && (
         <div className="container mx-auto px-4 py-12">
           <div className="mb-8">

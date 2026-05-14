@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import CategoryFilter from "@/components/UI/Categories/CategoryFilter/page";
 import PostArticles from "@/components/UI/Blog/PostArticle/PostArticles";
 import HorizontalAd from "../Ads/Google/HorizontalAd";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
-import { useTranslations } from "next-intl";
 
 interface BlogProps {
   posts: PostType[];
@@ -26,24 +24,8 @@ const Blog: React.FC<BlogProps> = ({ posts, categories }) => {
       ) || []
     : posts || [];
 
-  const tBlog = useTranslations("Blog");
-
   return (
     <div>
-      <HeaderImage
-        roundedImage="/images/profile-avatar.webp"
-        text={
-          <div>
-            <h2 className="font-bold italic">
-              {tBlog("blogHeaderCaptionFirstPart")}
-              <br />
-              <span className="font-ps text-[28px]">
-                {tBlog("blogHeaderCaptionSecondPart")}
-              </span>
-            </h2>
-          </div>
-        }
-      />
 
       <div className="w-full flex justify-center">
         <div className="w-full md:w-[768px]">

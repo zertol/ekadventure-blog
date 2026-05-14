@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import HeaderImage from "@/components/UI/Common/HeaderImage/page";
 import Image from "next/image";
 import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
 import { HeroText } from "../UI/Home/HeroText/page";
@@ -13,7 +12,6 @@ import { getTranslations } from "next-intl/server";
 import { CategoriesSkeleton } from "../Skeletons/Category/CategoriesSkeleton";
 import { PostsSkeleton } from "../Skeletons/Post/PostsSkeleton";
 import { VideosSkeleton } from "../Skeletons/Video/VideosSkeleton";
-import { ProductType } from "@/types/ecommerce/product-type";
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 import ProductsList from "../UI/ECommerce/ProductsList";
 
@@ -36,19 +34,6 @@ const Home: React.FC<HomeProps> = async ({
 
   return (
     <div className="home-page">
-      <HeaderImage
-        roundedImage="/images/profile-avatar.webp"
-        text={
-          <div>
-            <h2 className="font-bold italic">
-              {tHome("homeHeaderCaptionFirstPart")}{" "}
-              <span className="font-ps text-[28px]">
-                {tHome("homeHeaderCaptionSecondPart")}
-              </span>
-            </h2>
-          </div>
-        }
-      />
       <section className={`mt-c-30 mb-c-30`}>
         <HeroText />
       </section>
@@ -150,7 +135,6 @@ async function LatestPostsSection({
 }: {
   promise: Promise<ApiResult<PostType[]>>;
 }) {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   const latestPosts = await promise;
   return <PostArticles posts={latestPosts.Result ?? []} />;
 }

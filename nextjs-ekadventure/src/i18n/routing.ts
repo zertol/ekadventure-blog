@@ -14,6 +14,8 @@ export const routing = defineRouting({
         '/accueil': '/',
         '/videos': '/videos',
         '/videos/[videoId]': '/videos/[videoId]',
+        '/products': '/produits',
+        '/products/[productId]': '/produits/[productId]',
         '/about': {
             en: '/about',
             fr: '/a-propos'

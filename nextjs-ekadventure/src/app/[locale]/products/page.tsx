@@ -5,8 +5,8 @@ import {
   getLatestProducts,
   getTotalProducts,
 } from "@/api/controllers/ecommerce";
-import ProductsList from "@/components/UI/ECommerce/ProductsList";
 import Shop from "@/components/Pages/Shop";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pages = await fetchAllPages({});
@@ -36,9 +36,16 @@ export default async function ProductsPage() {
     getTotalProducts(),
   ]);
 
+  const tShop = await getTranslations("Shop");
+
   return (
     products.Result && (
-      <App currentPage="products">
+      <App currentPage="products" headerImage={{
+        text: {
+          firstPart: tShop("shopHeaderCaptionFirstPart"),
+          secondPart: tShop("shopHeaderCaptionSecondPart"),
+        }
+      }}>
         <Shop
           products={products.Result}
           totalProducts={totalProducts.Result?.count || 0}

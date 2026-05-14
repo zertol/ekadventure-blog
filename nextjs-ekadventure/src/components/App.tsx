@@ -5,18 +5,21 @@ import React, { ReactNode, useEffect, useRef } from "react";
 import Header from "./Layout/Header/page";
 import Footer from "./Layout/Footer/page";
 import CookieConsent from "./UI/Common/CookieConsent/page";
+import HeaderImage, { HeaderImageProps } from "./UI/Common/HeaderImage/page";
 
 interface AppProps {
   currentPage?: string;
   children?: ReactNode;
+  headerImage?: HeaderImageProps;
 }
 
-const App: React.FC<AppProps> = ({ currentPage = "home", children }) => {
+const App: React.FC<AppProps> = ({ currentPage = "home", headerImage, children }) => {
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-grow">
+      {headerImage && <HeaderImage {...headerImage} /> }
+      <main className="flex-grow flex items-center justify-center">
         {children}
       </main>
       <Footer />

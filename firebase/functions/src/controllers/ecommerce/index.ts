@@ -40,12 +40,23 @@ export const updateProductImages = onRequest(
 export const getLatestProducts = onRequest(
     { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
     withApiAuth(createApiHandler<any>(
-        async (req: Request<any>, res: Response<ApiResult<any>>): Promise<ProductsResponseType> => {
+        async (req: Request<any>, res: Response<ApiResult<ProductsResponseType>>): Promise<ProductsResponseType> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
             EcommerceService.initStripe();
 
             return await EcommerceService.getLatestProducts(params?.lastProductId);
+        }
+    )));
+
+export const getAllProducts = onRequest(
+    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    withApiAuth(createApiHandler<any>(
+        async (req: Request<any>, res: Response<ApiResult<ProductType[]>>): Promise<ProductType[]> => {
+            const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
+
+            return await EcommerceService.getAllProducts();
         }
     )));
 

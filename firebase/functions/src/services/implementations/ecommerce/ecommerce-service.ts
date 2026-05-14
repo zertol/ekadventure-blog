@@ -87,6 +87,25 @@ export class EcommerceService implements IEcommerceService {
         return productsResponse;
     }
 
+    async getAllProducts(): Promise<ProductType[]> {
+        let products = await this.stripe.products.list({ active: true, limit: 100 });
+
+        const allProducts = products.data.map((prod) => {
+            return mapStripeProduct(prod);
+        });
+
+        while (products.has_more) {
+            const lastId = products.data[products.data.length - 1].id;
+
+            products = await this.stripe.products.list({ active: true, limit: 100, starting_after: lastId });
+            products.data.map((prod) => {
+                allProducts.push(mapStripeProduct(prod));
+            });
+        }
+
+        return allProducts;
+    }
+
     async getProductById(id: string): Promise<ProductType> {
         if (!id) {
             throw new Error("Product Id is required");

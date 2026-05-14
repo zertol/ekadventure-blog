@@ -10,6 +10,7 @@ export interface IEcommerceService {
     createProduct(product: CreateProductParamsType): Promise<ProductType>;
     updateProductImages(id: string, images: string[]): Promise<ProductType>;
     getLatestProducts(lastProductId?: string): Promise<ProductsResponseType>;
+    getAllProducts(): Promise<ProductType[]>;
     getProductById(id: string): Promise<ProductType>;
     createCheckoutSession(params: CheckoutSessionParamsType): Promise<URLType>;
     generateProductDownloadLink(token: string, expiresIn?: number): Promise<URLType>;

@@ -6,6 +6,7 @@ import { getLatestYouTubeVideos } from "@/api/controllers/youtube";
 import App from "@/components/App";
 import Home from "@/components/Pages/Home";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -42,8 +43,18 @@ export default async function HomePage({
 }) {
   const localParams = await params;
 
+  const tHome = await getTranslations("Home");
+
   return (
-    <App currentPage="home">
+    <App
+      currentPage="home"
+      headerImage={{
+        text: {
+          firstPart: tHome("homeHeaderCaptionFirstPart"),
+          secondPart: tHome("homeHeaderCaptionSecondPart"),
+        }
+      }}
+    >
       <Home
         categories={fetchAllCategories(localParams)}
         latestPosts={fetchLatestPosts(localParams)}

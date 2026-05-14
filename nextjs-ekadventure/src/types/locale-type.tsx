@@ -1,0 +1,1 @@
+type LocaleType = "en" | "fr";

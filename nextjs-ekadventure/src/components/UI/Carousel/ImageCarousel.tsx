@@ -1,26 +1,35 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
+//@ts-ignore
 import "./slick.css";
 import LightGallery from "lightgallery/react";
 // import styles
-import 'lightgallery/css/lightgallery.css';
-import 'lightgallery/css/lg-zoom.css';
-import 'lightgallery/css/lg-thumbnail.css';
+//@ts-ignore
+import "lightgallery/css/lightgallery.css";
+//@ts-ignore
+import "lightgallery/css/lg-zoom.css";
+//@ts-ignore
+import "lightgallery/css/lg-thumbnail.css";
 
 // import plugins if you need
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
-import lgFullScreen from 'lightgallery/plugins/fullscreen';
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgFullScreen from "lightgallery/plugins/fullscreen";
 
 interface ImageCarouselProps {
   images: ImageType[];
   title?: string;
+  productGallerySettings?: {
+    afterChange: (index: number) => void;
+    selectedImageIndex: number;
+  };
 }
 
 // Define the slider settings
 const sliderSettings = {
+  afterChange: (index: number) => {},
   dots: false,
   infinite: true,
   centerPadding: 50,
@@ -31,6 +40,7 @@ const sliderSettings = {
   pauseOnHover: true,
   arrows: true,
   swipeToSlide: true,
+
   responsive: [
     {
       breakpoint: 1024,
@@ -49,56 +59,77 @@ const sliderSettings = {
   ],
 };
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({
+  images,
+  productGallerySettings,
+}) => {
   // Slider reference to access methods if needed
-  const sliderRef = useRef(null);
+  const sliderRef = useRef<Slider | null>(null);
   const lightboxRef = useRef<any>(null);
+
+  if (productGallerySettings) {
+    sliderSettings.slidesToShow = 1;
+    sliderSettings.afterChange = productGallerySettings.afterChange;
+  }
+
+  useEffect(() => {
+    if (productGallerySettings) {
+      sliderRef.current?.slickGoTo(
+        productGallerySettings.selectedImageIndex || 0,
+        true,
+      );
+    }
+  }, [productGallerySettings?.selectedImageIndex]);
 
   const handleOpenLightbox = (index: number) => {
     lightboxRef.current?.openGallery(index);
-  }
+  };
 
   if (!images || images.length === 0) {
     return null;
   }
 
   return (
-    <div className="slick-carousel-container mt-5">
+    <div
+      className={`slick-carousel-container ${productGallerySettings ? "mt-0" : "mt-5"}`}
+    >
       <div className="relative">
         {/* @ts-ignore - bypassing type check for Slider */}
         <Slider ref={sliderRef} {...sliderSettings}>
           {images.map((image, index) => (
             <div key={index} className="outline-none">
               <div
-                className="relative group overflow-hidden cursor-pointer w-full h-[190px]"
+                className={`relative group overflow-hidden w-full flex justify-center ${productGallerySettings ? "h-[190px] cursor-fullscreen  rounded-md" : "h-full cursor-pointer rounded-none"}`}
                 onClick={() => handleOpenLightbox(index)}
               >
                 <img
                   src={image.url}
                   alt={image.alt || `Image ${index + 1}`}
-                  className="object-cover"
+                  className={`object-cover ${productGallerySettings ? "h-[480px] rounded-md" : "rounded-none"}`}
                 />
-                <div className="absolute w-full h-full inset-0">
-                  <div className="w-full h-full bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-white font-bold mb-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={3}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                    <p className="text-white text-sm text-center px-2">
-                      {image.alt || `Image ${index + 1}`}
-                    </p>
+                {!productGallerySettings && (
+                  <div className="absolute w-full h-full inset-0">
+                    <div className="w-full h-full bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-white font-bold mb-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={3}
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                      </svg>
+                      <p className="text-white text-sm text-center px-2">
+                        {image.alt || `Image ${index + 1}`}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           ))}

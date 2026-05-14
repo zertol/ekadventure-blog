@@ -3,6 +3,7 @@ import { fetchAllPages } from "@/api/controllers/pages";
 import { Metadata } from "next";
 import { getLatestYouTubeVideos } from "@/api/controllers/youtube";
 import Videos from "@/components/Pages/Videos";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pages = await fetchAllPages({});
@@ -29,9 +30,16 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function VideosPage() {
   const [videos] = await Promise.all([getLatestYouTubeVideos()]);
 
+  const tVideos = await getTranslations("Videos");
+  
   return (
     videos.Result && (
-      <App currentPage="videos">
+      <App currentPage="videos" headerImage={{
+        text: {
+          firstPart: tVideos("videosHeaderCaptionFirstPart"),
+          secondPart: tVideos("videosHeaderCaptionSecondPart")
+        }
+      }}>
         <Videos ytPlaylist={videos.Result}  />
       </App>
     )

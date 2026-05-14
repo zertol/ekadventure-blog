@@ -51,6 +51,7 @@ export const getYouTubeVideoById = YouTubeController.getYouTubeVideoById;
 export const createProduct = ECommerceController.createProduct;
 export const updateProductImages = ECommerceController.updateProductImages;
 export const getLatestProducts = ECommerceController.getLatestProducts;
+export const getAllProducts = ECommerceController.getAllProducts;
 export const getProductById = ECommerceController.getProductById;
 export const getTotalProducts = ECommerceController.getTotalProducts;
 export const createCheckoutSession = ECommerceController.createCheckoutSession;

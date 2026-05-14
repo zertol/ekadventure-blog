@@ -21,6 +21,7 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   const params = useParams();
   const isBlogDetailsPage = !!params?.slug;
   const isVideoDetailsPage = !!params?.videoId;
+  const isProductDetailsPage = !!params?.productId;
 
   const { pages } = usePages();
   const isScrollable =
@@ -28,7 +29,8 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
     !isBlogDetailsPage &&
     !isContactPage &&
     !notFound &&
-    !isVideoDetailsPage;
+    !isVideoDetailsPage &&
+    !isProductDetailsPage;
 
   useEffect(() => {
     if (isScrollable) {

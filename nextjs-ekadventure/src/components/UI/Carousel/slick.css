@@ -53,7 +53,16 @@
 
 .slick-list{
   margin-left: -10px;
+  height: 100%;
 } 
+
+.slick-track{
+  height: 100%;
+}
+
+.slick-track div{
+  height: 100%;
+}
 
 .lg-fullscreen::after{
   content: "";
