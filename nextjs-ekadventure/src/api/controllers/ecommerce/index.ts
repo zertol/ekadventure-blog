@@ -26,7 +26,7 @@ export const getTotalProducts = async (): Promise<ApiResult<{ count: number }>> 
 export const getProductById = async (params: Record<string, any>): Promise<ApiResult<ProductType>> => {
     return await handleApiRequest<ProductType>("https://getproductbyid-zsszt3mtmq-uc.a.run.app", {
         method: "POST",
-        body: JSON.stringify(params),
+        body: JSON.stringify(params)
     });
 };
 
@@ -49,6 +49,6 @@ export const createCheckoutSession = async (params?: CheckoutSessionParamsType):
 export const verifyProcessedTokenFromSession = async (params: Record<string, any>): Promise<ApiResult<{ processed: boolean }>> => {
     return await handleApiRequest<{ processed: boolean }>("https://verifyprocessedtokenfromsession-zsszt3mtmq-uc.a.run.app", {
         method: "POST",
-        body: JSON.stringify(params),
-    });
+        body: JSON.stringify(params)
+    }, 0);
 };
