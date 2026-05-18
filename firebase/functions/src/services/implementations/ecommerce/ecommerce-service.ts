@@ -88,7 +88,7 @@ export class EcommerceService implements IEcommerceService {
     }
 
     async getAllProducts(): Promise<ProductType[]> {
-        let products = await this.stripe.products.list({ active: true, limit: 100 });
+        let products = await this.stripe.products.list({ active: true, limit: 100, expand: ["data.default_price"] });
 
         const allProducts = products.data.map((prod) => {
             return mapStripeProduct(prod);
@@ -97,7 +97,7 @@ export class EcommerceService implements IEcommerceService {
         while (products.has_more) {
             const lastId = products.data[products.data.length - 1].id;
 
-            products = await this.stripe.products.list({ active: true, limit: 100, starting_after: lastId });
+            products = await this.stripe.products.list({ active: true, limit: 100, starting_after: lastId, expand: ["data.default_price"] });
             products.data.map((prod) => {
                 allProducts.push(mapStripeProduct(prod));
             });
@@ -110,7 +110,7 @@ export class EcommerceService implements IEcommerceService {
         if (!id) {
             throw new Error("Product Id is required");
         }
-        const product = await this.stripe.products.retrieve(id);
+        const product = await this.stripe.products.retrieve(id, { expand: ["default_price"] });
         return mapStripeProduct(product);
     }
 
@@ -183,16 +183,21 @@ export class EcommerceService implements IEcommerceService {
             const tokenDoc = await tokenRef.get();
 
             if (!tokenDoc.exists) {
+                console.log("Download token not found");
                 throw new Error("Download token not found");
             }
 
             const tokenData = tokenDoc.data() as ProductDownloadTokenType;
 
-            if (tokenData.used) throw new Error("Download token already used");
-            if (tokenData.expiresAt < Date.now()) throw new Error("Download token expired");
+            if (tokenData.used) {
+                console.log("Download token already used");
+                throw new Error("Download token already used");
+            }
 
-            // mark as used before generating the link
-            await tokenRef.update({ used: true });
+            if (tokenData.expiresAt < Date.now()) {
+                console.log("Download token expired");
+                throw new Error("Download token expired");
+            }
 
             const client = new S3Client({
                 endpoint: process.env.R2_ENDPOINT,
@@ -214,12 +219,52 @@ export class EcommerceService implements IEcommerceService {
                 ResponseContentType: Helpers.getContentType(fileName ?? "")
             });
 
-            const url = await getSignedUrl(client, command, { expiresIn: tokenData.expiresAt ?? Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS });
+            const url = await getSignedUrl(client, command, { expiresIn: Math.max(0, Math.floor((tokenData.expiresAt - Date.now()) / 1000)) ?? Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS });
+
+            if (!url) {
+                console.log(`URL is Empty: ${JSON.stringify(tokenData.metadata)}`);
+                throw new Error(`URL is Empty: ${JSON.stringify(tokenData.metadata)}`);
+            }
+
+            // mark as used after generating the link
+            await tokenRef.update({ used: true });
 
             return { url: encodeURIComponent(url) };
         } catch (err) {
+            console.log(`Failed to retrieve download token: ${err}`);
             throw new Error(`Failed to retrieve download token: ${err}`);
         }
+    }
+
+    async verifyProcessedTokenFromSession(sessionId: string): Promise<{ processed: boolean; }> {
+        try {
+            if (!sessionId) {
+                throw new Error("Session ID should have a value");
+            }
+
+            const sessionRef = ekadventureBlogDb
+                .collection("product_download_tokens")
+                .where("sessionId", "==", sessionId)
+                .limit(1);
+
+            const sessionDoc = await sessionRef.get();
+
+            if (sessionDoc.empty) {
+                console.log("Download token not found from Session ID");
+                throw new Error("Download token not found from Session ID");
+            }
+
+            const tokenData = sessionDoc.docs[0].data() as ProductDownloadTokenType;
+
+            if (tokenData.used) {
+                return { processed: true };
+            }
+        } catch (err) {
+            console.log(`Failed to retrieve download token from Session ID: ${err}`);
+            throw new Error(`Failed to retrieve download token from Session ID: ${err}`);
+        }
+
+        return { processed: false };
     }
 }
 

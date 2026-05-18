@@ -154,8 +154,19 @@
         "privacyPolicyTitle": "Privacy Policy"
     },
     "Shop": {
+        "alreadyProcessedContactMeText": "If you're having trouble downloading your purchase, feel free to contact me directly and I'll be happy to assist you!",
+        "alreadyProcessedHeaderText": "It looks like you already completed this purchase.",
+        "buyNowButtonText": "Buy Now",
+        "productDetailsPageTitle": "Ekadventure Shop: From the outdoors, to You.",
+        "relatedProductsTitle": "Similar Products",
         "shopHeaderCaptionFirstPart": "Where Adventures Are Kept Alive",
-        "shopHeaderCaptionSecondPart": "Welcome"
+        "shopHeaderCaptionSecondPart": "Welcome",
+        "thankYouPurchaseCheckSpamText": "If you don't see the second email within 24 hours, please check your spam folder or contact me directly. Happy adventuring!",
+        "thankYouPurchaseDescription": "Thank you for your purchase! Your support means the world to me and helps keep the spirit of adventure alive. Please check your inbox for two separate emails:",
+        "thankYouPurchaseHeaderText": "Payment Successful!",
+        "thankYouPurchaseOurShopText": "<strong>Our Shop</strong>: A separate email containing your personal digital download link.",
+        "thankYouPurchaseReceiptText": "Your official payment receipt (sent immediately).",
+        "thankYouPurchaseSubscribeNewsletterText": "Don't forget to subscribe to my newsletter to stay up to date with my latest experiences and exclusive adventures I wanna share."
     },
     "Sidebar": {
         "aboutMeBottomText": "I created <brand>EKADVENTURE</brand> as a way to pursue my dreams, and to hopefully inspire you through my experiences, by sharing what I love to do the most.",

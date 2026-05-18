@@ -111,7 +111,13 @@ export const formatDate = (date: string, locale: string) => {
     });
 };
 
+export const formatString = (template: string, ...args: string[]): string => {
+    return template.replace(/{(\d+)}/g, (match, number) => {
+        return typeof args[number] !== 'undefined' ? args[number] : match;
+    });
+};
+
 // Ads
 export const isGoogleAdSlotConfig = (config: BaseAdConfig): config is GoogleAdSlotConfig => {
     return config.provider === "google";
-}
+};

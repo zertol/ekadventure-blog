@@ -19,7 +19,7 @@ const App: React.FC<AppProps> = ({ currentPage = "home", headerImage, children }
     <div className="flex min-h-screen flex-col">
       <Header />
       {headerImage && <HeaderImage {...headerImage} /> }
-      <main className="flex-grow flex items-center justify-center">
+      <main className="flex-grow flex flex-col items-center justify-center">
         {children}
       </main>
       <Footer />

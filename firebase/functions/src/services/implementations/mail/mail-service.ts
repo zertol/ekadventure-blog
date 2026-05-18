@@ -233,6 +233,7 @@ export class MailService implements IMailService {
 
         try {
             const productDownloadToken: ProductDownloadTokenType = {
+                sessionId: session.id,
                 metadata: Helpers.mapMetadata(session.metadata),
                 customerDetails: session.customer_details,
                 locale: session.locale as Locale,

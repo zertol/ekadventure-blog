@@ -1,3 +1,5 @@
+import { CheckoutSessionParamsType } from "@/types/ecommerce/checkout-session-params-type";
+import { ProductActionsEnum } from "@/types/ecommerce/product-actions-enum";
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 import { ProductType } from "@/types/ecommerce/product-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
@@ -29,7 +31,23 @@ export const getProductById = async (params: Record<string, any>): Promise<ApiRe
 };
 
 export const getProductsByRoute = async (params?: Record<string, any>): Promise<ApiResult<ProductsResponseType>> => {
-    return await handleApiRequest<ProductsResponseType>("/api/products", params && {
+    const action = ProductActionsEnum.getLatestProducts;
+    return await handleApiRequest<ProductsResponseType>("/api/ecommerce", params && {
+        method: "POST",
+        body: JSON.stringify({ ...params, action })
+    });
+};
+
+export const createCheckoutSession = async (params?: CheckoutSessionParamsType): Promise<ApiResult<URLType>> => {
+    const action = ProductActionsEnum.createCheckoutSession;
+    return await handleApiRequest<URLType>("/api/ecommerce", params && {
+        method: "POST",
+        body: JSON.stringify({ ...params, action })
+    });
+};
+
+export const verifyProcessedTokenFromSession = async (params: Record<string, any>): Promise<ApiResult<{ processed: boolean }>> => {
+    return await handleApiRequest<{ processed: boolean }>("https://verifyprocessedtokenfromsession-zsszt3mtmq-uc.a.run.app", {
         method: "POST",
         body: JSON.stringify(params),
     });

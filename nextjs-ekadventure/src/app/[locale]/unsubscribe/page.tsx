@@ -9,7 +9,7 @@ const UnsubscribePage: React.FC = () => {
   const tLetter = useTranslations("Newsletter");
 
   return (
-    <div className="h-screen flex-center-col overflow-auto">
+    <div className="h-screen flex flex-col justify-start md:justify-center overflow-auto">
       <div className="container px-c-25 lg:px-0">
         <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
           <HikerImage />
@@ -29,7 +29,7 @@ const UnsubscribePage: React.FC = () => {
                 {tLetter("unsubscribeStillSureMessage")}
               </p>
 
-              <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
+              <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center mb-4">
                 <NewsLetterForm newsLetterAction="unsubscribe" />
               </div>
             </div>

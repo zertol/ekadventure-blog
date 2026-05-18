@@ -10,7 +10,8 @@ import { useTranslations } from "next-intl";
 const ProductsList: React.FC<{
   products: ProductsResponseType;
   totalProducts?: number;
-}> = ({ products, totalProducts }) => {
+  isRelated?: boolean;
+}> = ({ products, totalProducts, isRelated }) => {
   const [visibleProducts, setVisibleProducts] = useState(products.data);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(products.has_more);
@@ -37,11 +38,11 @@ const ProductsList: React.FC<{
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12 items-start">
+      <div className={`grid grid-cols-1 ${isRelated ? "md:grid-cols-4 lg:grid-cols-6" : "md:grid-cols-2 lg:grid-cols-3"} gap-12 mb-12 items-start`}>
         {visibleProducts
           .slice(0, visibleProducts.length)
           .map((product: ProductType) => {
-            return <Product key={product.id} product={product} />;
+            return <Product key={product.id} product={product} isRelated={isRelated} />;
           })}
       </div>
 

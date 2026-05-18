@@ -1,6 +1,6 @@
 import App from "@/components/App";
 import { Metadata } from "next";
-import { getAllProducts, getProductById } from "@/api/controllers/ecommerce";
+import { getAllProducts, getLatestProducts, getProductById } from "@/api/controllers/ecommerce";
 import { ProductType } from "@/types/ecommerce/product-type";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -67,10 +67,15 @@ export default async function ProductPage({
   }
 
   const product = productResult.Result;
+  const latestProducts = await getLatestProducts();
+
+  if (!latestProducts.Result) {
+    return notFound();
+  }
 
   return (
     <App currentPage="product">
-      {product && <ProductGallery product={product} locale={localParams.locale} />}
+      {product && <ProductGallery product={product} locale={localParams.locale} relatedProducts={latestProducts.Result} />}
     </App>
   );
 }

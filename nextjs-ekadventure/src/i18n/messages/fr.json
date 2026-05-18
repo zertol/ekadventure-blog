@@ -154,8 +154,19 @@
         "privacyPolicyTitle": "Politique de Confidentialité"
     },
     "Shop": {
+        "alreadyProcessedContactMeText": "Si vous rencontrez des difficultés pour télécharger votre achat, n'hésitez pas à me contacter directement et je serai heureux de vous aider!",
+        "alreadyProcessedHeaderText": "Il semble que vous ayez déjà terminé cet achat.",
+        "buyNowButtonText": "Achetez Maintenant",
+        "productDetailsPageTitle": "Boutique Ekadventure: De l'extérieur, à Vous.",
+        "relatedProductsTitle": "Produits Similaires",
         "shopHeaderCaptionFirstPart": "Où les Aventures Sont Gardées Précieusement",
-        "shopHeaderCaptionSecondPart": "Bienvenue"
+        "shopHeaderCaptionSecondPart": "Bienvenue",
+        "thankYouPurchaseCheckSpamText": "Si vous ne voyez pas le deuxième email dans les 24 heures, veuillez vérifier votre dossier de courrier indésirable ou nous contacter directement. Bonne aventure!",
+        "thankYouPurchaseDescription": "Merci pour votre achat! Votre soutien signifie le monde pour moi et aide à garder l'esprit d'aventure vivant. Veuillez vérifier votre boîte de réception pour deux emails séparés:",
+        "thankYouPurchaseHeaderText": "Paiement Réussi!",
+        "thankYouPurchaseOurShopText": "<strong>Notre Boutique</strong>: Un email séparé contenant votre lien de téléchargement numérique personnel.",
+        "thankYouPurchaseReceiptText": "Votre reçu de paiement officiel (envoyé immédiatement).",
+        "thankYouPurchaseSubscribeNewsletterText": "N'oubliez pas de vous abonner à ma newsletter pour rester à jour avec mes dernières expériences et aventures exclusives que je veux partager."
     },
     "Sidebar": {
         "aboutMeBottomText": "J'ai créé <brand>EKADVENTURE</brand> comme un moyen de poursuivre mes rêves, et d'espérer vous inspirer à travers mes expériences, en partageant ce que j'aime faire le plus.",

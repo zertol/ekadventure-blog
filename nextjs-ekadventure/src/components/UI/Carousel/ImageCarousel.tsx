@@ -69,6 +69,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
   if (productGallerySettings) {
     sliderSettings.slidesToShow = 1;
+    sliderSettings.responsive = [];
     sliderSettings.afterChange = productGallerySettings.afterChange;
   }
 
@@ -99,13 +100,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           {images.map((image, index) => (
             <div key={index} className="outline-none">
               <div
-                className={`relative group overflow-hidden w-full flex justify-center ${productGallerySettings ? "h-[190px] cursor-fullscreen  rounded-md" : "h-full cursor-pointer rounded-none"}`}
+                className={`relative group overflow-hidden w-full flex justify-center ${productGallerySettings ? "h-full cursor-fullscreen  rounded-md" : "h-[190px] cursor-pointer rounded-none"}`}
                 onClick={() => handleOpenLightbox(index)}
               >
                 <img
                   src={image.url}
                   alt={image.alt || `Image ${index + 1}`}
-                  className={`object-cover ${productGallerySettings ? "h-[480px] rounded-md" : "rounded-none"}`}
+                  className={`object-cover ${productGallerySettings ? "h-full rounded-md" : "rounded-none"}`}
                 />
                 {!productGallerySettings && (
                   <div className="absolute w-full h-full inset-0">
@@ -148,6 +149,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           speed={500}
           plugins={[lgThumbnail, lgZoom, lgFullScreen]}
           download={false}
+          mobileSettings={{
+            controls: true,
+            showCloseIcon: true,
+          }}
         />
       </div>
     </div>

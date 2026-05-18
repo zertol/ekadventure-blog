@@ -47,22 +47,13 @@
   color: white;
   opacity: 1;
 }
-.slick-slide img{
-  margin-left: 10px;
+.slick-slide{
+  padding: 0 5px ;
 }
 
 .slick-list{
-  margin-left: -10px;
-  height: 100%;
+  margin: 0 -5px;
 } 
-
-.slick-track{
-  height: 100%;
-}
-
-.slick-track div{
-  height: 100%;
-}
 
 .lg-fullscreen::after{
   content: "";

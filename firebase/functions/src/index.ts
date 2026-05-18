@@ -57,3 +57,4 @@ export const getTotalProducts = ECommerceController.getTotalProducts;
 export const createCheckoutSession = ECommerceController.createCheckoutSession;
 export const sendProductLink = ECommerceController.sendProductLink;
 export const generateProductDownloadLink = ECommerceController.generateProductDownloadLink;
+export const verifyProcessedTokenFromSession = ECommerceController.verifyProcessedTokenFromSession;

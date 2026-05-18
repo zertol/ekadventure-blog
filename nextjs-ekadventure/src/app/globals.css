@@ -89,8 +89,12 @@
     @apply text-[20px] font-medium leading-none;
   }
 
-  h4, h5, h6 {
+  h4, h5 {
     @apply text-[18px] font-medium leading-none;
+  }
+
+  h6 {
+    @apply text-[16px] font-medium leading-none;
   }
   
   p, a, span, input, button, textarea, label, li {
@@ -402,3 +406,5 @@
 .cursor-fullscreen {
   cursor: url(/images/fullscreen-cursor.svg) 32 32, zoom-in;
 }
+
+/* Product gallery carousel overrides */

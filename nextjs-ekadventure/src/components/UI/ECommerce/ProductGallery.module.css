@@ -1,0 +1,13 @@
+.product-gallery :global(.slick-carousel-container),
+.product-gallery :global(.slick-carousel-container div)
+{
+  height: 100%;
+}
+
+.product-gallery :global(.slick-slide) {
+  padding: 0;
+}
+
+.product-gallery :global(.slick-list) {
+  margin: 0;
+} 

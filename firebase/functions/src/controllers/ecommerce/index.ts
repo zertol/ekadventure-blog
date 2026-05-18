@@ -113,3 +113,15 @@ export const generateProductDownloadLink = onRequest(
             return await EcommerceService.generateProductDownloadLink(params.token);
         }
     )));
+
+export const verifyProcessedTokenFromSession = onRequest(
+    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    withApiAuth(createApiHandler<any>(
+        async (req: Request<any>, res: Response<ApiResult<{ processed: boolean }>>): Promise<{ processed: boolean }> => {
+            const params: ParamsType = req.body;
+            const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
+
+            return await EcommerceService.verifyProcessedTokenFromSession(params.sessionId);
+        }
+    )));

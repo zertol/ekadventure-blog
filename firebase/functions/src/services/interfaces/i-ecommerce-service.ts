@@ -14,4 +14,5 @@ export interface IEcommerceService {
     getProductById(id: string): Promise<ProductType>;
     createCheckoutSession(params: CheckoutSessionParamsType): Promise<URLType>;
     generateProductDownloadLink(token: string, expiresIn?: number): Promise<URLType>;
+    verifyProcessedTokenFromSession(sessionId: string): Promise<{ processed: boolean }>;
 }
