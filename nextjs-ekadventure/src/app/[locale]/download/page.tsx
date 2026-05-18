@@ -24,7 +24,7 @@ const DownloadPage: React.FC<PageProps> = async ({ searchParams }) => {
     if (response.ErrorMessages && response.ErrorMessages.length > 0) {
       throw new Error(response.ErrorMessages.join(","));
     }
-    
+
     downloadUrl = response.Result;
   } catch (err) {
     console.error(err);
@@ -35,7 +35,9 @@ const DownloadPage: React.FC<PageProps> = async ({ searchParams }) => {
     return notFound();
   }
 
-  return downloadUrl && <Download downloadUrl={downloadUrl} />;
+  return (
+    downloadUrl && <Download downloadUrl={downloadUrl} tokenInUse={token} />
+  );
 };
 
 export default DownloadPage;

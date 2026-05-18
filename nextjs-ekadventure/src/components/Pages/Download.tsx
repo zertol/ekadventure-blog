@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import NewsLetterForm from "../UI/Common/Form/NewsLetterForm/page";
 import HelpButtons from "../UI/Common/HelpButtons/page";
 import PrimaryLink from "../UI/Common/PrimaryLink/page";
@@ -11,10 +11,20 @@ import { HikerDescrtiptionText } from "../UI/Common/Hiker/HikerDescriptionText";
 
 interface DownloadProps {
   downloadUrl: URLType | null;
+  tokenInUse: string;
 }
 
-const Download: React.FC<DownloadProps> = ({ downloadUrl }) => {
+const Download: React.FC<DownloadProps> = ({ downloadUrl, tokenInUse }) => {
+  const [downloadButtonLink, setDownloadButtonLink] = useState("/");
+
   useEffect(() => {
+    setDownloadButtonLink(window.location.toString());
+    
+    const storedToken = sessionStorage.getItem("downloadToken");
+    if (storedToken === tokenInUse) {
+      console.log("Download skipped: Already processed in this session.");
+      return;
+    }
 
     const triggerDownload = () => {
       const anchor = document.createElement("a");
@@ -23,16 +33,10 @@ const Download: React.FC<DownloadProps> = ({ downloadUrl }) => {
       document.body.appendChild(anchor);
       anchor.click();
       document.body.removeChild(anchor);
+      sessionStorage.setItem("downloadToken", tokenInUse);
     };
-
-    const handlePageShow = (e: PageTransitionEvent) => {
-      if (e.persisted) return; // skip bfcache restores
-      triggerDownload();
-    };
-
-    window.addEventListener("pageshow", handlePageShow);
-
-    return () => window.removeEventListener("pageshow", handlePageShow);
+    
+    triggerDownload();
   }, [downloadUrl]);
 
   const tDownload = useTranslations("Download");
@@ -53,7 +57,7 @@ const Download: React.FC<DownloadProps> = ({ downloadUrl }) => {
 
               <div className="text-center mb-14">
                 <PrimaryLink
-                  href={downloadUrl?.url ?? "/"}
+                  href={downloadButtonLink}
                   text={`${tDownload("startDownloadButtonText")} 📥`}
                   className="font-ps font-bold text-[14px] md:text-[18px] py-2"
                 />

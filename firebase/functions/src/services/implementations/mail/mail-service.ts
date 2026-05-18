@@ -272,7 +272,7 @@ export class MailService implements IMailService {
                     CTA: cta,
                     FOOTER: footer,
                     SIGNATURE: signature,
-                    PRODUCT_LINK: `https://ekadventure.com/download?token=${token}`
+                    PRODUCT_LINK: `https://ekadventure.com/${locale}/download?token=${token}`
                 }
             }
         });
