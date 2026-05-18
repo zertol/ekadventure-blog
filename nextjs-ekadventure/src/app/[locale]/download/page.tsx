@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Download from "@/components/Pages/Download";
 import { generateProductDownloadLink } from "@/api/controllers/ecommerce";
 import { notFound } from "next/navigation";

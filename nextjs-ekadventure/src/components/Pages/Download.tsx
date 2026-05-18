@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import NewsLetterForm from "../UI/Common/Form/NewsLetterForm/page";
 import HelpButtons from "../UI/Common/HelpButtons/page";
 import PrimaryLink from "../UI/Common/PrimaryLink/page";
@@ -15,15 +15,24 @@ interface DownloadProps {
 
 const Download: React.FC<DownloadProps> = ({ downloadUrl }) => {
   useEffect(() => {
-    if (downloadUrl?.url) {
-      // trigger download
+
+    const triggerDownload = () => {
       const anchor = document.createElement("a");
-      anchor.href = decodeURIComponent(downloadUrl.url) ?? "";
+      anchor.href = decodeURIComponent(downloadUrl?.url ?? "");
       anchor.download = "";
       document.body.appendChild(anchor);
       anchor.click();
       document.body.removeChild(anchor);
-    }
+    };
+
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) return; // skip bfcache restores
+      triggerDownload();
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+
+    return () => window.removeEventListener("pageshow", handlePageShow);
   }, [downloadUrl]);
 
   const tDownload = useTranslations("Download");
