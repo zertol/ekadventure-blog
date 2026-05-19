@@ -15,4 +15,7 @@ export class Constants {
     public static readonly RESEND_BROADCAST_EMAIL_FROM = "Ekadventure Blog <blog@ekadventure.com>";
     public static readonly RESEND_PRODUCT_EMAIL_FROM = "Ekadventure Shop <shop@ekadventure.com>";
     public static readonly RESEND_EMAIL_REPLY_TO = "e.kadvnture@gmail.com";
+
+    // Site
+    public static readonly SITE_URL = "https://ekadventure.com";
 }

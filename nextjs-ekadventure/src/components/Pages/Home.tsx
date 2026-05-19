@@ -50,14 +50,14 @@ const Home: React.FC<HomeProps> = async ({
         </div>
       </div>
 
-      {/* <FeaturedSection
+      <FeaturedSection
         title={tCommon("featuredProductsTitle")}
         canViewAll={{ page: { url: "/products" }, text: tUI("viewAll") }}
       >
         <Suspense fallback={<VideosSkeleton />}>
           <LatestProductsSection promise={products} />
         </Suspense>
-      </FeaturedSection> */}
+      </FeaturedSection>
 
       <FeaturedSection
         title={tCommon("featuredAdventuresTitle")}

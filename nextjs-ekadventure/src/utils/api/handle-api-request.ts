@@ -16,7 +16,7 @@ export const handleApiRequest = async <T>(
                 "X-API-KEY": process.env.X_API_KEY || '',
                 ...options?.headers
             },
-            next: { revalidate: revalidateIn ?? 60 },
+            next: { revalidate: revalidateIn ?? 86400 }
         }).then(res => res.json());
 
         if (response.ErrorMessages && response.ErrorMessages.length > 0) {

@@ -61,7 +61,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 }) => {
   // Slider reference to access methods if needed
   const sliderRef = useRef<Slider | null>(null);
-  const lightboxRef = useRef<any>(null);
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);

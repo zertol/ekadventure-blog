@@ -35,7 +35,7 @@ export const Product: React.FC<ProductProps> = ({ product, isRelated = false }) 
         )}
 
         <span className="mr-1 text-gray-500 whitespace-nowrap capitalize">
-          Price: {((product.default_price?.unit_amount || 0) / 100).toFixed(2)}{" "}
+          {tShop("priceLabel")}: {((product.default_price?.unit_amount || 0) / 100).toFixed(2)}{" "}
           {product.default_price?.currency?.toUpperCase()}
         </span>
       </div>

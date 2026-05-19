@@ -209,7 +209,7 @@ export class EcommerceService implements IEcommerceService {
             });
 
             const bucketName = "ekadventure-images"; // Your bucket name
-            const objectKey = `digital-photos/${tokenData.metadata.item_key}`; // Your file path
+            const objectKey = tokenData.metadata.item_key; // Your file path
             const fileName = tokenData.metadata.item_key.split("/").pop();
 
             const command = new GetObjectCommand({
