@@ -14,8 +14,14 @@ export const routing = defineRouting({
         '/accueil': '/',
         '/videos': '/videos',
         '/videos/[videoId]': '/videos/[videoId]',
-        '/products': '/produits',
-        '/products/[productId]': '/produits/[productId]',
+        '/products': {
+            en: '/products',
+            fr: '/produits'
+        },
+        '/products/[productId]': {
+            en: '/products/[productId]',
+            fr: '/produits/[productId]'
+        },
         '/success': {
             en: '/success',
             fr: '/succès'
