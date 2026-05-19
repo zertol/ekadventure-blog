@@ -32,7 +32,8 @@ export function mapMetadata(metadata: Record<string, string>): ProductMetadataTy
         item_source: metadata.item_source as ProductItemSource,
         item_source_id: metadata.item_source_id ?? null,
         item_description_en: metadata.item_description_en ?? null,
-        item_description_fr: metadata.item_description_fr ?? null
+        item_description_fr: metadata.item_description_fr ?? null,
+        item_tags: metadata.item_tags ?? null
     };
 }
 

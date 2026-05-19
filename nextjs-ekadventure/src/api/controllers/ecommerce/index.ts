@@ -3,6 +3,7 @@ import { ProductActionsEnum } from "@/types/ecommerce/product-actions-enum";
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 import { ProductType } from "@/types/ecommerce/product-type";
 import { handleApiRequest } from "@/utils/api/handle-api-request";
+import { parseTags } from "@/utils/data/helpers";
 
 export const generateProductDownloadLink = async (params: Record<string, any>): Promise<ApiResult<URLType>> => {
     return await handleApiRequest<URLType>("https://generateproductdownloadlink-zsszt3mtmq-uc.a.run.app", {
@@ -51,4 +52,21 @@ export const verifyProcessedTokenFromSession = async (params: Record<string, any
         method: "POST",
         body: JSON.stringify(params)
     }, 0);
+};
+
+export const getSimilarProducts = (product: ProductType, allProducts: ProductType[], limit: number = 3): ProductType[] => {
+    const productTags = parseTags(product.metadata);
+
+    return allProducts
+        .filter(p => p.id !== product.id)
+        .map(p => ({
+            product: p,
+            score: parseTags(p.metadata)
+                .filter(tag => productTags.includes(tag))
+                .length
+        }))
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit)
+        .map(({ product }) => product);
 };

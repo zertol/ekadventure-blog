@@ -1,10 +1,11 @@
 import App from "@/components/App";
 import { Metadata } from "next";
-import { getAllProducts, getLatestProducts, getProductById } from "@/api/controllers/ecommerce";
+import { getAllProducts, getLatestProducts, getProductById, getSimilarProducts } from "@/api/controllers/ecommerce";
 import { ProductType } from "@/types/ecommerce/product-type";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import ProductGallery from "@/components/UI/ECommerce/ProductGallery";
+import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 
 export async function generateMetadata({
   params,
@@ -53,29 +54,35 @@ export default async function ProductPage({
   params: { locale: LocaleType; productId: string };
 }) {
   const localParams = await params;
-  let productResult;
+  let productsResult;
 
   try {
-    productResult = await getProductById({ id: localParams.productId });
+    productsResult = await getAllProducts();
   } catch (error) {
     console.error(`Unable to find product with id: ${localParams.productId}`, error);
     return notFound();
   }
 
-  if (!productResult.Result) {
+  if (!productsResult.Result) {
     return notFound();
   }
 
-  const product = productResult.Result;
-  const latestProducts = await getLatestProducts();
+  const allProducts = productsResult.Result;
 
-  if (!latestProducts.Result) {
+  const product = allProducts.find(p => p.id === localParams.productId);
+  
+  if (!product) {
     return notFound();
   }
+
+  const similarProducts: ProductsResponseType = {
+    data: getSimilarProducts(product, allProducts),
+    has_more: false
+  };
 
   return (
     <App currentPage="product">
-      {product && <ProductGallery product={product} locale={localParams.locale} relatedProducts={latestProducts.Result} />}
+      {product && <ProductGallery product={product} locale={localParams.locale} similarProducts={similarProducts} />}
     </App>
   );
 }

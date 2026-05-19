@@ -1,5 +1,6 @@
 import { BaseAdConfig } from "@/domain/ads/base-ad-config";
 import { GoogleAdSlotConfig } from "@/domain/ads/google/google-ad-slot-config";
+import { ProductMetadataType } from "@/types/ecommerce/product-metadata-type";
 
 export const groupImagesFromBlocks = (blocks: any[]) => {
     if (!blocks || !Array.isArray(blocks)) return [];
@@ -121,3 +122,8 @@ export const formatString = (template: string, ...args: string[]): string => {
 export const isGoogleAdSlotConfig = (config: BaseAdConfig): config is GoogleAdSlotConfig => {
     return config.provider === "google";
 };
+
+// Ecommerce
+export const parseTags = (metadata: ProductMetadataType): string[] => {
+    return metadata.item_tags?.split(',').map(t => t.trim()) ?? [];
+}

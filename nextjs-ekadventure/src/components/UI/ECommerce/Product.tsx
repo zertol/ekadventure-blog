@@ -17,7 +17,7 @@ export const Product: React.FC<ProductProps> = ({ product, isRelated = false }) 
     <article className="relative group rounded-lg hover:cursor-pointer transition-shadow duration-300 flex flex-col flex-1">
       <div className="absolute -inset-3 rounded-lg bg-background-green-accent/20 opacity-40 transition-opacity duration-300 group-hover:opacity-100 -z-10" />
 
-      <div className="aspect-video w-full">
+      <div className="aspect-video h-full w-full">
         <Link href={`/products/${product.id}` as any}>
           <img
             src={product.images[0]}

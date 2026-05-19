@@ -1,22 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 //@ts-ignore
 import "./slick.css";
-import LightGallery from "lightgallery/react";
-// import styles
-//@ts-ignore
-import "lightgallery/css/lightgallery.css";
-//@ts-ignore
-import "lightgallery/css/lg-zoom.css";
-//@ts-ignore
-import "lightgallery/css/lg-thumbnail.css";
 
-// import plugins if you need
-import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
-import lgFullScreen from "lightgallery/plugins/fullscreen";
+import Lightbox from 'yet-another-react-lightbox';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
+//@ts-ignore
+import 'yet-another-react-lightbox/styles.css';
+//@ts-ignore
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 interface ImageCarouselProps {
   images: ImageType[];
@@ -67,6 +63,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   const sliderRef = useRef<Slider | null>(null);
   const lightboxRef = useRef<any>(null);
 
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
   if (productGallerySettings) {
     sliderSettings.slidesToShow = 1;
     sliderSettings.responsive = [];
@@ -83,7 +82,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   }, [productGallerySettings?.selectedImageIndex]);
 
   const handleOpenLightbox = (index: number) => {
-    lightboxRef.current?.openGallery(index);
+    setLightboxIndex(index);
+    setLightboxOpen(true);
   };
 
   if (!images || images.length === 0) {
@@ -136,24 +136,18 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           ))}
         </Slider>
 
-        <LightGallery
-          onInit={(detail) => {
-            lightboxRef.current = detail.instance;
-          }}
-          dynamic
-          dynamicEl={images.map((image, index) => ({
-            src: image.url,
-            thumb: image.url,
-            subHtml: `<h4>${image.alt || `Image ${index + 1}`}</h4>`,
-          }))}
-          speed={500}
-          plugins={[lgThumbnail, lgZoom, lgFullScreen]}
-          download={false}
-          mobileSettings={{
-            controls: true,
-            showCloseIcon: true,
-          }}
-        />
+        <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={images.map(img => ({ src: img.url, alt: img.alt }))}
+        plugins={[Zoom, Thumbnails, Fullscreen]}
+        carousel={{ finite: true }}
+        zoom={{
+          scrollToZoom: true,
+          maxZoomPixelRatio: 3
+        }}
+      />
       </div>
     </div>
   );

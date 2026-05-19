@@ -7,6 +7,7 @@ export type ProductMetadataType = {
     item_source_id: string | null; // article, post, or video title/name
     item_description_en: string | null;
     item_description_fr: string | null;
+    item_tags: string | null;
 }
 
 export enum ProductItemType {

@@ -13,13 +13,13 @@ import { formatString } from "@/utils/data/helpers";
 
 interface ProductGalleryProps {
   product: ProductType;
-  relatedProducts: ProductsResponseType;
+  similarProducts: ProductsResponseType;
   locale: LocaleType;
 }
 
 const ProductGallery: React.FC<ProductGalleryProps> = ({
   product,
-  relatedProducts,
+  similarProducts,
   locale,
 }) => {
   const tShop = useTranslations("Shop");
@@ -49,7 +49,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
       }
 
       if(response.Result?.url) {
-        window.location.href=response.Result.url;
+        window.location.href = response.Result.url;
       }
     } catch (error) {
       console.error("Error creating checkout session:", error);
@@ -152,10 +152,10 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
             </div>
           </div>
         </section>
-        {relatedProducts && (
+        {similarProducts && similarProducts.data.length > 0 && (
           <section>
             <h2 className="mb-4">{tShop("relatedProductsTitle")}</h2>
-            <ProductsList products={relatedProducts} isRelated={true} />
+            <ProductsList products={similarProducts} isRelated={true} />
           </section>
         )}
       </div>

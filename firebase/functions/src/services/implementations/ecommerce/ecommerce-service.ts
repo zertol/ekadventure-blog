@@ -152,7 +152,7 @@ export class EcommerceService implements IEcommerceService {
                         product_data: {
                             name: Helpers.localizeMetadata(params.metadata, "item_display_name", params.locale),
                             images: product.images,
-                            description: Helpers.localizeMetadata(params.metadata, "item_description", params.locale)
+                            description: Helpers.localizeMetadata(params.metadata, "item_description", params.locale).split("|")[0]
                         }
                     }
                 }
@@ -215,8 +215,9 @@ export class EcommerceService implements IEcommerceService {
             const command = new GetObjectCommand({
                 Bucket: bucketName,
                 Key: objectKey,
-                ResponseContentDisposition: `attachment; filename=${fileName}`,
-                ResponseContentType: Helpers.getContentType(fileName ?? "")
+                ResponseContentDisposition: `attachment; filename="${fileName}"`,
+                ResponseContentType: Helpers.getContentType(fileName ?? ""),
+                ResponseCacheControl: "no-store, no-cache, must-revalidate, proxy-revalidate"
             });
 
             const url = await getSignedUrl(client, command, { expiresIn: Math.max(0, Math.floor((tokenData.expiresAt - Date.now()) / 1000)) ?? Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS });
