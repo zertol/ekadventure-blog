@@ -38,7 +38,7 @@ const ProductsList: React.FC<{
 
   return (
     <>
-      <div className={`grid grid-cols-1 ${isRelated ? "md:grid-cols-4 lg:grid-cols-6" : "md:grid-cols-2 lg:grid-cols-3"} gap-12 mb-12 items-start`}>
+      <div className={`grid grid-cols-1 items-start md:items-stretch ${isRelated ? "md:grid-cols-4 lg:grid-cols-5" : "md:grid-cols-2 lg:grid-cols-3"} gap-12 mb-12`}>
         {visibleProducts
           .slice(0, visibleProducts.length)
           .map((product: ProductType) => {

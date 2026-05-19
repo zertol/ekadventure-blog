@@ -61,7 +61,7 @@ const PostArticle: React.FC<PostType> = ({
             components={{
               block: {
                 normal: ({ children }: any) => {
-                  return <p className="text-sm mb-3 leading-5">{children}</p>;
+                  return <p className="mb-3 leading-5">{children}</p>;
                 },
               },
             }}

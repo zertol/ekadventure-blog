@@ -26,7 +26,7 @@ const Shop: React.FC<ShopProps> = ({ products, totalProducts }) => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-20 my-c-60">
+      <div className="container mx-auto px-8 lg:px-20 my-c-60">
         <ProductsList products={products} totalProducts={totalProducts} />
       </div>
     </div>

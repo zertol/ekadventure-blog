@@ -114,13 +114,13 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
             {/* ── Right side — product details ── */}
             <div className="flex flex-col gap-6 justify-between flex-1 p-4">
               {/* Title */}
-              <h1 className="text-3xl lg:text-4xl font-bold text-text-white">
+              <h2 className="font-bold text-text-white leading-7">
                 {product.name[locale]}
-              </h1>
+              </h2>
 
               {/* Description */}
 
-              <h4 className="font-semibold mb-3 leading-5 text-text-white">
+              <h4 className="font-semibold leading-5 text-text-white">
                 {intro}
               </h4>
               <ul className="font-semibold text-text-white">
@@ -153,8 +153,8 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           </div>
         </section>
         {similarProducts && similarProducts.data.length > 0 && (
-          <section>
-            <h2 className="mb-4">{tShop("relatedProductsTitle")}</h2>
+          <section className="px-5 md:px-0">
+            <h2 className="mb-6 text-center md:text-left">{tShop("relatedProductsTitle")}</h2>
             <ProductsList products={similarProducts} isRelated={true} />
           </section>
         )}

@@ -42,7 +42,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   return (
     <>
       {!isReply && (
-        <h3 className="text-xl font-semibold mb-4">{tComments("leaveACommentTitle")}</h3>
+        <h3 className="font-semibold mb-4">{tComments("leaveACommentTitle")}</h3>
       )}
       <form
         onSubmit={handleSubmit(onSubmitForm)}

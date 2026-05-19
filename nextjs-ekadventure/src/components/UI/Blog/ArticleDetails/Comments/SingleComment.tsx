@@ -35,9 +35,9 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
               <span className="text-xs text-gray-500">({tComments("authorText")})</span>
             )}
           </h4>
-          <p className="text-xs text-gray-500">
+          <span className="text-xs text-gray-500">
             {formatDate(comment.createdAt, locale)}
-          </p>
+          </span>
         </div>
       </div>
       <p className="mt-2 text-gray-700 whitespace-pre-line">

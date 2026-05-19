@@ -78,27 +78,27 @@
   }
 
   h1 {
-    @apply text-[30px] font-bold leading-none;
+    @apply text-[25px] md:text-[28px] font-bold leading-none;
   }
   
   h2 {
-    @apply text-[25px] font-semibold leading-none;
+    @apply text-[22px] md:text-[24px] font-semibold leading-none;
   }
   
   h3 {
-    @apply text-[20px] font-medium leading-none;
+    @apply text-[18px] md:text-[20px] font-medium leading-none;
   }
 
   h4, h5 {
-    @apply text-[18px] font-medium leading-none;
+    @apply text-[16px] md:text-[18px] font-medium leading-none;
   }
 
   h6 {
-    @apply text-[16px] font-medium leading-none;
+    @apply text-[14px] md:text-[16px] font-medium leading-none;
   }
   
   p, a, span, input, button, textarea, label, li {
-    @apply text-[14px] leading-relaxed;
+    @apply text-[13px] md:text-[14px] leading-relaxed;
   }
 
   mark {

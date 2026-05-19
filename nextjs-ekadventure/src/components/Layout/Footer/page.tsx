@@ -12,8 +12,6 @@ import HorizontalAd from "@/components/Ads/Google/HorizontalAd";
 import { useCookieConsent } from "@/store/CookieConsentContext";
 import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";
-import GoogleAdSlot from "@/components/Ads/Google/GoogleAdSlot";
-import { AdFormatEnum } from "@/domain/ads/google/implementations/google-ad-format-enum";
 
 const Footer: React.FC = () => {
   const { pages } = usePages();
@@ -27,6 +25,9 @@ const Footer: React.FC = () => {
   const pathName = usePathname();
 
   const [adHeight, setAdHeight] = useState(0);
+
+  // Check if we're on a product detail page
+  const isProductDetailPage = /\/products\/[^/]+$/.test(pathName);
 
   // We only care about the height if it's not the first visit
   const effectiveMargin = !isFirstVisit && adHeight > 0 ? adHeight + 50 : 0;
@@ -69,9 +70,9 @@ const Footer: React.FC = () => {
               <LocaleSelect />
             </div>
             <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
-              <h3 className="md:text-2xl font-semibold mb-2">
+              <h2 className="font-semibold mb-2">
                 {tLetter("newsletterTitle")}
-              </h3>
+              </h2>
               <p className="text-text-dark font-semibold mb-3 text-sm/5">
                 {tLetter("newsletterDescription")}
               </p>
@@ -110,17 +111,19 @@ const Footer: React.FC = () => {
           </div>
         )}
       </div>
-      <ClientAdWrapper
-        headerText="Google"
-        className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full"
-        onHeightChange={setAdHeight}
-      >
-        <div className="w-full flex justify-center">
-          <div className="w-full md:w-[768px]">
-            <HorizontalAd adSlot="7868749713" />
+      {!isProductDetailPage && (
+        <ClientAdWrapper
+          headerText="Google"
+          className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full"
+          onHeightChange={setAdHeight}
+        >
+          <div className="w-full flex justify-center">
+            <div className="w-full md:w-[768px]">
+              <HorizontalAd adSlot="7868749713" />
+            </div>
           </div>
-        </div>
-      </ClientAdWrapper>
+        </ClientAdWrapper>
+      )}
     </footer>
   );
 };

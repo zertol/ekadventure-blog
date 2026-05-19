@@ -24,9 +24,9 @@ const Comments: React.FC = () => {
 
   return (
     <div className="mt-c-60">
-      <h2 className="text-2xl font-bold mb-6">
+      <h1 className="font-bold mb-6">
         {totalComments === 1 ? tComments("oneComment") : tComments("nbComments", {0: totalComments})}
-      </h2>
+      </h1>
 
       <div className="mb-8">
         <CommentForm />

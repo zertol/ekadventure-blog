@@ -45,7 +45,7 @@ const ModalDialog: React.FC<{
           {outsideLocale ? (
             <button
               onClick={onClose}
-              className={`primary-button px-6 py-2 text-white hover:bg-background-dark`}
+              className={`primary-button px-4 py-1 text-white hover:bg-background-dark`}
               aria-label="Close"
             >
               Close

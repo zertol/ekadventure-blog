@@ -50,10 +50,10 @@ export default function NotFound() {
                   <HelpButtons outsideLocale={true} />
 
                   <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
-                    <h3 className="md:text-2xl font-semibold mb-2">
+                    <h2 className="font-semibold mb-2">
                       Still can&apos;t find your trail?
-                    </h3>
-                    <p className="text-white font-semibold mb-3 text-sm/5">
+                    </h2>
+                    <p className="text-white font-semibold mb-3">
                       Try searching below for your next adventure.
                     </p>
                     <form
