@@ -55,9 +55,6 @@ export class DIRegistration {
 
         DependencyContainer.register<IYouTubeService>("IYouTubeService", new YouTubeService());
 
-        // Ecommerce
-        const ecommerceService = new EcommerceService();
-        ecommerceService.initStripe(); // Create the client only once
-        DependencyContainer.register<IEcommerceService>("IEcommerceService", ecommerceService);
+        DependencyContainer.register<IEcommerceService>("IEcommerceService", new EcommerceService());
     }
 }

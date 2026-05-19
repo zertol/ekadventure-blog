@@ -19,6 +19,7 @@ export const createProduct = onRequest(
         async (req: Request<any>, res: Response<ApiResult<ProductType>>): Promise<ProductType> => {
             const params: CreateProductParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.createProduct(params);
         }
@@ -30,6 +31,7 @@ export const updateProductImages = onRequest(
         async (req: Request<any>, res: Response<ApiResult<ProductType>>): Promise<ProductType> => {
             const params: UpdateProductParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.updateProductImages(params.id, params.images);
         }
@@ -41,6 +43,7 @@ export const getLatestProducts = onRequest(
         async (req: Request<any>, res: Response<ApiResult<ProductsResponseType>>): Promise<ProductsResponseType> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.getLatestProducts(params?.lastProductId);
         }
@@ -51,6 +54,7 @@ export const getAllProducts = onRequest(
     withApiAuth(createApiHandler<any>(
         async (req: Request<any>, res: Response<ApiResult<ProductType[]>>): Promise<ProductType[]> => {
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.getAllProducts();
         }
@@ -62,6 +66,7 @@ export const getProductById = onRequest(
         async (req: Request<any>, res: Response<ApiResult<ProductType>>): Promise<ProductType> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.getProductById(params.id);
         }
@@ -72,6 +77,7 @@ export const getTotalProducts = onRequest(
     withApiAuth(createApiHandler<any>(
         async (req: Request<any>, res: Response<ApiResult<{ count: number }>>): Promise<{ count: number }> => {
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.getTotalProducts();
         }
@@ -82,6 +88,7 @@ export const createCheckoutSession = onRequest(
     withApiAuth(createApiHandler<any>(
         async (req: Request<any>, res: Response<ApiResult<URLType>>): Promise<URLType> => {
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.createCheckoutSession(req.body as CheckoutSessionParamsType);
         }
@@ -113,6 +120,7 @@ export const verifyProcessedTokenFromSession = onRequest(
         async (req: Request<any>, res: Response<ApiResult<{ processed: boolean }>>): Promise<{ processed: boolean }> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
+            EcommerceService.initStripe();
 
             return await EcommerceService.verifyProcessedTokenFromSession(params.sessionId);
         }
