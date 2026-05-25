@@ -1,11 +1,16 @@
 import App from "@/components/App";
 import { Metadata } from "next";
-import { getAllProducts, getLatestProducts, getProductById, getSimilarProducts } from "@/api/controllers/ecommerce";
+import { getAllProducts, getSimilarProducts } from "@/api/controllers/ecommerce";
 import { ProductType } from "@/types/ecommerce/product-type";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import ProductGallery from "@/components/UI/ECommerce/ProductGallery";
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
+import { ProductItemSource } from "@/types/ecommerce/product-metadata-type";
+
+const getCachedProducts = async (): Promise<ApiResult<ProductType[]>> => {
+  return await getAllProducts();
+};
 
 export async function generateMetadata({
   params,
@@ -13,12 +18,15 @@ export async function generateMetadata({
   params: { locale: LocaleType; productId: string };
  }): Promise<Metadata> {
   const { locale, productId } = await params;
-  const productResult = await getProductById({
-    id: productId,
-  });
-  const product = productResult.Result;
+  const productsResult = await getCachedProducts();
 
-  if (!product || !product ) {
+  if (!productsResult.Result) {
+    return {};
+  }
+
+  const product = productsResult.Result.find(p => p.id === productId);
+
+  if (!product) {
     return {};
   }
 
@@ -50,14 +58,18 @@ export async function generateStaticParams() {
 
 export default async function ProductPage({
   params,
+  searchParams
 }: {
-  params: { locale: LocaleType; productId: string };
+  params: { locale: LocaleType; productId: string};
+  searchParams: {itemSource?: string; itemSourceId?: string};
 }) {
   const localParams = await params;
+  const localSearchParams = await searchParams;
+
   let productsResult;
 
   try {
-    productsResult = await getAllProducts();
+    productsResult = await getCachedProducts();
   } catch (error) {
     console.error(`Unable to find product with id: ${localParams.productId}`, error);
     return notFound();
@@ -70,10 +82,13 @@ export default async function ProductPage({
   const allProducts = productsResult.Result;
 
   const product = allProducts.find(p => p.id === localParams.productId);
-  
+
   if (!product) {
     return notFound();
   }
+
+  product.metadata.item_source = localSearchParams.itemSource as ProductItemSource || product.metadata.item_source;
+  product.metadata.item_source_id = localSearchParams.itemSourceId || product.metadata.item_source_id;
 
   const similarProducts: ProductsResponseType = {
     data: getSimilarProducts(product, allProducts),

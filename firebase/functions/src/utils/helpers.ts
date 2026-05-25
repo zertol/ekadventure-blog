@@ -6,8 +6,7 @@ import { Locale } from "./localizer";
 export function isValidProductMetadata(meta: Record<string, string>): meta is ProductMetadataType {
     return (
         typeof meta.item_key === "string" &&
-        Object.values(ProductItemType).includes(meta.item_type as ProductItemType) &&
-        Object.values(ProductItemSource).includes(meta.item_source as ProductItemSource)
+        Object.values(ProductItemType).includes(meta.item_type as ProductItemType)
     );
 }
 

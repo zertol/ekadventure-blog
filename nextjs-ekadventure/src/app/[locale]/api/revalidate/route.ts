@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
 
   try {
     revalidatePath('/', 'layout');
+    revalidatePath('/', 'page');
     return NextResponse.json({ Result: { revalidated: true }, ErrorMessages: [] }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ Result: null, ErrorMessages: [(err as Error).message || "Unknown error"] }, { status: 500 });
