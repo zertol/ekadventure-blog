@@ -45,7 +45,7 @@ const Download: React.FC<DownloadProps> = ({ downloadUrl, tokenInUse }) => {
   });
 
   return (
-    <div className="h-screen flex-center-col overflow-auto">
+    <div className="h-screen flex flex-col justify-start md:justify-center items-center overflow-auto">
       <div className="container px-c-25 lg:px-0">
         <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
           <HikerImage />
@@ -69,7 +69,7 @@ const Download: React.FC<DownloadProps> = ({ downloadUrl, tokenInUse }) => {
 
               <HikerDescrtiptionText text={tDownload("downloadSubscribeNewsletterText")} />
 
-              <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
+              <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center mb-4 md:mb-0">
                 <NewsLetterForm newsLetterAction="subscribe" />
               </div>
             </div>

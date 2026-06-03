@@ -24,7 +24,7 @@ const Success: React.FC<SuccessProps> = ({ isProcessed }) => {
   });
 
   return (
-    <div className="h-screen flex flex-col justify-start md:justify-center overflow-auto">
+    <div className="h-screen flex flex-col justify-start md:justify-center items-center overflow-auto">
       <div className="container px-c-25 lg:px-0">
         <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
           <HikerImage />

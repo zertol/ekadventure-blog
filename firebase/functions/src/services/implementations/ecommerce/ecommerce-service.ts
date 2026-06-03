@@ -11,6 +11,7 @@ import { URLType } from "../../../types/domain/url-type";
 import { ProductDownloadTokenType } from "../../../types/ecommerce/product-download-token-type";
 import { ekadventureBlogDb } from "../../../cms/firestore/firestore-db";
 import { CreateProductParamsType } from "../../../types/ecommerce/create-product-params-type";
+import { ProductItemType } from "../../../types/ecommerce/product-metadata-type";
 
 type StripeProduct = Awaited<ReturnType<typeof Stripe.prototype.products.list>>["data"][number];
 
@@ -208,7 +209,7 @@ export class EcommerceService implements IEcommerceService {
                 }
             });
 
-            const bucketName = "ekadventure-images"; // Your bucket name
+            const bucketName = tokenData.metadata.item_type == ProductItemType.Photo ? "ekadventure-images" : "ekadventure-guides"; // Your bucket name
             const objectKey = tokenData.metadata.item_key; // Your file path
             const fileName = tokenData.metadata.item_key.split("/").pop();
 

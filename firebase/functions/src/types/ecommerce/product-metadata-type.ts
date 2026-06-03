@@ -12,7 +12,9 @@ export type ProductMetadataType = {
 
 export enum ProductItemType {
     Photo = "photo",
-    PDF = "pdf"
+    PDF = "pdf",
+    KML = "kml",
+    GPX = "gpx"
 }
 
 export enum ProductItemSource {
