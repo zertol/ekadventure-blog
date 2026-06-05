@@ -9,6 +9,7 @@ import * as Helpers from "../../../utils/helpers";
 import { Locale, strings } from "../../../utils/localizer";
 import { ContactType } from "../../../types/domain/contact-type";
 import { ProductDownloadTokenType } from "../../../types/ecommerce/product-download-token-type";
+import { ProductItemType } from "../../../types/ecommerce/product-metadata-type";
 
 export class MailService implements IMailService {
     async sendContactMail(contactInfo: ContactFormType): Promise<CreateEmailResponse> {
@@ -227,6 +228,10 @@ export class MailService implements IMailService {
             throw new Error(`Invalid metadata: ${JSON.stringify(session.metadata)}`);
         }
 
+        if (session.metadata.item_type.toLowerCase() == ProductItemType.Substack) {
+            return { data: null, error: null } as CreateEmailResponse;
+        }
+
         if (session.payment_status !== "paid") {
             return { data: null, error: null } as CreateEmailResponse;
         }
@@ -249,11 +254,13 @@ export class MailService implements IMailService {
 
         const locale = session.locale as Locale;
 
+        const itemGenderLetter = locale == "fr" && "e";
+
         const itemLabel = strings.common.productItemLabel[session.metadata.item_type][locale];
-        const subject = strings.email.downloadReady.subject[locale](itemLabel);
+        const subject = strings.email.downloadReady.subject[locale](itemLabel, itemGenderLetter);
         const greeting = strings.email.downloadReady.greeting[locale](session.customer_details.name);
         const thankYou = strings.email.downloadReady.thankYou[locale];
-        const body = strings.email.downloadReady.body[locale](itemLabel, Constants.DOWNLOAD_LINK_EXPIRES_IN_DAYS.toString());
+        const body = strings.email.downloadReady.body[locale](itemLabel, Constants.DOWNLOAD_LINK_EXPIRES_IN_DAYS.toString(), itemGenderLetter);
         const cta = strings.email.downloadReady.cta[locale](itemLabel);
         const footer = strings.email.downloadReady.footer[locale];
         const signature = strings.email.downloadReady.signature[locale];

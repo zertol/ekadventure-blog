@@ -3,12 +3,13 @@ import { createPortal } from "react-dom";
 import CloseButton from "../CloseButton/page";
 
 const ModalDialog: React.FC<{
+  isSmall?: boolean;
   isOpen: Boolean;
   onClose: () => void;
   children: ReactNode;
   className?: string;
   outsideLocale?: boolean;
-}> = ({ isOpen, onClose, children, className, outsideLocale }) => {
+}> = ({ isSmall,isOpen, onClose, children, className, outsideLocale }) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -31,14 +32,14 @@ const ModalDialog: React.FC<{
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-[55] flex items-center justify-center">
+    <div className="fixed inset-0 z-[55] flex items-center justify-center animate-cookie-consent-fade-in">
       <div
         className="fixed inset-0 bg-black/50"
         onClick={handleBackdropClick}
       />
 
       <div
-        className={`relative z-[55] rounded-md shadow-md w-[90%] md:w-[75%] max-h-[80%] grid grid-rows-[auto_1fr_auto] ${className}`}
+        className={`relative z-[55] rounded-md shadow-md w-[90%] ${isSmall ? "sm:w-[480px]" : "sm:w-[75%]"} max-h-[80%] grid grid-rows-[auto_1fr_auto] ${className}`}
       >
         {children}
         <div className="flex justify-end mt-4">

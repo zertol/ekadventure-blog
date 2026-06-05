@@ -6,6 +6,7 @@ import Header from "./Layout/Header/page";
 import Footer from "./Layout/Footer/page";
 import CookieConsent from "./UI/Common/CookieConsent/page";
 import HeaderImage, { HeaderImageProps } from "./UI/Common/HeaderImage/page";
+import NewsLetterModal from "./UI/Common/NewsLetterModal/page";
 
 interface AppProps {
   currentPage?: string;
@@ -17,6 +18,7 @@ const App: React.FC<AppProps> = ({ currentPage = "home", headerImage, children }
 
   return (
     <div className="flex min-h-screen flex-col">
+      <NewsLetterModal />
       <Header />
       {headerImage && <HeaderImage {...headerImage} /> }
       <main className="flex-grow flex flex-col items-center justify-center">

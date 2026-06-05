@@ -1,35 +1,28 @@
 "use client";
 import NewsLetterForm from "@/components/UI/Common/Form/NewsLetterForm/page";
 import { useTranslations } from "next-intl";
-import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 import { HikerImage } from "@/components/UI/Common/Hiker/HikerImage";
+import HelpButtons from "@/components/UI/Common/HelpButtons/page";
 
-const UnsubscribePage: React.FC = () => {
+const SubscribePage: React.FC = () => {
   const tLetter = useTranslations("Newsletter");
 
   return (
-    <div className="h-screen flex flex-col justify-start md:justify-center overflow-auto">
+    <div className="h-screen flex flex-col justify-start md:justify-center items-center overflow-auto">
       <div className="container px-c-25 lg:px-0">
         <div className="flex flex-col lg:flex-row justify-center gap-4 min-h-[400px]">
           <HikerImage />
           <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start lg:justify-center text-center lg:text-left">
             <div className="lg:w-[80%]">
-              <h1 className="leading-7 md:leading-9 mb-4 text-2xl md:text-[30px]">
-                {tLetter("unsubscribeTitle")}
-              </h1>
-
-              <p className="mb-4 md:mb-6 text-lg md:text-2xl font-ps leading-6 md:leading-7">
-                {tLetter("unsubscribeNotReadyMessage")}
-              </p>
-
               <HelpButtons />
-
-              <p className="mb-2 text-lg font-ps leading-6 md:leading-7">
-                {tLetter("unsubscribeStillSureMessage")}
-              </p>
-
               <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center mb-4">
-                <NewsLetterForm newsLetterAction="unsubscribe" />
+                <h2 className="font-semibold mb-2">
+                  {tLetter("newsletterTitle")}
+                </h2>
+                <p className="text-text-dark font-semibold mb-3 text-sm/5">
+                  {tLetter("newsletterDescription")}
+                </p>
+                <NewsLetterForm newsLetterAction="subscribe" />
               </div>
             </div>
           </div>
@@ -39,4 +32,4 @@ const UnsubscribePage: React.FC = () => {
   );
 };
 
-export default UnsubscribePage;
+export default SubscribePage;

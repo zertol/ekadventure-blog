@@ -44,7 +44,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const products = await getAllProducts();
+  const products = await getCachedProducts();
 
   const params = products.Result?.flatMap((product: ProductType) => {
     return routing.locales.map((locale) => ({

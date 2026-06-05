@@ -79,7 +79,7 @@ export const strings = {
         downloadReady: {
             subject: {
                 en: (itemLabel: string) => `Your ${itemLabel} is ready to download`,
-                fr: (itemLabel: string) => `Votre ${itemLabel} est prête à télécharger`
+                fr: (itemLabel: string, itemGenderLetter: string) => `Votre ${itemLabel} est prêt${itemGenderLetter} à télécharger`
             },
             greeting: {
                 en: (customerName: string) => `Hey ${customerName},`,
@@ -91,7 +91,7 @@ export const strings = {
             },
             body: {
                 en: (itemLabel: string, expiresIn: string) => `Your ${itemLabel} is now ready. Click the button below to download your file. The link is valid for ${expiresIn} days.`,
-                fr: (itemLabel: string, expiresIn: string) => `Votre ${itemLabel} est maintenant prête. Cliquez sur le bouton ci-dessous pour télécharger votre fichier. Le lien est valide pendant ${expiresIn} jours.`
+                fr: (itemLabel: string, expiresIn: string, itemGenderLetter: string) => `Votre ${itemLabel} est maintenant prête. Cliquez sur le bouton ci-dessous pour télécharger votre fichier. Le lien est valide pendant ${expiresIn} jours.`
             },
             cta: {
                 en: (itemLabel: string) => `Download your ${itemLabel}`,

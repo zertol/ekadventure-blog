@@ -110,7 +110,7 @@ export default async function PostPage({
                   <SocialIcons className="text-white" isSidebar />
                 </div>
               </div>
-              <h1 className="font-semibold mb-0">{post.title}</h1>
+              <h1 className="font-semibold mb-0 leading-7">{post.title}</h1>
               <div className="prose max-w-none mb-5">
                 <span className="mr-1 font-semibold text-[11px]">
                   {tArticle("lastUpdatedText")}

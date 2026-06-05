@@ -46,6 +46,10 @@ export const routing = defineRouting({
             en: '/unsubscribe',
             fr: '/désabonnez'
         },
+        '/subscribe': {
+            en: '/subscribe',
+            fr: '/abonnez'
+        },
         '/download': {
             en: '/download',
             fr: '/téléchargez'

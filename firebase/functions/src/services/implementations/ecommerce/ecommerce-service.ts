@@ -17,6 +17,7 @@ type StripeProduct = Awaited<ReturnType<typeof Stripe.prototype.products.list>>[
 
 export class EcommerceService implements IEcommerceService {
     private stripe: Stripe.Stripe;
+    private excludeTypesQuery = "-metadata[\"item_type\"]:\"substack\" active:\"true\"";
 
     initStripe() {
         const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -29,13 +30,13 @@ export class EcommerceService implements IEcommerceService {
     }
 
     async getTotalProducts(): Promise<{ count: number }> {
-        let products = await this.stripe.products.list({ active: true, limit: 100 });
+        let products = await this.stripe.products.search({ query: this.excludeTypesQuery, limit: 100 });
         let count = products.data.length;
 
         while (products.has_more) {
             const lastId = products.data[products.data.length - 1].id;
 
-            products = await this.stripe.products.list({ active: true, limit: 100, starting_after: lastId });
+            products = await this.stripe.products.search({ query: this.excludeTypesQuery, limit: 100, page: lastId });
             count += products.data.length;
         }
 
@@ -69,12 +70,12 @@ export class EcommerceService implements IEcommerceService {
     }
 
     async getLatestProducts(lastProductId?: string): Promise<ProductsResponseType> {
-        const products = await this.stripe.products.list({
+        const products = await this.stripe.products.search({
+            query: this.excludeTypesQuery,
             limit: 3,
-            active: true,
             expand: ["data.default_price"],
             ...(lastProductId && {
-                starting_after: lastProductId
+                page: lastProductId
             })
         });
 
@@ -89,7 +90,7 @@ export class EcommerceService implements IEcommerceService {
     }
 
     async getAllProducts(): Promise<ProductType[]> {
-        let products = await this.stripe.products.list({ active: true, limit: 100, expand: ["data.default_price"] });
+        let products = await this.stripe.products.search({ query: this.excludeTypesQuery, limit: 100, expand: ["data.default_price"] });
 
         const allProducts = products.data.map((prod) => {
             return mapStripeProduct(prod);
@@ -98,7 +99,7 @@ export class EcommerceService implements IEcommerceService {
         while (products.has_more) {
             const lastId = products.data[products.data.length - 1].id;
 
-            products = await this.stripe.products.list({ active: true, limit: 100, starting_after: lastId, expand: ["data.default_price"] });
+            products = await this.stripe.products.search({ query: this.excludeTypesQuery, limit: 100, page: lastId, expand: ["data.default_price"] });
             products.data.map((prod) => {
                 allProducts.push(mapStripeProduct(prod));
             });

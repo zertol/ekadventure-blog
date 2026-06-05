@@ -14,7 +14,8 @@ export enum ProductItemType {
     Photo = "photo",
     PDF = "pdf",
     KML = "kml",
-    GPX = "gpx"
+    GPX = "gpx",
+    Substack = "substack"
 }
 
 export enum ProductItemSource {
