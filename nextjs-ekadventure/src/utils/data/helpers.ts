@@ -85,8 +85,8 @@ export const sanitizeSearchTerm = (term: string) => {
     if (cleaned.length === 0) return "";
     if (cleaned.length > 30) return cleaned.slice(0, 30);
 
-    // whitelist allowed characters: letters, numbers, spaces, dash, apostrophe
-    return cleaned.replace(/[^a-zA-Z0-9\s\-']/g, "");
+    // whitelist allowed characters: letters (including accented), numbers, spaces, dash, apostrophe
+    return cleaned.replace(/[^\p{L}\p{N}\s\-']/gu, "");
 }
 
 export const formatStringToHtml = (text: string) => {
