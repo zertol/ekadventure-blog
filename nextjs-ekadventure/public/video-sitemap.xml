@@ -2,6 +2,22 @@
 	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 	<url>
+		<loc>https://ekadventure.com/video/iqbSMRckcN4</loc>
+		<video:video>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/iqbSMRckcN4/maxresdefault.jpg</video:thumbnail_loc>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/iqbSMRckcN4/sddefault.jpg</video:thumbnail_loc>
+			<video:title>
+				<![CDATA[ These 10 Hikes Will Change Your Summer in Quebec ]]>
+			</video:title>
+			<video:description>
+				<![CDATA[ Get your digital products and full hiking guides https://ekadventure.com/products Welcome to Quebec! After living and hiking for 4 years here, I put together a list of my top 10 hikes to do during Summer. There are a lot more out there that I've already explored but you might consider this as a starting kit for anyone coming to the province. ▶ 32 Km River Hike: https://youtu.be/6XihThqnX2c ▶ Backpacking Mont du Dôme: https://youtu.be/X4El0Sequto ▶ The Wolves Trail: https://youtu.be/fSEoIsfNNj8 ▶ Mount St. Joseph: https://youtu.be/TaWIxdVkzfs ▶ Mount Kaaikop: https://youtu.be/RT2FWmsNvP8 ▶ Backpacking Mount Morios: https://youtu.be/xwB0ufQx3do ▶ Follow me on Substack: https://substack.com/@ekadventure ▶ Subscribe for more: https://www.youtube.com/channel/UCOdgQ-R9q50rOmIDTVU8b_A?sub_confirmation=1 ▶ Social Media: - Instagram: https://instagram.com/e.kadventure - Tiktok: https://tiktok.com/@e.kadventure ▶ Full Articles About Each Hike on My Blog: https://ekadventure.com/ ▶ Chapters: 00:00 Intro 00:22 Hike 1: St. Charles River Linear Park 01:40 Hike 2: Mount of Dôme 02:30 Hike 3: The Wolves Trail 03:35 Hike 4: The Charlevoix Palissades 04:30 Hike 5: Acropole des Draveurs 05:25 Hike 6: Mount St. Joseph 06:40 Hike 7: Lac des Cygnes 07:26 Hike 8: The Paysan Trail 08:10 Hike 9: Mount Kaaikop 08:55 Hike 10: Mount Morios #adventure #hiking #viral #bucketlist #topten #outdoor #youtube #nature #wildlife #landscape #challenge # #trail #outdoorvibes #travel #quebec #canada #summer ]]>
+			</video:description>
+			<video:player_loc allow_embed="yes">https://youtube.com/watch?v=iqbSMRckcN4</video:player_loc>
+			<video:publication_date>2026-06-12T23:00:35Z</video:publication_date>
+			<video:duration>601</video:duration>
+		</video:video>
+	</url>
+	<url>
 		<loc>https://ekadventure.com/video/8zFhCZGLdzo</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/8zFhCZGLdzo/maxresdefault.jpg</video:thumbnail_loc>

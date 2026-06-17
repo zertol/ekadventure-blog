@@ -61,6 +61,14 @@ export class MailService implements IMailService {
             } as CreateEmailResponse;
         }
 
+        // If contact exists but subscribed, no need to call anything
+        if (fetchResult.data && !fetchResult.data.unsubscribed) {
+            return {
+                data: null,
+                error: null
+            } as CreateEmailResponse;
+        }
+
         const createResult: CreateEmailResponse = await resend.contacts.create({
             firstName: contactInfo.name,
             email: contactInfo.email,
@@ -71,7 +79,7 @@ export class MailService implements IMailService {
             throw new Error(`Resend email error: ${JSON.stringify(createResult.error)}`);
         }
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const addToSegmentResult: CreateEmailResponse = await resend.contacts.segments.add({
             email: contactInfo.email,
@@ -82,7 +90,7 @@ export class MailService implements IMailService {
             throw new Error(`Resend email error: ${addToSegmentResult.error}`);
         }
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const locale = contactInfo.preferences.locale;
 
@@ -95,6 +103,7 @@ export class MailService implements IMailService {
                 }
             });
         } catch (err) {
+            console.error(`Failed to create contact: ${err}`);
             throw new Error(`Failed to create contact: ${err}`);
         }
 
