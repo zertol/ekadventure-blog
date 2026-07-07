@@ -15,20 +15,31 @@ const ProductsList: React.FC<{
   const [visibleProducts, setVisibleProducts] = useState(products.data);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(products.has_more);
+  const [nextPage, setNextPage] = useState(products.next_page);
 
   const tUI = useTranslations("UI");
 
   const handleLoadMoreProducts = async () => {
+    if (isLoading) return;
     setIsLoading(true);
+
     try {
-      const params: Record<string, string> = {
-        nextPage: products.next_page || ""
+      const params: Record<string, string | null> = {
+        nextPage: nextPage,
       };
       const response = await getProductsByRoute(params);
-      setHasMore(response.Result?.has_more ?? false);
+
+      // single state update with all changes at once
       setVisibleProducts((prev) => {
-        return [...prev, ...(response.Result?.data || [])];
+        const existingIds = new Set(prev.map((p) => p.id));
+        const newProducts = (response.Result?.data || []).filter(
+          (p) => !existingIds.has(p.id),
+        ); // deduplicate
+        return [...prev, ...newProducts];
       });
+
+      setHasMore(response.Result?.has_more ?? false);
+      setNextPage(response.Result?.next_page ?? null);
     } catch (error) {
       console.error("Error loading more products:", error);
     } finally {
