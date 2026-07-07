@@ -92,7 +92,8 @@ export default async function ProductPage({
 
   const similarProducts: ProductsResponseType = {
     data: getSimilarProducts(product, allProducts),
-    has_more: false
+    has_more: false,
+    next_page: null
   };
 
   return (
