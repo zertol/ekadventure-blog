@@ -22,7 +22,7 @@ const ProductsList: React.FC<{
     setIsLoading(true);
     try {
       const params: Record<string, string> = {
-        lastProductId: visibleProducts[visibleProducts.length - 1].id
+        nextPage: products.next_page || ""
       };
       const response = await getProductsByRoute(params);
       setHasMore(response.Result?.has_more ?? false);
