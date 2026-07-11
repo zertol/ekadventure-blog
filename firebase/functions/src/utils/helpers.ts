@@ -17,7 +17,8 @@ export function getContentType(filename: string): string {
         jpeg: "image/jpeg",
         png: "image/png",
         pdf: "application/pdf",
-        kml: "application/vnd.google-earth.kml+xml"
+        kml: "application/vnd.google-earth.kml+xml",
+        gpx: "application/gpx+xml"
     };
     return map[ext ?? ""] ?? "application/octet-stream";
 }
