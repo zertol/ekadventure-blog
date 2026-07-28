@@ -1,8 +1,24 @@
 <urlset
 	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+	xmlns:video="http://www.google.com/schemas/sitemap-videos/1.1">
 	<url>
-		<loc>https://ekadventure.com/video/iqbSMRckcN4</loc>
+		<loc>https://ekadventure.com/videos/zA_Ybr3kvBY</loc>
+		<video:video>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/zA_Ybr3kvBY/maxresdefault.jpg</video:thumbnail_loc>
+			<video:thumbnail_loc>https://i.ytimg.com/vi/zA_Ybr3kvBY/sddefault.jpg</video:thumbnail_loc>
+			<video:title>
+				<![CDATA[ 4 Days Solo Camping (Recovering from a 7-Month Injury) ]]>
+			</video:title>
+			<video:description>
+				<![CDATA[ Get your digital products and full hiking guides https://ekadventure.com/products After 7 months dealing with a calf injury and chronic lower back pain, I needed to get back outside. No big objective, no peak to summit. Just 4 days alone by the lake, to recharge and breathe again. This is my solo camping and kayaking trip at Zec Jaro, a controlled wildlife zone in Chaudière-Appalaches, deep in the Beauce region. Quiet lakes, forest roads, and zero cell service. Exactly what I needed. Essential Gear I Used: ▶ Naturehike Tent → https://amzn.to/3SllJ9A ▶ Hammock Tarp → https://amzn.to/4phQmZS ▶ Portable Coffee Filter → https://amzn.to/4fZNJt5 ▶ Camping Pillow → https://amzn.to/4uT3INk ▶ Cookwear → https://amzn.to/4agWRWG ▶ Power Station → https://amzn.to/4vhtUlM ▶ DJI Mic → https://amzn.to/3TtltWm ▶ Follow me on Substack: https://substack.com/@ekadventure ▶ Subscribe for more: https://www.youtube.com/channel/UCOdgQ-R9q50rOmIDTVU8b_A?sub_confirmation=1 ▶ Social Media: - Instagram: https://instagram.com/e.kadventure - Tiktok: https://tiktok.com/@e.kadventure ▶ My Blog: https://ekadventure.com/blog ▶ Chapters: 00:00 The Injury That Kept Me Inside All Winter 01:30 Day 1 Setting Up & Steak By The Lake 03:18 Morning 2: The Tarp Held Through The Wind 05:08 A Stranger Named Louie & The Canoe Ride 06:56 Camp Kitchen: What I'm Eating For 4 Days 11:00 Morning 3: Hiking The Tour À Feu Trail 15:49 Post-Hike Reflections 18:08 Last Night: Rain, Peace & A Few Tears 21:41 Last Coffee By The Lake & Heading Home 22:19 Camp Setup Tour 29:42 See You In The Next One The links above are affiliate links, from which I gain a small commission for purchases made at no extra cost to you. This support helps make these videos possible, thank you! #solocamping #camping #kayaking #quebec #canada #nature #outdoor #hiking #wildlife #landscape #travel #summer #recovery #adventure #outdoorvibes #trail #zecjaro ]]>
+			</video:description>
+			<video:player_loc allow_embed="yes">https://youtube.com/watch?v=zA_Ybr3kvBY</video:player_loc>
+			<video:publication_date>2026-07-10T23:00:08Z</video:publication_date>
+			<video:duration>1801</video:duration>
+		</video:video>
+	</url>
+	<url>
+		<loc>https://ekadventure.com/videos/iqbSMRckcN4</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/iqbSMRckcN4/maxresdefault.jpg</video:thumbnail_loc>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/iqbSMRckcN4/sddefault.jpg</video:thumbnail_loc>
@@ -18,7 +34,7 @@
 		</video:video>
 	</url>
 	<url>
-		<loc>https://ekadventure.com/video/8zFhCZGLdzo</loc>
+		<loc>https://ekadventure.com/videos/8zFhCZGLdzo</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/8zFhCZGLdzo/maxresdefault.jpg</video:thumbnail_loc>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/8zFhCZGLdzo/sddefault.jpg</video:thumbnail_loc>
@@ -34,7 +50,7 @@
 		</video:video>
 	</url>
 	<url>
-		<loc>https://ekadventure.com/video/VO9sPeR1buk</loc>
+		<loc>https://ekadventure.com/videos/VO9sPeR1buk</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/VO9sPeR1buk/maxresdefault.jpg</video:thumbnail_loc>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/VO9sPeR1buk/sddefault.jpg</video:thumbnail_loc>
@@ -50,7 +66,7 @@
 		</video:video>
 	</url>
 	<url>
-		<loc>https://ekadventure.com/video/t_7TWoqTubE</loc>
+		<loc>https://ekadventure.com/videos/t_7TWoqTubE</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/t_7TWoqTubE/maxresdefault.jpg</video:thumbnail_loc>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/t_7TWoqTubE/sddefault.jpg</video:thumbnail_loc>
@@ -66,7 +82,7 @@
 		</video:video>
 	</url>
 	<url>
-		<loc>https://ekadventure.com/video/Vb3x0Bhj3hc</loc>
+		<loc>https://ekadventure.com/videos/Vb3x0Bhj3hc</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/Vb3x0Bhj3hc/maxresdefault.jpg</video:thumbnail_loc>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/Vb3x0Bhj3hc/sddefault.jpg</video:thumbnail_loc>
@@ -82,7 +98,7 @@
 		</video:video>
 	</url>
 	<url>
-		<loc>https://ekadventure.com/video/JfoscsN9Tp8</loc>
+		<loc>https://ekadventure.com/videos/JfoscsN9Tp8</loc>
 		<video:video>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/JfoscsN9Tp8/maxresdefault.jpg</video:thumbnail_loc>
 			<video:thumbnail_loc>https://i.ytimg.com/vi/JfoscsN9Tp8/sddefault.jpg</video:thumbnail_loc>
