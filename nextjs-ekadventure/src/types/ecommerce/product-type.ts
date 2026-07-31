@@ -22,6 +22,7 @@ export type ProductType = {
     unit_label: string | null;
     updated: number;
     url: string | null;
+    promotion: PromotionSettingsType | null;
 }
 
 export type PriceType = {

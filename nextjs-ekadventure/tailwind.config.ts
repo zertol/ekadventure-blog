@@ -39,13 +39,18 @@ const config: Config = {
         "cookie-consent-fade-out-kf": {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },
+        },
+        "text-slide-right-kf": {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(100%)' }
         }
       },
       animation: {
         "modal-right-enter": "modal-right-enter-kf 0.3s ease-out forwards",
         "modal-right-exit": "modal-right-exit-kf 0.3s ease-out forwards",
         "cookie-consent-fade-in": "cookie-consent-fade-in-kf 0.3s ease-out forwards",
-        "cookie-consent-fade-out": "cookie-consent-fade-out-kf 0.3s ease-out forwards"
+        "cookie-consent-fade-out": "cookie-consent-fade-out-kf 0.3s ease-out forwards",
+        "text-slide-right": "text-slide-right-kf 15s linear infinite"
       }
     },
   },

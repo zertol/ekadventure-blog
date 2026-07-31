@@ -1,4 +1,5 @@
 import { ProductMetadataType } from "./product-metadata-type";
+import { PromotionSettingsType } from "./promotion-settings-type";
 
 export type ProductType = {
     id: string;
@@ -22,6 +23,7 @@ export type ProductType = {
     unit_label: string | null;
     updated: number;
     url: string | null;
+    promotion: Pick<PromotionSettingsType, "banner" | "expiresAt"> | null;
 }
 
 export type PriceType = {

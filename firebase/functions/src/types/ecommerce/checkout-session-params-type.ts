@@ -5,6 +5,7 @@ type StripeLocale = Parameters<typeof Stripe.prototype.checkout.sessions.create>
 
 export type CheckoutSessionParamsType = {
     priceId: string;
+    productId: string;
     quantity: number;
     isQuantityAdjustable: boolean;
     maximumQuantity?: number;

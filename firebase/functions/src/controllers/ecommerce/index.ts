@@ -45,7 +45,7 @@ export const getLatestProducts = onRequest(
             const EcommerceService = DIResolutions.getEcommerceService();
             EcommerceService.initStripe();
 
-            return await EcommerceService.getLatestProducts(params?.lastProductId);
+            return await EcommerceService.getLatestProducts(params?.nextPage);
         }
     )));
 
@@ -105,7 +105,7 @@ export const sendProductLink = onRequest(
     )));
 
 export const generateProductDownloadLink = onRequest(
-    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY", "R2_ENDPOINT", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"] },
+    { secrets: ["X_API_KEY", "R2_ENDPOINT", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"] },
     withApiAuth(createApiHandler<any>(
         async (req: Request<any>, res: Response<ApiResult<URLType>>): Promise<URLType> => {
             const params: ParamsType = req.body;
@@ -115,13 +115,11 @@ export const generateProductDownloadLink = onRequest(
     )));
 
 export const verifyProcessedTokenFromSession = onRequest(
-    { secrets: ["X_API_KEY", "STRIPE_SECRET_KEY"] },
+    { secrets: ["X_API_KEY"] },
     withApiAuth(createApiHandler<any>(
         async (req: Request<any>, res: Response<ApiResult<{ processed: boolean }>>): Promise<{ processed: boolean }> => {
             const params: ParamsType = req.body;
             const EcommerceService = DIResolutions.getEcommerceService();
-            EcommerceService.initStripe();
-
             return await EcommerceService.verifyProcessedTokenFromSession(params.sessionId);
         }
     )));

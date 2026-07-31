@@ -9,7 +9,7 @@ export interface IEcommerceService {
     getTotalProducts(): Promise<{ count: number }>;
     createProduct(product: CreateProductParamsType): Promise<ProductType>;
     updateProductImages(id: string, images: string[]): Promise<ProductType>;
-    getLatestProducts(lastProductId?: string): Promise<ProductsResponseType>;
+    getLatestProducts(nextPage?: string): Promise<ProductsResponseType>;
     getAllProducts(): Promise<ProductType[]>;
     getProductById(id: string): Promise<ProductType>;
     createCheckoutSession(params: CheckoutSessionParamsType): Promise<URLType>;

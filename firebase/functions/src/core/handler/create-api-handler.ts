@@ -14,6 +14,7 @@ export const createApiHandler = <T>(handler: Handler<T>) => {
             res.status(200).json(apiResult);
         } catch (err) {
             apiResult.ErrorMessages?.push((err as Error).message || "Unknown error");
+            console.log(err);
             res.status(500).json(apiResult);
         }
     };

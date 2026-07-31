@@ -1,6 +1,6 @@
 import App from "@/components/App";
 import { Metadata } from "next";
-import { getAllProducts, getSimilarProducts } from "@/api/controllers/ecommerce";
+import { getAllProducts, getProductById, getSimilarProducts } from "@/api/controllers/ecommerce";
 import { ProductType } from "@/types/ecommerce/product-type";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -69,7 +69,7 @@ export default async function ProductPage({
   let productsResult;
 
   try {
-    productsResult = await getCachedProducts();
+    productsResult = await getProductById({id: localParams.productId});
   } catch (error) {
     console.error(`Unable to find product with id: ${localParams.productId}`, error);
     return notFound();
@@ -79,9 +79,9 @@ export default async function ProductPage({
     return notFound();
   }
 
-  const allProducts = productsResult.Result;
+  const allProducts = await getCachedProducts();
 
-  const product = allProducts.find(p => p.id === localParams.productId);
+  const product = productsResult.Result;
 
   if (!product) {
     return notFound();
@@ -91,7 +91,7 @@ export default async function ProductPage({
   product.metadata.item_source_id = localSearchParams.itemSourceId || product.metadata.item_source_id;
 
   const similarProducts: ProductsResponseType = {
-    data: getSimilarProducts(product, allProducts),
+    data: getSimilarProducts(product, allProducts.Result || []),
     has_more: false,
     next_page: null
   };

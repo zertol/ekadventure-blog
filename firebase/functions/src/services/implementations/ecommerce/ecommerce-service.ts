@@ -12,6 +12,7 @@ import { ProductDownloadTokenType } from "../../../types/ecommerce/product-downl
 import { ekadventureBlogDb } from "../../../cms/firestore/firestore-db";
 import { CreateProductParamsType } from "../../../types/ecommerce/create-product-params-type";
 import { ProductItemType } from "../../../types/ecommerce/product-metadata-type";
+import { PromotionSettingsType } from "../../../types/ecommerce/promotion-settings-type";
 
 type StripeProduct = Awaited<ReturnType<typeof Stripe.prototype.products.list>>["data"][number];
 
@@ -69,13 +70,13 @@ export class EcommerceService implements IEcommerceService {
         }
     }
 
-    async getLatestProducts(lastProductId?: string): Promise<ProductsResponseType> {
+    async getLatestProducts(nextPage?: string): Promise<ProductsResponseType> {
         const products = await this.stripe.products.search({
             query: this.excludeTypesQuery,
             limit: 3,
             expand: ["data.default_price"],
-            ...(lastProductId && {
-                page: lastProductId
+            ...(nextPage && {
+                page: nextPage
             })
         });
 
@@ -83,7 +84,8 @@ export class EcommerceService implements IEcommerceService {
             data: products.data.map((prod) => {
                 return mapStripeProduct(prod);
             }),
-            has_more: products.has_more
+            has_more: products.has_more,
+            next_page: products.next_page
         };
 
         return productsResponse;
@@ -112,8 +114,13 @@ export class EcommerceService implements IEcommerceService {
         if (!id) {
             throw new Error("Product Id is required");
         }
-        const product = await this.stripe.products.retrieve(id, { expand: ["default_price"] });
-        return mapStripeProduct(product);
+
+        const [product, promotion] = await Promise.all([
+            this.stripe.products.retrieve(id, { expand: ["default_price"] }),
+            this.getProductActivePromotion(id)
+        ]);
+
+        return mapStripeProduct(product, promotion);
     }
 
     async createCheckoutSession(params: CheckoutSessionParamsType): Promise<URLType> {
@@ -129,15 +136,17 @@ export class EcommerceService implements IEcommerceService {
         const separator = url.search ? "&" : "?";
         const successUrl = `${url.toString()}${separator}session_id={CHECKOUT_SESSION_ID}`;
 
-        const price = await this.stripe.prices.retrieve(params.priceId, {
-            expand: ["product"]
-        });
+        const [price, promotion] = await Promise.all([
+            this.stripe.prices.retrieve(params.priceId, { expand: ["product"] }),
+            this.getProductActivePromotion(params.productId)
+        ]);
 
         const product = price.product as any;
 
         const session = await this.stripe.checkout.sessions.create({
             mode: "payment",
             billing_address_collection: "auto",
+            allow_promotion_codes: promotion !== null,
             line_items: [
                 {
                     quantity: params.quantity,
@@ -269,6 +278,33 @@ export class EcommerceService implements IEcommerceService {
 
         return { processed: false };
     }
+
+    private async getProductActivePromotion(productId: string): Promise<PromotionSettingsType | null> {
+        const now = Date.now();
+
+        const doc = await ekadventureBlogDb
+            .collection("store_settings")
+            .doc("promotions")
+            .get();
+
+        if (!doc.exists) return null;
+
+        const promotion = doc.data() as PromotionSettingsType;
+
+        if (!promotion.active) {
+            return null;
+        }
+
+        if (promotion.expiresAt && promotion.expiresAt < now) {
+            return null;
+        }
+
+        if (promotion.scope === "products" && !promotion.productIds.includes(productId)) {
+            return null;
+        }
+
+        return promotion;
+    }
 }
 
 /**
@@ -276,9 +312,10 @@ export class EcommerceService implements IEcommerceService {
  * It doesn't reside in Helpers.ts because of the need to infer from "stripe" the type of Product since
  * "stripe" doesn't expose it. (check beginning of service code)
  * @param {StripeProduct} product
+ * @param {PromotionSettingsType} promotion
  * @return {ProductType}
  */
-function mapStripeProduct(product: StripeProduct): ProductType {
+function mapStripeProduct(product: StripeProduct, promotion?: PromotionSettingsType): ProductType {
     if (!Helpers.isValidProductMetadata(product.metadata)) {
         throw new Error(`Invalid metadata: ${JSON.stringify(product.metadata)}`);
     }
@@ -308,6 +345,10 @@ function mapStripeProduct(product: StripeProduct): ProductType {
         tax_code: typeof product.tax_code === "string" ? product.tax_code : product.tax_code?.id ?? null,
         unit_label: product.unit_label ?? null,
         updated: product.updated,
-        url: product.url ?? null
+        url: product.url ?? null,
+        promotion: promotion ? {
+            banner: promotion.banner,
+            expiresAt: promotion.expiresAt
+        } : null
     };
 }

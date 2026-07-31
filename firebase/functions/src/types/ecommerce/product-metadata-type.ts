@@ -15,12 +15,13 @@ export enum ProductItemType {
     PDF = "pdf",
     KML = "kml",
     GPX = "gpx",
-    Substack = "substack"
+    Substack = "substack" // Substack adds products automatically into Stripe Dashboard
 }
 
 export enum ProductItemSource {
     YouTube = "YouTube",
     Facebook = "Facebook",
     Instagram = "Instagram",
-    Blog = "Blog"
+    Blog = "Blog",
+    Substack = "Substack"
 }

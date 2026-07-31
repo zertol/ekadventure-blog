@@ -36,6 +36,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
     try {
       const response = await createCheckoutSession({
         priceId: product.default_price?.id ?? "",
+        productId: product.id,
         cancelUrl: window.location.toString(),
         isQuantityAdjustable: false,
         metadata: product.metadata,
@@ -69,6 +70,11 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
         <h4 className="font-semibold text-center">
           {tShop("productDetailsPageTitle")}
         </h4>
+        {product.promotion && (
+          <div className="text-center mt-4 bg-background-blue-accent w-[50%] mx-auto rounded-md shadow-md py-2 px-2">
+            <h6 className="text-text-white leading-6">{product.promotion.banner.message[locale]}</h6>
+          </div>
+        )}
       </div>
       <div className="container px-c-25 xl:px-0 xl:max-w-[1140px] mx-auto mb-c-30">
         <section className="mb-c-90">
