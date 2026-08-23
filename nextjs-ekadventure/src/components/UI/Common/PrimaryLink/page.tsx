@@ -8,6 +8,7 @@ interface PrimaryLinkProps {
   className?: string;
   handleClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   outsideLocale?: boolean;
+  target?: string;
 }
 
 const PrimaryLink: React.FC<PrimaryLinkProps> = ({
@@ -16,6 +17,7 @@ const PrimaryLink: React.FC<PrimaryLinkProps> = ({
   className,
   handleClick,
   outsideLocale,
+  target,
 }) => {
   if (outsideLocale) {
     return (
@@ -23,6 +25,8 @@ const PrimaryLink: React.FC<PrimaryLinkProps> = ({
         href={href}
         className={`primary-button ${className}`}
         onClick={handleClick}
+        target={target}
+        rel="noopener noreferrer"
       >
         {text}
       </NextLink>
@@ -36,6 +40,8 @@ const PrimaryLink: React.FC<PrimaryLinkProps> = ({
       href={href as LinkProps["href"]}
       className={`primary-button ${className}`}
       onClick={handleClick}
+      target={target}
+      rel="noopener noreferrer"
     >
       {text}
     </Link>

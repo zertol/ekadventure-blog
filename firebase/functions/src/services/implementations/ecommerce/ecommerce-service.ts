@@ -291,6 +291,10 @@ export class EcommerceService implements IEcommerceService {
 
         const promotion = doc.data() as PromotionSettingsType;
 
+        if (promotion.allow_substack_promotion_codes) {
+            return promotion;
+        }
+
         if (!promotion.active) {
             return null;
         }

@@ -21,6 +21,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
+import PrimaryLink from "@/components/UI/Common/PrimaryLink/page";
 
 export async function generateMetadata({
   params,
@@ -148,8 +149,8 @@ export default async function PostPage({
                         className="mb-1 flex-start-row font-ps text-white w-full"
                       >
                         <p className="text-[22px]">
-                          <strong>{stat["label_" + localParams.locale]}</strong>:{" "}
-                          <em>{stat["value_" + localParams.locale]}</em>
+                          <strong>{stat["label_" + localParams.locale]}</strong>
+                          : <em>{stat["value_" + localParams.locale]}</em>
                         </p>
                       </div>
                     ))}
@@ -291,6 +292,25 @@ export default async function PostPage({
                   <ImageCarousel images={post.capturedMoments} />
                 </div>
               )}
+
+              <div className="mt-c-60 w-full text-left border border-background-dark/20 p-4 rounded-md shadow-md">
+                <h3 className="mb-2">
+                  <img
+                    className="inline-block w-5 h-5 mr-2"
+                    alt="📝"
+                    src="https://s.w.org/images/core/emoji/14.0.0/svg/1f4dd.svg"
+                  />
+                  {tArticle("substackMessageTitle")}
+                </h3>
+
+                <p className="mb-3 italic">{tArticle("substackMessage")}</p>
+                <PrimaryLink
+                  href="https://ekadventure.substack.com/"
+                  text={tArticle("readOnSubstack")}
+                  className="font-semibold"
+                  target="_blank"
+                />
+              </div>
 
               <CommentsProvider
                 initialComments={buildCommentTree(post.comments)}
