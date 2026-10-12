@@ -83,7 +83,7 @@ export class MailService implements IMailService {
 
         const addToSegmentResult: CreateEmailResponse = await resend.contacts.segments.add({
             email: contactInfo.email,
-            segmentId: "d1389b4b-7128-46ac-bfdc-21cfcff0556f"
+            segmentId: contactInfo.preferences.locale === "en" ? "1d7a8a74-059e-41af-806d-a8b048765c9f" : "3a25470b-af75-4afa-8181-0f8b2cd17840"
         });
 
         if (addToSegmentResult.error) {
