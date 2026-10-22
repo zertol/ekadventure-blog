@@ -1,8 +1,8 @@
 import React from "react";
-import {Link} from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import PrimaryLink from "../PrimaryLink/page";
 import { useTranslations } from "next-intl";
- 
+
 interface LatestArticleProps {
   title: string;
   slug: string;
@@ -18,15 +18,14 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
   categories,
   slug,
   featuredMedia,
-  isLinkOnly = false,
+  isLinkOnly = false
 }) => {
   const tUI = useTranslations("UI");
 
   return isLinkOnly ? (
     <Link
       href={`/${slug}` as any}
-      className="inline-flex items-center font-bold text-background-blue-accent underline hover:text-background-green-accent"
-    >
+      className="inline-flex items-center font-bold text-background-blue-accent underline hover:text-background-green-accent">
       {title}
     </Link>
   ) : (
@@ -38,9 +37,8 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
           style={{
             backgroundImage: `url(${featuredMedia?.url || "/images/adventure-header.jpg"})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
+            backgroundPosition: "center"
+          }}></div>
 
         <div className="flex-start-col text-wrap mb-2 w-[65%]">
           <Link href={`/${slug}` as any}>
@@ -72,8 +70,7 @@ const LatestArticle: React.FC<LatestArticleProps> = ({
         <div className="flex justify-end">
           <Link
             href={`/${slug}` as any}
-            className="inline-flex items-center font-semibold text-background-blue-accent underline hover:text-background-green-accent"
-          >
+            className="inline-flex items-center font-semibold text-background-blue-accent underline hover:text-background-green-accent">
             {tUI("readMore")}
           </Link>
         </div>

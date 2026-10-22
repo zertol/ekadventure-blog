@@ -10,7 +10,7 @@ interface LatestArticlesProps {
 
 const LatestArticles: React.FC<LatestArticlesProps> = ({
   posts,
-  isLinkOnly = false,
+  isLinkOnly = false
 }) => {
   const locale = useLocale();
   return (

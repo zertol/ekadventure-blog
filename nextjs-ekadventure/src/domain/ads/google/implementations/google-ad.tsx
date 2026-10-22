@@ -18,8 +18,7 @@ export class GoogleAd implements IAd {
       <ClientAdWrapper
         headerText={config.title}
         className={config.wrapper?.className}
-        isCollapsible={config.wrapper?.isCollapsible}
-      >
+        isCollapsible={config.wrapper?.isCollapsible}>
         <GoogleAdSlot config={config} />
       </ClientAdWrapper>
     );
