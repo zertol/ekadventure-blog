@@ -31,9 +31,17 @@ export const pageType = defineType({
           { title: 'Private', value: 'private' },
           { title: 'Trash', value: 'trash' },
           { title: 'Auto-Draft', value: 'auto-draft' },
-          { title: 'Inherit', value: 'inherit' },
-        ],
-      },
+          { title: 'Inherit', value: 'inherit' }
+        ]
+      }
+    }),
+    defineField({
+      name: 'heroLine',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'portableText' },
+        { name: 'fr', type: 'portableText' }
+      ]
     }),
     defineField({
       name: 'content',
@@ -51,7 +59,7 @@ export const pageType = defineType({
     defineField({
       name: 'author',
       type: 'reference',
-      to: [{ type: 'author' }],
+      to: [{ type: 'author' }]
     }),
     defineField({
       name: "metadata",
@@ -73,6 +81,6 @@ export const pageType = defineType({
       title: 'title.en',
       subtitle: 'author.name',
       imageUrl: 'featuredMedia.url',
-    },
-  },
+    }
+  }
 });

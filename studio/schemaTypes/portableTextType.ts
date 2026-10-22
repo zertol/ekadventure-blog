@@ -9,7 +9,7 @@ export const portableTextType = defineField({
         { title: "Emphasis", value: "em" },
         { title: "Poor Story", value: "poorStory" },
         { title: "Bordered Thick", value: "borderedThick" },
-      ],
-    },
-  }, { type: 'image' }, { type: 'externalImage' }, { type: 'iframe' }, { type: 'googleAdSlot' }],
+      ]
+    }
+  }, { type: 'image' }, { type: 'externalImage' }, { type: 'iframe' }, { type: 'googleAdSlot' }]
 });

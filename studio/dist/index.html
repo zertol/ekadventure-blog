@@ -267,32 +267,43 @@
     margin: 0;
     -webkit-font-smoothing: antialiased;
   }
-</style><script type="application/json" id="__imports">{"imports":{"react":"/vendor/react/index-dQIzgPo2.mjs","react/compiler-runtime":"/vendor/react/compiler-runtime-DFvlMPQC.mjs","react/jsx-dev-runtime":"/vendor/react/jsx-dev-runtime-DfWk5rvv.mjs","react/jsx-runtime":"/vendor/react/jsx-runtime-unUbLgIf.mjs","react/package.json":"/vendor/react/package.json-C9u_SLlD.mjs","react-dom":"/vendor/react-dom/index-DiwhFQN-.mjs","react-dom/client":"/vendor/react-dom/client-wMYtBfr5.mjs","react-dom/package.json":"/vendor/react-dom/package.json-DJr-B_rE.mjs","react-dom/server":"/vendor/react-dom/server-D0ZtJl1m.mjs","react-dom/static":"/vendor/react-dom/static-BhSdrEvI.mjs","styled-components":"/vendor/styled-components/index-CtQ3r5GA.mjs","styled-components/package.json":"/vendor/styled-components/package.json-CcTdcSoj.mjs","react-dom/server.browser":"/vendor/react-dom/server.browser-r0AF4Yay.mjs","react-dom/static.browser":"/vendor/react-dom/static.browser-CXtUyS0Q.mjs","sanity":"https://sanity-cdn.com/v1/modules/sanity/default/%5E5.23.0/t1777944422","sanity/":"https://sanity-cdn.com/v1/modules/sanity/default/%5E5.23.0/t1777944422/","@sanity/vision":"https://sanity-cdn.com/v1/modules/@sanity__vision/default/%5E5.23.0/t1777944422","@sanity/vision/":"https://sanity-cdn.com/v1/modules/@sanity__vision/default/%5E5.23.0/t1777944422/"}}</script><script>
+</style><script type="application/json" id="__imports">{"imports":{"react":"/vendor/react/index-CuZhUgED.mjs","react/compiler-runtime":"/vendor/react/compiler-runtime-DFvlMPQC.mjs","react/jsx-dev-runtime":"/vendor/react/jsx-dev-runtime-DfWk5rvv.mjs","react/jsx-runtime":"/vendor/react/jsx-runtime-unUbLgIf.mjs","react/package.json":"/vendor/react/package.json-DDPJLp8W.mjs","react-dom":"/vendor/react-dom/index-62pgutTU.mjs","react-dom/client":"/vendor/react-dom/client-CImEQ4lu.mjs","react-dom/package.json":"/vendor/react-dom/package.json-BEYRuyJF.mjs","react-dom/server":"/vendor/react-dom/server-DveacCGq.mjs","react-dom/static":"/vendor/react-dom/static-D6gucwzj.mjs","styled-components":"/vendor/styled-components/index-CtQ3r5GA.mjs","styled-components/package.json":"/vendor/styled-components/package.json-CcTdcSoj.mjs","react-dom/server.browser":"/vendor/react-dom/server.browser-CvexleBr.mjs","react-dom/static.browser":"/vendor/react-dom/static.browser-iQLgEwFT.mjs","sanity":"https://sanity-cdn.com/v1/modules/sanity/default/%5E5.31.2/t1792172648","sanity/":"https://sanity-cdn.com/v1/modules/sanity/default/%5E5.31.2/t1792172648/","@sanity/vision":"https://sanity-cdn.com/v1/modules/@sanity__vision/default/%5E5.31.2/t1792172648","@sanity/vision/":"https://sanity-cdn.com/v1/modules/@sanity__vision/default/%5E5.31.2/t1792172648/"},"css":["https://sanity-cdn.com/v1/modules/sanity/default/%5E5.31.2/t1792172648/index.css","https://sanity-cdn.com/v1/modules/@sanity__vision/default/%5E5.31.2/t1792172648/index.css"]}</script><script>
   // auto-generated script to add import map with timestamp
   const importsJson = document.getElementById('__imports')?.textContent;
-  const { imports = {}, ...rest } = importsJson ? JSON.parse(importsJson) : {};
+  const { imports = {}, css = [], ...rest } = importsJson ? JSON.parse(importsJson) : {};
   const importMapEl = document.createElement('script');
   importMapEl.type = 'importmap';
   const newTimestamp = `/t${Math.floor(Date.now() / 1000)}`;
+
+  function replaceTimestamp(urlStr) {
+    try {
+      const url = new URL(urlStr);
+      if (/^sanity-cdn\.[a-zA-Z]+$/.test(url.hostname)) {
+        url.pathname = url.pathname.replace(/\/t\d+/, newTimestamp);
+      }
+      return url.toString();
+    } catch {
+      return urlStr;
+    }
+  }
+
   importMapEl.textContent = JSON.stringify({
     imports: Object.fromEntries(
-      Object.entries(imports).map(([specifier, path]) => {
-        try {
-          const url = new URL(path);
-          if (/^sanity-cdn\.[a-zA-Z]+$/.test(url.hostname)) {
-            url.pathname = url.pathname.replace(/\/t\d+/, newTimestamp);
-          }
-          return [specifier, url.toString()];
-        } catch {
-          return [specifier, path];
-        }
-      })
+      Object.entries(imports).map(([specifier, path]) => [specifier, replaceTimestamp(path)])
     ),
     ...rest,
   });
   document.head.appendChild(importMapEl);
+
+  // Creates <link rel="stylesheet"> tags with fresh timestamps.
+  for (const cssUrl of css) {
+    const linkEl = document.createElement('link');
+    linkEl.rel = 'stylesheet';
+    linkEl.href = replaceTimestamp(cssUrl);
+    document.head.appendChild(linkEl);
+  }
 </script><script src="https://core.sanity-cdn.com/bridge.js" async type="module" data-sanity-core></script>
-</head><body><div id="sanity"></div><script src="/static/sanity-CpszXr4f.js" type="module"></script><noscript><div class="sanity-app-no-js__root"><div class="sanity-app-no-js__content"><style type="text/css">
+</head><body><div id="sanity"></div><script src="/static/sanity-cs6Jlrjg.js" type="module"></script><noscript><div class="sanity-app-no-js__root"><div class="sanity-app-no-js__content"><style type="text/css">
 .sanity-app-no-js__root {
   position: absolute;
   top: 0;

@@ -20,9 +20,11 @@ export const postType = defineType({
     defineField({
       name: 'status',
       type: 'string',
+      initialValue: 'draft',
+      validation: Rule => Rule.required(),
       options: {
         list: [
-          { title: 'Published', value: 'publish' },
+          { title: 'Published', value: 'published' },
           { title: 'Future', value: 'future' },
           { title: 'Draft', value: 'draft' },
           { title: 'Pending', value: 'pending' },
@@ -30,8 +32,8 @@ export const postType = defineType({
           { title: 'Trash', value: 'trash' },
           { title: 'Auto-Draft', value: 'auto-draft' },
           { title: 'Inherit', value: 'inherit' },
-        ],
-      },
+        ]
+      }
     }),
     defineField({
       name: 'content',
