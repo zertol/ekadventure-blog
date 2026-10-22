@@ -13,6 +13,6 @@ export const withApiAuth = (handler: (req: Request, res: Response) => Promise<vo
             return;
         }
 
-        return handler(req, res);
+        return await handler(req, res);
     };
 };

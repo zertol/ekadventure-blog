@@ -3,15 +3,17 @@ import { IMailService } from "../../interfaces/i-mail-service";
 import { ContactFormType } from "../../../types/domain/contact-form-type";
 import { BroadcastType } from "../../../types/domain/broadcast-type";
 import { StripeWebhookEvent } from "../../../types/ecommerce/stripe-webhook-event-type";
-import { ekadventureBlogDb } from "../../../cms/firestore/firestore-db";
 import { Constants } from "../../../Constants";
 import * as Helpers from "../../../utils/helpers";
 import { Locale, strings } from "../../../utils/localizer";
 import { ContactType } from "../../../types/domain/contact-type";
 import { ProductDownloadTokenType } from "../../../types/ecommerce/product-download-token-type";
 import { ProductItemType } from "../../../types/ecommerce/product-metadata-type";
+import { ICMSClient } from "../../../cms/shared/interfaces/i-cms-client";
 
 export class MailService implements IMailService {
+    constructor(private cmsClient: ICMSClient) { }
+
     async sendContactMail(contactInfo: ContactFormType): Promise<CreateEmailResponse> {
         const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -94,18 +96,7 @@ export class MailService implements IMailService {
 
         const locale = contactInfo.preferences.locale;
 
-        try {
-            await ekadventureBlogDb.collection("contacts").doc(createResult.data.id).set({
-                name: contactInfo.name,
-                email: contactInfo.email,
-                preferences: {
-                    locale: locale ?? "en"
-                }
-            });
-        } catch (err) {
-            console.error(`Failed to create contact: ${err}`);
-            throw new Error(`Failed to create contact: ${err}`);
-        }
+        await this.cmsClient.getRepositories().contact.addContactDetails(locale, createResult.data.id, contactInfo);
 
         const subject = strings.email.onboarding.subject[locale];
         const greeting = strings.email.onboarding.greeting[locale](contactInfo.name);
@@ -153,17 +144,7 @@ export class MailService implements IMailService {
             throw new Error(`Resend email error Upon Fetching List: ${JSON.stringify(listResult.error)}`);
         }
 
-        const contactsMap = new Map<string, ContactType>();
-
-        try {
-            const contactsSnapshot = await ekadventureBlogDb.collection("contacts").get();
-            contactsSnapshot.docs.forEach((doc) => {
-                const data = doc.data() as ContactType;
-                contactsMap.set(data.email, data);
-            });
-        } catch (err) {
-            throw new Error(`Failed to get contacts: ${err}`);
-        }
+        const contactsMap = await this.cmsClient.getRepositories().contact.getAllContacts();
 
         const contactsBatch = listResult.data.data.filter((contact) => !contact.unsubscribed).map((contact) => {
             const dbContact = contactsMap.get(contact.email);
@@ -230,8 +211,8 @@ export class MailService implements IMailService {
 
     async sendProductLink(event: StripeWebhookEvent): Promise<CreateEmailResponse | { received: boolean }> {
         const resend = new Resend(process.env.RESEND_API_KEY);
-        const token = crypto.randomUUID();
         const session = event.data.object;
+        const token = crypto.randomUUID();
 
         if (!Helpers.isValidProductMetadata(session.metadata)) {
             throw new Error(`Invalid metadata: ${JSON.stringify(session.metadata)}`);
@@ -245,26 +226,22 @@ export class MailService implements IMailService {
             return { data: null, error: null } as CreateEmailResponse;
         }
 
-        try {
-            const productDownloadToken: ProductDownloadTokenType = {
-                sessionId: session.id,
-                metadata: Helpers.mapMetadata(session.metadata),
-                customerDetails: session.customer_details,
-                locale: session.locale as Locale,
-                expiresAt: Date.now() + (Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS * 1000), // Store in Milliseconds to compare later
-                createdAt: Date.now(),
-                used: false
-            };
-
-            await ekadventureBlogDb.collection("product_download_tokens").doc(token).set(productDownloadToken);
-        } catch (err) {
-            throw new Error(`Failed to create download token: ${err}`);
-        }
-
         const locale = session.locale as Locale;
 
-        const itemGenderLetter = locale == "fr" && "e";
+        const productDownloadToken: ProductDownloadTokenType = {
+            sessionId: session.id,
+            metadata: Helpers.mapMetadata(session.metadata),
+            customerDetails: session.customer_details,
+            locale: locale,
+            expiresAt: Date.now() + (Constants.DOWNLOAD_LINK_EXPIRES_IN_SECONDS * 1000), // Store in Milliseconds to compare later
+            createdAt: Date.now(),
+            used: false
+        };
 
+        await this.cmsClient.getRepositories().product.addProductDownloadToken(productDownloadToken, token);
+
+        // Prepare email content based on locale and product metadata
+        const itemGenderLetter = locale == "fr" && "e";
         const itemLabel = strings.common.productItemLabel[session.metadata.item_type][locale];
         const subject = strings.email.downloadReady.subject[locale](itemLabel, itemGenderLetter);
         const greeting = strings.email.downloadReady.greeting[locale](session.customer_details.name);

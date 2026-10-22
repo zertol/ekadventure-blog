@@ -1,5 +1,5 @@
-import { ICMSRepositories } from "./i-cms-repositories";
+import { RepositorySetType } from "../../../types/domain/repository-set-type";
 
 export interface ICMSClient {
-    getRepositories(): ICMSRepositories;
+    getRepositories(): RepositorySetType;
 }

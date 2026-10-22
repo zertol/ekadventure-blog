@@ -1,3 +1,4 @@
+import { FirestoreContactRepository } from "../../firestore/repositories/contact/firestore-contact-repository";
 import { IAboutRepository } from "./i-about-repository";
 import { ICategoryRepository } from "./i-category-repository";
 import { ICommentRepository } from "./i-comment-repository";

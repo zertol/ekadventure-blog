@@ -1,5 +1,4 @@
 import { ICMSClient } from "../cms/shared/interfaces/i-cms-client";
-import { SantiyCMSClient } from "../cms/sanity/sanity-cms-client";
 import { IMailService } from "../services/interfaces/i-mail-service";
 import { MailService } from "../services/implementations/mail/mail-service";
 import { PageService } from "../services/implementations/page/page-service";
@@ -20,11 +19,12 @@ import { IYouTubeService } from "../services/interfaces/i-youtube-service";
 import { YouTubeService } from "../services/implementations/youtube/youtube-service";
 import { IEcommerceService } from "../services/interfaces/i-ecommerce-service";
 import { EcommerceService } from "../services/implementations/ecommerce/ecommerce-service";
+import { CMSClient } from "../cms/shared/cms-client";
 
 export class DIRegistration {
     public static registerDependencies(): void {
         // Repository Instances
-        DependencyContainer.register<ICMSClient>("ICMSClient", new SantiyCMSClient());
+        DependencyContainer.register<ICMSClient>("ICMSClient", new CMSClient());
 
         // Service Instances
         DependencyContainer.register<IPageService>("IPageService", new PageService(
@@ -51,7 +51,7 @@ export class DIRegistration {
             DIResolutions.getCMSClient()
         ));
 
-        DependencyContainer.register<IMailService>("IMailService", new MailService());
+        DependencyContainer.register<IMailService>("IMailService", new MailService(DIResolutions.getCMSClient()));
 
         DependencyContainer.register<IYouTubeService>("IYouTubeService", new YouTubeService());
 

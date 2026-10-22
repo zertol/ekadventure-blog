@@ -6,7 +6,9 @@ export const PAGES_QUERY = `*[_type == "page" && visible == true] | order(order 
   metadata {
     ogImage,
     "description": coalesce(description[$locale], description["en"])
-  }
+  },
+  "content": coalesce(content[$locale], content["en"]),
+  "updatedAt": modified
 }` as const;
 
 export const PRIVACY_PAGE_QUERY = `*[_type == "page" && slug.current == "privacy-policy"][0] {
@@ -23,7 +25,7 @@ export const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post
       "postCount": count(*[_type == "post" && references(^._id)])
   }` as const;
 
-export const POSTS_QUERY = `*[_type == "post"] | order(date desc) {
+export const POSTS_QUERY = `*[_type == "post" && status == "published"] | order(date desc) {
   _id,
   "title": coalesce(title[$locale], title["en"]),
   slug,
@@ -76,7 +78,7 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
 }` as const;
 
 export const POSTS_BY_CATEGORY_QUERY = `*[
-  _type == "post" && 
+  _type == "post" && status == "published" && 
   references(*[_type == "category" && slug.current == $categoryname]._id)
 ] | order(date desc) {
   _id,
@@ -100,7 +102,7 @@ export const ABOUT_PAGE_QUERY = `*[_type == "page" && slug.current == "about"][0
   "content": coalesce(content[$locale], content["en"])
 }` as const;
 
-export const LATEST_POSTS_QUERY = `*[_type == "post"] | order(date desc)[0...3]{
+export const LATEST_POSTS_QUERY = `*[_type == "post" && status == "published"] | order(date desc)[0...3]{
   _id,
   "publishedAt": date,
   "title": coalesce(title[$locale], title["en"]),
@@ -115,7 +117,7 @@ export const LATEST_POSTS_QUERY = `*[_type == "post"] | order(date desc)[0...3]{
 }` as const;
 
 export const LATEST_POSTS_BY_CATEGORIES_QUERY = `*[_type == "post" && slug.current == $slug][0]{
-  "relatedPosts": *[_type == "post" && 
+  "relatedPosts": *[_type == "post" && status == "published" && 
     references(^.categories[]._ref) && 
     slug.current != $slug] | order(date desc)[0...3]{
       _id,

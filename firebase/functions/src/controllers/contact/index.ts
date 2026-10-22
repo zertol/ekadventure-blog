@@ -27,6 +27,7 @@ export const createNewsletterSubscriptionEmail = onRequest(
         }
     )));
 
+// Send Broadcast that I've published an article
 export const sendBroadcastEmail = onRequest(
     { secrets: ["RESEND_API_KEY", "X_API_KEY"] },
     withApiAuth(createApiHandler<CreateBatchResponse<any>>(
