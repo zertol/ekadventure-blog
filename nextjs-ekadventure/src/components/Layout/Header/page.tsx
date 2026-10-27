@@ -24,25 +24,25 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   const isProductDetailsPage = !!params?.productId;
 
   const { pages } = usePages();
-  const isScrollable =
-    !isAboutPage &&
-    !isBlogDetailsPage &&
-    !isContactPage &&
-    !notFound &&
-    !isVideoDetailsPage &&
-    !isProductDetailsPage;
+  // const isScrollable =
+  //   !isAboutPage &&
+  //   !isBlogDetailsPage &&
+  //   !isContactPage &&
+  //   !notFound &&
+  //   !isVideoDetailsPage &&
+  //   !isProductDetailsPage;
 
-  useEffect(() => {
-    if (isScrollable) {
-      const handleScroll = () => {
-        const scrollPosition = window.scrollY;
-        setIsScrolled(scrollPosition > 5);
-      };
+  // useEffect(() => {
+  //   if (isScrollable) {
+  //     const handleScroll = () => {
+  //       const scrollPosition = window.scrollY;
+  //       setIsScrolled(scrollPosition > 5);
+  //     };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
-  }, [isScrollable]);
+  //     window.addEventListener("scroll", handleScroll);
+  //     return () => window.removeEventListener("scroll", handleScroll);
+  //   }
+  // }, [isScrollable]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -62,16 +62,12 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-[52] px-3 md:pl-c-25 md:pr-c-25 py-[12px] transition-all duration-200 ${
-          isScrolled || !isScrollable
-            ? "bg-background-green-accent h-auto"
-            : "bg-transparent h-auto"
-        }`}
+        className={`absolute top-0 left-0 right-0 z-[52] container-max-w-1280 mx-auto container-px-25 py-[12px] transition-all duration-200 bg-transparent h-auto`}
       >
         <div
-          className={`container container-max-w-none flex items-center justify-between gap-1 xl:gap-4`}
+          className={`flex items-center justify-center gap-1`}
         >
-          <Logo isScrolled={isScrolled} isScrollable={isScrollable} />
+          <Logo />
           <DesktopNav menuItems={menuItems} />
           {isMobileMenuOpen && (
             <MobileNav

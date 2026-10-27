@@ -98,7 +98,7 @@
   }
   
   p, a, span, input, button, textarea, label, li {
-    @apply text-[13px] md:text-[14px] leading-relaxed;
+    @apply text-[12px] md:text-[13px] leading-relaxed;
   }
 
   mark {

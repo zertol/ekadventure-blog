@@ -7,7 +7,7 @@ const DesktopNav: React.FC<{
 }> = ({ menuItems }) => {
   return (
     <div className="hidden lg:contents justify-self-center">
-      <nav className="flex flex-1 gap-6 items-center justify-center ">
+      <nav className="flex flex-1 gap-6 items-center justify-center" aria-label="Main">
         {menuItems.map((page: PageType) => (
           <HeaderNavLink
             key={page.slug}

@@ -21,7 +21,7 @@ const App: React.FC<AppProps> = ({ currentPage = "home", headerImage, children }
       <NewsLetterModal />
       <Header />
       {headerImage && <HeaderImage {...headerImage} /> }
-      <main className="flex-grow flex flex-col items-center justify-center">
+      <main className="container-max-w-1280 mx-auto container-px-25 flex flex-col items-center justify-center">
         {children}
       </main>
       <Footer />
