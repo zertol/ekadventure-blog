@@ -49,7 +49,7 @@ const Home: React.FC<HomeProps> = async ({
         <HeroText />
       </section>
 
-      <div className="flex justify-center">
+      <div className="flex px-1 justify-center">
         <div className="w-full md:w-[768px]">
           <ClientAdWrapper
             headerText="Google"
@@ -89,7 +89,7 @@ const Home: React.FC<HomeProps> = async ({
         </Suspense>
       </FeaturedSection>
 
-      <div className="flex justify-center">
+      <div className="flex px-1 justify-center">
         <div className="w-full md:w-[768px]">
           <ClientAdWrapper
             headerText="Google"
