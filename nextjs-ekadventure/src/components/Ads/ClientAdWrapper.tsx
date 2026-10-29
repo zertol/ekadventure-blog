@@ -78,7 +78,7 @@ export function ClientAdWrapper({
                 </div>
                 {opened ? (
                   <svg
-                    className={`fill-current w-4 h-4 flex-shrink-0`}
+                    className={`fill-current w-4 h-4 shrink-0`}
                     viewBox="0 0 16 16"
                   >
                     <path d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z" />
@@ -86,7 +86,7 @@ export function ClientAdWrapper({
                   </svg>
                 ) : (
                   <svg
-                    className={`fill-current w-4 h-4 flex-shrink-0`}
+                    className={`fill-current w-4 h-4 shrink-0`}
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -108,7 +108,9 @@ export function ClientAdWrapper({
           ref={containerRef}
           style={{ maxHeight: calc() }}
         >
-          <div ref={contentRef}>{children}</div>
+          <div className="overflow-hidden" ref={contentRef}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

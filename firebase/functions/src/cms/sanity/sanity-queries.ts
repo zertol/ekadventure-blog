@@ -16,6 +16,23 @@ export const PRIVACY_PAGE_QUERY = `*[_type == "page" && slug.current == "privacy
   "updatedAt": modified
 }` as const;
 
+export const PAGE_BY_SLUG_QUERY = `*[_type == "page" && slug.current == $slug][0] {
+  featuredMedia,
+  "title": coalesce(title[$locale], title["en"]),
+  metadata {
+    ogImage,
+    "description": coalesce(description[$locale], description["en"])
+  },
+  "content": coalesce(content[$locale], content["en"]),
+  "updatedAt": modified
+}` as const;
+
+export const MENU_ITEMS_QUERY = `*[_type == "page" && visible == true] {
+  "slug": slug.current,
+  "title": coalesce(title[$locale], title["en"]),
+  order
+}` as const;
+
 export const CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "post" && references(^._id)]) > 0] | order(coalesce(name[$locale], name["en"]) asc) {
       _id,
       "name": coalesce(name[$locale], name["en"]),

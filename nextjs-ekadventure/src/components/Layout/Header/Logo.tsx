@@ -1,7 +1,9 @@
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
-const Logo: React.FC = () => {
+const Logo: React.FC<{
+  isWithImage: boolean;
+}> = ({ isWithImage }) => {
   return (
     <div className="flex flex-1 items-center ">
       <Link href="/">
@@ -10,7 +12,7 @@ const Logo: React.FC = () => {
           alt="EkAdventure Logo"
           width={500}
           height={500}
-          className={`transition-all duration-300 h-auto w-[150px] lg:w-[140px]`}
+          className={`transition-all duration-300 h-auto ${!isWithImage ? "w-[110px] lg:w-[110px]" : "w-[150px] lg:w-[140px]"}`}
         />
       </Link>
     </div>

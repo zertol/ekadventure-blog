@@ -14,12 +14,15 @@ import { PostsSkeleton } from "../Skeletons/Post/PostsSkeleton";
 import { VideosSkeleton } from "../Skeletons/Video/VideosSkeleton";
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 import ProductsList from "../UI/ECommerce/ProductsList";
+import HeaderImage from "../UI/Common/HeaderImage/page";
+import { PageType } from "@/types/page-type";
 
 interface HomeProps {
   categories: Promise<ApiResult<CategoryType[]>>;
   latestPosts: Promise<ApiResult<PostType[]>>;
   videos: Promise<ApiResult<YouTubePlaylistType>>;
   products: Promise<ApiResult<ProductsResponseType>>;
+  page: Promise<ApiResult<PageType>>;
 }
 
 const Home: React.FC<HomeProps> = async ({
@@ -27,13 +30,21 @@ const Home: React.FC<HomeProps> = async ({
   latestPosts,
   videos,
   products,
+  page
 }) => {
   const tHome = await getTranslations("Home");
   const tUI = await getTranslations("UI");
   const tCommon = await getTranslations("Common");
 
+  const pageData = await page;
+  const headerImage = { displayImage: pageData.Result?.featuredMedia };
+
   return (
     <div className="home-page">
+      <section className="overflow:hidden m-[calc(50%-50vw)]">
+        {headerImage && <HeaderImage {...headerImage} /> }
+      </section>
+      
       <section className={`mt-c-30 mb-c-30`}>
         <HeroText />
       </section>

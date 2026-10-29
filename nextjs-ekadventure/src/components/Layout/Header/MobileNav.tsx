@@ -25,7 +25,7 @@ const MobileNav: React.FC<{
     >
       {/* Backdrop with blur */}
       <div
-        className={`absolute inset-0 bg-black/40 transition-opacity duration-[400ms] ease-in-out ${
+        className={`absolute inset-0 bg-black/40 transition-opacity duration-400 ease-in-out ${
           !backdropOpen ? "opacity-0" : "opacity-100"
         }`}
         onClick={closeMobileMenu}
@@ -40,7 +40,7 @@ const MobileNav: React.FC<{
       >
         {/* Header */}
         <div className="sticky top-0 bg-background-green-accent px-4 pb-4 pt-[12px] flex justify-between items-center z-10">
-          <Logo isScrolled={false} isScrollable={true} />
+          <Logo isWithImage={true} />
           <CloseButton
             handleClose={closeMobileMenu}
             className="text-white hover:text-text-dark"

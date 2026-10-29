@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 // @ts-ignore
 import "./globals.css";
 import { useSearch } from "@/utils/hooks/use-search";
@@ -66,7 +65,7 @@ export default function NotFound() {
                           type="text"
                           name="query"
                           placeholder="Search an adventure..."
-                          className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
+                          className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-hidden"
                           ref={searchRef}
                         />
                         <button

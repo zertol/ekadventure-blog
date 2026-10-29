@@ -1,6 +1,6 @@
 import { fetchAllCategories } from "@/api/controllers/categories";
 import { getLatestProducts as getLatestProducts } from "@/api/controllers/ecommerce";
-import { fetchAllPages } from "@/api/controllers/pages";
+import { fetchPageBySlug } from "@/api/controllers/pages";
 import { fetchLatestPosts } from "@/api/controllers/posts";
 import { getLatestYouTubeVideos } from "@/api/controllers/youtube";
 import App from "@/components/App";
@@ -17,21 +17,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const localParams = await params;
 
-  const pages = await fetchAllPages(localParams);
-
-  const page = pages.Result?.find((page) => page.slug === "home");
-
-  if (!page) {
-    return {};
-  }
+  const page = await fetchPageBySlug({locale: localParams.locale, slug: "home"});
 
   const metaData: Metadata = {
-    title: page.title,
-    description: page.metadata?.description,
+    title: page.Result?.title,
+    description: page.Result?.metadata?.description,
     openGraph: {
-      title: page.title,
-      description: page.metadata?.description,
-      images: page.metadata ? [page.metadata?.ogImage?.url] : [],
+      title: page.Result?.title,
+      description: page.Result?.metadata?.description,
+      images: page.Result?.metadata ? [page.Result?.metadata?.ogImage?.url] : [],
     },
   };
 
@@ -49,19 +43,13 @@ export default async function HomePage({
 
   return (
     <App
-      currentPage="home"
-      headerImage={{
-        text: {
-          firstPart: tHome("homeHeaderCaptionFirstPart"),
-          secondPart: tHome("homeHeaderCaptionSecondPart"),
-        }
-      }}
-    >
+      currentPage="home">
       <Home
         categories={fetchAllCategories(localParams)}
         latestPosts={fetchLatestPosts(localParams)}
         videos={getLatestYouTubeVideos()}
         products={getLatestProducts()}
+        page={fetchPageBySlug({locale: localParams.locale, slug: "home"})}
       />
     </App>
   );

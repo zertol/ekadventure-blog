@@ -36,7 +36,7 @@ const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
               type="text"
               name="query"
               placeholder={tUI("searchPlaceholderAdventure")}
-              className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none"
+              className="flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-hidden"
               ref={searchRef}
             />
             <button
@@ -81,7 +81,7 @@ const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder={tUI("searchPlaceholder")}
-        className="bg-transparent border-b border-white text-white placeholder-white/70 px-2 py-1 focus:outline-none w-full"
+        className="bg-transparent border rounded-md border-white text-white placeholder-white/70 px-2 py-1 focus:outline-hidden w-full"
       />
       <button className="absolute right-2 top-1/2 transform -translate-y-1/2">
         <svg
@@ -90,7 +90,7 @@ const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-5 h-5 text-white"
+          className="w-5 h-5 text-white/70"
         >
           <path
             strokeLinecap="round"

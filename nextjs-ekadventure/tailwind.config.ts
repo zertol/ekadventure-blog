@@ -54,10 +54,7 @@ const config: Config = {
       }
     },
   },
-  plugins: [],
-  corePlugins: {
-    boxSizing: true, // This ensures box-sizing is used as expected
-  }
+  plugins: []
 };
 
 export default config;

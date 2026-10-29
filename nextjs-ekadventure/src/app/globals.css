@@ -1,16 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
 /* Import local Poppins Black font */
 
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @theme {
-  
+  --color-primary: #659DBD;
+  --color-secondary: #A39F66;
+  --color-text-white: #ffffff;
+  --color-text-dark: #313131;
+  --color-text-white-off: #FEFBF2;
+  --color-background-primary: #FEFBF2;
+  --color-background-green-accent: #A39F66;
+  --color-background-blue-accent: #659DBD;
+  --color-background-dark: #313131;
+
+  --font-primary: Poppins, sans-serif;
+  --font-secondary: "Poor Story", cursive;
+
+  --animate-modal-right-enter: modal-right-enter-kf 0.3s ease-out forwards;
+  --animate-modal-right-exit: modal-right-exit-kf 0.3s ease-out forwards;
+  --animate-cookie-consent-fade-in: cookie-consent-fade-in-kf 0.3s ease-out forwards;
+  --animate-cookie-consent-fade-out: cookie-consent-fade-out-kf 0.3s ease-out forwards;
+  --animate-text-slide-right: text-slide-right-kf 15s linear infinite;
+
+  @keyframes modal-right-enter-kf {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes modal-right-exit-kf {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes cookie-consent-fade-in-kf {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes cookie-consent-fade-out-kf {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes text-slide-right-kf {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(100%); }
+  }
 }
+
 
 @layer utilities {
   .webkit-autofill-override {
@@ -54,17 +93,6 @@
   .no-scrollbar {
     scrollbar-width: none; /* Firefox */
   }
-}
-
-:root {
-  --color-primary: #659DBD;
-  --color-secondary: #A39F66;
-  --color-text-white: #ffffff;
-  --color-text-dark: #313131;
-  --color-background-primary: #FEFBF2;
-  --color-background-green-accent: #A39F66;
-  --color-background-blue-accent: #659DBD;
-  --color-background-dark: #313131;
 }
 
 * {
@@ -357,11 +385,11 @@
   }
 
   .contact-form-input{
-    @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white rounded-none border-b-[1px] border-b-white resize-none focus:outline-none focus:placeholder:text-white
+    @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white rounded-none border-b border-b-white resize-none focus:outline-hidden focus:placeholder:text-white
   }
 
   .comment-form-input{
-    @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white resize-none focus:outline-none focus:placeholder:text-white rounded-sm block
+    @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white resize-none focus:outline-hidden focus:placeholder:text-white rounded-sm block
   }
 
   .primary-button{
@@ -370,7 +398,7 @@
   }
 
   .featured-adventure-title{
-    @apply font-bold font-ps text-white;
+    @apply font-bold font-secondary text-white;
   }
 }
 
@@ -392,6 +420,7 @@
 .adsbygoogle.horizontal-ad {
   display: inline-block;
   width: 100%;
+  max-width: 100%;
   height: 60px;
 }
 

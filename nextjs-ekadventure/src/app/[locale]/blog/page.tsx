@@ -9,8 +9,9 @@ import { getTranslations } from "next-intl/server";
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: { locale: string, slug: string };
 }): Promise<Metadata> {
+  console.log(await params);
   const pages = await fetchAllPages(await params);
 
   const page = pages.Result?.find((page) => page.slug === "blog");

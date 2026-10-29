@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
       {!isProductDetailPage && (
         <ClientAdWrapper
           headerText="Google"
-          className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full"
+          className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full max-w-full"
           onHeightChange={setAdHeight}
         >
           <div className="w-full flex justify-center">

@@ -20,7 +20,7 @@ const App: React.FC<AppProps> = ({ currentPage = "home", headerImage, children }
     <div className="flex min-h-screen flex-col">
       <NewsLetterModal />
       <Header />
-      {headerImage && <HeaderImage {...headerImage} /> }
+      
       <main className="container-max-w-1280 mx-auto container-px-25 flex flex-col items-center justify-center">
         {children}
       </main>

@@ -82,7 +82,7 @@ const CategoryPage: React.FC<any> = async ({
     <App
       currentPage="category"
       headerImage={{
-        backgroundImage: headerMedia,
+        displayImage: headerMedia,
         text: {
           firstPart: tCategories("categoriesHeaderCaptionFirstPart"),
           secondPart: tCategories("categoriesHeaderCaptionSecondPart"),

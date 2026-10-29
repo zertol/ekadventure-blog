@@ -90,7 +90,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
             placeholder={tLetter("namePlaceholder")}
             register={register}
             required={true}
-            className={`${errors.name?.message ? "border-red-900" : "border-gray-300"} flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none`}
+            className={`${errors.name?.message ? "border-red-900" : "border-gray-300"} flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-hidden`}
             registrationName="name"
           />
         </div>
@@ -101,7 +101,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
             placeholder={tLetter("emailPlaceholder")}
             register={register}
             required={true}
-            className={`${errors.email?.message ? "border-red-900" : "border-gray-300"} flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-none`}
+            className={`${errors.email?.message ? "border-red-900" : "border-gray-300"} flex-1 w-full px-4 py-2 bg-white text-gray-800 font-primary focus:outline-hidden`}
             registrationName="email"
           />
         </div>

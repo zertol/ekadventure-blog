@@ -40,7 +40,7 @@ const LocaleSelect: React.FC = () => {
         value={locale}
         onChange={onSelectChange}
         disabled={isPending}
-        className="text-[12px] tracking-tighter appearance-none w-full px-2 py-1 outline-none rounded-md bg-white"
+        className="text-[12px] tracking-tighter appearance-none w-full px-2 py-1 outline-hidden rounded-md bg-white"
       >
         <option value="-1" disabled>
           {tUI("selectLanguage")}
@@ -53,7 +53,7 @@ const LocaleSelect: React.FC = () => {
         fill="currentColor"
         data-slot="icon"
         aria-hidden="true"
-        className="w-3 h-3 text-text-dark self-center right-1 flex-shrink-0 absolute"
+        className="w-3 h-3 text-text-dark self-center right-1 shrink-0 absolute"
       >
         <path
           d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"

@@ -16,6 +16,8 @@ DIRegistration.registerDependencies();
 // Page Controllers
 export const fetchAllPages = PagesController.fetchAllPages;
 export const fetchPrivacyPolicyPage = PagesController.fetchPrivacyPolicyPage;
+export const fetchPageBySlug = PagesController.fetchPageBySlug;
+export const fetchMenuItems = PagesController.fetchMenuItems;
 
 // Post Controllers
 export const fetchAllPosts = PostsController.fetchAllPosts;

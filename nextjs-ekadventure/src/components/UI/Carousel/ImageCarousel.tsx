@@ -97,7 +97,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         {/* @ts-ignore - bypassing type check for Slider */}
         <Slider ref={sliderRef} {...sliderSettings}>
           {images.map((image, index) => (
-            <div key={index} className="outline-none">
+            <div key={index} className="outline-hidden">
               <div
                 className={`relative group overflow-hidden w-full flex justify-center ${productGallerySettings ? "h-full cursor-fullscreen  rounded-md" : "h-[190px] cursor-pointer rounded-none"}`}
                 onClick={() => handleOpenLightbox(index)}

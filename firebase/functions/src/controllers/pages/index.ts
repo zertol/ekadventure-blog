@@ -6,6 +6,7 @@ import { withApiAuth } from "../../core/middleware/auth-middleware";
 import { createApiHandler } from "../../core/handler/create-api-handler";
 import { DIResolutions as DIResolution } from "../../utils/di-resolution";
 import { ParamsType } from "../../types/api/params-type";
+import { MenuItemType } from "../../types/domain/menu-item-type";
 
 export const fetchAllPages = onRequest(
     { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
@@ -22,5 +23,23 @@ export const fetchPrivacyPolicyPage = onRequest(
         async (req: Request<any>, res: Response<ApiResult<PageType>>): Promise<PageType> => {
             const params: ParamsType = req.body;
             return await DIResolution.getPageService().fetchPrivacyPolicyPage(params.locale);
+        }
+    )));
+
+export const fetchPageBySlug = onRequest(
+    { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
+    withApiAuth(createApiHandler<PageType>(
+        async (req: Request<any>, res: Response<ApiResult<PageType>>): Promise<PageType> => {
+            const params: ParamsType = req.body;
+            return await DIResolution.getPageService().fetchPageBySlug(params.slug, params.locale);
+        }
+    )));
+
+export const fetchMenuItems = onRequest(
+    { secrets: ["SANITY_PROJECT_ID", "X_API_KEY"] },
+    withApiAuth(createApiHandler<MenuItemType[]>(
+        async (req: Request<any>, res: Response<ApiResult<MenuItemType[]>>): Promise<MenuItemType[]> => {
+            const params: ParamsType = req.body;
+            return await DIResolution.getPageService().fetchMenuItems(params.locale);
         }
     )));

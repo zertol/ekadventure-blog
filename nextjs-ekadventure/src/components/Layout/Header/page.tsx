@@ -24,13 +24,13 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   const isProductDetailsPage = !!params?.productId;
 
   const { pages } = usePages();
-  // const isScrollable =
-  //   !isAboutPage &&
-  //   !isBlogDetailsPage &&
-  //   !isContactPage &&
-  //   !notFound &&
-  //   !isVideoDetailsPage &&
-  //   !isProductDetailsPage;
+  const isWithImage =
+    !isAboutPage &&
+    !isBlogDetailsPage &&
+    !isContactPage &&
+    !notFound &&
+    !isVideoDetailsPage &&
+    !isProductDetailsPage;
 
   // useEffect(() => {
   //   if (isScrollable) {
@@ -62,12 +62,16 @@ const Header: React.FC<{ notFound?: boolean }> = ({ notFound }) => {
   return (
     <>
       <header
-        className={`absolute top-0 left-0 right-0 z-[52] container-max-w-1280 mx-auto container-px-25 py-[12px] transition-all duration-200 bg-transparent h-auto`}
+        className={`absolute top-0 left-0 right-0 z-52 container-px-25 py-[12px] transition-all duration-200 h-auto ${
+          !isWithImage
+            ? "bg-background-green-accent h-auto "
+            : "bg-transparent h-auto  container-max-w-1280 mx-auto"
+        }`}
       >
         <div
           className={`flex items-center justify-center gap-1`}
         >
-          <Logo />
+          <Logo isWithImage={isWithImage} />
           <DesktopNav menuItems={menuItems} />
           {isMobileMenuOpen && (
             <MobileNav
