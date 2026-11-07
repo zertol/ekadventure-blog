@@ -16,13 +16,13 @@ export const SearchResults: React.FC<{
 
   return (
     <div
-      className={`${!isInContainer ? "absolute left-auto top-full" : ""} mt-1 
-             bg-background-dark rounded shadow-lg z-50 ${isInContainer ? "w-full" : " max-h-80"} 
+      className={`${!isInContainer ? "absolute left-0 top-full" : ""} mt-1 animate-search-results-open motion-reduce:animate-none
+             bg-background-dark rounded shadow-lg z-50 ${isInContainer ? "w-full" : "w-[96%] ml-[2%] max-h-100"} 
              overflow-auto custom-scrollbar`}
     >
       {loading && (
         <div className="p-2 flex justify-center w-full">
-          <div className="w-3 h-3 border-2 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-3 h-3 border-2 border-background-primary border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 

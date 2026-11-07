@@ -1,5 +1,5 @@
 import { DocumentIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const pageType = defineType({
   name: 'page',
@@ -35,13 +35,26 @@ export const pageType = defineType({
         ]
       }
     }),
+    defineField({ name: "heroSection", type: "hero" }),
     defineField({
-      name: 'heroLine',
-      type: 'object',
-      fields: [
-        { name: 'en', type: 'portableText' },
-        { name: 'fr', type: 'portableText' }
-      ]
+      name: "sections",
+      title: "Page sections",
+      type: "array",
+      of: [
+        // defineArrayMember({ type: "richText" }),
+        defineArrayMember({ type: "imageGallery" }),
+        // defineArrayMember({ type: "hikingTrail" }),
+        // defineArrayMember({ type: "video" }),
+        // defineArrayMember({ type: "faq" }),
+        defineArrayMember({
+          name: 'content',
+          type: 'object',
+          fields: [
+            { name: 'en', type: 'portableText' },
+            { name: 'fr', type: 'portableText' }
+          ]
+        }),
+      ],
     }),
     defineField({
       name: 'content',
@@ -50,10 +63,6 @@ export const pageType = defineType({
         { name: 'en', type: 'portableText' },
         { name: 'fr', type: 'portableText' }
       ]
-    }),
-    defineField({
-      name: 'excerpt',
-      type: 'portableText',
     }),
     defineField({ name: 'featuredMedia', type: 'externalImage' }),
     defineField({

@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import SocialIcons from "../SocialIcons/page";
-import Image from "next/image";
 
 export interface HeaderImageProps {
   text?: {firstPart: string, secondPart: string};
@@ -11,16 +9,14 @@ export interface HeaderImageProps {
 }
 
 const HeaderImage: React.FC<HeaderImageProps> = ({
-  text,
-  displayImage,
-  roundedImage = "/images/profile-avatar.webp",
+  displayImage
 }) => {
 
   const headerImage = displayImage?.url || "/images/adventure-header.jpg";
 
   return (
     <div
-      className="relative h-150 overflow-hidden after:absolute after:inset-0 after:bg-linear-to-b after:from-background-dark/40 after:from-0% after:via-background-dark/10 after:via-30% after:via-transparent after:via-70% after:to-background-primary after:to-100%"
+      className=""
       // style={{
       //   backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.1) 100%), url(${headerImage})`,
       //   backgroundSize: "cover",
@@ -30,8 +26,15 @@ const HeaderImage: React.FC<HeaderImageProps> = ({
       <img
         src={headerImage}
         alt={displayImage?.alt || "Header image"}
-        className="absolute w-full h-full object-cover inset-0"
+        className="absolute w-full h-full object-cover object-center inset-0 z-[-2]"
       />
+
+      {/* <Image
+        src={headerImage}
+        alt={displayImage?.alt || "Header image"}
+        fill
+        className="absolute object-cover inset-0"
+      /> */}
     </div>
 
 

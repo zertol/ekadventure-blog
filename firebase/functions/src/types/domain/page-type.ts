@@ -10,4 +10,25 @@ export type PageType = {
     metadata: MetadataType;
     content: PortableTextBlock[];
     updatedAt: string;
-};
+    heroSection: {
+        backgroundImage: ImageType;
+        buttons: {
+            url: string;
+            text: string;
+            type: ButtonType;
+            style: ButtonStyle;
+        }[];
+        heading: string;
+        description: PortableTextBlock[];
+    }
+}
+
+export enum ButtonType {
+    Link = "link",
+    Normal = "normal"
+}
+
+export enum ButtonStyle {
+    Primary = "primary",
+    Secondary = "secondary"
+}

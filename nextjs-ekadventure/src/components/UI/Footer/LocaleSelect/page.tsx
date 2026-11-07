@@ -28,6 +28,7 @@ const LocaleSelect: React.FC = () => {
 
     startTransition(() => {
       router.replace({ pathname, params } as any, { locale: nextLocale });
+      router.refresh();
     });
   }
 
@@ -48,7 +49,7 @@ const LocaleSelect: React.FC = () => {
         <option value="en">English (US)</option>
         <option value="fr">Français</option>
       </select>
-      <svg
+    <svg
         viewBox="0 0 16 16"
         fill="currentColor"
         data-slot="icon"

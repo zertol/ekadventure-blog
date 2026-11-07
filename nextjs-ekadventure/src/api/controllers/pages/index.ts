@@ -21,6 +21,9 @@ export const fetchPageBySlug = async (params: Record<string, any>): Promise<ApiR
     });
 }
 
-export const fetchMenuItems = async (): Promise<ApiResult<MenuItemType[]>> => {
-    return await handleApiRequest<MenuItemType[]>("https://fetchmenuitems-zsszt3mtmq-uc.a.run.app");
+export const fetchMenuItems = async (params: Record<string, any>): Promise<ApiResult<MenuItemType[]>> => {
+    return await handleApiRequest<MenuItemType[]>("https://fetchmenuitems-zsszt3mtmq-uc.a.run.app", {
+        method: "POST",
+        body: JSON.stringify(params)
+    });
 }

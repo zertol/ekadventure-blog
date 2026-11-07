@@ -105,7 +105,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 <img
                   src={image.url}
                   alt={image.alt || `Image ${index + 1}`}
-                  className={`object-cover ${productGallerySettings ? "h-full rounded-md" : "rounded-none"}`}
+                  className={`object-cover w-full ${productGallerySettings ? "h-full rounded-md" : "rounded-none"}`}
                 />
                 {!productGallerySettings && (
                   <div className="absolute w-full h-full inset-0">

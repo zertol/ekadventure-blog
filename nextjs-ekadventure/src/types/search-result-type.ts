@@ -9,4 +9,5 @@ export type SearchResultType = {
     slug: { current: string };
     _updatedAt: string;
     content: PortableTextBlock[];
+    featuredMedia: ImageType;
 }

@@ -5,6 +5,7 @@ import { createContext, useContext } from "react";
 
 const PagesContext = createContext<PagesContextType>({
   pages: [],
+  menus: [],
   error: null
 });
 

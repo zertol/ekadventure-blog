@@ -19,6 +19,17 @@ export const PRIVACY_PAGE_QUERY = `*[_type == "page" && slug.current == "privacy
 export const PAGE_BY_SLUG_QUERY = `*[_type == "page" && slug.current == $slug][0] {
   featuredMedia,
   "title": coalesce(title[$locale], title["en"]),
+  heroSection {
+    backgroundImage,
+    "buttons": buttons[]{
+      url,
+      "text": coalesce(text[$locale], text["en"]),
+      type,
+      style
+    },
+    "heading": coalesce(heading[$locale], heading["en"]),
+    "description": coalesce(description[$locale], description["en"])
+  },
   metadata {
     ogImage,
     "description": coalesce(description[$locale], description["en"])
@@ -160,5 +171,6 @@ export const SEARCH_QUERY = `*[_type in ["post", "category"] && $matchquery] | o
   "name": coalesce(name[$locale], name["en"]),
   slug,
   _updatedAt,
-  "content": coalesce(content[$locale], content["en"])
+  "content": coalesce(content[$locale], content["en"]),
+  featuredMedia
 }` as const;

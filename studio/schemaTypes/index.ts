@@ -8,6 +8,9 @@ import { portableTextType } from './portableTextType'
 import iframeType from './iframeType'
 import commentType from './commentType'
 import { googleAdSlotType } from './googleAdSlotType'
+import { heroType } from './heroType'
+import { imageGalleryType } from './imageGalleryType'
+import { buttonType } from './buttonType'
 
 export const schemaTypes = [
   authorType,
@@ -19,5 +22,8 @@ export const schemaTypes = [
   portableTextType,
   iframeType,
   commentType,
-  googleAdSlotType
+  googleAdSlotType,
+  heroType,
+  buttonType,
+  imageGalleryType
 ];

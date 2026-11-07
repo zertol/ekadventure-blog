@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import PagesContextProvider from "@/store/PagesContext";
 import { Suspense } from "react";
-import { fetchAllPages } from "@/api/controllers/pages";
+import { fetchMenuItems } from "@/api/controllers/pages";
 import Script from "next/script";
 import AnalyticsTracker from "@/components/Analytics/AnalyticsTracker";
 import { PagesContextType } from "@/types/pages-context-type";
@@ -70,15 +70,16 @@ export default async function LocaleLayout({
   // Providing all messages to the client side is the easiest way to get started
   const messages = await getMessages();
 
-  const pagesProps: PagesContextType = { pages: [], error: null };
+  const pagesProps: PagesContextType = { pages: [], menus: [], error: null };
+  
   try {
-    const result = await fetchAllPages({ locale });
+    const result = await fetchMenuItems({ locale });
 
     if (result.ErrorMessages && result.ErrorMessages.length > 0) {
       throw new Error(result.ErrorMessages.join(", "));
     }
 
-    pagesProps.pages = result.Result || [];
+    pagesProps.menus = result.Result || [];
   } catch (err) {
     console.error("Error fetching Pages Data:", err);
   }

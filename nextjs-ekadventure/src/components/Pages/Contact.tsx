@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { usePages } from "@/store/PagesContext";
 import { useForm } from "react-hook-form";
 import { handleMailService } from "@/api/controllers/contact";
 import FormInput from "../UI/Common/Form/FormInput/FormInput";
@@ -9,10 +8,7 @@ import SubmitStatus from "../UI/Common/Form/SubmitStatus/page";
 import { PageType } from "@/types/page-type";
 import { useTranslations } from "next-intl";
 
-const Contact: React.FC = () => {
-  const { pages } = usePages();
-  const contactPage = pages.find((page: PageType) => page.slug === "contact");
-
+const Contact: React.FC<{ page: PageType | null }> = ({ page }) => {
   const tContact = useTranslations("Contact");
 
   const [submitStatus, setSubmitStatus] = useState<{
@@ -63,8 +59,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="contact-page px-c-25 lg:px-[60px] mb-c-60">
-      <div className="container container-max-w-1280 mx-auto mt-28">
+    <div className="contact-page mb-c-60 mt-28 w-full">
         <h1 className="text-[48px] font-bold font-ps text-center mb-12">
           {tContact("contactTitle")}
         </h1>
@@ -73,8 +68,8 @@ const Contact: React.FC = () => {
           <div className="lg:flex-1 flex flex-col">
             <div className="flex-center-col text-center p-4 mb-4">
               <div className="mb-4">
-                <p>{tContact("contactDescriptionFirstPart")}</p>
-                <p>{tContact("contactDescriptionSecondPart")}</p>
+                <p className="text-16">{tContact("contactDescriptionFirstPart")}</p>
+                <p className="text-16">{tContact("contactDescriptionSecondPart")}</p>
               </div>
               <span className="block w-24 h-1 bg-black"></span>
             </div>
@@ -157,14 +152,13 @@ const Contact: React.FC = () => {
 
           <div className="h-[250px] lg:h-auto lg:flex-1 relative">
             <img
-              src={contactPage?.featuredMedia?.url}
-              alt={contactPage?.featuredMedia?.alt || "Contact Featured Media"}
+              src={page?.featuredMedia?.url}
+              alt={page?.featuredMedia?.alt || "Contact Featured Media"}
               className="inset-0 w-full h-full object-cover rounded-lg"
             />
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

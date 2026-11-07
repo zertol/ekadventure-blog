@@ -4,27 +4,31 @@ import SocialIcon from "../SocialIcon/page";
 interface SocialIconsProps {
   className?: string;
   isSidebar?: boolean;
+  isButtonStyle?: boolean;
 }
 
 const SOCIAL_LINKS = [
-  { icon: "instagram", href: "https://instagram.com/e.kadventure" },
-  { icon: "youtube", href: "https://youtube.com/@e.kadventure" },
-  { icon: "facebook", href: "https://facebook.com/e.kadvnture" },
-  { icon: "tiktok", href: "https://tiktok.com/@e.kadventure" },
+  { icon: "youtube", href: "https://youtube.com/@e.kadventure", displayName: "YouTube" },
+  { icon: "instagram", href: "https://instagram.com/e.kadventure", displayName: "Instagram" },
+  { icon: "facebook", href: "https://facebook.com/e.kadvnture", displayName: "Facebook" },
+  { icon: "tiktok", href: "https://tiktok.com/@e.kadventure", displayName: "TikTok" }
 ] as const;
 
 const SocialIcons: React.FC<SocialIconsProps> = ({
   className = "",
-  isSidebar = false,
+  isSidebar,
+  isButtonStyle
 }) => {
   return (
-    <div className={`flex-center-row space-x-4 ${className}`}>
+    <div className={`flex flex-wrap gap-2 md:gap-4 ${className}`}>
       {SOCIAL_LINKS.map((social) => (
         <SocialIcon
           key={social.icon}
           icon={social.icon}
           href={social.href}
+          displayName={social.displayName}
           isSidebar={isSidebar}
+          isButtonStyle={isButtonStyle}
         />
       ))}
     </div>

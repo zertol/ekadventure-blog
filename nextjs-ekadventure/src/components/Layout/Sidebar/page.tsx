@@ -60,9 +60,10 @@ const Sidebar: React.FC<SideBarProps> = ({ sideImage, relatedPosts }) => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex justify-center mb-10">
-          <SocialIcons className="text-white" isSidebar />
+        <div className="flex-center-row">
+          <SocialIcons className="text-white mb-10" isSidebar />
         </div>
+        
 
         {/* Featured Adventures */}
         <div className="flex-center-col mb-1">

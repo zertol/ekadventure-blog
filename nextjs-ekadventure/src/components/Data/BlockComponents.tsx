@@ -8,11 +8,17 @@ import ImageGroup from "../UI/Blog/ArticleDetails/ImageGroup/page";
 import { adManager } from "@/domain/ads/ad-manager";
 import { GoogleAdSlotType } from "@/domain/ads/google/google-ad-slot-type";
 
-export const generateBlockComponents = (
+export const generateBlockComponents = ({
   isAfterContent = false,
   fullContainerWidth = false,
   adsVisible = false,
-) => {
+  normalBlocClassName = "",
+}: {
+  isAfterContent?: boolean;
+  fullContainerWidth?: boolean;
+  adsVisible?: boolean;
+  normalBlocClassName?: string;
+} = {}) => {
   return {
     types: {
       imageGroup: ({ value }: { value: { images: any[] } }) => {
@@ -100,7 +106,7 @@ export const generateBlockComponents = (
           ) : children?.toString().toLocaleLowerCase() === "$parspacing$" ? (
             <div className="mb-3"></div>
           ) : (
-            <p className="mb-3 leading-6">{children}</p>
+            <p className={`mb-3 leading-6 ${normalBlocClassName}`}>{children}</p>
           );
 
         return <>{renderedText}</>;

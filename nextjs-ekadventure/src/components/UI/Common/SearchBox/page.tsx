@@ -75,13 +75,16 @@ const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
 
   return (
     <>
+    <div className="relative w-full">
       <input
+        id="search-input"
+        aria-label={tUI("searchPlaceholder")}
         maxLength={30}
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder={tUI("searchPlaceholder")}
-        className="bg-transparent border rounded-md border-white text-white placeholder-white/70 px-2 py-1 focus:outline-hidden w-full"
+        className="bg-transparent border-b border-b-white text-white placeholder-white/70 px-2 py-1 focus:outline-hidden w-full"
       />
       <button className="absolute right-2 top-1/2 transform -translate-y-1/2">
         <svg
@@ -99,6 +102,7 @@ const SearchBox: React.FC<{ isInContainer?: boolean }> = ({
           />
         </svg>
       </button>
+      </div>
 
       {(query || loading) && (
         <SearchResults query={query} results={results} loading={loading} />

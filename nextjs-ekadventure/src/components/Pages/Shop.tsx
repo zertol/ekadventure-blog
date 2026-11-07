@@ -5,15 +5,19 @@ import HorizontalAd from "../Ads/Google/HorizontalAd";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
 import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 import ProductsList from "../UI/ECommerce/ProductsList";
+import { PageType } from "@/types/page-type";
+import HeroSection from "../UI/Common/HeroSection/page";
 
 interface ShopProps {
   products: ProductsResponseType;
   totalProducts: number;
+  page: PageType | null;
 }
 
-const Shop: React.FC<ShopProps> = ({ products, totalProducts }) => {
+const Shop: React.FC<ShopProps> = ({ products, totalProducts, page }) => {
   return (
     <div>
+      <HeroSection page={page} />
       <div className="w-full flex justify-center">
         <div className="w-full md:w-[768px]">
           <ClientAdWrapper
@@ -26,7 +30,7 @@ const Shop: React.FC<ShopProps> = ({ products, totalProducts }) => {
         </div>
       </div>
 
-      <div className="container mx-auto px-8 lg:px-20 my-c-60">
+      <div className="my-c-60">
         <ProductsList products={products} totalProducts={totalProducts} />
       </div>
     </div>

@@ -16,6 +16,8 @@ import { ProductsResponseType } from "@/types/ecommerce/product-response-type";
 import ProductsList from "../UI/ECommerce/ProductsList";
 import HeaderImage from "../UI/Common/HeaderImage/page";
 import { PageType } from "@/types/page-type";
+import SocialIcons from "../UI/Common/SocialIcons/page";
+import HeroSection from "../UI/Common/HeroSection/page";
 
 interface HomeProps {
   categories: Promise<ApiResult<CategoryType[]>>;
@@ -37,34 +39,14 @@ const Home: React.FC<HomeProps> = async ({
   const tCommon = await getTranslations("Common");
 
   const pageData = await page;
-  const headerImage = { displayImage: pageData.Result?.featuredMedia };
 
   return (
-    <div className="home-page">
-      <section className="overflow:hidden m-[calc(50%-50vw)]">
-        {headerImage && <HeaderImage {...headerImage} /> }
-      </section>
-      
-      <section className={`mt-c-30 mb-c-30`}>
-        <HeroText />
-      </section>
-
-      <div className="flex px-1 justify-center">
-        <div className="w-full md:w-[768px]">
-          <ClientAdWrapper
-            headerText="Google"
-            isCollapsible={false}
-            className="mb-c-30"
-          >
-            <HorizontalAd adSlot="9510559826" />
-          </ClientAdWrapper>
-        </div>
-      </div>
+    <div className="w-full">
+      <HeroSection page={pageData.Result} />
 
       <FeaturedSection
         title={tCommon("featuredProductsTitle")}
-        canViewAll={{ page: { url: "/products" }, text: tUI("viewAll") }}
-      >
+        canViewAll={{ page: { url: "/products" }, text: tUI("viewAll") }}>
         <Suspense fallback={<VideosSkeleton />}>
           <LatestProductsSection promise={products} />
         </Suspense>
@@ -72,8 +54,7 @@ const Home: React.FC<HomeProps> = async ({
 
       <FeaturedSection
         title={tCommon("featuredAdventuresTitle")}
-        canViewAll={{ page: { url: "/blog" }, text: tUI("viewAll") }}
-      >
+        canViewAll={{ page: { url: "/blog" }, text: tUI("viewAll") }}>
         <Suspense fallback={<PostsSkeleton />}>
           <LatestPostsSection promise={latestPosts} />
         </Suspense>
@@ -82,8 +63,7 @@ const Home: React.FC<HomeProps> = async ({
       <FeaturedSection
         title={tCommon("featuredVideosTitle")}
         canViewAll={{ page: { url: "/videos" }, text: tUI("viewAll") }}
-        className="mb-c-30"
-      >
+        className="mb-c-30">
         <Suspense fallback={<VideosSkeleton />}>
           <VideosSection promise={videos} />
         </Suspense>
@@ -94,8 +74,7 @@ const Home: React.FC<HomeProps> = async ({
           <ClientAdWrapper
             headerText="Google"
             isCollapsible={false}
-            className="mb-c-30"
-          >
+            className="mb-c-30">
             <HorizontalAd adSlot="2079251461" />
           </ClientAdWrapper>
         </div>
@@ -107,7 +86,7 @@ const Home: React.FC<HomeProps> = async ({
         </Suspense>
       </FeaturedSection>
 
-      <section className="relative h-[400px] flex-center-row mb-c-60">
+      {/* <section className="relative h-[400px] flex-center-row mb-c-60">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/adventure-header.jpg"
@@ -127,7 +106,7 @@ const Home: React.FC<HomeProps> = async ({
             className="px-[24px] py-[12px] text-[16px]"
           />
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

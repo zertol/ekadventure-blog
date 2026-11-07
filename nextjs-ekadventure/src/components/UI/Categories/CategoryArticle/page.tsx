@@ -29,7 +29,7 @@ const CategoryArticle: React.FC<CategoryArticleProps> = ({
         </div>
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-black opacity-20 transition-opacity duration-300" />
 
         {/* Centered Text */}
         <div className="absolute inset-0 flex items-center justify-center text-white z-10">

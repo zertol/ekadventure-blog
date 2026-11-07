@@ -33,10 +33,13 @@ const Footer: React.FC = () => {
   const effectiveMargin = !isFirstVisit && adHeight > 0 ? adHeight + 50 : 0;
 
   return (
-    <footer className="bg-[#2D2D2D] text-white">
-      <div className="container-max-w-1280 mx-auto px-[15px] md:px-[25px] py-[20px]">
-        <div className="flex flex-col md:flex-row justify-between items-center md:gap-4 gap-8 max-w-6xl mx-auto">
-          <div className="flex-center-col space-y-6">
+    <footer className="bg-background-dark text-white">
+      <div className="py-[20px] container-px-25">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-20">
+          <div className="flex-center-col">
+            <div className="flex items-center justify-center mb-6 w-full">
+              <LocaleSelect />
+            </div>
             <Image
               src="/images/Logo_Site_CUT_FOOTER.png"
               alt="Ekadventure Logo"
@@ -44,7 +47,6 @@ const Footer: React.FC = () => {
               height={200}
               className="w-[260px] h-auto"
             />
-            <SocialIcons />
           </div>
 
           <nav className="space-y-3 hidden lg:block">
@@ -57,8 +59,7 @@ const Footer: React.FC = () => {
                     : page.slug?.toLocaleLowerCase() === "home"
                       ? "/"
                       : "/" + page.slug
-                }`}
-              >
+                }`}>
                 {page.title.toUpperCase()}
               </HeaderNavLink>
             ))}
@@ -66,9 +67,6 @@ const Footer: React.FC = () => {
 
           {/* Newsletter Subscription */}
           <div className="w-full md:w-auto md:max-w-sm">
-            <div className="flex items-center justify-center mb-6">
-              <LocaleSelect />
-            </div>
             <div className="bg-background-green-accent p-[10px] md:p-4 rounded-md w-full text-center">
               <h2 className="font-semibold mb-2">
                 {tLetter("newsletterTitle")}
@@ -81,6 +79,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+      <div className="flex-center-row">
+        <SocialIcons />
+      </div>
 
       {/* Divider - full width */}
       <div className="w-full h-[1px] bg-background-primary mt-4" />
@@ -89,23 +90,20 @@ const Footer: React.FC = () => {
       <div
         className="py-1 flex flex-col justify-center items-center gap-1"
         style={{
-          marginBottom: effectiveMargin, // Add margin at the bottom based on ad height
-        }}
-      >
+          marginBottom: effectiveMargin // Add margin at the bottom based on ad height
+        }}>
         <p className="text-center">© {new Date().getFullYear()} Elie Kadoury</p>
         {pathName !== "/privacy-policy" && (
           <div className={`flex flex-row`}>
             <Link
               href="/privacy-policy"
               target="_blank"
-              className="text-[10px] text-center underline hover:text-gray-300 transition-colors"
-            >
+              className="text-[10px] text-center underline hover:text-gray-300 transition-colors">
               {tFooter("privacyPolicyLinkText")}
             </Link>
             <button
               onClick={() => openModal()}
-              className="bg-transparent p-0 ml-1 text-[10px] underline hover:text-gray-300 transition-colors hover:bg-transparent"
-            >
+              className="bg-transparent p-0 ml-1 text-[10px] underline hover:text-gray-300 transition-colors hover:bg-transparent">
               {tFooter("manageCookiesLinkText")}
             </button>
           </div>
@@ -115,8 +113,7 @@ const Footer: React.FC = () => {
         <ClientAdWrapper
           headerText="Google"
           className="fixed bottom-0 left-auto z-50 flex flex-col justify-center w-full max-w-full"
-          onHeightChange={setAdHeight}
-        >
+          onHeightChange={setAdHeight}>
           <div className="w-full flex justify-center">
             <div className="w-full md:w-[768px]">
               <HorizontalAd adSlot="7868749713" />

@@ -100,9 +100,9 @@ export default async function PostPage({
   return (
     <App currentPage="post">
       {post && (
-        <div className="container px-c-25 xl:px-0 xl:max-w-[1140px] mt-28 mb-c-90 mx-auto">
+        <div className="mt-28 mb-c-90">
           <div className="flex flex-col lg:flex-row justify-center gap-4">
-            <div className="w-full lg:w-[70%] mb-c-60 lg:mb-0 lg:pr-[5px]">
+            <div className="w-full lg:w-[70%] mb-c-60 mb-0 lg:pr-[5px]">
               <div className="flex-between-row mb-6">
                 <div className="gap-2 flex-start-col md:flex-start-row">
                   <PostCategories categories={post.categories} />
@@ -124,7 +124,7 @@ export default async function PostPage({
                 {post.content && (
                   <PortableText
                     value={groupImagesFromBlocks(post.content)}
-                    components={generateBlockComponents(false, false, true)}
+                    components={generateBlockComponents({ adsVisible: true })}
                   />
                 )}
               </div>
@@ -170,7 +170,10 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.googleMapsHowTo)}
-                    components={generateBlockComponents(true, false, true)}
+                    components={generateBlockComponents({
+                      isAfterContent: true,
+                      adsVisible: true,
+                    })}
                   />
                 </div>
               )}
@@ -207,7 +210,9 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.hikingPass)}
-                    components={generateBlockComponents(false, true)}
+                    components={generateBlockComponents({
+                      fullContainerWidth: true,
+                    })}
                   />
                 </div>
               )}
@@ -224,7 +229,9 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.whereToStay)}
-                    components={generateBlockComponents(true)}
+                    components={generateBlockComponents({
+                      isAfterContent: true,
+                    })}
                   />
                 </div>
               )}
@@ -241,7 +248,9 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.whereToEat)}
-                    components={generateBlockComponents(true)}
+                    components={generateBlockComponents({
+                      isAfterContent: true,
+                    })}
                   />
                 </div>
               )}
@@ -258,7 +267,9 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.otherHikes)}
-                    components={generateBlockComponents(true)}
+                    components={generateBlockComponents({
+                      isAfterContent: true,
+                    })}
                   />
                 </div>
               )}
@@ -275,7 +286,9 @@ export default async function PostPage({
 
                   <PortableText
                     value={groupImagesFromBlocks(post.otherAttractions)}
-                    components={generateBlockComponents(true)}
+                    components={generateBlockComponents({
+                      isAfterContent: true,
+                    })}
                   />
                 </div>
               )}
@@ -319,7 +332,7 @@ export default async function PostPage({
                 <Comments />
               </CommentsProvider>
             </div>
-            <div className="w-full lg:w-[30%] lg:p-c-25 lg:border-l-[1px] border-background-dark/20">
+            <div className="w-full lg:w-[30%] lg:px-[25px] lg:border-l border-background-dark/20">
               {post.featuredMedia && (
                 <Sidebar
                   sideImage={post.featuredMedia}

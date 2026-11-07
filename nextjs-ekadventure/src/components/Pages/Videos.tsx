@@ -4,22 +4,24 @@ import React from "react";
 import HorizontalAd from "../Ads/Google/HorizontalAd";
 import YouTubeVideos from "../UI/YouTube/YouTubeVideo/YouTubeVideos";
 import { ClientAdWrapper } from "../Ads/ClientAdWrapper";
+import { PageType } from "@/types/page-type";
+import HeroSection from "../UI/Common/HeroSection/page";
 
 interface VideosProps {
   ytPlaylist: YouTubePlaylistType;
+  page: PageType | null;
 }
 
-const Videos: React.FC<VideosProps> = ({ ytPlaylist }) => {
-
+const Videos: React.FC<VideosProps> = ({ ytPlaylist, page }) => {
   return (
-    <div>
+    <div className="w-full">
+      <HeroSection page={page} />
       <div className="w-full flex justify-center">
         <div className="w-full md:w-[768px]">
           <ClientAdWrapper
             headerText="Google"
             className="mt-3"
-            isCollapsible={false}
-          >
+            isCollapsible={false}>
             <HorizontalAd adSlot="5553437940" />
           </ClientAdWrapper>
         </div>

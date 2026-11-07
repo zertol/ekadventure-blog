@@ -1,13 +1,13 @@
-import { PageType } from "@/types/page-type";
 import HeaderNavLink from "./NavLink";
 import CloseButton from "@/components/UI/Common/CloseButton/page";
 import Logo from "./Logo";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBox from "@/components/UI/Common/SearchBox/page";
 import LocaleSelect from "@/components/UI/Footer/LocaleSelect/page";
+import { MenuItemType } from "@/types/menu-item-type";
 
 const MobileNav: React.FC<{
-  menuItems: PageType[];
+  menuItems: MenuItemType[];
   isMobileMenuClosing: boolean;
   closeMobileMenu: () => void;
 }> = ({ menuItems, isMobileMenuClosing, closeMobileMenu }) => {
@@ -32,14 +32,14 @@ const MobileNav: React.FC<{
       />
 
       <div
-        className={`relative bg-background-green-accent pb-[12px] w-full max-w-[300px] h-dvh overflow-y-auto custom-scrollbar  ${
+        className={`relative bg-background-green-accent pb-3 w-full max-w-75 h-dvh overflow-y-auto custom-scrollbar  ${
           isMobileMenuClosing
             ? "animate-modal-right-exit"
             : "animate-modal-right-enter"
         }`}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-background-green-accent px-4 pb-4 pt-[12px] flex justify-between items-center z-10">
+        <div className="sticky top-0 bg-background-green-accent px-4 pb-4 pt-3 flex justify-between items-center z-10">
           <Logo isWithImage={true} />
           <CloseButton
             handleClose={closeMobileMenu}
@@ -48,7 +48,7 @@ const MobileNav: React.FC<{
         </div>
         <div className="flex flex-col justify-between gap-10">
           <nav className="flex flex-col justify-center items-center gap-6 w-full text-center">
-            {menuItems.map((page: PageType) => (
+            {menuItems.map((page: MenuItemType) => (
               <HeaderNavLink
                 key={page.slug}
                 href={`${

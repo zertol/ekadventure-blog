@@ -10,7 +10,7 @@ export const HeroText: React.FC = () => {
           {t("heroTextTitle")}
         </h2>
       </div>
-      <div className="mb-0 pl-c-25">
+      <div className="mb-0 pl-[25px]">
         <p className="text-left text-wrap font-ps text-[20px]">
           {t.rich("heroTextContent", {
             br: () => <br />

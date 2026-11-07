@@ -109,7 +109,7 @@ const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
         <div className="flex flex-row w-full overflow-hidden mt-2 justify-center">
           <button
             type="submit"
-            className="bg-background-blue-accent text-white px-6 py-2 whitespace-nowrap hover:bg-background-dark transition-colors"
+            className="cursor-pointer bg-background-blue-accent text-white px-6 py-2 whitespace-nowrap hover:bg-background-dark transition-colors"
           >
             {newsLetterAction === "subscribe"
               ? tLetter("subscribeButtonText")

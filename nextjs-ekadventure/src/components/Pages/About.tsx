@@ -8,13 +8,11 @@ import LatestArticles from "@/components/UI/Common/LatestArticle/LatestArticles"
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { generateBlockComponents } from "@/components/Data/BlockComponents";
-import { usePages } from "@/store/PagesContext";
-import { AboutType } from "@/types/about-type";
 import { PageType } from "@/types/page-type";
 import { useTranslations } from "next-intl";
 
 interface AboutProps {
-  about: AboutType | null;
+  page: PageType | null;
   latestPosts: PostType[];
 }
 
@@ -23,10 +21,7 @@ interface AccordionItem {
   answer: string;
 }
 
-const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
-  const { pages } = usePages();
-  const aboutPage: PageType | null =
-    pages.find((page: PageType) => page.slug === "about" || page.slug === "a-propos") ?? null;
+const About: React.FC<AboutProps> = ({ page, latestPosts }) => {
 
   const tAbout = useTranslations("About");
   const tCommon = useTranslations("Common");
@@ -34,25 +29,25 @@ const About: React.FC<AboutProps> = ({ about, latestPosts }) => {
   const accordionItems: AccordionItem[] = tAbout.raw("accordionItems") as AccordionItem[];
 
   return (
-    <div className="about-page px-c-25 lg:px-[60px]">
+    <div className="px-c-25 lg:px-[60px]">
       <section className="mt-28 mb-c-90">
-        <div className="container max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-8 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 items-center">
           <AboutBrief />
-          <AboutImage featuredMedia={aboutPage?.featuredMedia} quote={tAbout("aboutBriefQuote")} />
+          <AboutImage featuredMedia={page?.featuredMedia} quote={tAbout("aboutBriefQuote")} />
         </div>
       </section>
 
-      <section className="container max-w-[1280px] mx-auto mb-6">
+      <section className="mx-auto mb-6">
         <h1 className="font-ps text-[42px] font-semibold">
           {tAbout("helloTitle")}
         </h1>
       </section>
       {/* New Content Section */}
-      <section className="container max-w-[1280px] mx-auto mb-c-90">
+      <section className="mb-c-90">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="about-content max-w-none leading-relaxed pl-2">
+          <div className="about-content leading-relaxed pl-2">
             <PortableText
-              value={about?.content || []}
+              value={page?.content || []}
               components={generateBlockComponents()}
             />
           </div>

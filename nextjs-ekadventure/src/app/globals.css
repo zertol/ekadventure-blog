@@ -23,76 +23,177 @@
   --animate-cookie-consent-fade-in: cookie-consent-fade-in-kf 0.3s ease-out forwards;
   --animate-cookie-consent-fade-out: cookie-consent-fade-out-kf 0.3s ease-out forwards;
   --animate-text-slide-right: text-slide-right-kf 15s linear infinite;
+  --animate-search-results-open: search-results-open 180ms ease-out both;
 
   @keyframes modal-right-enter-kf {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(0); }
-  }
+    0% {
+      transform: translateX(100%);
+    }
 
-  @keyframes modal-right-exit-kf {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(100%); }
-  }
-
-  @keyframes cookie-consent-fade-in-kf {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
-  @keyframes cookie-consent-fade-out-kf {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  @keyframes text-slide-right-kf {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(100%); }
-  }
-}
-
-
-@layer utilities {
-  .webkit-autofill-override {
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: white;
-      transition: background-color 5000s ease-in-out 0s;
-      box-shadow: inset 0 0 0 1000px var(--color-background-green-accent);
+    100% {
+      transform: translateX(0);
     }
   }
 
-  /* For Webkit-based browsers (Chrome, Safari and Opera) */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 10px; /* Width of the vertical scrollbar */
-    height: 10px; /* Height of the horizontal scrollbar */
+  @keyframes modal-right-exit-kf {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Light gray background for the track */
-    border-radius: 10px;
+  @keyframes cookie-consent-fade-in-kf {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #888; /* Darker gray for the thumb */
-    border-radius: 10px;
+  @keyframes cookie-consent-fade-out-kf {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Even darker gray on hover */
+  @keyframes text-slide-right-kf {
+    0% {
+      transform: translateX(-50%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
   }
 
-  /* For Firefox */
-  .custom-scrollbar {
-    scrollbar-width: thin; /* "auto" or "thin" */
-    scrollbar-color: #888 #f1f1f1; /* thumb color track color */
-  }
+  @keyframes search-results-open {
+    from {
+      clip-path: inset(0 0 100% 0);
+      opacity: 0;
+    }
 
-  .no-scrollbar {
-    scrollbar-width: none; /* Firefox */
+    to {
+      clip-path: inset(0);
+      opacity: 1;
+    }
   }
+}
+
+@utility container-px-60 {
+  padding-inline: 60px;
+}
+
+@utility container-px-30 {
+  padding-inline: 30px;
+}
+
+@utility container-px-25 {
+  padding-inline: 25px;
+}
+
+@utility text-35 {
+  @apply text-[35px];
+}
+
+@utility text-30 {
+  @apply text-[30px];
+}
+
+@utility text-28 {
+  @apply text-[28px];
+}
+
+@utility text-25 {
+  @apply text-[25px];
+}
+
+@utility text-24 {
+  @apply text-[24px];
+}
+
+@utility text-22 {
+  @apply text-[22px];
+}
+
+@utility text-20 {
+  @apply text-[20px];
+}
+
+@utility text-18 {
+  @apply text-[18px];
+}
+
+@utility text-16 {
+  @apply text-[16px];
+}
+
+@utility text-14 {
+  @apply text-[14px];
+}
+
+@utility text-12 {
+  @apply text-[12px];
+}
+
+
+.webkit-autofill-override {
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 0 1000px var(--color-background-green-accent);
+  }
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  /* Width of the vertical scrollbar */
+  height: 10px;
+  /* Height of the horizontal scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Light gray background for the track */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Darker gray for the thumb */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Even darker gray on hover */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  /* "auto" or "thin" */
+  scrollbar-color: #888 #f1f1f1;
+  /* thumb color track color */
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 * {
@@ -102,31 +203,49 @@
 /* Base typography styles */
 @layer base {
   body {
-    @apply bg-background-primary text-text-dark font-primary ;
+    @apply bg-background-primary text-text-dark font-primary overflow-x-clip;
   }
 
   h1 {
-    @apply text-[25px] md:text-[28px] font-bold leading-none;
-  }
-  
-  h2 {
-    @apply text-[22px] md:text-[24px] font-semibold leading-none;
-  }
-  
-  h3 {
-    @apply text-[18px] md:text-[20px] font-medium leading-none;
+    @apply text-[25px] md:text-[28px] font-bold leading-9;
   }
 
-  h4, h5 {
-    @apply text-[16px] md:text-[18px] font-medium leading-none;
+  h1.hero {
+    @apply text-[30px] md:text-[35px] leading-10;
+  }
+
+  h2 {
+    @apply text-[22px] md:text-[24px] font-semibold leading-7;
+  }
+
+  h3 {
+    @apply text-[18px] md:text-[20px] font-medium leading-6;
+  }
+
+  h4,
+  h5 {
+    @apply text-[16px] md:text-[18px] font-medium leading-6;
   }
 
   h6 {
-    @apply text-[14px] md:text-[16px] font-medium leading-none;
+    @apply text-[14px] md:text-[16px] font-medium leading-8;
   }
-  
-  p, a, span, input, button, textarea, label, li {
-    @apply text-[12px] md:text-[13px] leading-relaxed;
+
+  p,
+  a,
+  span,
+  input,
+  button,
+  textarea,
+  label,
+  li {
+    @apply text-[13px] md:text-[14px] leading-relaxed;
+  }
+
+  button,
+  select,
+  a {
+    @apply cursor-pointer;
   }
 
   mark {
@@ -180,84 +299,24 @@
     @apply flex flex-wrap flex-col;
   }
 
-  .py-c-60{
+  .py-c-60 {
     @apply py-[60px];
   }
 
-  .py-c-30{
+  .py-c-30 {
     @apply py-[30px];
   }
 
-  .px-c-60{
+  .px-c-60 {
     @apply px-[60px];
   }
 
-  .px-c-30{
+  .px-c-30 {
     @apply px-[30px];
   }
 
-  .px-c-25{
+  .px-c-25 {
     @apply px-[25px];
-  }
-
-  .p-c-25{
-    @apply p-[25px];
-  }
-
-  .p-c-30{
-    @apply p-[30px];
-  }
-
-  .p-c-60{
-    @apply p-[60px];
-  }
-
-  .pl-c-25{
-    @apply pl-[25px];
-  }
-
-  .pl-c-30{
-    @apply pl-[30px];
-  }
-
-  .pl-c-60{
-    @apply pl-[60px];
-  }
-
-  .pt-c-25{
-    @apply pt-[25px];
-  }
-
-  .pt-c-30{
-    @apply pt-[30px];
-  }
-
-  .pt-c-60{
-    @apply pt-[60px];
-  }
-
-  .pr-c-25{
-    @apply pr-[25px];
-  }
-
-  .pr-c-30{
-    @apply pr-[30px];
-  }
-
-  .pr-c-60{
-    @apply pr-[60px];
-  }
-
-  .pb-c-25{
-    @apply pb-[25px];
-  }
-
-  .pb-c-30{
-    @apply pb-[30px];
-  }
-
-  .pb-c-60{
-    @apply pb-[60px];
   }
 
   .mt-c-30 {
@@ -292,23 +351,23 @@
     @apply mb-[120px];
   }
 
-  .my-c-60{
+  .my-c-60 {
     @apply my-[60px];
   }
 
-  .my-c-30{
+  .my-c-30 {
     @apply my-[30px];
   }
 
-  .mx-c-60{
+  .mx-c-60 {
     @apply mx-[60px];
   }
 
-  .mx-c-30{
+  .mx-c-30 {
     @apply mx-[30px];
   }
 
-  .mx-c-25{
+  .mx-c-25 {
     @apply mx-[25px];
   }
 
@@ -323,21 +382,9 @@
   .container-max-w-768 {
     @apply max-w-[768px];
   }
-  
+
   .container-max-w-none {
     @apply max-w-none;
-  }
-
-  .container-px-60 {
-    @apply px-[60px];
-  }
-
-  .container-px-30 {
-    @apply px-[30px];
-  }
-
-  .container-px-25 {
-    @apply px-[25px];
   }
 
   .container-py-60 {
@@ -372,42 +419,53 @@
     @apply my-[25px];
   }
 
-  .font-ps{
+  .font-ps {
     @apply font-secondary
   }
 
-  .about-content p{
+  .about-content p {
     @apply text-[16px] mb-5 leading-7;
   }
 
-  .about-content span.font-ps{
+  .about-content span.font-ps {
     @apply text-[20px];
   }
 
-  .contact-form-input{
+  .contact-form-input {
     @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white rounded-none border-b border-b-white resize-none focus:outline-hidden focus:placeholder:text-white
   }
 
-  .comment-form-input{
+  .comment-form-input {
     @apply w-full p-2 placeholder:text-gray-300 bg-background-green-accent text-white resize-none focus:outline-hidden focus:placeholder:text-white rounded-sm block
   }
 
-  .primary-button{
-    @apply text-white bg-background-blue-accent hover:bg-background-green-accent 
-                  rounded-sm transition-all duration-300 px-2 py-1;
+  .primary-button {
+    @apply text-white bg-background-blue-accent hover:bg-background-green-accent rounded-sm transition-all duration-300 px-2 py-1;
   }
 
-  .featured-adventure-title{
+  .secondary-button {
+    @apply text-white bg-background-green-accent hover:bg-background-blue-accent rounded-sm transition-all duration-300 px-2 py-1;
+  }
+
+  .featured-adventure-title {
     @apply font-bold font-secondary text-white;
   }
 }
 
-.box-shadow-quote{
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+.box-shadow-quote {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
-.box-shadow-post-detail-image{
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5)
+.box-shadow-post-detail-image {
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5)
+}
+
+.hero-gradient-overlay::after {
+  background: linear-gradient(to bottom,
+      color-mix(in srgb, var(--color-background-dark) 40%, transparent) 0%,
+      color-mix(in srgb, var(--color-background-dark) 10%, transparent) 20%,
+      color-mix(in srgb, var(--color-background-dark) 20%, transparent) 95%,
+      var(--color-background-primary) 100%);
 }
 
 
@@ -425,6 +483,7 @@
 
 .adsbygoogle.sidebar-ad {
   display: block;
+
   @media screen and (max-width:1024px) {
     display: none !important;
   }

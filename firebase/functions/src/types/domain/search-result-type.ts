@@ -1,4 +1,5 @@
 import { PortableTextBlock } from "@portabletext/types";
+import { ImageType } from "./image-type";
 
 export type SearchResultType = {
     [key: string]: any;
@@ -9,6 +10,7 @@ export type SearchResultType = {
     slug: { current: string };
     _updatedAt: string;
     content: PortableTextBlock[];
+    featuredMedia: ImageType;
 }
 
 export type SearchLocaleKeysResultType = {

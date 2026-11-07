@@ -3,31 +3,29 @@ import About from "@/components/Pages/About";
 import { fetchLatestPosts } from "@/api/controllers/posts";
 import { fetchAboutDetails } from "@/api/controllers/about";
 import { Metadata } from "next";
-import { fetchAllPages } from "@/api/controllers/pages";
+import { fetchPageBySlug } from "@/api/controllers/pages";
 
-export async function generateMetadata({params}: {params: {locale: string}}): Promise<Metadata> {
-  const pages = await fetchAllPages(await params);
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const localParams = await params;
 
-  const page = pages.Result?.find(
-    (page) => page.slug === "about",
-  );
-
-  if (!page) {
-    return {};
-  }
-
+  const page = await fetchPageBySlug({locale: localParams.locale, slug: "about"});
+  
   const metaData: Metadata = {
-    title: page.title,
-    description: page.metadata?.description,
+    title: page.Result?.title,
+    description: page.Result?.metadata?.description,
     openGraph: {
-      title: page.title,
-      description: page.metadata?.description,
-      images: page.metadata ? [page.metadata?.ogImage?.url] : [],
+      title: page.Result?.title,
+      description: page.Result?.metadata?.description,
+      images: page.Result?.metadata ? [page.Result?.metadata?.ogImage?.url] : [],
     },
     alternates: {
-      canonical: `/${page.slug}`,
+      canonical: `/${page.Result?.slug}`,
       languages: {
-        en: `/${page.slug}`,
+        en: `/${page.Result?.slug}`,
         fr: `/fr/a-propos`,
       },
     },
@@ -42,15 +40,15 @@ export default async function AboutPage({
   params: { locale: string };
 }) {
   const localParams = await params;
-  
-  const [posts, about] = await Promise.all([
+
+  const [posts, page] = await Promise.all([
     fetchLatestPosts(localParams),
-    fetchAboutDetails(localParams),
+    fetchPageBySlug({locale: localParams.locale, slug: "about"})
   ]);
 
   return (
     <App currentPage="about">
-      <About latestPosts={posts.Result ?? []} about={about.Result} />
+      <About latestPosts={posts.Result ?? []} page={page.Result} />
     </App>
   );
 }
